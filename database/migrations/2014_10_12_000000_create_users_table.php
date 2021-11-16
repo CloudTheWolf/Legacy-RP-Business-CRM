@@ -17,10 +17,17 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('cell');
+            $table->string('towID');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->tinyInteger('onDuty');
+            $table->integer('cid');
+            $table->string('steamId',100);
+            $table->tinyInteger('IsAdmin');
+            $table->tinyInteger('disabled');
         });
     }
 
