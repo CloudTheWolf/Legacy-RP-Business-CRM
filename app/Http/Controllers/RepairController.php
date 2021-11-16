@@ -136,6 +136,7 @@ class RepairController extends BaseController
     private function getLatestRepairs()
     {
         return DB::table('repair_log')
+            ->where('deleted','=','0')
             ->join('users', 'users.id','=','repair_log.mechanic')
             ->select('repair_log.id', 'users.name', 'repair_log.customer_name', 'repair_log.vehicle', 'repair_log.scrap_used', 'repair_log.alum_used', 'repair_log.steel_used', 'repair_log.glass_used', 'repair_log.rubber_used', 'repair_log.cost', 'repair_log.timestamp')
             ->limit(25)
@@ -146,6 +147,7 @@ class RepairController extends BaseController
     private function getAllRepairs()
     {
         return DB::table('repair_log')
+            ->where('deleted','=','0')
             ->join('users', 'users.id','=','repair_log.mechanic')
             ->select('repair_log.id', 'users.name', 'repair_log.customer_name', 'repair_log.vehicle', 'repair_log.scrap_used', 'repair_log.alum_used', 'repair_log.steel_used', 'repair_log.glass_used', 'repair_log.rubber_used', 'repair_log.cost', 'repair_log.timestamp')
             ->orderByDesc('repair_log.timestamp')
