@@ -35,7 +35,7 @@ This will create your DB structure.
 
 Finally you will need to create your Admin user.
 
-To do this you first need to get a password hask using the following command
+To do this you first need to get a password hash using the following command
 ```php
 C:\htdocs\harmonycrm> php artisan tinker;
 >>> echo Hash::make('password');
