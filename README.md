@@ -26,6 +26,10 @@ COMPANY_NAME=
 
 Then change `public/assets/images/logo-icon2.png` and `public/assets/images/logo-img2.png` with images to match your branding
 
+Now run the following command to install all required packages:
+
+`php .\composer.phar install`
+
 Next you need to setup the DB Schema
 
 To do this run
