@@ -52,7 +52,7 @@
                         <div class="menu-title">Team</div>
                     </a>
                     <ul>
-                        <li> <a href="javascript:;"><i class="bx bx-right-arrow-alt"></i>SoonTM</a>
+                        <li> <a href="{{url('team')}}"><i class="bx bx-right-arrow-alt"></i>Our Team</a>
                         </li>
                     </ul>
                 </li>
