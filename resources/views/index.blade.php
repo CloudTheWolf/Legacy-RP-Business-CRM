@@ -91,7 +91,7 @@
                                     <h6 class="mb-0">Top 5 Mechanics</h6>
                                 </div>
                                 <div class="dropdown ms-auto">
-                                    <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
+                                    <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i></a>
                                 </div>
                             </div>
                             <div class="chart-container-2 mt-4">
@@ -111,36 +111,6 @@
                             </li>
                         </ul>
                     </div>
-
-                <div class="col-12 col-lg-12">
-                    <div class="card radius-10">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="col-md-12">
-                                    <h6 class="mb-0">Team</h6>
-                                    <table id="example2" class="table table-striped table-bordered">
-                                        <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Mechanic</th>
-                                            <th>Cell Phone</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($team as $member)
-                                            <tr>
-                                                <td>{{$member->id}}</td>
-                                                <td>{{$member->name}} <i class="bx bx-radio-circle-marked" style="color: {{$member->onDuty == 1 ? 'lawngreen': 'orangered'}};"></i></td>
-                                                <td>{{$member->cell}}</td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 </div>
 
             </div><!--end row-->
