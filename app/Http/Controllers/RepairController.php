@@ -37,7 +37,7 @@ class RepairController extends BaseController
         $latest = $this->getLatestRepairs();
         $mechanics = DB::table('users')->where('disabled','=','0')->get();
         $job = DB::table('repair_log')->where('id','=',$id)->first();
-        return view('repair-log-edit',)->with('vehicles',$vehicles)->with('latest',$latest)->with('mechanics',$mechanics)->with('job',$job);
+        return view('repair-log-edit')->with('vehicles',$vehicles)->with('latest',$latest)->with('mechanics',$mechanics)->with('job',$job);
     }
 
     function repairFormUpdate(Request $request)

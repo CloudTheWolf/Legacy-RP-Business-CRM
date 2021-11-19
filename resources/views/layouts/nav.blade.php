@@ -41,15 +41,15 @@
                         <div class="menu-title">Tow Tools</div>
                     </a>
                     <ul>
-                        <li> <a href="javascript:;"><i class="bx bx-right-arrow-alt"></i>SoonTM</a>
+                        <li> <a href="{{url('tow')}}"><i class="bx bx-right-arrow-alt"></i>Tow Tracker</a>
                         </li>
                     </ul>
                 </li>
                 <li>
                     <a class="has-arrow" href="javascript:;">
-                        <div class="parent-icon"><i class='bx bx-calendar'></i>
+                        <div class="parent-icon"><i class='bx bxs-group'></i>
                         </div>
-                        <div class="menu-title">Timesheets</div>
+                        <div class="menu-title">Team</div>
                     </a>
                     <ul>
                         <li> <a href="javascript:;"><i class="bx bx-right-arrow-alt"></i>SoonTM</a>

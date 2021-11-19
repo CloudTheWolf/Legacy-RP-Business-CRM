@@ -9,7 +9,8 @@ use App\Http\Controllers\DashController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ActionController;
-
+use App\Http\Controllers\TowController;
+use App\Http\Controllers\TeamsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,10 +58,14 @@ Route::get('/login', function () {
 
 Route::post('/login',[LoginController::class,'authenticate']);
 
-Route::get('/logout',[LoginController::class,'logout']);
-Route::get('/tow',function(){
-    return view('tow-log');
-});
+Route::get('/logout',[LoginController::class,'logout'])->middleware('auth');
+Route::get('/tow',[TowController::class,'viewPage'])->name('tow')->middleware('auth');
+
+Route::post('/tow',[TowController::class,'addTally'])->name('tow.tally')->middleware('auth');
+Route::post('/tow/submit',[TowController::class,'submit'])->middleware('auth');
+
 Route::get('/clock-on/{action}',[ActionController::class,'ClockInOut'])->middleware('auth');
+
+Route::get('/team',[TeamsController::class,'viewTeam'])->middleware('auth');
 
 
