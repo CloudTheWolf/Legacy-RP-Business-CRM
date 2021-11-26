@@ -18,6 +18,7 @@
                                         <div>
                                             <h5 class="card-title">{{$user->name}} [{{$user->cid}}]</h5>
                                         </div>
+                                        <p class="card-text">{{$user->role}}</p>
                                         <p class="card-text">{{$user->disabled == 1 ? 'Removed' : 'Active'}}</p>
                                         <a href="{{url('/admin/users/'.$user->id)}}" class="btn btn-primary">Manage User</a>
                                     </div>

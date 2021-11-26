@@ -42,9 +42,9 @@ class DashController extends Controller
         $tDec = DB::select('SELECT COUNT(*) as count FROM `repair_log` WHERE deleted = 0 AND timestamp > now() - INTERVAL 12 month and MONTH(timestamp) = 12');
 
         $team = DB::table('users')->select(["id","name","cell","onDuty"])->where('disabled','=','0')->get();
-
+        $onDutyList = DB::table('users')->select(["name","workingAs"])->where("onDuty","=","1")->get();
         return view('index',)->with('count',$count)->with('rev',$rev)->with('onDuty',$onDuty)->with('citizens',$citizens)->with('pie',$pie)
             ->with('jan',$tJan)->with('feb',$tFeb)->with('mar',$tMar)->with('apr',$tApr)->with('may',$tMay)->with('jun',$tJun)
-            ->with('jul',$tJul)->with('aug',$tAug)->with('sep',$tSep)->with('oct',$tOct)->with('nov',$tNov)->with('dec',$tDec)->with('team',$team);
+            ->with('jul',$tJul)->with('aug',$tAug)->with('sep',$tSep)->with('oct',$tOct)->with('nov',$tNov)->with('dec',$tDec)->with('team',$team)->with("onDutyList",$onDutyList);
     }
 }

@@ -44,8 +44,12 @@
                                                     <input type="text" name="username" class="form-control" id="inputEmailAddress" placeholder="John.Doe">
                                                 </div>
                                             <div class="col-sm-12">
-                                                <label for="inputEmailAddress" class="form-label">CID</label>
+                                                <label for="inputRole" class="form-label">CID</label>
                                                 <input type="text" class="form-control" id="inputEmailAddress" name="cid" placeholder="123456" pattern="[0-9]+">
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <label for="inputRole" class="form-label">Job Role</label>
+                                                <input type="text" class="form-control" id="inputRole" name="role" placeholder="Tow Driver">
                                             </div>
                                             <div class="col-sm-12">
                                                 <label for="inputEmailAddress" class="form-label">Passport ID (Steam FiveM ID)</label>

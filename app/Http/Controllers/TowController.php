@@ -16,13 +16,19 @@ class TowController extends BaseController
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    function viewPage()
+    function viewPage(Request $request)
     {
+        $useApi = true;
+        $apiTable = null;
         $stats = DB::table('tow_log')->where("userId","=",Auth::id())->get();
         $local = "0";
         $citizen = "0";
         $pd = "0";
         $help = "0";
+
+
+        $data = Http::get(env('API_BASE_URI')."/op-framework/towImpounds.json");
+        $apiTable = json_decode($data);
 
         if ($stats->count() != 0)
         {
@@ -32,8 +38,33 @@ class TowController extends BaseController
             $help = $stats->first()->help;
         }
 
-        return view('tow-log')->with("local",$local)->with("citizen",$citizen)->with("pd",$pd)->with("help",$help);
+        if(!$useApi)
+        {
+            return view('tow-log')->with("local",$local)->with("citizen",$citizen)->with("pd",$pd)->with("help",$help)->with("useApi",$useApi);
+        }
+        return view('tow-log')->with("local",$local)->with("citizen",$citizen)->with("pd",$pd)->with("help",$help)->with("useApi",$useApi)->with("apiTable",$apiTable->data);
 
+    }
+
+    function viewLivePage()
+    {
+        $data = Http::get(env('API_BASE_URI')."/op-framework/towImpounds.json");
+        $apiTable = json_decode($data);
+        $cids = DB::table('users')->where('disabled',"=","0")->get("cid")->toArray();
+        $cidList = [];
+        foreach ($cids as $cid) {
+            if(isset($cid)) {
+                $cidList[] = $cid->cid;
+            }
+        }
+        return view('tow-log-live')->with("apiTable",$apiTable->data)->with("cidList",$cidList);
+
+    }
+
+    static function cidToName($cid)
+    {
+        $user = DB::table('users')->where('cid','=',$cid)->first();
+        return $user->name;
     }
 
     function addTally(Request $request)
@@ -100,7 +131,7 @@ class TowController extends BaseController
             ],
         ]);
 
-        return view('tow-log',['status','Submitted']);
+        return redirect()->route('tow',['message','Submitted']);
 
     }
 

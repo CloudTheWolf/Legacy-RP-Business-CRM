@@ -101,11 +101,11 @@
                                                 @endforeach
                                             </optgroup>
                                             <optgroup label="Work Vehicles">
-                                                <option value="phantom">Phantom</option>
-                                                <option value="taxi">Taxi</option>
-                                                <option value="ems">EMS Vehicle</option>
-                                                <option value="pd">PD Vehicle</option>
-                                                <option value="aircraft">Aircraft</option>
+                                                <option value="Phantom">Phantom</option>
+                                                <option value="Taxi">Taxi</option>
+                                                <option value="EMS Vehicle">EMS Vehicle</option>
+                                                <option value="PD Vehicle">PD Vehicle</option>
+                                                <option value="Aircraft">Aircraft</option>
                                                 <option value="Boat">Boat</option>
                                             </optgroup>
                                         </select>

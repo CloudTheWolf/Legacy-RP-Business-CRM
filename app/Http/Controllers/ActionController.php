@@ -23,7 +23,8 @@ class ActionController extends BaseController
             DB::table('users')
             ->where('id',Auth::id())
             ->update([
-            'onDuty' =>$state
+                'onDuty' =>$state,
+                'workingAs' => $action
         ]);
 
             $route = $action == 'Mechanic' ? '/repairs' : '/';

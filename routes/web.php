@@ -60,6 +60,7 @@ Route::post('/login',[LoginController::class,'authenticate']);
 
 Route::get('/logout',[LoginController::class,'logout'])->middleware('auth');
 Route::get('/tow',[TowController::class,'viewPage'])->name('tow')->middleware('auth');
+Route::get('/tow-live',[TowController::class,'viewLivePage'])->name('tow-live')->middleware('auth');
 
 Route::post('/tow',[TowController::class,'addTally'])->name('tow.tally')->middleware('auth');
 Route::post('/tow/submit',[TowController::class,'submit'])->middleware('auth');

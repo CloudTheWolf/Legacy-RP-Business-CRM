@@ -16,5 +16,10 @@ return [
     'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'disabled' => 'Your account has been disabled, please contact the administrator',
+    'signin' => 'Sign In',
+    'username'=> 'Username',
+    'password' => 'Password',
+    'remember' => 'Remember Me',
 
 ];

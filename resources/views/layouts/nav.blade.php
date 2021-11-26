@@ -42,6 +42,7 @@
                     </a>
                     <ul>
                         <li> <a href="{{url('tow')}}"><i class="bx bx-right-arrow-alt"></i>Tow Tracker</a>
+                        <li> <a href="{{url('tow-live')}}"><i class="bx bx-right-arrow-alt"></i>Live Impound Tracker</a>
                         </li>
                     </ul>
                 </li>

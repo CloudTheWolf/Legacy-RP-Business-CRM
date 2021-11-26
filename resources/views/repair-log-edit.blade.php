@@ -104,9 +104,10 @@
                                             <optgroup label="Work Vehicles">
                                                 <option value="Phantom">Phantom</option>
                                                 <option value="Taxi">Taxi</option>
-                                                <option value="EMS">EMS Vehicle</option>
-                                                <option value="PD">PD Vehicle</option>
+                                                <option value="EMS Vehicle">EMS Vehicle</option>
+                                                <option value="PD Vehicle">PD Vehicle</option>
                                                 <option value="Aircraft">Aircraft</option>
+                                                <option value="Boat">Boat</option>
                                             </optgroup>
                                         </select>
                                     </div>

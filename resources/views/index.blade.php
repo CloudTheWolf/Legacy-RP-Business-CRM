@@ -66,7 +66,7 @@
             </div><!--end row-->
 
             <div class="row">
-                <div class="col-12 col-lg-8">
+                <div class="col-12 col-lg-4">
                     <div class="card radius-10">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -90,9 +90,7 @@
                                 <div>
                                     <h6 class="mb-0">Top 5 Mechanics</h6>
                                 </div>
-                                <div class="dropdown ms-auto">
-                                    <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i></a>
-                                </div>
+
                             </div>
                             <div class="chart-container-2 mt-4">
                                 <canvas id="chart2"></canvas>
@@ -109,6 +107,23 @@
                             </li>
                             <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie[5]->name}} <span class="badge bg-info text-dark rounded-pill">{{$pie[5]->count}}</span>
                             </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4">
+                    <div class="card radius-10">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <h6 class="mb-0">On Duty</h6>
+                                </div>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                        @foreach($onDutyList as $od)
+                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$od->name}} <span class="badge bg-danger rounded-pill">{{$od->workingAs}}</span>
+                            </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>

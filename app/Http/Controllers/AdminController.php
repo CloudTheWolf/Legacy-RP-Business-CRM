@@ -31,6 +31,7 @@ class AdminController extends BaseController
             'steamId' => $request->input('steamId'),
             'isAdmin'=> $admin,
             'disabled'=> 0,
+            'role' => $request->input('role'),
         ]);
         return back()->with('message', "User Added");
     }
@@ -52,6 +53,15 @@ class AdminController extends BaseController
             'isAdmin'=> $admin,
             'disabled'=> $disabled,
         ]);
+
+        if(strlen($request->input('role')) > 0)
+        {
+            DB::table('users')
+                ->where('id',$request->input('id'))
+                ->update([
+                    'role'=> $request->input('role'),
+                ]);
+        }
 
         if(strlen($request->input('password')) > 0)
         {

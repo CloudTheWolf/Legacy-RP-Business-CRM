@@ -31,7 +31,7 @@
                             <div class="card-body">
                                 <div class="border p-4 rounded">
                                     <div class="text-center">
-                                        <h3 class="">Sign in</h3>
+                                        <h3 class="">{{__('auth.signin')}}</h3>
                                         @if (\Session::has('error'))
                                             <div class="alert alert-danger border-0 border-start border-5 border-danger fade show py-2">
                                                 <div class="d-flex">
@@ -47,26 +47,25 @@
                                     </div>
                                     <div class="form-body">
                                         {{ Form::open(array('url' => 'login/')) }}
-                                        <!--<form class="row g-3">-->
                                             <div class="col-12">
-                                                <label for="inputEmailAddress" class="form-label">Username</label>
-                                                <input type="text" class="form-control" id="inputEmailAddress" name="email" placeholder="Username">
+                                                <label for="inputEmailAddress" class="form-label">{{__('auth.username')}}</label>
+                                                <input type="text" class="form-control" id="inputEmailAddress" name="email" placeholder="{{__('auth.username')}}">
                                             </div>
                                             <div class="col-12">
-                                                <label for="inputChoosePassword" class="form-label">Enter Password</label>
+                                                <label for="inputChoosePassword" class="form-label">{{__('auth.password')}}</label>
                                                 <div class="input-group" id="show_hide_password">
-                                                    <input type="password" class="form-control border-end-0" id="inputChoosePassword" name="password" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+                                                    <input type="password" class="form-control border-end-0" id="inputChoosePassword" name="password" placeholder="'{{__('auth.password')}}'"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" type="checkbox" name="rememberMe" id="flexSwitchCheckChecked" checked>
-                                                    <label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
+                                                    <label class="form-check-label" for="flexSwitchCheckChecked">{{__('auth.remember')}}</label>
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="d-grid">
-                                                    <button type="submit" class="btn btn-primary"><i class="bx bxs-lock-open"></i>Sign in</button>
+                                                    <button type="submit" class="btn btn-primary"><i class="bx bxs-lock-open"></i>{{__('auth.signin')}}</button>
                                                 </div>
                                             </div>
                                         </form>

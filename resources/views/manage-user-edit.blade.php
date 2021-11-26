@@ -45,6 +45,10 @@
                                                     <input type="text" name="username" class="form-control" id="inputEmailAddress" value="{{$user->email}}" readonly>
                                                 </div>
                                             <div class="col-sm-12">
+                                                <label for="inputRole" class="form-label">Job Role</label>
+                                                <input type="text" class="form-control" id="inputRole" name="role" placeholder="Tow Driver" value="{{$user->role}}">
+                                            </div>
+                                            <div class="col-sm-12">
                                                 <label for="inputEmailAddress" class="form-label">CID</label>
                                                 <input type="text" class="form-control" id="inputEmailAddress" name="cid" placeholder="123456" pattern="[0-9]+" value="{{$user->cid}}">
                                             </div>

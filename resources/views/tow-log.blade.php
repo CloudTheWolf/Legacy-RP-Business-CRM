@@ -37,6 +37,19 @@
                                 </div>
                                 <h5 class="mb-0 text-danger">Track your Impound/Tow Actions</h5>
                             </div>
+                            @if (\Session::has('status'))
+                                <div class="alert border-0 border-start border-5 border-success alert-dismissible fade show py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div class="font-35 text-white"><i class='bx bxs-check-circle'></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h6 class="mb-0 text-white">Success</h6>
+                                            <div class="text-white">{!! \Session::get('status') !!}</div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
                             <hr>
                             {{ Form::open(array('url' => 'tow/submit', 'class' => 'row g-3')) }}
                                 <div class="col-md-2">
@@ -73,6 +86,53 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-xl-10 mx-auto">
+                    <h6 class="mb-0 text-uppercase">Recent Impounds</h6>
+                    <hr/>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="example2" class="table table-striped table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Vehicle</th>
+                                        <th>Plate</th>
+                                        <th>Type</th>
+                                        <th>Payout</th>
+                                        <th>Timestamp</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @if($useApi)
+                                        @foreach($apiTable as $users)
+                                            @if($users->characterId == Auth::user('cid')->get)
+
+                                                @foreach($users->towImpounds as $impound)
+                                                    <tr>
+                                                        <td>{{$impound->timestamp}}</td>
+                                                        <td>{{$impound->modelName}}</td>
+                                                        <td>{{$impound->plateNumber}}</td>
+                                                        <td>{{$impound->playerVehicle == 1 ? "Citizen" : "Local"}}</td>
+                                                        <td>{{$impound->reward}}</td>
+                                                        <td>{{Carbon::parse($impound->timestamp)->setTimezone('PST')}}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+
+                                    @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 		@endsection
 

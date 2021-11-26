@@ -44,12 +44,41 @@
                                             <div class="app-title">Scuba</div>
                                         </div>
                                         @else
-                                        <div class="col text-center">
-                                            <a href="{{url('clock-on/Off-Duty')}}" >
-                                            <div class="app-box mx-auto bg-gradient-kyoto text-dark"><i class='bx bx-notification'></i>
-                                            </div></a>
-                                            <div class="app-title">Off Duty</div>
-                                        </div>
+                                                @if(Auth::user()->workingAs != "Mechanic")
+                                                    <div class="col text-center">
+                                                        <a href="{{url('clock-on/Mechanic')}}" >
+                                                            <div class="app-box mx-auto bg-gradient-cosmic text-white"><i class='bx bx-wrench'></i>
+                                                            </div>
+                                                        </a>
+                                                        <div class="app-title">Mechanic</div>
+
+                                                    </div>
+                                                @endif
+                                                @if(Auth::user()->workingAs != "Tow")
+                                                    <div class="col text-center">
+                                                        <a href="{{url('clock-on/Tow')}}" >
+                                                            <div class="app-box mx-auto bg-gradient-burning text-white"><i class='bx bxs-truck'></i>
+                                                            </div>
+                                                        </a>
+                                                        <div class="app-title">Tow</div>
+
+                                                    </div>
+                                                @endif
+                                                @if(Auth::user()->workingAs != "Scuba")
+                                                    <div class="col text-center">
+                                                        <a href="{{url('clock-on/Scuba')}}" >
+                                                            <div class="app-box mx-auto bg-gradient-deepblue text-white"><i class="fa fa-swimmer"></i>
+                                                            </div></a>
+                                                        <div class="app-title">Scuba</div>
+                                                    </div>
+                                                @endif
+
+                                            <div class="col text-center">
+                                                <a href="{{url('clock-on/Off-Duty')}}" >
+                                                <div class="app-box mx-auto bg-gradient-kyoto text-dark"><i class='bx bx-notification'></i>
+                                                </div></a>
+                                                <div class="app-title">Off Duty</div>
+                                            </div>
                                         @endif
                                     </div>
                                 </div>
@@ -83,7 +112,7 @@
                             <img src="https://eu.ui-avatars.com/api/?background=C71585&color=fff&name={{Auth::user()->name}}" class="user-img" alt="user avatar">
                             <div class="user-info ps-3">
                                 <p class="user-name mb-0">{{Auth::user()->name}}</p>
-                                <p class="designattion mb-0">{{Auth::user()->IsAdmin == 1 ? 'Admin' : 'User'}}</p>
+                                <p class="designattion mb-0">{{Auth::user()->role}}</p>
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
