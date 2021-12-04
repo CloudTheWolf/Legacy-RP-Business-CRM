@@ -11,6 +11,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ActionController;
 use App\Http\Controllers\TowController;
 use App\Http\Controllers\TeamsController;
+use App\Http\Controllers\PublicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,5 +69,8 @@ Route::post('/tow/submit',[TowController::class,'submit'])->middleware('auth');
 Route::get('/clock-on/{action}',[ActionController::class,'ClockInOut'])->middleware('auth');
 
 Route::get('/team',[TeamsController::class,'viewTeam'])->middleware('auth');
+
+Route::get('/apply',[PublicController::class,'applicationForm']);
+Route::post('/apply',[PublicController::class,'applicationFormSubmit']);
 
 

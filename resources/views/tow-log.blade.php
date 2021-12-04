@@ -1,4 +1,7 @@
-		@extends("layouts.app")
+<?php
+    use Carbon\Carbon
+?>
+        @extends("layouts.app")
 
         @section("style")
             <link href="assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
@@ -106,9 +109,8 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @if($useApi)
                                         @foreach($apiTable as $users)
-                                            @if($users->characterId == Auth::user('cid')->get)
+                                            @if($users->characterId == Auth::user()->cid)
 
                                                 @foreach($users->towImpounds as $impound)
                                                     <tr>
@@ -122,8 +124,6 @@
                                                 @endforeach
                                             @endif
                                         @endforeach
-
-                                    @endif
                                     </tbody>
                                 </table>
                             </div>

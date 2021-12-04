@@ -38,10 +38,6 @@ class TowController extends BaseController
             $help = $stats->first()->help;
         }
 
-        if(!$useApi)
-        {
-            return view('tow-log')->with("local",$local)->with("citizen",$citizen)->with("pd",$pd)->with("help",$help)->with("useApi",$useApi);
-        }
         return view('tow-log')->with("local",$local)->with("citizen",$citizen)->with("pd",$pd)->with("help",$help)->with("useApi",$useApi)->with("apiTable",$apiTable->data);
 
     }

@@ -115,35 +115,35 @@
                                     <label for="inputEmailAddress" class="form-label">Scrap</label>
                                     <div class="input-group">
                                         <input type="number" min="0" class="form-control" id="inputEmailAddress" name="scrap" onchange="multiply(this.value,75,'scrapCost')" value="0" />
-                                        <input type="hidden" class="form-control" id="scrapCost" value="0" onchange="finalValue()" onClick="this.setSelectionRange(0, this.value.length)" />
+                                        <input type="hidden" class="form-control" id="scrapCost" value="0" required="required" onchange="finalValue()" onClick="this.setSelectionRange(0, this.value.length)" />
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <label for="inputChoosePassword" class="form-label">Alum</label>
                                     <div class="input-group">
                                         <input type="number" min="0" class="form-control" id="inputChoosePassword" name="aluminium" value="0" onchange="multiply(this.value,100,'alumCost')"/>
-                                        <input type="hidden" class="form-control" id="alumCost" value="0" onchange="finalValue()" />
+                                        <input type="hidden" class="form-control" id="alumCost" value="0" required="required" onchange="finalValue()" />
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <label for="inputConfirmPassword" class="form-label">Steel</label>
                                     <div class="input-group">
                                         <input type="number" min="0" class="form-control" id="inputConfirmPassword" name="steel" value="0" onchange="multiply(this.value,125,'steelCost')"/>
-                                        <input type="hidden" class="form-control" id="steelCost" value="0" onchange="finalValue()" />
+                                        <input type="hidden" class="form-control" id="steelCost" value="0" required="required" onchange="finalValue()" />
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <label for="inputConfirmPassword" class="form-label">Glass</label>
                                     <div class="input-group">
                                         <input type="number" min="0" class="form-control" id="inputConfirmPassword" name="glass" value="0" onchange="multiply(this.value,40,'glassCost')"/>
-                                        <input type="hidden" class="form-control" id="glassCost" value="0" onchange="finalValue()" />
+                                        <input type="hidden" class="form-control" id="glassCost" value="0" required="required" onchange="finalValue()" />
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <label for="inputConfirmPassword" class="form-label">Rubber</label>
                                     <div class="input-group">
                                         <input type="number" min="0" class="form-control" id="inputConfirmPassword" name="rubber" value="0" onchange="multiply(this.value,15,'rubberCost')"/>
-                                        <input type="hidden" class="form-control" id="rubberCost" value="0" onchange="finalValue()" />
+                                        <input type="hidden" class="form-control" id="rubberCost" value="0" required="required" onchange="finalValue()" />
                                     </div>
                                 </div>
                                 <div class="col-3">
