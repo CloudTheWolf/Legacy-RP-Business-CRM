@@ -31,7 +31,7 @@ class PublicController extends Controller
             ]
         );
 
-        Http::post('https://discord.com/api/webhooks/905386277334028299/X9s8KaaICQe7b790yNprCQ_FUp_dWstt_dCwlVx_tPfXdDX1tR1ZSlDEkGS9By8kPD6R', [
+        Http::post(env('DISCORD_JOB_WEBHOOK'), [
             "embeds"=> [
                 [
                     "title"=> "New Job Application",
