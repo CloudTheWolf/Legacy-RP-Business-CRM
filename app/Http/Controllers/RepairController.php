@@ -20,9 +20,15 @@ class RepairController extends BaseController
     function repairForm()
     {
 
-        $client = new Client(['base_uri' => env("API_BASE_URI")]);
-        $response = $client->request('GET', '/op-framework/vehicles.json');
-        $vehicles = json_decode($response->getBody());
+        try {
+            $client = new Client(['base_uri' => env("API_BASE_URI"),'timeout' => 5]);
+            $response = $client->request('GET', '/op-framework/vehicles.json');
+            $vehicles = json_decode($response->getBody());
+        }
+        catch (\Exception $e)
+        {
+            $vehicles = json_decode('{"data":{"pdm":[],"edm":[],"addon":[]}}');
+        }
         $latest = $this->getLatestRepairs();
         $mechanics = DB::table('users')->where('disabled','=','0')->get();
         return view('repair-log',)->with('vehicles',$vehicles)->with('latest',$latest)->with('mechanics',$mechanics);
@@ -30,10 +36,15 @@ class RepairController extends BaseController
 
     function repairFormEdit(Request $request, $id)
     {
-
-        $client = new Client(['base_uri' => env("API_BASE_URI")]);
-        $response = $client->request('GET', '/op-framework/vehicles.json');
-        $vehicles = json_decode($response->getBody());
+        try {
+            $client = new Client(['base_uri' => env("API_BASE_URI"),'timeout' => 5]);
+            $response = $client->request('GET', '/op-framework/vehicles.json');
+            $vehicles = json_decode($response->getBody());
+        }
+        catch (\Exception $e)
+        {
+            $vehicles = json_decode('{"data":{"pdm":[],"edm":[],"addon":[]}}');
+        }
         $latest = $this->getLatestRepairs();
         $mechanics = DB::table('users')->where('disabled','=','0')->get();
         $job = DB::table('repair_log')->where('id','=',$id)->first();

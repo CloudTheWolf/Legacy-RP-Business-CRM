@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -26,8 +27,15 @@ class TowController extends BaseController
         $pd = "0";
         $help = "0";
 
-
-        $data = Http::get(env('API_BASE_URI')."/op-framework/towImpounds.json");
+        try {
+            $client = new Client(['base_uri' => env("API_BASE_URI"),'timeout' => 5]);
+            $response = $client->request('GET', '/op-framework/towImpounds.json');
+            $data = json_decode($response->getBody());
+        }
+        catch (\Exception $e)
+        {
+            $data = '{"data":[]}';
+        }
         $apiTable = json_decode($data);
 
         if ($stats->count() != 0)
@@ -44,7 +52,15 @@ class TowController extends BaseController
 
     function viewLivePage()
     {
-        $data = Http::get(env('API_BASE_URI')."/op-framework/towImpounds.json");
+        try {
+            $client = new Client(['base_uri' => env("API_BASE_URI"),'timeout' => 5]);
+            $response = $client->request('GET', '/op-framework/towImpounds.json');
+            $data = json_decode($response->getBody());
+        }
+        catch (\Exception $e)
+        {
+            $data = '{"data":[]}';
+        }
         $apiTable = json_decode($data);
         $cids = DB::table('users')->where('disabled',"=","0")->get("cid")->toArray();
         $cidList = [];

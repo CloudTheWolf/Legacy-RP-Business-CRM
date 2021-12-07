@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception;
 use Illuminate\Support\Facades\DB;
 use SebastianBergmann\CodeCoverage\Driver\Selector;
 
@@ -22,10 +23,15 @@ class DashController extends Controller
         $rev = DB::table('repair_log')->where('deleted','=','0')->select("cost")->sum('cost');
         $onDuty = DB::table('users')->select("onDuty")->where("onDuty","=","1")->count('id');
 
-        $client = new Client(['base_uri' => env("API_BASE_URI")]);
-        $response = $client->request('GET', '/op-framework/connections.json');
-        $citizens = json_decode($response->getBody())->data->joined->total;
-
+        try {
+            $client = new Client(['base_uri' => env("API_BASE_URI"), 'timeout' => 60]);
+            $response = $client->request('GET', '/op-framework/connections.json');
+            $citizens = json_decode($response->getBody())->data->joined->total;
+        }
+        catch(\Exception $e)
+        {
+            $citizens = '0 (Server Offline)';
+        }
         $pie = DB::select('SELECT users.name,COUNT(repair_log.id) as count FROM `repair_log` inner join users on `users`.`id` = `repair_log`.`mechanic` where `repair_log`.`deleted` = 0 AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
 
         $tJan = DB::select('SELECT COUNT(*) as count FROM `repair_log` WHERE deleted = 0 AND timestamp > now() - INTERVAL 12 month and MONTH(timestamp) = 1');
