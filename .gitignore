@@ -12,11 +12,5 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-.idea/webServers.xml
-.idea/vertical.iml
-.idea/modules.xml
-.idea/deployment.xml
-.idea/vertical.iml
-.idea/deployment.xml
-.idea/modules.xml
-.idea/vertical.iml
+/.idea
+
