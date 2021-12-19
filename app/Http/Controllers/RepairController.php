@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use mysql_xdevapi\Exception;
 
 
@@ -97,6 +98,70 @@ class RepairController extends BaseController
             'cost' => $total,
 
         ]);
+
+        $mechanicName = DB::table('users')->where('id','=',$mechanic)->select('name')->get();
+        Http::post(env('DISCORD_REPAIR_WEBHOOK'), [
+            "embeds"=> [
+                [
+                    "title"=> $mechanicName[0]->name." has logged a repair!",
+                    "description"=> "See the repair details below:",
+                    "color"=> 15358714,
+                    "fields" =>
+                        [
+                            [
+                                "name" => "Mechanic",
+                                "value"=> $mechanicName[0]->name,
+                                "inline" => false
+                            ],
+                            [
+                                "name" => "Customer",
+                                "value"=> empty($customer) ? "N/A" : $customer,
+                                "inline" => true
+                            ],
+                            [
+                                "name" => "Vehicle",
+                                "value"=> empty($vehicle) ? "Undefined" : $vehicle,
+                                "inline" => true
+                            ],
+                            [
+                                "name" => "Scrap Used",
+                                "value"=> $scrap,
+                                "inline" => false
+                            ],
+                            [
+                                "name" => "Aluminium Used",
+                                "value"=> $aluminium,
+                                "inline" => true
+                            ],
+                            [
+                                "name" => "Steel Used",
+                                "value"=> $steel,
+                                "inline" => true
+                            ],
+                            [
+                                "name" => "Glass Used",
+                                "value"=> $glass,
+                                "inline" => true
+                            ],
+                            [
+                                "name" => "Rubber Used",
+                                "value"=> $rubber,
+                                "inline" => true
+                            ],
+                            [
+                                "name" => "Total",
+                                "value"=> "$".$total,
+                                "inline" => false
+                            ],
+                        ],
+                    "author"=> [
+                        "name"=> env('COMPANY_NAME')." Live Repair Logger"
+                    ]
+                ]
+            ],
+        ]);
+
+
     }
 
     private function updateRepair($id,$mechanic,$customer, $vehicle, $scrap, $aluminium, $steel, $glass, $rubber, $total)
