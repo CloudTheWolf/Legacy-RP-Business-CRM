@@ -26,7 +26,7 @@
                                             <div class="app-box mx-auto bg-gradient-cosmic text-white"><i class='bx bx-wrench'></i>
                                             </div>
                                             </a>
-                                                <div class="app-title">Mechanic</div>
+                                                <div class="app-title">@lang('app.mechanic')</div>
 
                                         </div>
                                         <div class="col text-center">
@@ -34,37 +34,37 @@
                                             <div class="app-box mx-auto bg-gradient-burning text-white"><i class='bx bxs-truck'></i>
                                             </div>
                                             </a>
-                                            <div class="app-title">Tow</div>
+                                            <div class="app-title">@lang('app.tow')</div>
 
                                         </div>
                                         <div class="col text-center">
                                             <a href="{{url('clock-on/Scuba')}}" >
                                             <div class="app-box mx-auto bg-gradient-deepblue text-white"><i class="fa fa-swimmer"></i>
                                             </div></a>
-                                            <div class="app-title">Scuba</div>
+                                            <div class="app-title">@lang('app.scuba')</div>
                                         </div>
                                         @else
-                                                @if(Auth::user()->workingAs != "Mechanic")
+                                                @if(Auth::user()->workingAs != __('app.mechanic'))
                                                     <div class="col text-center">
                                                         <a href="{{url('clock-on/Mechanic')}}" >
                                                             <div class="app-box mx-auto bg-gradient-cosmic text-white"><i class='bx bx-wrench'></i>
                                                             </div>
                                                         </a>
-                                                        <div class="app-title">Mechanic</div>
+                                                        <div class="app-title">@lang('app.mechanic')</div>
 
                                                     </div>
                                                 @endif
-                                                @if(Auth::user()->workingAs != "Tow")
+                                                @if(Auth::user()->workingAs != __('app.tow'))
                                                     <div class="col text-center">
                                                         <a href="{{url('clock-on/Tow')}}" >
                                                             <div class="app-box mx-auto bg-gradient-burning text-white"><i class='bx bxs-truck'></i>
                                                             </div>
                                                         </a>
-                                                        <div class="app-title">Tow</div>
+                                                        <div class="app-title">@lang('app.tow')</div>
 
                                                     </div>
                                                 @endif
-                                                @if(Auth::user()->workingAs != "Scuba")
+                                                @if(Auth::user()->workingAs != __('app.scuba'))
                                                     <div class="col text-center">
                                                         <a href="{{url('clock-on/Scuba')}}" >
                                                             <div class="app-box mx-auto bg-gradient-deepblue text-white"><i class="fa fa-swimmer"></i>

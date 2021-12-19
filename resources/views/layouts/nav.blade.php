@@ -16,21 +16,21 @@
                     <a href="{{ url('index') }}" class="">
                         <div class="parent-icon"><i class='bx bx-home-circle'></i>
                         </div>
-                        <div class="menu-title">Dashboard</div>
+                        <div class="menu-title">@lang('pages.dashboard')</div>
                     </a>
                 </li>
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="bx bx-car"></i>
                         </div>
-                        <div class="menu-title">Mechanic</div>
+                        <div class="menu-title">@lang('pages.mechanicMenu')</div>
                     </a>
                     <ul>
-                        <li> <a href="{{ url('repairs') }}"><i class="bx bx-right-arrow-alt"></i>Repair Logger</a>
+                        <li> <a href="{{ url('repairs') }}"><i class="bx bx-right-arrow-alt"></i>@lang('pages.repairLogger')</a>
                         </li>
-                        <li> <a href="{{ url('repairsLog') }}"><i class="bx bx-right-arrow-alt"></i>Full Repair Logs</a>
+                        <li> <a href="{{ url('repairsLog') }}"><i class="bx bx-right-arrow-alt"></i>@lang('pages.repairLog')</a>
                         </li>
-                        <li> <a href="{{ url('buying') }}"><i class="bx bx-right-arrow-alt"></i>Purchase Calculator</a>
+                        <li> <a href="{{ url('buying') }}"><i class="bx bx-right-arrow-alt"></i>@lang('pages.purchaseCalc')</a>
                         </li>
                     </ul>
                 </li>
@@ -38,11 +38,11 @@
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class='bx bxs-truck'></i>
                         </div>
-                        <div class="menu-title">Tow Tools</div>
+                        <div class="menu-title">@lang('pages.towMenu')</div>
                     </a>
                     <ul>
-                        <li> <a href="{{url('tow')}}"><i class="bx bx-right-arrow-alt"></i>Tow Tracker</a>
-                        <li> <a href="{{url('tow-live')}}"><i class="bx bx-right-arrow-alt"></i>Live Impound Tracker</a>
+                        <li> <a href="{{url('tow')}}"><i class="bx bx-right-arrow-alt"></i>@lang('pages.towTracker')</a>
+                        <li> <a href="{{url('tow-live')}}"><i class="bx bx-right-arrow-alt"></i>@lang('pages.liveImpoundTracker')</a>
                         </li>
                     </ul>
                 </li>

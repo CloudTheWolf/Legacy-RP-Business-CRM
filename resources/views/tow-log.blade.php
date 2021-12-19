@@ -57,32 +57,32 @@
                             {{ Form::open(array('url' => 'tow/submit', 'class' => 'row g-3')) }}
                                 <div class="col-md-2">
                                     <input type="number" min="0" class="form-control" value="{{$local ?? '0'}}" name="local">
-                                    <button class="btn btn-outline-success col-md-12"><i class="bx bxs-plus-square"></i><br>Add Local</button>
+                                    <button class="btn btn-outline-success col-md-12"><i class="bx bxs-plus-square"></i><br>@lang('app.add') @lang('app.local')</button>
                                 </div>
                                 <div class="col-md-2">
                                     <input type="number" min="0" class="form-control" value="{{$citizen ?? '0'}}" name="citizen">
-                                    <button class="btn btn-outline-info col-md-12"><i class="bx bx-user"></i><br>Add Citizen</button>
+                                    <button class="btn btn-outline-info col-md-12"><i class="bx bx-user"></i><br>@lang('app.add') @lang('app.citizen')</button>
                                 </div>
                                 <div class="col-md-2">
                                     <input type="number" min="0" class="form-control" value="{{$pd ?? '0'}}" name="pd">
-                                    <button class="btn btn-outline-danger col-md-12"><i class="bx bx-error"></i><br>Add Police</button>
+                                    <button class="btn btn-outline-danger col-md-12"><i class="bx bx-error"></i><br>@lang('app.add') @lang('app.police')</button>
                                 </div>
                                 <div class="col-md-3">
                                     <input type="number" min="0" class="form-control" value="{{$help ?? '0'}}" name="help">
-                                    <button class="btn btn-outline-warning col-md-12"><i class="bx bxs-truck"></i><br>Add General Help</button>
+                                    <button class="btn btn-outline-warning col-md-12"><i class="bx bxs-truck"></i><br>@lang('app.add') @lang('app.genHelp')</button>
                                 </div>
                                 <div class="col-12">
                                     <hr/>
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" required>
-                                        <label class="form-check-label" for="flexSwitchCheckDefault">Ready to submit</label>
+                                        <label class="form-check-label" for="flexSwitchCheckDefault">@lang('app.readyCheck')</label>
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <button type="submit" class="btn btn-danger px-5">Log Tow Report</button>
+                                    <button type="submit" class="btn btn-danger px-5">@lang('app.logTow')</button>
                                 </div>
                                 <div class="col-md-6">
-                                    <a type="submit" id="reset" class="btn btn-outline-primary px-5">Clear Tracker</a>
+                                    <a type="submit" id="reset" class="btn btn-outline-primary px-5">@lang('app.clearTow')</a>
                                 </div>
                             </form>
                         </div>

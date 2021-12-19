@@ -12,7 +12,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div>
-                                    <p class="mb-0 text-secondary">Total Repairs</p>
+                                    <p class="mb-0 text-secondary">@lang('app.totalRepairs')</p>
                                     <h4 class="my-1 text-info">{{$count}}</h4>
                                 </div>
                                 <div class="widgets-icons-2 rounded-circle bg-gradient-scooter text-white ms-auto"><i class='bx bxs-wrench'></i>
@@ -26,7 +26,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div>
-                                    <p class="mb-0 text-secondary">Total Revenue</p>
+                                    <p class="mb-0 text-secondary">@lang('app.totalRevenue')</p>
                                     <h4 class="my-1 text-danger">${{$rev}}</h4>
                                 </div>
                                 <div class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto"><i class='bx bxs-wallet'></i>
@@ -40,7 +40,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div>
-                                    <p class="mb-0 text-secondary">On Duty</p>
+                                    <p class="mb-0 text-secondary">@lang('app.onDuty')</p>
                                     <h4 class="my-1 text-success">{{$onDuty}}</h4>
                                 </div>
                                 <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i class='bx bxs-user' ></i>
@@ -54,7 +54,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div>
-                                    <p class="mb-0 text-secondary">Active Citizens In City<sup>BETA</sup></p>
+                                    <p class="mb-0 text-secondary">@lang('app.activeInCity')</p>
                                     <h4 class="my-1 text-warning">{{$citizens}}</h4>
                                 </div>
                                 <div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto"><i class='bx bxs-group'></i>
@@ -71,7 +71,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div>
-                                    <h6 class="mb-0">Repairs Overview</h6>
+                                    <h6 class="mb-0">@lang('app.repairsOverview')</h6>
                                 </div>
 
                             </div>
@@ -88,7 +88,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div>
-                                    <h6 class="mb-0">Top 5 Mechanics</h6>
+                                    <h6 class="mb-0">@lang('app.topFiveMech')</h6>
                                 </div>
 
                             </div>
@@ -116,7 +116,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div>
-                                    <h6 class="mb-0">On Duty</h6>
+                                    <h6 class="mb-0">@lang('app.onDuty')</h6>
                                 </div>
                         </div>
                         <ul class="list-group list-group-flush">
@@ -153,7 +153,8 @@
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    labels: ['@lang("app.month1")','@lang("app.month2")','@lang("app.month3")','@lang("app.month4")','@lang("app.month5")','@lang("app.month6")','@lang("app.month7")',
+                        '@lang("app.month8")','@lang("app.month9")','@lang("app.month10")','@lang("app.month11")','@lang("app.month12")',],
                     datasets: [{
                         data: [{{$jan[0]->count}},{{$feb[0]->count}},{{$mar[0]->count}},{{$apr[0]->count}},{{$may[0]->count}},{{$jun[0]->count}},{{$jul[0]->count}},{{$aug[0]->count}},{{$sep[0]->count}},{{$oct[0]->count}},{{$nov[0]->count}},{{$dec[0]->count}}],
                         borderColor: gradientStroke1,

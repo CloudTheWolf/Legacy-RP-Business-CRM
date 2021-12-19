@@ -38,7 +38,7 @@
                                 <h5 class="mb-0 text-danger">Purchase Materials</h5>
                             </div>
                             <hr>
-                            {{ Form::open(array('url' => 'buying/', 'class' => 'row g-3')) }}
+                            {{ Form::open(array('url' => 'buying/', 'class' => 'row g-3', 'name'=>'buy')) }}
                                 <div class="col-2">
                                     <label for="inputEmailAddress" class="form-label">Scrap</label>
                                     <div class="input-group">
@@ -80,9 +80,13 @@
                                         <input  type="currency" class="form-control" id="fullCost" name="FinalCost" value="0" readonly/>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-outline-success px-5"><i class="bx bx-save"></i> Save Values</button>
-                                </div>
+                            <div class="col-9"></div>
+                                    <div class="col-md-6">
+                                        <button type="submit" id="submit" class="btn btn-outline-success px-5"><i class="bx bx-save"></i> @lang('app.saveValues')</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a id="reset" class="btn btn-outline-danger px-5">@lang('app.clearPurchase')</a>
+                                    </div>
                             </form>
                         </div>
                     </div>
@@ -93,10 +97,27 @@
         </div>
 		@endsection
 
+        @section('script')
+            <script type="text/javascript">
 
+                $("#reset").click(function(e){
 
-        @section("script")
+                    e.preventDefault();
 
+                    var scrap = 0;
+                    var alum = 0;
+                    var steel = 0;
+                    var glass = 0;
+                    var rubber = 0;
+                    $("input[name=scrap]").val(scrap);
+                    $("input[name=alum]").val(alum);
+                    $("input[name=steel]").val(steel);
+                    $("input[name=glass]").val(glass);
+                    $("input[name=rubber]").val(rubber);
+                    document.getElementById("submit").click();
+                });
+
+            </script>
 
             <script>
                 function multiply(value,multiplier,element) {
