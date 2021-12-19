@@ -50,7 +50,7 @@ class PublicController extends Controller
                             "inline" => false
                         ],
                         [
-                            "name" => "Password (Steam) ID",
+                            "name" => "Passport (Steam) ID",
                             "value"=> $request->input('steam'),
                             "inline" => false
                         ],
