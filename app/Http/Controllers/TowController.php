@@ -34,9 +34,9 @@ class TowController extends BaseController
         }
         catch (\Exception $e)
         {
-            $data = '{"data":[]}';
+            $data = json_decode('{"data":[]}');
         }
-        $apiTable = json_decode($data);
+        $apiTable = $data;
 
         if ($stats->count() != 0)
         {
@@ -59,9 +59,9 @@ class TowController extends BaseController
         }
         catch (\Exception $e)
         {
-            $data = '{"data":[]}';
+            $data = json_decode('{"data":[]}');
         }
-        $apiTable = json_decode($data);
+        $apiTable = $data;
         $cids = DB::table('users')->where('disabled',"=","0")->get("cid")->toArray();
         $cidList = [];
         foreach ($cids as $cid) {
