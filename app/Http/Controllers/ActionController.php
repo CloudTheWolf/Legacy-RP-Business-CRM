@@ -27,7 +27,7 @@ class ActionController extends BaseController
                 'workingAs' => $action
         ]);
 
-            $route = $action == 'Mechanic' ? '/repairs' : '/';
+            $route = $action == __('app.mechanic') ? '/repairs' : '/';
             $state == 1 ? $this->OnDuty(Auth::user()->name,$action) : $this->OffDuty(Auth::user()->name);
 
             return redirect($route);
@@ -39,7 +39,7 @@ class ActionController extends BaseController
             "embeds"=> [
             [
                 "title"=> $name." has started work",
-                "description"=> $name." has clocked in as ".$action." at ".now(),
+                "description"=> $name." has clocked in as ".$action." @ ".now(),
                 "color"=> 1044011,
                 "author"=> [
                     "name"=> env('COMPANY_NAME')." Time Tracker"
@@ -54,7 +54,7 @@ class ActionController extends BaseController
             "embeds"=> [
                 [
                     "title"=> $name." has stopped work",
-                    "description"=> $name." has clocked out at ".now(),
+                    "description"=> $name." has clocked out @ ".now(),
                     "color"=> 15604751,
                     "author"=> [
                         "name"=> env('COMPANY_NAME')." Time Tracker"
