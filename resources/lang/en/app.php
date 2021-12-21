@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'copyright' => ' Copyright © :year. All right reserved.',
+    'copyright' => 'Copyright © :year. All right reserved.',
     'mechanic' => 'Mechanic',
     'tow' => 'Tow',
     'scuba' => 'Scuba',
