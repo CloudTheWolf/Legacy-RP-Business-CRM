@@ -18,6 +18,12 @@ class AdminController extends BaseController
         return view('manage-user-add');
     }
 
+    function ViewAllStorage()
+    {
+        if(Auth::user()->IsAdmin != 1) abort('401',"You don't have access to this page");
+        return view('admin-storage');
+    }
+
     function CreateUserPost(Request $request)
     {
         if(Auth::user()->IsAdmin != 1) abort('401',"You don't have access to this page");
