@@ -51,6 +51,22 @@ return [
     'month9'=> 'Sep',
     'month10'=> 'Oct',
     'month11'=> 'Nov',
-    'month12'=> 'Dec'
+    'month12'=> 'Dec',
+
+    /*
+     * Generic
+     */
+    'id' => 'ID',
+    'invoice' => 'Invoice',
+    'matScrap' => 'Scrap',
+    'matAluminium' => 'Aluminium',
+    'matSteel' => 'Steel',
+    'matGlass' => 'Glass',
+    'matRubber' => 'Rubber',
+    'warehouse' => 'Warehouse',
+    'management' => 'Management',
+    'name' => 'Name',
+    'actions' => 'Actions',
+    'capacity' => 'Capacity',
 
 ];
