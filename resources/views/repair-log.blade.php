@@ -146,28 +146,37 @@
                                         <input type="hidden" class="form-control" id="rubberCost" value="0" required="required" onchange="finalValue()" />
                                     </div>
                                 </div>
+                                <div class="col-2">
+
+                                </div>
                                 <div class="col-3">
-                                    <label for="inputAddress3" class="form-label">Total</label>
-                                    <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bx-dollar'></i></span>
+                                    <label for="inputAddress3" class="form-label">Total ($)</label>
+                                    <div class="input-group">
                                         <input  type="currency" class="form-control" id="fullCost" name="FinalCost" value="0" readonly/>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <label for="inputAddress3" class="form-label">10% Off</label>
-                                    <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bx-dollar'></i></span>
+                                    <label for="inputAddress3" class="form-label"><span class="badge rounded-pill bg-gradient-ibiza">10% Off</span></label>
+                                    <div class="input-group">
                                         <input  type="currency" class="form-control" id="10Cost" name="10Cost" value="0" readonly/>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <label for="inputAddress3" class="form-label">15% Off</label>
-                                    <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bx-dollar'></i></span>
+                                    <label for="inputAddress3" class="form-label"><span class="badge rounded-pill bg-gradient-ibiza">15% Off</span></label>
+                                    <div class="input-group">
                                         <input  type="currency" class="form-control" id="15Cost" name="15Cost" value="0" readonly/>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <label for="inputAddress3" class="form-label">20% Off</label>
-                                    <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bx-dollar'></i></span>
+                                    <label for="inputAddress3" class="form-label"><span class="badge rounded-pill bg-gradient-ibiza">20% Off</span></label>
+                                    <div class="input-group">
                                         <input  type="currency" class="form-control" id="20Cost" name="20Cost" value="0" readonly/>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <label for="inputAddress3" class="form-label"><span class="badge rounded-pill bg-gradient-ibiza">25% Off</span></label>
+                                    <div class="input-group">
+                                        <input  type="currency" class="form-control" id="25Cost" name="25Cost" value="0" readonly/>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -279,9 +288,10 @@
                     const rubber = document.getElementById('rubberCost').value;
                     const fullCost = parseInt(scrap)+parseInt(alum)+parseInt(steel)+parseInt(glass)+parseInt(rubber);
                     document.getElementById('fullCost').value = fullCost;
-                    document.getElementById('10Cost').value = 90/100*parseInt(fullCost);
-                    document.getElementById('15Cost').value = 85/100*parseInt(fullCost);
-                    document.getElementById('20Cost').value = 80/100*parseInt(fullCost);
+                    document.getElementById('10Cost').value = Math.floor(90/100*parseInt(fullCost));
+                    document.getElementById('15Cost').value = Math.floor(85/100*parseInt(fullCost));
+                    document.getElementById('20Cost').value = Math.floor(80/100*parseInt(fullCost));
+                    document.getElementById('25Cost').value = Math.floor(75/100*parseInt(fullCost));
 
                 }
             </script>
