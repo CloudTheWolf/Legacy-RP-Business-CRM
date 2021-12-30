@@ -105,7 +105,7 @@
                             </li>
                             <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie[3]->name}} <span class="badge bg-warning text-dark rounded-pill">{{$pie[3]->count}}</span>
                             </li>
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie[5]->name}} <span class="badge bg-info text-dark rounded-pill">{{$pie[5]->count}}</span>
+                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie[4]->name}} <span class="badge bg-info text-dark rounded-pill">{{$pie[4]->count}}</span>
                             </li>
                         </ul>
                     </div>
@@ -217,7 +217,7 @@
             var myChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: ["{{$pie[0]->name}}", "{{$pie[1]->name}}", "{{$pie[2]->name}}", "{{$pie[3]->name}}", "{{$pie[5]->name}}"],
+                    labels: ["{{$pie[0]->name}}", "{{$pie[1]->name}}", "{{$pie[2]->name}}", "{{$pie[3]->name}}", "{{$pie[4]->name}}"],
                     datasets: [{
                         backgroundColor: [
                             gradientStroke1,
@@ -233,7 +233,7 @@
                             gradientStroke4,
                             gradientStroke5
                         ],
-                        data: [{{$pie[0]->count}}, {{$pie[1]->count}}, {{$pie[2]->count}}, {{$pie[3]->count}},{{$pie[5]->count}}],
+                        data: [{{$pie[0]->count}}, {{$pie[1]->count}}, {{$pie[2]->count}}, {{$pie[3]->count}},{{$pie[4]->count}}],
                         borderWidth: [1, 1, 1, 1]
                     }]
                 },
