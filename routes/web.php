@@ -33,6 +33,8 @@ Route::post('/admin/add-user', [AdminController::class,'CreateUserPost'])->middl
 Route::get('/admin/users/{id}',[AdminController::class,'editUserView'])->middleware('auth');
 Route::get('/admin/users',[AdminController::class,'editUserList'])->middleware('auth');
 Route::post('/admin/edit-user',[AdminController::class,'saveUserOnPost'])->middleware('auth');
+Route::get('/admin/storage',[AdminController::class,'ViewAllStorage'])->middleware('auth');
+
 
 Route::get('/edit-user',[AccountController::class,'editUserView'])->middleware('auth');
 Route::post('/edit-user/save',[AccountController::class,'saveUserOnPost'])->middleware('auth');
