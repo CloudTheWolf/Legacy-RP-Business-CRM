@@ -89,12 +89,12 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="name" class="form-label">Your Citizen ID</label>
-                                <input type="text" class="form-control" name="cid" placeholder="69420" pattern="[1-9]{1,6}" required aria-required="true">
+                                <input type="text" class="form-control" name="cid" placeholder="69420" pattern="[0-9]{1,6}" required aria-required="true">
                                 <p class="form-help">use <code>/info</code> in city to get this</p>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="name" class="form-label">Your Cell Phone</label>
-                                <input type="text" class="form-control" name="cell" placeholder="123-4567" pattern="[1-9]{3}-[1-9]{4}" required aria-required="true">
+                                <input type="text" class="form-control" name="cell" placeholder="123-4567" pattern="[0-9]{3}-[0-9]{4}" required aria-required="true">
                                 <p class="form-help">Use <code>/number</code> in city to get this</p>
                             </div>
                             <hr>
