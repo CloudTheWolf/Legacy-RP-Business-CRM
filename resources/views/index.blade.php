@@ -149,6 +149,12 @@
             gradientStroke1.addColorStop(0, '#a360ea');
             gradientStroke1.addColorStop(1, '#9617ea');
 
+            var gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
+            gradientStroke2.addColorStop(0, '#eab360');
+            gradientStroke2.addColorStop(1, '#ea8117');
+
+            const d = new Date();
+            let year = d.getFullYear();
 
             var myChart = new Chart(ctx, {
                 type: 'bar',
@@ -161,8 +167,18 @@
                         backgroundColor: gradientStroke1,
                         hoverBackgroundColor: gradientStroke1,
                         pointRadius: 0,
-                        fill: false,
-                        borderWidth: 0
+                        fill: true,
+                        borderWidth: 0,
+                        label: year
+                    },{
+                        data: [{{$ljan[0]->count}},{{$lfeb[0]->count}},{{$lmar[0]->count}},{{$lapr[0]->count}},{{$lmay[0]->count}},{{$ljun[0]->count}},{{$ljul[0]->count}},{{$laug[0]->count}},{{$lsep[0]->count}},{{$loct[0]->count}},{{$lnov[0]->count}},{{$ldec[0]->count}}],
+                        borderColor: gradientStroke2,
+                        backgroundColor: gradientStroke2,
+                        hoverBackgroundColor: gradientStroke2,
+                        pointRadius: 0,
+                        fill: true,
+                        borderWidth: 0,
+                        label: year - 1
                     }]
                 },
 
@@ -170,7 +186,7 @@
                     maintainAspectRatio: false,
                     legend: {
                         position: 'bottom',
-                        display: false,
+                        display: true,
                         labels: {
                             boxWidth: 8
                         }
@@ -180,7 +196,7 @@
                     },
                     scales: {
                         xAxes: [{
-                            barPercentage: .5
+                            barPercentage: 0.7
                         }]
                     }
                 }
