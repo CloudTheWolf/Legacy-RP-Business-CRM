@@ -62,8 +62,8 @@
                                                 <input type="text" class="form-control" id="inputEmailAddress" name="cell" placeholder="123-4567" pattern="^[0-9]{3}-[0-9]{4}$" value="{{$user->cell}}">
                                             </div>
                                             <div class="col-sm-12">
-                                                <label for="inputEmailAddress" class="form-label">Tow Plate</label>
-                                                <input type="text" class="form-control" id="inputEmailAddress" name="towID" placeholder="AAAAAAAA" pattern="[a-zA-Z0-9]+" value="{{$user->towID}}">
+                                                <label for="inputEmailAddress" class="form-label">Tow Plate(s)</label>
+                                                <input type="text" class="form-control" id="inputEmailAddress" name="towID" placeholder="AAAAAAAA" pattern="[a-zA-Z0-9;,]+" value="{{$user->towID}}">
                                             </div>
                                                 <div class="col-12">
                                                     <label for="inputChoosePassword" class="form-label">Password</label>
