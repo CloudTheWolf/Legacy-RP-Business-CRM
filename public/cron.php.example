@@ -33,7 +33,17 @@ if ($result->num_rows > 0) {
             CURLOPT_CUSTOMREQUEST => 'GET',
         ));
 
-        $response = json_decode(curl_exec($curl));
+        $curlData = curl_exec($curl);
+
+        $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        if($httpcode != 200)
+        {
+            echo('API Error, Will do nothing');
+            curl_close($curl);
+            return;
+        }
+
+        $response = json_decode($curlData);
 
         curl_close($curl);
 
