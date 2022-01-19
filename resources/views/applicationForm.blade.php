@@ -100,15 +100,15 @@
                             <hr>
                             <div class="form-group col-md-12">
                                 <label for="name" class="form-label">Tell us a little about yourself</label>
-                                <textarea class="form-control col-md-12" name="about" maxlength="255" pattern="[a-zA-Z0-9\-\_\s]{1,255}" required aria-required="true"></textarea>
+                                <textarea class="form-control col-md-12" name="about" maxlength="230" pattern="[a-zA-Z0-9\-\_\s]{1,255}" required aria-required="true"></textarea>
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="name" class="form-label">Tell us why you want a job at Harmony and why we should hire you!</label>
-                                <textarea class="form-control col-md-12" name="why" maxlength="255" pattern="[a-zA-Z0-9\-\_\s]{1,255}" required aria-required="true"></textarea>
+                                <textarea class="form-control col-md-12" name="why" maxlength="230" pattern="[a-zA-Z0-9\-\_\s]{1,230}" required aria-required="true"></textarea>
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="name" class="form-label">Tell us about your Criminal Record!</label>
-                                <textarea class="form-control col-md-12" name="record" maxlength="255" pattern="[a-zA-Z0-9\-\_\s]{1,255}" required aria-required="true"></textarea>
+                                <textarea class="form-control col-md-12" name="record" maxlength="230" pattern="[a-zA-Z0-9\-\_\s]{1,230}" required aria-required="true"></textarea>
                                 <p>For no criminal record put <code>None</code></p>
                             </div>
                             <hr>
