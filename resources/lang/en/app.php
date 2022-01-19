@@ -17,6 +17,7 @@ return [
     'scuba' => 'Scuba',
     'offDuty' => 'Off Duty',
     'onDuty' => 'On Duty',
+    'mgmt'=> 'Management',
     'repairsOverview' => 'Repairs Overview',
     'topFiveMech' => 'Top 5 Mechanics',
     'totalRepairs' => 'Total Repairs',

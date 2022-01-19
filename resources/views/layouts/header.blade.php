@@ -21,28 +21,36 @@
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <div class="row row-cols-3 g-3 p-3">
                                         @if(Auth::user()->onDuty == 0)
-                                        <div class="col text-center">
-                                            <a href="{{url('clock-on/Mechanic')}}" >
-                                            <div class="app-box mx-auto bg-gradient-cosmic text-white"><i class='bx bx-wrench'></i>
-                                            </div>
-                                            </a>
-                                                <div class="app-title">@lang('app.mechanic')</div>
+                                            <div class="col text-center">
+                                                <a href="{{url('clock-on/Mechanic')}}" >
+                                                <div class="app-box mx-auto bg-gradient-cosmic text-white"><i class='bx bx-wrench'></i>
+                                                </div>
+                                                </a>
+                                                    <div class="app-title">@lang('app.mechanic')</div>
 
-                                        </div>
-                                        <div class="col text-center">
-                                            <a href="{{url('clock-on/Tow')}}" >
-                                            <div class="app-box mx-auto bg-gradient-burning text-white"><i class='bx bxs-truck'></i>
                                             </div>
-                                            </a>
-                                            <div class="app-title">@lang('app.tow')</div>
+                                            <div class="col text-center">
+                                                <a href="{{url('clock-on/Tow')}}" >
+                                                <div class="app-box mx-auto bg-gradient-burning text-white"><i class='bx bxs-truck'></i>
+                                                </div>
+                                                </a>
+                                                <div class="app-title">@lang('app.tow')</div>
 
-                                        </div>
-                                        <div class="col text-center">
-                                            <a href="{{url('clock-on/Scuba')}}" >
-                                            <div class="app-box mx-auto bg-gradient-deepblue text-white"><i class="fa fa-swimmer"></i>
-                                            </div></a>
-                                            <div class="app-title">@lang('app.scuba')</div>
-                                        </div>
+                                            </div>
+                                            <div class="col text-center">
+                                                <a href="{{url('clock-on/Scuba')}}" >
+                                                <div class="app-box mx-auto bg-gradient-deepblue text-white"><i class="fa fa-swimmer"></i>
+                                                </div></a>
+                                                <div class="app-title">@lang('app.scuba')</div>
+                                            </div>
+                                            @if(Auth::user()->IsAdmin == 1)
+                                                <div class="col text-center">
+                                                    <a href="{{url('clock-on/Management')}}" >
+                                                        <div class="app-box mx-auto bg-gradient-scooter text-white"><i class="fa fa-user-shield"></i>
+                                                        </div></a>
+                                                    <div class="app-title">Management</div>
+                                                </div>
+                                            @endif
                                         @else
                                                 @if(Auth::user()->workingAs != __('app.mechanic'))
                                                     <div class="col text-center">
@@ -70,6 +78,15 @@
                                                             <div class="app-box mx-auto bg-gradient-deepblue text-white"><i class="fa fa-swimmer"></i>
                                                             </div></a>
                                                         <div class="app-title">Scuba</div>
+                                                    </div>
+                                                @endif
+
+                                                @if(Auth::user()->workingAs != __('app.mgmt') && Auth::user()->IsAdmin == 1)
+                                                    <div class="col text-center">
+                                                        <a href="{{url('clock-on/Management')}}" >
+                                                            <div class="app-box mx-auto bg-gradient-scooter text-white"><i class="fa fa-user-shield"></i>
+                                                            </div></a>
+                                                        <div class="app-title">Management</div>
                                                     </div>
                                                 @endif
 
