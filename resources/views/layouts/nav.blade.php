@@ -65,6 +65,7 @@
                     <div class="menu-title">Admin</div>
                 </a>
                 <ul>
+                    <li> <a href="{{url('/admin/applications')}}"><i class="bx bx-right-arrow-alt"></i>Applications</a></li>
                     <li> <a href="{{ url('admin/add-user') }}"><i class="bx bx-right-arrow-alt"></i>Add User</a></li>
                     <li> <a href="{{url('/admin/users/')}}"><i class="bx bx-right-arrow-alt"></i>Manage Users</a></li>
                 </ul>
