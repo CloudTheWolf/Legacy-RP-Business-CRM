@@ -63,6 +63,9 @@
                                     <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bx-car' ></i></span>
                                         <select name="vehicle" id="vehicle" class="single-select" required>
                                             <option selected disabled>--- Please Selected ---</option>
+                                            <optgroup label="Items">
+                                                <option value="Advanced Repair Kit">Advanced Repair Kit</option>
+                                            </optgroup>
                                             <optgroup label="Generic Types">
                                                 <option value="Boat">Boat</option>
                                                 <option value="Commercial">Commercial</option>
@@ -115,35 +118,35 @@
                                 <div class="col-2">
                                     <label for="inputEmailAddress" class="form-label">Scrap</label>
                                     <div class="input-group">
-                                        <input type="number" min="0" class="form-control" id="scrap" name="scrap" onchange="multiply(this.value,75,'scrapCost')" value="{{$job->scrap_used}}" />
+                                        <input type="number" min="0" class="form-control" id="scrap" name="scrap" onchange="multiply(this.value,{!! config('mechanic.scrap.sell') !!},'scrapCost')" value="{{$job->scrap_used}}" />
                                         <input type="hidden" class="form-control" id="scrapCost" value="0" onchange="finalValue()" onClick="this.setSelectionRange(0, this.value.length)" />
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <label for="inputChoosePassword" class="form-label">Alum</label>
                                     <div class="input-group">
-                                        <input type="number" min="0" class="form-control" id="alum" name="aluminium" value="{{$job->alum_used}}" onchange="multiply(this.value,100,'alumCost')"/>
+                                        <input type="number" min="0" class="form-control" id="alum" name="aluminium" value="{{$job->alum_used}}" onchange="multiply(this.value,{!! config('mechanic.aluminium.sell') !!},'alumCost')"/>
                                         <input type="hidden" class="form-control" id="alumCost" value="0" onchange="finalValue()" />
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <label for="inputConfirmPassword" class="form-label">Steel</label>
                                     <div class="input-group">
-                                        <input type="number" min="0" class="form-control" id="steel" name="steel" value="{{$job->steel_used}}" onchange="multiply(this.value,125,'steelCost')"/>
+                                        <input type="number" min="0" class="form-control" id="steel" name="steel" value="{{$job->steel_used}}" onchange="multiply(this.value,{!! config('mechanic.steel.sell') !!},'steelCost')"/>
                                         <input type="hidden" class="form-control" id="steelCost" value="0" onchange="finalValue()" />
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <label for="inputConfirmPassword" class="form-label">Glass</label>
                                     <div class="input-group">
-                                        <input type="number" min="0" class="form-control" id="glass" name="glass" value="{{$job->glass_used}}" onchange="multiply(this.value,40,'glassCost')"/>
+                                        <input type="number" min="0" class="form-control" id="glass" name="glass" value="{{$job->glass_used}}" onchange="multiply(this.value,{!! config('mechanic.glass.sell') !!},'glassCost')"/>
                                         <input type="hidden" class="form-control" id="glassCost" value="0" onchange="finalValue()" />
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <label for="inputConfirmPassword" class="form-label">Rubber</label>
                                     <div class="input-group">
-                                        <input type="number" min="0" class="form-control" id="rubber" name="rubber" value="{{$job->rubber_used}}" onchange="multiply(this.value,15,'rubberCost')"/>
+                                        <input type="number" min="0" class="form-control" id="rubber" name="rubber" value="{{$job->rubber_used}}" onchange="multiply(this.value,{!! config('mechanic.rubber.sell') !!},'rubberCost')"/>
                                         <input type="hidden" class="form-control" id="rubberCost" value="0" onchange="finalValue()" />
                                     </div>
                                 </div>
@@ -167,7 +170,7 @@
                                 </div>
                                 <div class="col-3">
                                     <label for="inputAddress3" class="form-label"><span class="badge rounded-pill bg-gradient-ibiza">20% Off</span></label>
-                                    <div class="input-group">
+                                    <div class="input-group">6
                                         <input  type="currency" class="form-control" id="20Cost" name="20Cost" value="0" readonly/>
                                     </div>
                                 </div>
@@ -331,13 +334,39 @@
                 $(document).ready(function() {
                     $('#vehicle').val('{{$job->vehicle}}');
                     $('#vehicle').trigger('change');
-                    multiply(document.getElementById('scrap').value,75,'scrapCost');
-                    multiply(document.getElementById('alum').value,100,'alumCost');
-                    multiply(document.getElementById('steel').value,125,'steelCost');
-                    multiply(document.getElementById('glass').value,40,'glassCost');
-                    multiply(document.getElementById('rubber').value,15,'rubberCost');
+                    multiply(document.getElementById('scrap').value,{!! config('mechanic.scrap.sell') !!},'scrapCost');
+                    multiply(document.getElementById('alum').value,{!! config('mechanic.aluminium.sell') !!},'alumCost');
+                    multiply(document.getElementById('steel').value,{!! config('mechanic.steel.sell') !!},'steelCost');
+                    multiply(document.getElementById('glass').value,{!! config('mechanic.glass.sell') !!},'glassCost');
+                    multiply(document.getElementById('rubber').value,{!! config('mechanic.rubber.sell') !!},'rubberCost');
                     finalValue();
                 } );
+            </script>
+
+            <script type="text/javascript">
+                function checkKit()
+                {
+                    const type = document.getElementById('vehicle').value;
+                    if(type == 'Advanced Repair Kit') {
+                        document.getElementById('scrap').value = 3;
+                        document.getElementById('aluminium').value = 2;
+                        document.getElementById('steel').value = 0;
+                        document.getElementById('glass').value = 2;
+                        document.getElementById('rubber').value= 4;
+                        multiply(3,{!! config('mechanic.scrap.sell') !!},'scrapCost')
+                        multiply(2,{!! config('mechanic.aluminium.sell') !!},'alumCost')
+                        multiply(0,{!! config('mechanic.steel.sell') !!},'steelCost')
+                        multiply(2,{!! config('mechanic.glass.sell') !!},'glassCost')
+                        multiply(4,{!! config('mechanic.rubber.sell') !!},'rubberCost')
+
+                        document.getElementById('fullCost').value = {!! config('mechanic.specialItemPrices.advRepairKit') !!};
+                        document.getElementById('10Cost').value = {!! config('mechanic.specialItemPrices.advRepairKit') !!};
+                        document.getElementById('15Cost').value = {!! config('mechanic.specialItemPrices.advRepairKit') !!};
+                        document.getElementById('20Cost').value = {!! config('mechanic.specialItemPrices.advRepairKit') !!};
+                        document.getElementById('25Cost').value = {!! config('mechanic.specialItemPrices.advRepairKit') !!};
+
+                    }
+                }
             </script>
 
 

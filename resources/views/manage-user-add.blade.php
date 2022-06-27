@@ -49,7 +49,18 @@
                                             </div>
                                             <div class="col-sm-12">
                                                 <label for="inputRole" class="form-label">Job Role</label>
-                                                <input type="text" class="form-control" id="inputRole" name="role" placeholder="Tow Driver">
+                                                <select class="form-control" id="inputRole" name="role">
+                                                    <option selected disabled>Please Select</option>
+                                                    <option value="Tow Driver">Tow Driver</option>
+                                                    <option value="Intern Mechanic">Intern Mechanic</option>
+                                                    <option value="Lead Mechanic">Lead Mechanic</option>
+                                                    <option value="Adept Mechanic">Adept Mechanic</option>
+                                                    <option value="Expert Mechanic">Expert Mechanic</option>
+                                                    <option value="Veteran Mechanic">Veteran Mechanic</option>
+                                                    <option value="Manager">Manager</option>
+                                                    <option Value="Boss">Boss</option>
+
+                                                </select>
                                             </div>
                                             <div class="col-sm-12">
                                                 <label for="inputEmailAddress" class="form-label">Passport ID (Steam FiveM ID)</label>

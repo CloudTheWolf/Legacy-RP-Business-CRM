@@ -24,13 +24,13 @@ class DashController extends Controller
         $onDuty = DB::table('users')->select("onDuty")->where("onDuty","=","1")->count('id');
 
         try {
-            $client = new Client(['base_uri' => env("API_BASE_URI"), 'timeout' => 60]);
-            $response = $client->request('GET', '/op-framework/connections.json');
-            $citizens = json_decode($response->getBody())->data->joined->total;
+            $client = new Client(['base_uri' => env("API_BASE_URI"),'timeout' => 5]);
+            $response = $client->request('GET', '/op-framework/users.json');
+            $citizens = count(json_decode($response->getBody())->data);
         }
         catch(\Exception $e)
         {
-            $citizens = '0 (Server Offline)';
+            $citizens = 'API Error';
         }
         $pie = DB::select('SELECT users.name,COUNT(repair_log.id) as count FROM `repair_log` inner join users on `users`.`id` = `repair_log`.`mechanic` where `repair_log`.`deleted` = 0 AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
 

@@ -12,6 +12,7 @@ use App\Http\Controllers\ActionController;
 use App\Http\Controllers\TowController;
 use App\Http\Controllers\TeamsController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\WarehouseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,9 @@ Route::get('/login', function () {
     return view('authentication-signin');
 })->name('login');
 
+Route::get('auth/steam', [LoginController::class,'redirectToSteam'])->name('auth.steam');
+Route::get('auth/steam/handle', [LoginController::class,'handle'])->name('auth.steam.handle');
+
 Route::post('/login',[LoginController::class,'authenticate']);
 
 Route::get('/logout',[LoginController::class,'logout'])->middleware('auth');
@@ -72,7 +76,14 @@ Route::get('/clock-on/{action}',[ActionController::class,'ClockInOut'])->middlew
 
 Route::get('/team',[TeamsController::class,'viewTeam'])->middleware('auth');
 
-Route::get('/apply',[PublicController::class,'applicationForm']);
-Route::post('/apply',[PublicController::class,'applicationFormSubmit']);
+Route::get('/apply',[PublicController::class,'applicationFormAuth']);
+Route::get('/apply/select-profile',[PublicController::class,'applicationFormProfile']);
+//Route::get('/apply/form',[PublicController::class,'applicationForm']);
+Route::post('/apply/done',[PublicController::class,'applicationFormSubmit']);
+Route::post('/apply/form',[PublicController::class,'applicationForm']);
 
+Route::get('/warehouse',[WarehouseController::class,'ViewAllStorage']);
+Route::get('/warehouse/{id}',[WarehouseController::class,'ViewAllStorage']);
 
+Route::get('apply/auth/steam', [LoginController::class,'jobApplicationSendToSteam'])->name('apply.auth.steam');
+Route::get('apply/auth/steam/handle', [LoginController::class,'handleApplication'])->name('apply.auth.steam.handle');

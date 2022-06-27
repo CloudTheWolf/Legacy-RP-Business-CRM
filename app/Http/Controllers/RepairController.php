@@ -22,7 +22,7 @@ class RepairController extends BaseController
     {
 
         try {
-            $client = new Client(['base_uri' => env("API_BASE_URI"),'timeout' => 5]);
+            $client = new Client(['base_uri' => env("API_BASE_URI"),'timeout' => 60]);
             $response = $client->request('GET', '/op-framework/vehicles.json');
             $vehicles = json_decode($response->getBody());
         }
@@ -38,7 +38,7 @@ class RepairController extends BaseController
     function repairFormEdit(Request $request, $id)
     {
         try {
-            $client = new Client(['base_uri' => env("API_BASE_URI"),'timeout' => 5]);
+            $client = new Client(['base_uri' => env("API_BASE_URI"),'timeout' => 60]);
             $response = $client->request('GET', '/op-framework/vehicles.json');
             $vehicles = json_decode($response->getBody());
         }

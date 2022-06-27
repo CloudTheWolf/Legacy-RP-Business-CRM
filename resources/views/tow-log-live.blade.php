@@ -36,9 +36,6 @@ use Carbon\Carbon
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
-                                @foreach($apiTable as $users)
-                                    @if(in_array((int)$users->characterId,$cidList))
-                                    <h5>{{TowController::cidToName($users->characterId)}}</h5>
                                 <table id="example2" class="table table-striped table-bordered">
                                     <thead>
                                     <tr>
@@ -49,19 +46,21 @@ use Carbon\Carbon
                                         @if(Auth::user()->IsAdmin == '1')
                                         <th>Payout</th>
                                         @endif
+                                        <th>Impounded By</th>
                                         <th>Timestamp</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                                @foreach($users->towImpounds as $impound)
+                                                @foreach($towImpound as $impound)
                                                     <tr>
-                                                        <td>{{$impound->timestamp}}</td>
+                                                        <td>{{$impound->id}}</td>
                                                         <td>{{$impound->modelName}}</td>
                                                         <td>{{$impound->plateNumber}}</td>
                                                         <td>{{$impound->playerVehicle == 1 ? "Citizen" : "Local"}}</td>
                                                         @if(Auth::user()->IsAdmin == '1')
                                                         <td>{{$impound->reward}}</td>
                                                         @endif
+                                                        <td>{{$impound->name}}</td>
                                                         <td>{{Carbon::parse($impound->timestamp)->setTimezone('PST')}}</td>
                                                     </tr>
                                                 @endforeach
@@ -69,8 +68,6 @@ use Carbon\Carbon
 
                                     </tbody>
                                 </table>
-                                    @endif
-                                @endforeach
                             </div>
                         </div>
                     </div>

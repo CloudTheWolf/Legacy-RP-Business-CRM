@@ -231,4 +231,6 @@ return [
 
     ],
 
+    'companyName' => env('COMPANY_NAME',null),
+    'brandingPath' => env('BRANDING_DIR',null)
 ];

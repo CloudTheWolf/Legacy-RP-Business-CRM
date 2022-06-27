@@ -13,18 +13,19 @@ class TeamsController extends BaseController
     function viewTeam()
     {
         $users = DB::table('users')->where("disabled","=","0")->orderBy("id")->get();
-        return view("team-list")->with('users',$users);
+        $onlineUsers = self::getOnlineUsers();
+        return view("team-list")->with('users',$users)->with('onlineUsers',$onlineUsers);
     }
 
-    static function checkState($cid)
+    static function getOnlineUsers()
     {
         $client = new Client(['base_uri' => env("API_BASE_URI")]);
         try {
-            $response = $client->request('GET', '/op-framework/character.json?characterId=' . $cid);
+            $response = $client->request('GET', '/op-framework/users.json');
         } catch (GuzzleException $e) {
             return 500;
         }
-        $userState = json_decode($response->getBody());
-        return $userState->statusCode;
+        $userState = json_decode($response->getBody(),true);
+        return $userState; //$userState->statusCode;
     }
 }

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--favicon-->
-    <link rel="icon" href="../../assets/images/favicon-32x32.png" type="image/png" />
+    <link rel="icon" href="../../assets/images/branding/{!! (config('app.brandingPath')) !!}/favicon-32x32.png" type="image/png" />
     <!--plugins-->
 
     <link href="../../assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
@@ -49,16 +49,16 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <a href="javascript:;">
-                                                        <img src="../../assets/images/logo-icon2.png" width="128" alt="" />
+                                                        <img src="../../assets/images/branding/{!! config('app.brandingPath') !!}/logo-icon2.png" width="128" alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="col company-details">
                                                     <h2 class="name">
                                                         <a target="_blank" href="javascript:;">
-                                                            Harmony Repair
+                                                            {!! config('app.companyName') !!}
                                                         </a>
                                                     </h2>
-                                                    <div>Route 68</div>
+                                                    <div></div>
                                                     <div></div>
                                                     <div></div>
                                                 </div>
@@ -74,7 +74,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col invoice-details">
-                                                    <h1 class="invoice-id">INVOICE H-REP-{{$repair[0]->id}}</h1>
+                                                    <h1 class="invoice-id">INVOICE {!! strtoupper(str_replace(' ','-',config('app.companyName'))) !!}-{{$repair[0]->id}}</h1>
                                                     <div class="date">Date of Invoice: {{date('d/m/Y', strtotime($repair[0]->timestamp))}}</div>
                                                     <div class="date">Due Date: {{date('d/m/Y', strtotime($repair[0]->timestamp))}}</div>
                                                 </div>
@@ -96,41 +96,41 @@
                                                         <h3>
                                                             Scrap
                                                         </h3>
-                                                    <td class="unit">$75.00</td>
+                                                    <td class="unit">${!! config('mechanic.scrap.sell') !!}.00</td>
                                                     <td class="qty">{{$repair[0]->scrap_used}}</td>
-                                                    <td class="total">${{75 * $repair[0]->scrap_used}}</td>
+                                                    <td class="total">${{config('mechanic.scrap.sell') * $repair[0]->scrap_used}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="no">02</td>
                                                     <td class="text-left">
                                                         <h3>Aluminium</h3></td>
-                                                    <td class="unit">$100.00</td>
+                                                    <td class="unit">${!! config('mechanic.aluminium.sell') !!}.00</td>
                                                     <td class="qty">{{$repair[0]->alum_used}}</td>
-                                                    <td class="total">${{100 * $repair[0]->alum_used}}</td>
+                                                    <td class="total">${{config('mechanic.aluminium.sell') * $repair[0]->alum_used}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="no">03</td>
                                                     <td class="text-left">
                                                         <h3>Steel</h3></td>
-                                                    <td class="unit">$125.00</td>
+                                                    <td class="unit">{!! config('mechanic.steel.sell') !!}.00</td>
                                                     <td class="qty">{{$repair[0]->steel_used}}</td>
-                                                    <td class="total">${{125 * $repair[0]->steel_used}}</td>
+                                                    <td class="total">${{config('mechanic.steel.sell') * $repair[0]->steel_used}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="no">04</td>
                                                     <td class="text-left">
                                                         <h3>Glass</h3></td>
-                                                    <td class="unit">$40.00</td>
+                                                    <td class="unit">${!! config('mechanic.glass.sell') !!}.00</td>
                                                     <td class="qty">{{$repair[0]->glass_used}}</td>
-                                                    <td class="total">${{40 * $repair[0]->glass_used}}</td>
+                                                    <td class="total">${{config('mechanic.glass.sell') * $repair[0]->glass_used}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="no">05</td>
                                                     <td class="text-left">
                                                         <h3>Rubber</h3></td>
-                                                    <td class="unit">$15.00</td>
+                                                    <td class="unit">${!! config('mechanic.rubber.sell') !!}.00</td>
                                                     <td class="qty">{{$repair[0]->rubber_used}}</td>
-                                                    <td class="total">${{15 * $repair[0]->rubber_used}}</td>
+                                                    <td class="total">${{config('mechanic.rubber.sell') * $repair[0]->rubber_used}}</td>
                                                 </tr>
                                                 </tbody>
                                                 <tfoot>

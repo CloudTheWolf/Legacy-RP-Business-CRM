@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -78,6 +79,16 @@ class AdminController extends BaseController
                 ]);
         }
 
+        if($disabled == 1)
+        {
+            DB::table('users')
+                ->where('id',$request->input('id'))
+                ->update([
+                    'remember_token'=> null,
+                ]);
+        }
+
+
         return back()->with('message', "Saved User");
     }
 
@@ -92,7 +103,7 @@ class AdminController extends BaseController
 
     function editUserList()
     {
-        $users = DB::table('users')->get();
+        $users = DB::table('users')->orderBy("disabled")->get();
         return view('manage-user-list')->with('users',$users);
     }
 

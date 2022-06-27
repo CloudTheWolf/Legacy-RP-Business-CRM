@@ -42,7 +42,31 @@ use \App\Http\Controllers\TeamsController;
                                                     <td>{{$user->cid}}</td>
                                                     <td>{{$user->cell}}</td>
                                                     <td>{{$user->towID}}</td>
-                                                    <td><span id="{{$user->cid}}">{{$user->cid != '' ? 'Loading...': 'CID Not Set'}}</span></td>
+                                                    <td>
+                                                            @php
+                                                            if($user->cid != '')
+                                                            {
+                                                                $found = false;
+                                                                $cid = $user->cid;
+                                                                foreach($onlineUsers['data'] as $ou)
+                                                                    {
+                                                                        $c = $ou['character'];
+                                                                        $oCid = $c["id"] ??= 0;
+                                                                        $match = $cid == $oCid;
+                                                                        if($match)
+                                                                            {
+                                                                               $found = true;
+                                                                               break;
+                                                                            }
+                                                                    }
+                                                            }
+                                                            if($found) {
+                                                                    echo("<span style=\"color: greenyellow\">In City <i class=\"bx bx-check\"></i></span>");
+                                                                 }
+                                                            else{
+                                                                     echo("<span style=\"color: orangered\">Out Of City <i class=\"bx bx-x\"></i></span>");
+                                                                 }
+                                                            @endphp</td>
                                                     <td style="color: {{$user->onDuty == 1 ? "greenyellow" :  "orangered"}}">{{$user->onDuty == 1 ? $user->workingAs : "Off Duty"}}<i class="bx bx-{{$user->onDuty == 1 ? "check" : "x"}}"></i></td>
                                                 </tr>
                                             @endforeach
@@ -61,55 +85,6 @@ use \App\Http\Controllers\TeamsController;
 @endsection
 
 @section("script")
-    <script type="text/javascript">
-
-        $(document).ready(function() {
-            @foreach($users as $userScript)
-                checkCity('{{$userScript->cid}}');
-            @endforeach
-        });
-
-
-        function checkCity(cid)
-        {
-            if(cid == '')
-            {
-                console.log("No CID")
-                return;
-            }
-            console.log("Searching "+cid)
-            $.ajax({
-                type: 'GET',
-                url: "{{env('API_BASE_URI')}}/op-framework/character.json?characterId="+cid,
-                tryCount : 0,
-                retryLimit : 5,
-                success: function (data) {
-                    if (JSON.parse(data).statusCode == "200") {
-                        $("#"+cid).html("In City <i class=\"bx bx-check\">").css('color', 'greenyellow');
-                    } else {
-                        $("#"+cid).html("Out Of City <i class=\"bx bx-x\">").css('color', 'orangered');
-                    };
-                },
-                error:function(xhr, textStatus, errorThrown ) {
-                    if (textStatus == 'timeout') {
-                        this.tryCount++;
-                        if (this.tryCount <= this.retryLimit) {
-                            setTimeout(2000);
-                            $.ajax(this);
-                            return;
-                        }
-                        return;
-                    }
-                    if (xhr.status == 500) {
-                        $("#"+cid).html("Error").css('color', 'red');
-                    } else {
-                        $("#"+cid).html("Error").css('color', 'red');
-                    }
-                }
-            });
-        }
-
-    </script>
     <script src="assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
     <script src="assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
     <script>

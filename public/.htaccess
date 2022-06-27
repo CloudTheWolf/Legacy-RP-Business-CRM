@@ -19,3 +19,13 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+<IfModule mod_headers.c>
+	Header set X-XSS-Protection "1; mode=block"
+	Header always append X-Frame-Options SAMEORIGIN
+	Header set X-Content-Type-Options nosniff
+	Header unset X-Powered-By
+    Header set X-Powered-By "The Internet :kekw:"
+    Header unset X-Turbo-Charged-By
+    Header set X-Turbo-Charged-By "a"
+</IfModule>

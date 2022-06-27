@@ -51,10 +51,11 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                             @endif
-                            <img src="https://lh4.googleusercontent.com/HE6FG3wtnfQ6fo50rKMQFebcwHIHW20ysGWjwGIJuBPzsPIalLQqI84F5GkWbQDr-07_n9H11l-L-vwtoTvBdgQFW0QRWIstH_2-DxS6qpgFPl9EcjrhtlKi8mxRddRebQ" width="100%">
+                            <img src="{!! url('/assets/images/branding/'.config('app.brandingPath').'/job_banner.png') !!}" width="100%">
                             <hr>
                             <p><strong>Directions</strong>:
                                 <ul>
+                                <li>Please fill out the application <i>In Character</i>. </li>
                                 <li>Please fill out the application COMPLETELY and ANSWER ALL QUESTIONS honestly.</li>
                                 <li>Please allow upto 7 Business Days for a reply to your Application.</li>
                                 </ul>
@@ -63,14 +64,23 @@
                             <strong>PRE-REQUIREMENTS</strong>
                             <ul>
                                 <li>Must be willing to undergo any criminal background check that may be required.</li>
-                                <li>Have the ability to work at least 4 hours per week (On-Duty)</li>
+                                <!--<li>Have the ability to work at least 4 hours per week (On-Duty)</li>-->
+                                <li>Understand that, unless otherwise stated, you will start as a Tow Driver</li>
                             </ul>
                             <hr>
-                            {{ Form::open(array('id'=>'apply','url' => 'apply', 'class' => 'row g-3')) }}
+                            {{ Form::open(array('id'=>'apply','url' => 'apply/done', 'class' => 'row g-3')) }}
                                 {{ csrf_field() }}
+                            <div class="form-group col-md-3">
+
+                                <label for="name" class="form-label">Your Timezone</label>
+                                <input type="text" name="timezone" id="timezone" value="" class="form-control" required aria-required="true">
+
+                            </div>
+                                <hr>
                              <div class="form-group col-md-3">
+                                 <input type="hidden" name="timezone" id="timezone" value="">
                                  <label for="name" class="form-label">Your Name</label>
-                                 <input type="text" name="name" class="form-control" placeholder="John Doe" required aria-required="true">
+                                 <input type="text" name="name" readonly class="form-control" placeholder="John Doe" required aria-required="true" value="{!! $name !!}">
 
                              </div>
                             <hr>
@@ -81,20 +91,20 @@
                             <hr>
                             <div class="form-group col-md-3">
                                 <label for="name" class="form-label">Your Passport ID (Steam FiveM ID)</label>
-                                <input type="text" class="form-control" name="steam" placeholder="steam:112233445abc6de" pattern="^steam:+[a-zA-Z0-9]{13,16}" required aria-required="true">
-                                <sub class="form-help"><a href="https://steamdb.info/calculator/" target="_blank">Click here to find this</a></sub>
+                                <input type="text" readonly class="form-control" name="steam" placeholder="steam:112233445abc6de" pattern="^steam:+[a-zA-Z0-9]{13,16}" required aria-required="true" value="{!! $steamID !!}">
+                                <!--sub class="form-help"><a href="https://steamdb.info/calculator/" target="_blank">Click Here</a> to find this. Enter your Steam Username and then copy the FiveM value under SteamID</sub>-->
                                 <div class="invalid-feedback">
                                     Invalid Steam FiveM ID
                                 </div>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="name" class="form-label">Your Citizen ID</label>
-                                <input type="text" class="form-control" name="cid" placeholder="69420" pattern="[0-9]{1,6}" required aria-required="true">
+                                <input type="text" class="form-control" readonly name="cid" placeholder="69420" pattern="[0-9]{1,6}" required aria-required="true" value="{!! $cid !!}">
                                 <p class="form-help">use <code>/info</code> in city to get this</p>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="name" class="form-label">Your Cell Phone</label>
-                                <input type="text" class="form-control" name="cell" placeholder="123-4567" pattern="[0-9]{3}-[0-9]{4}" required aria-required="true">
+                                <input type="text" class="form-control" readonly name="cell" placeholder="123-4567" pattern="[0-9]{3}-[0-9]{4}" required aria-required="true" value="{!! $cell !!}">
                                 <p class="form-help">Use <code>/number</code> in city to get this</p>
                             </div>
                             <hr>
@@ -153,9 +163,16 @@
             <script src="{{ url('/') }}/assets/js/app.js"></script>
             <script type="text/javascript">
                 $(function () {
-                    $("#apply").bootstrapValidator();
-                );
-            </script>
-</body>
+                    $("#apply").bootstrapValidator(),
 
+                    });
+            </script>
+
+            <script type="text/javascript" language="javascript">
+                $(document).ready(function () {
+                    $('input[name="timezone"]').val(new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1]);
+                });
+            </script>
+
+</body>
 </html>

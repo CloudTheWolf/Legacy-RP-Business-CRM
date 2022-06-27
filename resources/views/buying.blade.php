@@ -42,35 +42,35 @@
                                 <div class="col-2">
                                     <label for="inputEmailAddress" class="form-label">Scrap</label>
                                     <div class="input-group">
-                                        <input type="number" min="0" class="form-control" id="scrap" name="scrap" onchange="multiply(this.value,50,'scrapCost')" value="{{$matts->scrap}}" />
+                                        <input type="number" min="0" class="form-control" id="scrap" name="scrap" onchange="multiply(this.value,{!! config('mechanic.scrap.buy') !!},'scrapCost')" value="{{$matts->scrap}}" />
                                         <input type="hidden" class="form-control" id="scrapCost" value="0" onchange="finalValue()" />
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <label for="inputChoosePassword" class="form-label">Aluminium</label>
                                     <div class="input-group">
-                                        <input type="number" min="0" class="form-control" id="alum" name="aluminium" value="{{$matts->alum}}" onchange="multiply(this.value,70,'alumCost')"/>
+                                        <input type="number" min="0" class="form-control" id="alum" name="aluminium" value="{{$matts->alum}}" onchange="multiply(this.value,{!! config('mechanic.aluminium.buy') !!},'alumCost')"/>
                                         <input type="hidden" class="form-control" id="alumCost" value="0" onchange="finalValue()" />
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <label for="inputConfirmPassword" class="form-label">Steel</label>
                                     <div class="input-group">
-                                        <input type="number" min="0" class="form-control" id="steel" name="steel" value="{{$matts->steel}}" onchange="multiply(this.value,90,'steelCost')"/>
+                                        <input type="number" min="0" class="form-control" id="steel" name="steel" value="{{$matts->steel}}" onchange="multiply(this.value,{!! config('mechanic.steel.buy') !!},'steelCost')"/>
                                         <input type="hidden" class="form-control" id="steelCost" value="0" onchange="finalValue()" />
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <label for="inputConfirmPassword" class="form-label">Glass</label>
                                     <div class="input-group">
-                                        <input type="number" min="0" class="form-control" id="glass" name="glass" value="{{$matts->glass}}" onchange="multiply(this.value,35,'glassCost')"/>
+                                        <input type="number" min="0" class="form-control" id="glass" name="glass" value="{{$matts->glass}}" onchange="multiply(this.value,{!! config('mechanic.glass.buy') !!},'glassCost')"/>
                                         <input type="hidden" class="form-control" id="glassCost" value="0" onchange="finalValue()" />
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <label for="inputConfirmPassword" class="form-label">Rubber</label>
                                     <div class="input-group">
-                                        <input type="number" min="0" class="form-control" id="rubber" name="rubber" value="{{$matts->rubber}}" onchange="multiply(this.value,10,'rubberCost')"/>
+                                        <input type="number" min="0" class="form-control" id="rubber" name="rubber" value="{{$matts->rubber}}" onchange="multiply(this.value,{!! config('mechanic.rubber.buy') !!},'rubberCost')"/>
                                         <input type="hidden" class="form-control" id="rubberCost" value="0" onchange="finalValue()" />
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@
                     var glass = 0;
                     var rubber = 0;
                     $("input[name=scrap]").val(scrap);
-                    $("input[name=alum]").val(alum);
+                    $("input[name=aluminium]").val(alum);
                     $("input[name=steel]").val(steel);
                     $("input[name=glass]").val(glass);
                     $("input[name=rubber]").val(rubber);
@@ -146,14 +146,15 @@
             <script src="assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
             <script>
                 $(document).ready(function() {
-                    multiply(document.getElementById('scrap').value,50,'scrapCost');
-                    multiply(document.getElementById('alum').value,70,'alumCost');
-                    multiply(document.getElementById('steel').value,90,'steelCost');
-                    multiply(document.getElementById('glass').value,35,'glassCost');
-                    multiply(document.getElementById('rubber').value,10,'rubberCost');
+                    multiply(document.getElementById('scrap').value,{!! config('mechanic.scrap.buy') !!},'scrapCost');
+                    multiply(document.getElementById('alum').value,{!! config('mechanic.aluminium.buy') !!},'alumCost');
+                    multiply(document.getElementById('steel').value,{!! config('mechanic.steel.buy') !!},'steelCost');
+                    multiply(document.getElementById('glass').value,{!! config('mechanic.glass.buy') !!},'glassCost');
+                    multiply(document.getElementById('rubber').value,{!! config('mechanic.rubber.buy') !!},'rubberCost');
                     finalValue();
                 } );
             </script>
+
 
 
         @endsection

@@ -46,7 +46,18 @@
                                                 </div>
                                             <div class="col-sm-12">
                                                 <label for="inputRole" class="form-label">Job Role</label>
-                                                <input type="text" class="form-control" id="inputRole" name="role" placeholder="Tow Driver" value="{{$user->role}}">
+                                                <select class="form-control" id="inputRole" name="role">
+                                                    <option {{$user->role == "Tow Driver" ? 'selected' : ''}} value="Tow Driver">Tow Driver</option>
+                                                    <option {{$user->role == "Intern Mechanic" ? 'selected' : ''}} value="Intern Mechanic">Intern Mechanic</option>
+                                                    <option {{$user->role == "Lead Mechanic" ? 'selected' : ''}} value="Lead Mechanic">Lead Mechanic</option>
+                                                    <option {{$user->role == "Adept Mechanic" ? 'selected' : ''}} value="Adept Mechanic">Adept Mechanic</option>
+                                                    <option {{$user->role == "Expert Mechanic" ? 'selected' : ''}} value="Expert Mechanic">Expert Mechanic</option>
+                                                    <option {{$user->role == "Veteran Mechanic" ? 'selected' : ''}} value="Veteran Mechanic">Veteran Mechanic</option>
+                                                    <option {{$user->role == "Manager" ? 'selected' : ''}} value="Manager">Manager</option>
+                                                    <option {{$user->role == "Boss" ? 'selected' : ''}} value="Boss">Boss</option>
+
+                                                </select>
+                                                <!--<input type="text" class="form-control" id="inputRole" name="role" placeholder="Tow Driver" value="{{$user->role}}">-->
                                             </div>
                                             <div class="col-sm-12">
                                                 <label for="inputEmailAddress" class="form-label">CID</label>
@@ -54,7 +65,7 @@
                                             </div>
                                             <div class="col-sm-12">
                                                 <label for="inputEmailAddress" class="form-label">Passport ID (Steam FiveM ID)</label>
-                                                <input type="text" class="form-control" id="inputEmailAddress" name="steamId" placeholder="steam:123456789abcdef" value="{{$user->steamId}}">
+                                                <input type="text" class="form-control" id="inputEmailAddress" name="steamId" placeholder="steam:123456789abcdef" value="{{$user->steamId}}" required>
                                                 <p><sub>See SteamDB to get FiveM ID: <a href="https://steamdb.info/calculator/" target="_blank">Click Here</a> </sub></p>
                                             </div>
                                             <div class="col-sm-12">
