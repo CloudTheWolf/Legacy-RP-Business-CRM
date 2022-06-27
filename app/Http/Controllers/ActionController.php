@@ -12,6 +12,7 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
 
 class ActionController extends BaseController
 {
@@ -27,7 +28,15 @@ class ActionController extends BaseController
                 'workingAs' => $action
         ]);
 
-            $route = $action == __('app.mechanic') ? '/repairs' : '/';
+            if($action === __('app.mechanic')) {
+                $route = '/repairs';
+            }
+            elseif($action === __('app.tow')){
+                $route = '/tow';
+            }
+            else {
+                $route = '/';
+            }
             $state == 1 ? $this->OnDuty(Auth::user()->name,$action) : $this->OffDuty(Auth::user()->name);
 
             return redirect($route);
@@ -35,6 +44,17 @@ class ActionController extends BaseController
 
     function OnDuty($name,$action)
     {
+
+        $isOnDuty = DB::table("workTime")->where([
+            "cid" => Auth::user()->cid,
+        ])->whereNull('clockOutAt')->count();
+        if($isOnDuty === 0) {
+            DB::table("workTime")
+                ->insert([
+                    "cid" => Auth::user()->cid
+                ]);
+        }
+
         return Http::post(env('DISCORD_TIMESHEET_WEBHOOK'), [
             "embeds"=> [
             [
@@ -50,6 +70,12 @@ class ActionController extends BaseController
     }
     function OffDuty($name)
     {
+        DB::table("workTime")->where([
+            "cid" => Auth::user()->cid,
+        ])->whereNull('clockOutAt')->update([
+            'clockOutAt' => Carbon::now('UTC')
+        ]);
+
         return Http::post(env('DISCORD_TIMESHEET_WEBHOOK'), [
             "embeds"=> [
                 [
