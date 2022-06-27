@@ -28,13 +28,19 @@ use App\Http\Controllers\WarehouseController;
 Route::get('/', [DashController::class,'showDashboard'])->middleware('auth');
 Route::get('/index', [DashController::class,'showDashboard'])->middleware('auth');
 
-Route::get('/admin/add-user', [AdminController::class,'CreateUserView'])->middleware('auth');
-Route::post('/admin/add-user', [AdminController::class,'CreateUserPost'])->middleware('auth');
 
-Route::get('/admin/users/{id}',[AdminController::class,'editUserView'])->middleware('auth');
-Route::get('/admin/users',[AdminController::class,'editUserList'])->middleware('auth');
-Route::post('/admin/edit-user',[AdminController::class,'saveUserOnPost'])->middleware('auth');
-Route::get('/admin/storage',[AdminController::class,'ViewAllStorage'])->middleware('auth');
+Route::prefix('/admin')->group(function() {
+
+    Route::get('/add-user', [AdminController::class, 'CreateUserView'])->middleware('auth');
+    Route::post('/add-user', [AdminController::class, 'CreateUserPost'])->middleware('auth');
+    Route::get('/users/{id}', [AdminController::class, 'editUserView'])->middleware('auth');
+    Route::get('/users', [AdminController::class, 'editUserList'])->middleware('auth');
+    Route::post('/edit-user', [AdminController::class, 'saveUserOnPost'])->middleware('auth');
+    Route::get('/storage', [AdminController::class, 'ViewAllStorage'])->middleware('auth');
+    Route::get('/applications', [AdminController::class, 'viewJobApplications'])->middleware('auth');
+    Route::get('/application/{id}', [AdminController::class, 'viewSingleJobApplication'])->middleware('auth');
+    Route::post('/applications/accept',[AdminController::class,'processJobRequest'])->middleware('auth');
+});
 
 
 Route::get('/edit-user',[AccountController::class,'editUserView'])->middleware('auth');

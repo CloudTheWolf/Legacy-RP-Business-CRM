@@ -50,6 +50,7 @@ class Applications extends Model
         'record',
         'gang',
         'timestamp',
+        'state',
     ];
 
     /**
@@ -67,6 +68,14 @@ class Applications extends Model
         'record' => 'string',
         'gang' => 'boolean',
         'timestamp' => 'datetime',
+        'state' => 'int'
     ];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 
 }

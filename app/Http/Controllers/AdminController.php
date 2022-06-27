@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Applications;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -107,4 +108,46 @@ class AdminController extends BaseController
         return view('manage-user-list')->with('users',$users);
     }
 
+    function viewJobApplications(Request $request)
+    {
+        $applications = Applications::where('state','=','0')->get();
+        return view('manage-applications',compact('applications'));
+    }
+
+    function viewSingleJobApplication(Request $request)
+    {
+        $application = Applications::where('id','=',$request->id)->first();
+
+        return view('view-application',compact('application'));
+    }
+
+    function processJobRequest(Request $request)
+    {
+        $password = Hash::make($request->input('cell'));
+        $user = User::firstOrNew(['email' => $request->input('username')]);
+        $user->password = $password;
+        $user->name = $request->input('name');
+        $user->cell = $request->input('cell');
+        $user->role = $request->input('role');
+        $user->cid = $request->input('cid');
+        $user->steamId = $request->input('steam');
+        $user->disabled = 0;
+        if($request->role == "Boss" || $request->role == "Manager")
+        {
+            $user->isAdmin = 1;
+        }
+        else
+        {
+            $user->isAdmin = 0;
+        }
+
+        $user->save();
+
+        $application = Applications::where('id','=',$request->id)->first();
+        $application->state = 1;
+        $application->save();
+
+        return redirect('/admin/applications')->with('message',"User Created/Updated");
+
+    }
 }

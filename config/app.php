@@ -232,5 +232,8 @@ return [
     ],
 
     'companyName' => env('COMPANY_NAME',null),
-    'brandingPath' => env('BRANDING_DIR',null)
+    'brandingPath' => env('BRANDING_DIR',null),
+    'enableWarehouse' => env('ENABLE_WAREHOUSE', false),
+    'postJobApplications' => env('POST_JOB_APP_TO_DISCORD', true)
+
 ];
