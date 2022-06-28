@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBuyTemplateTable extends Migration
+new class extends Migration
 {
     /**
      * Run the migrations.
@@ -32,4 +32,4 @@ class CreateBuyTemplateTable extends Migration
     {
         Schema::dropIfExists('buyTemplate');
     }
-}
+};
