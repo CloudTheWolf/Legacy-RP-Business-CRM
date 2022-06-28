@@ -123,26 +123,24 @@ class AdminController extends BaseController
 
     function processJobRequest(Request $request)
     {
-        $password = Hash::make($request->input('cell'));
-        $user = User::firstOrNew(['email' => $request->input('username')]);
-        $user->password = $password;
-        $user->name = $request->input('name');
-        $user->cell = $request->input('cell');
-        $user->role = $request->input('role');
-        $user->cid = $request->input('cid');
-        $user->steamId = $request->input('steam');
-        $user->disabled = 0;
-        if($request->role == "Boss" || $request->role == "Manager")
-        {
-            $user->isAdmin = 1;
-        }
-        else
-        {
-            $user->isAdmin = 0;
-        }
+        if($request->input('ack') == 'accept') {
+            $password = Hash::make($request->input('cell'));
+            $user = User::firstOrNew(['email' => $request->input('username')]);
+            $user->password = $password;
+            $user->name = $request->input('name');
+            $user->cell = $request->input('cell');
+            $user->role = $request->input('role');
+            $user->cid = $request->input('cid');
+            $user->steamId = $request->input('steam');
+            $user->disabled = 0;
+            if ($request->role == "Boss" || $request->role == "Manager") {
+                $user->isAdmin = 1;
+            } else {
+                $user->isAdmin = 0;
+            }
 
-        $user->save();
-
+            $user->save();
+        }
         $application = Applications::where('id','=',$request->id)->first();
         $application->state = 1;
         $application->save();

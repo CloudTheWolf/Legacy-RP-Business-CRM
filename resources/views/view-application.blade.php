@@ -83,11 +83,11 @@
                                         <div class="form-group col-md-12">
                                             <label class="form-label"><strong>Response</strong></label>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="ack" id="accept" required aria-required="true">
+                                                <input class="form-check-input" type="radio" name="ack" id="accept" value="accept" required aria-required="true">
                                                 <label class="form-check-label" for="accept">Accept Application</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="ack" id="deny" required aria-required="true">
+                                                <input class="form-check-input" type="radio" name="ack" id="deny" value="deny" required aria-required="true">
                                                 <label class="form-check-label" for="deny">Deny Application</label>
                                             </div>
                                         </div>
