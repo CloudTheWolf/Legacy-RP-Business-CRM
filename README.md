@@ -34,7 +34,7 @@ SESSION_LIFETIME=120
 MEMCACHED_HOST=127.0.0.1
 
 COMPANY_NAME= # <- Company Name 
-BRANDING_DIR= # <- Name of the directory in /public/assets/imagesbranding/
+BRANDING_DIR= # <- Name of the directory in /public/assets/images/branding/
 
 # LegacyRP API URL (We are using a cached feed instead of the Offical API to get arround issues being blocked for to many requests, there is a 15 Min delay between this and the live API)
 # This is used for seeing who is in city (Auto-Clock Out) as well as live Tow Logs
