@@ -131,7 +131,7 @@ class AdminController extends BaseController
             $user->cell = $request->input('cell');
             $user->role = $request->input('role');
             $user->cid = $request->input('cid');
-            $user->steamId = $request->input('steam');
+            $user->steamId = $request->input('steamId');
             $user->disabled = 0;
             if ($request->role == "Boss" || $request->role == "Manager") {
                 $user->isAdmin = 1;
