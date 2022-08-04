@@ -56,7 +56,7 @@ class TowController extends BaseController
         $towImpound = DB::table('cityTowLogs')
             ->join('users','users.cid','=', 'cityTowLogs.characterId')->where('users.disabled','=','0')
             ->selectRaw('`rowId`, `cityTowLogs`.`id`, `users`.`name`, `timestamp`, `modelName`, `reward`, `playerVehicle`, `plateNumber`')->get();
-        return view('tow-log-live')->with("towImpound",$towImpound);
+        return view('tow-log-live')->with("towImpound",$towImpound); 
 
     }
 
