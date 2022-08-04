@@ -43,7 +43,15 @@
                                                 </div></a>
                                                 <div class="app-title">@lang('app.scuba')</div>
                                             </div>
-                                            @if(Auth::user()->IsAdmin == 1)
+                                            @if(Auth::user()->role == "Boss" || Auth::user()->role == "IT Support" || Auth::user()->role == "Management" || Auth::user()->role == "Trainer")
+                                                <div class="col text-center">
+                                                    <a href="{{url('clock-on/Trainer')}}" >
+                                                        <div class="app-box mx-auto bg-gradient-scooter text-white"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3m6.82 6L12 12.72L5.18 9L12 5.28L18.82 9M17 16l-5 2.72L7 16v-3.73L12 15l5-2.73V16Z"/></svg>
+                                                        </div></a>
+                                                    <div class="app-title">Trainer</div>
+                                                </div>
+                                            @endif
+                                            @if(Auth::user()->role == "Boss" || Auth::user()->role == "IT Support" || Auth::user()->role == "Management")
                                                 <div class="col text-center">
                                                     <a href="{{url('clock-on/Management')}}" >
                                                         <div class="app-box mx-auto bg-gradient-scooter text-white"><i class="fa fa-user-shield"></i>
@@ -80,8 +88,15 @@
                                                         <div class="app-title">Scuba</div>
                                                     </div>
                                                 @endif
-
-                                                @if(Auth::user()->workingAs != __('app.mgmt') && Auth::user()->IsAdmin == 1)
+                                                @if((Auth::user()->workingAs != 'Trainer' && Auth::user()->role == "Boss" || Auth::user()->role == "IT Support" || Auth::user()->role == "Management" || Auth::user()->role == "Trainer"))
+                                                        <div class="col text-center">
+                                                            <a href="{{url('clock-on/Trainer')}}" >
+                                                                <div class="app-box mx-auto bg-gradient-scooter text-white"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3m6.82 6L12 12.72L5.18 9L12 5.28L18.82 9M17 16l-5 2.72L7 16v-3.73L12 15l5-2.73V16Z"/></svg>
+                                                                </div></a>
+                                                            <div class="app-title">Trainer</div>
+                                                        </div>
+                                                @endif
+                                                @if(Auth::user()->workingAs != __('app.mgmt') && Auth::user()->role == "Boss" || Auth::user()->role == "IT Support" || Auth::user()->role == "Management"))
                                                     <div class="col text-center">
                                                         <a href="{{url('clock-on/Management')}}" >
                                                             <div class="app-box mx-auto bg-gradient-scooter text-white"><i class="fa fa-user-shield"></i>

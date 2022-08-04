@@ -81,6 +81,13 @@
                 </ul>
             </li>
         @endif
+        <li>
+            <a href="https://github.com/CloudTheWolf/HarmonyCRM/issues/new/choose" target="_blank" class="">
+                <div class="parent-icon"><i class='bx bxl-github'></i>
+                </div>
+                <div class="menu-title">Bug Report</div>
+            </a>
+        </li>
     </ul>
     <!--end navigation-->
 </div>

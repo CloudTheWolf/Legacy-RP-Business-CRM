@@ -57,7 +57,9 @@
                                                     <option value="Adept Mechanic">Adept Mechanic</option>
                                                     <option value="Expert Mechanic">Expert Mechanic</option>
                                                     <option value="Veteran Mechanic">Veteran Mechanic</option>
+                                                    <option value="Manager">Trainer</option>
                                                     <option value="Manager">Manager</option>
+                                                    <option value="Veteran Manager">Veteran Manager</option>
                                                     <option Value="Boss">Boss</option>
 
                                                 </select>

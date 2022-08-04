@@ -21,6 +21,10 @@ class DashController extends Controller
     {
         $count = DB::table('repair_log')->where('deleted','=','0')->count();
         $rev = DB::table('repair_log')->where('deleted','=','0')->select("cost")->sum('cost');
+        $count2 = DB::table('repair_log')->where('deleted','=','0')->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) -1')->count();
+        $rev2 = DB::table('repair_log')->where('deleted','=','0')->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) -1')->select("cost")->sum('cost');
+        $count3 = DB::table('repair_log')->where('deleted','=','0')->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP)')->count();
+        $rev3 = DB::table('repair_log')->where('deleted','=','0')->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP)')->select("cost")->sum('cost');
         $onDuty = DB::table('users')->select("onDuty")->where("onDuty","=","1")->count('id');
 
         try {
@@ -33,6 +37,8 @@ class DashController extends Controller
             $citizens = 'API Error';
         }
         $pie = DB::select('SELECT users.name,COUNT(repair_log.id) as count FROM `repair_log` inner join users on `users`.`id` = `repair_log`.`mechanic` where `repair_log`.`deleted` = 0 AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
+        $pie2 = DB::select('SELECT users.name,COUNT(repair_log.id) as count FROM `repair_log` inner join users on `users`.`id` = `repair_log`.`mechanic` where `repair_log`.`deleted` = 0 AND MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) - 1 AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
+        $pie3 = DB::select('SELECT users.name,COUNT(repair_log.id) as count FROM `repair_log` inner join users on `users`.`id` = `repair_log`.`mechanic` where `repair_log`.`deleted` = 0 AND MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
 
         $tJan = DB::select('SELECT COUNT(*) as count FROM `repair_log` WHERE deleted = 0 AND timestamp > now() - INTERVAL 12 month and MONTH(timestamp) = 1 and YEAR(timestamp) = YEAR(CURRENT_TIMESTAMP)');
         $tFeb = DB::select('SELECT COUNT(*) as count FROM `repair_log` WHERE deleted = 0 AND timestamp > now() - INTERVAL 12 month and MONTH(timestamp) = 2 and YEAR(timestamp) = YEAR(CURRENT_TIMESTAMP)');
@@ -61,7 +67,8 @@ class DashController extends Controller
 
         $team = DB::table('users')->select(["id","name","cell","onDuty"])->where('disabled','=','0')->get();
         $onDutyList = DB::table('users')->select(["name","workingAs"])->where("onDuty","=","1")->get();
-        return view('index',)->with('count',$count)->with('rev',$rev)->with('onDuty',$onDuty)->with('citizens',$citizens)->with('pie',$pie)
+        return view('index',)->with('count',$count)->with('rev',$rev)->with('count2',$count2)->with('rev2',$rev2)->with('count3',$count3)->with('rev3',$rev3)
+            ->with('onDuty',$onDuty)->with('citizens',$citizens)->with('pie',$pie)->with('pie2',$pie2)->with('pie3',$pie3)
             ->with('jan',$tJan)->with('feb',$tFeb)->with('mar',$tMar)->with('apr',$tApr)->with('may',$tMay)->with('jun',$tJun)
             ->with('jul',$tJul)->with('aug',$tAug)->with('sep',$tSep)->with('oct',$tOct)->with('nov',$tNov)->with('dec',$tDec)
             ->with('ljan',$lJan)->with('lfeb',$lFeb)->with('lmar',$lMar)->with('lapr',$lApr)->with('lmay',$lMay)->with('ljun',$lJun)

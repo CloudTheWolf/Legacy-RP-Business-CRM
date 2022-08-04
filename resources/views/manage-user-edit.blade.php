@@ -53,7 +53,9 @@
                                                     <option {{$user->role == "Adept Mechanic" ? 'selected' : ''}} value="Adept Mechanic">Adept Mechanic</option>
                                                     <option {{$user->role == "Expert Mechanic" ? 'selected' : ''}} value="Expert Mechanic">Expert Mechanic</option>
                                                     <option {{$user->role == "Veteran Mechanic" ? 'selected' : ''}} value="Veteran Mechanic">Veteran Mechanic</option>
+                                                    <option {{$user->role == "Trainer" ? 'selected' : ''}} value="Manager">Trainer</option>
                                                     <option {{$user->role == "Manager" ? 'selected' : ''}} value="Manager">Manager</option>
+                                                    <option {{$user->role == "Veteran Manager" ? 'selected' : ''}} value="Veteran Manager">Veteran Manager</option>
                                                     <option {{$user->role == "Boss" ? 'selected' : ''}} value="Boss">Boss</option>
 
                                                 </select>
