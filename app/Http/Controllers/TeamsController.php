@@ -25,7 +25,6 @@ class TeamsController extends BaseController
         } catch (GuzzleException $e) {
             return 500;
         }
-        $userState = json_decode($response->getBody(),true);
-        return $userState; //$userState->statusCode;
+        return json_decode($response->getBody(),true);
     }
 }

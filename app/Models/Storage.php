@@ -32,7 +32,7 @@ class Storage extends Model
 {
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'storage';
@@ -63,5 +63,7 @@ class Storage extends Model
         'glass' => 'integer',
         'rubber' => 'integer',
     ];
+
+    public $timestamps = false;
 
 }

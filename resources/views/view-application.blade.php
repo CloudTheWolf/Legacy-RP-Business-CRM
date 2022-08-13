@@ -32,6 +32,10 @@
                                                     <input type="text" name="username" class="form-control" id="inputEmailAddress" value="{{str_replace(' ','.',$application->name)}}" required>
                                                 </div>
                                             <div class="col-sm-12">
+                                                <label for="inputEmailAddress" class="form-label">Email (Discord)</label>
+                                                <input type="text" name="username" class="form-control" id="inputEmailAddress" value="{{str_replace(' ','.',$application->discord)}}" readonly>
+                                            </div>
+                                            <div class="col-sm-12">
                                                 <label for="inputRole" class="form-label">Job Role</label>
                                                 <select class="form-control" id="inputRole" name="role" required>
                                                     <option selected value="Tow Driver">Tow Driver</option>

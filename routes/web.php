@@ -84,12 +84,13 @@ Route::get('/team',[TeamsController::class,'viewTeam'])->middleware('auth');
 
 Route::get('/apply',[PublicController::class,'applicationFormAuth']);
 Route::get('/apply/select-profile',[PublicController::class,'applicationFormProfile']);
-//Route::get('/apply/form',[PublicController::class,'applicationForm']);
 Route::post('/apply/done',[PublicController::class,'applicationFormSubmit']);
 Route::post('/apply/form',[PublicController::class,'applicationForm']);
 
 Route::get('/warehouse',[WarehouseController::class,'ViewAllStorage']);
-Route::get('/warehouse/{id}',[WarehouseController::class,'ViewAllStorage']);
+Route::post('/warehouse',[WarehouseController::class,'AddNewStorage']);
+Route::get('/warehouse/{id}',[WarehouseController::class,'viewWarehouse']);
+Route::post('/warehouse/{id}',[WarehouseController::class,'AddWarehouseEntry']);
 
 Route::get('apply/auth/steam', [LoginController::class,'jobApplicationSendToSteam'])->name('apply.auth.steam');
 Route::get('apply/auth/steam/handle', [LoginController::class,'handleApplication'])->name('apply.auth.steam.handle');
