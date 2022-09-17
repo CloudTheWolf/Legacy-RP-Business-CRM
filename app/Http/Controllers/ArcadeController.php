@@ -44,8 +44,8 @@ class ArcadeController extends BaseController
         $sale->whiskey = $request->get('whiskey');
         $sale->zombie = $request->get('zombie');
         $sale->arena = $request->get('arena');
-        $sale->arenaPizza = $request->get('app');
-        $sale->lunchSpecial = $request->get('ls');
+        $sale->arenaPizza = $request->get('avr');
+        $sale->lunchSpecial = $request->get('c1066');
         $sale->fullPie = $request->get('fp');
         $sale->happyHour = $request->get('hh');
         $sale->mexicanWave = $request->get('mw');
