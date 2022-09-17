@@ -13,21 +13,22 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception;
 use Illuminate\Support\Facades\DB;
 use SebastianBergmann\CodeCoverage\Driver\Selector;
-
+use Carbon\Carbon;
 
 class DashController extends BaseController
 {
 
     function showDashboard()
     {
+        $month = Carbon::now()->format('M');
+        $year = $month == "Jan" ? "YEAR(CURRENT_TIMESTAMP) -1" : "YEAR(CURRENT_TIMESTAMP)";
         $count = DB::table('repair_log')->where('deleted','=','0')->count();
         $rev = DB::table('repair_log')->where('deleted','=','0')->select("cost")->sum('cost');
-        $count2 = DB::table('repair_log')->where('deleted','=','0')->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) -1')->count();
-        $rev2 = DB::table('repair_log')->where('deleted','=','0')->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) -1')->select("cost")->sum('cost');
-        $count3 = DB::table('repair_log')->where('deleted','=','0')->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP)')->count();
-        $rev3 = DB::table('repair_log')->where('deleted','=','0')->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP)')->select("cost")->sum('cost');
+        $count2 = DB::table('repair_log')->where('deleted','=','0')->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) -1 and YEAR(`repair_log`.`timestamp`) = '.$year)->count();
+        $rev2 = DB::table('repair_log')->where('deleted','=','0')->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) -1 and YEAR(`repair_log`.`timestamp`) = '.$year)->select("cost")->sum('cost');
+        $count3 = DB::table('repair_log')->where('deleted','=','0')->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) and YEAR(`repair_log`.`timestamp`) = YEAR(CURRENT_TIMESTAMP)')->count();
+        $rev3 = DB::table('repair_log')->where('deleted','=','0')->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) and YEAR(`repair_log`.`timestamp`) = YEAR(CURRENT_TIMESTAMP)')->select("cost")->sum('cost');
         $onDuty = DB::table('users')->select("onDuty")->where("onDuty","=","1")->count('id');
-
         try {
             $client = new Client(['base_uri' => env("API_BASE_URI"),'timeout' => 5]);
             $response = $client->request('GET', '/op-framework/users.json');
