@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--favicon-->
-    <link rel="icon" href="../../assets/images/favicon-32x32.png" type="image/png" />
+    <link rel="icon" href="{{ url('/') }}/assets/images/branding/{!! config('app.brandingPath') !!}/favicon-32x32.png" type="image/png" />
     <!--plugins-->
 
     <link href="../../assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
@@ -56,8 +56,6 @@
                     </div>
                                 <div class="row">
                                     @foreach($characters as $character)
-                                        @if($character->character_deleted == 1) @continue;
-                                        @endif
                                             <div class="col-sm-4">
                                                 <div class="card" style="width: 18rem;">
                                                     <div class="card-body">

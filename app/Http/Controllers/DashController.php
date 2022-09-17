@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 namespace App\Http\Controllers;
 
+use App\Models\ArcadeSales;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 use SebastianBergmann\CodeCoverage\Driver\Selector;
 
 
-class DashController extends Controller
+class DashController extends BaseController
 {
 
     function showDashboard()
@@ -37,8 +38,8 @@ class DashController extends Controller
             $citizens = 'API Error';
         }
         $pie = DB::select('SELECT users.name,COUNT(repair_log.id) as count FROM `repair_log` inner join users on `users`.`id` = `repair_log`.`mechanic` where `repair_log`.`deleted` = 0 AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
-        $pie2 = DB::select('SELECT users.name,COUNT(repair_log.id) as count FROM `repair_log` inner join users on `users`.`id` = `repair_log`.`mechanic` where `repair_log`.`deleted` = 0 AND MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) - 1 AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
-        $pie3 = DB::select('SELECT users.name,COUNT(repair_log.id) as count FROM `repair_log` inner join users on `users`.`id` = `repair_log`.`mechanic` where `repair_log`.`deleted` = 0 AND MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
+        $pie2 = DB::select('SELECT users.name,COUNT(repair_log.id) as count FROM `repair_log` inner join users on `users`.`id` = `repair_log`.`mechanic` where `repair_log`.`deleted` = 0 AND MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) - 1 AND YEAR(`repair_log`.`timestamp`) = YEAR(CURRENT_TIMESTAMP) AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
+        $pie3 = DB::select('SELECT users.name,COUNT(repair_log.id) as count FROM `repair_log` inner join users on `users`.`id` = `repair_log`.`mechanic` where `repair_log`.`deleted` = 0 AND MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) AND YEAR(`repair_log`.`timestamp`) = YEAR(CURRENT_TIMESTAMP) AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
 
         $tJan = DB::select('SELECT COUNT(*) as count FROM `repair_log` WHERE deleted = 0 AND timestamp > now() - INTERVAL 12 month and MONTH(timestamp) = 1 and YEAR(timestamp) = YEAR(CURRENT_TIMESTAMP)');
         $tFeb = DB::select('SELECT COUNT(*) as count FROM `repair_log` WHERE deleted = 0 AND timestamp > now() - INTERVAL 12 month and MONTH(timestamp) = 2 and YEAR(timestamp) = YEAR(CURRENT_TIMESTAMP)');
@@ -74,4 +75,24 @@ class DashController extends Controller
             ->with('ljan',$lJan)->with('lfeb',$lFeb)->with('lmar',$lMar)->with('lapr',$lApr)->with('lmay',$lMay)->with('ljun',$lJun)
             ->with('ljul',$lJul)->with('laug',$lAug)->with('lsep',$lSep)->with('loct',$lOct)->with('lnov',$lNov)->with('ldec',$lDec)->with('team',$team)->with("onDutyList",$onDutyList);
     }
+
+    function showArcadeDashboard()
+    {
+        $onDuty = DB::table('users')->select("onDuty")->where("onDuty","=","1")->count('id');
+        $rev = ArcadeSales::all()->sum('finalCost');
+        $sales = ArcadeSales::all()->count('finalCost');
+        try {
+            $client = new Client(['base_uri' => env("API_BASE_URI"),'timeout' => 5]);
+            $response = $client->request('GET', '/op-framework/users.json');
+            $citizens = count(json_decode($response->getBody())->data);
+        }
+        catch(\Exception $e)
+        {
+            $citizens = 'API Error';
+        }
+        $team = DB::table('users')->select(["id","name","cell","onDuty"])->where('disabled','=','0')->get();
+        $onDutyList = DB::table('users')->select(["name","workingAs"])->where("onDuty","=","1")->get();
+        return view('arcade.index',compact('onDuty','citizens','team','onDutyList','sales','rev'));
+    }
+
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Applications;
+use App\Models\VgApplications;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -110,15 +111,28 @@ class AdminController extends BaseController
 
     function viewJobApplications(Request $request)
     {
-        $applications = Applications::where('state','=','0')->get();
+        if(config('app.siteMode') == "Mechanic") {
+            $applications = Applications::where('state','=','0')->get();
+        }
+        if(config('app.siteMode') == "Arcade") {
+            $applications = VgApplications::where('state','=','0')->get();
+        }
+
         return view('manage-applications',compact('applications'));
     }
 
     function viewSingleJobApplication(Request $request)
     {
-        $application = Applications::where('id','=',$request->id)->first();
+        if(config('app.siteMode') == "Mechanic") {
+            $application = Applications::where('id', '=', $request->id)->first();
+            return view('view-application',compact('application'));
+        }
 
-        return view('view-application',compact('application'));
+        if(config('app.siteMode') == "Arcade") {
+            $application = VgApplications::where('id', '=', $request->id)->first();
+            return view('arcade.view-application',compact('application'));
+        }
+
     }
 
     function processJobRequest(Request $request)
@@ -141,7 +155,14 @@ class AdminController extends BaseController
 
             $user->save();
         }
-        $application = Applications::where('id','=',$request->id)->first();
+        switch(config('app.siteMode')){
+            default:
+                $application = Applications::where('id', '=', $request->id)->first();
+                break;
+            case 'Arcade':
+                $application = VgApplications::where('id', '=', $request->id)->first();
+                break;
+        }
         $application->state = 1;
         $application->save();
 

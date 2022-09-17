@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--favicon-->
-    <link rel="icon" href="{{ url('/') }}/assets/images/branding/{!! config('app.brandingPath') !!}/favicon-32x32.png" type="image/png" />
+    <link rel="icon" href="../../assets/images/favicon-32x32.png" type="image/png" />
     <!--plugins-->
 
     <link href="../../assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
@@ -65,7 +65,7 @@
                             <ul>
                                 <li>Must be willing to undergo any criminal background check that may be required.</li>
                                 <!--<li>Have the ability to work at least 4 hours per week (On-Duty)</li>-->
-                                <li>Understand that, unless otherwise stated, you will start as a Tow Driver</li>
+                                <!--<li>Understand that, unless otherwise stated, you will start as a Tow Driver</li>--->
                             </ul>
                             <hr>
                             {{ Form::open(array('id'=>'apply','url' => 'apply/done', 'class' => 'row g-3')) }}
@@ -78,7 +78,7 @@
                             </div>
                                 <hr>
                              <div class="form-group col-md-3">
-                                 <input type="hidden" name="timezone" id="timezone" value="">
+                                 <!--<input type="hidden" name="timezone" id="timezone" value="">-->
                                  <label for="name" class="form-label">Your Name</label>
                                  <input type="text" name="name" readonly class="form-control" placeholder="John Doe" required aria-required="true" value="{!! $name !!}">
 
@@ -107,10 +107,23 @@
                                 <input type="text" class="form-control" readonly name="cell" placeholder="123-4567" pattern="[0-9]{3}-[0-9]{4}" required aria-required="true" value="{!! $cell !!}">
                                 <p class="form-help">Use <code>/number</code> in city to get this</p>
                             </div>
+                            <div class="form-group col-md-3">
+                                <label for="name" class="form-label">How long have you been a resident of Los Santos?</label>
+                                <input type="text" class="form-control" name="duration" placeholder="4 Months 3 Days 47 Minutes and 37 Seconds" required aria-required="true">
+                            </div>
                             <hr>
                             <div class="form-group col-md-12">
                                 <label for="name" class="form-label">Tell us a little about yourself</label>
                                 <textarea class="form-control col-md-12" name="about" maxlength="190" pattern="[a-zA-Z0-9\-\_\s]{1,255}" required aria-required="true"></textarea>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="name" class="form-label">What shift do you prefer? </label>
+                                <select class="form-control" id="inputShift" name="shift" required>
+                                    <option value="early">Early (Right After Tsunami)</option>
+                                    <option value="midday">Midday</option>
+                                    <option value="night">Night</option>
+                                    <option value="graveyard">Graveyard (Right Before Tsunami)</option>
+                                </select>
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="name" class="form-label">Tell us why you want a job at {!! config('app.companyName') !!} and why we should hire you?</label>
@@ -135,17 +148,15 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-12">
                                 <h4>𝐃𝐈𝐒𝐂𝐋𝐀𝐈𝐌𝐄𝐑</h4>
-                                <p><strong>𝐍𝐎𝐓𝐄:</strong> Applicants may have to go through a CRB check. An applicant who fails to pass on any of the checks mentioned above will result in dismissal.</p>
-                                <p>I confirm that my answers are accurate and complete to the best of my knowledge. If this applications leads to my employment, I understand that false or dishonest information in my application or interview could lead to my dismissal. </p>
-                                <p>Please be aware that all new employees, unless explicitly stated during the interview stage, will start as Tow Truck Drivers. During this time, you will be evaluated on how active you work as well as receive mechanic training.  </p>
+                                <p><strong>𝐍𝐎𝐓𝐄:</strong> Applicants may have to go through a CRB check. An applicant who fails to pass on any of the checks mentioned above may result in dismissal.</p>
+                                <p>I confirm that my answers are accurate and complete to the best of my knowledge. If this application leads to my employment, I understand that false or dishonest information in my application or interview could lead to my dismissal. </p>
                             </div>
                             <div class="form-group col-md-12">
-                                <p>I have read the disclaimer and am aware I will start as a Tow unless stated otherwise?</p>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="ack" id="flexRadioDefault2" required aria-required="true">
-                                    <label class="form-check-label" for="flexRadioDefault2">Yes</label>
+                                    <label class="form-check-label" for="flexRadioDefault2">I have read the disclaimer.</label>
                                 </div>
                             </div>
 
@@ -163,7 +174,7 @@
             <script src="{{ url('/') }}/assets/js/app.js"></script>
             <script type="text/javascript">
                 $(function () {
-                    $("#apply").bootstrapValidator(),
+                    $("#apply").bootstrapValidator()
 
                     });
             </script>

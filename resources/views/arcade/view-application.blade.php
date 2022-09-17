@@ -38,12 +38,7 @@
                                             <div class="col-sm-12">
                                                 <label for="inputRole" class="form-label">Job Role</label>
                                                 <select class="form-control" id="inputRole" name="role" required>
-                                                    <option selected value="Tow Driver">Tow Driver</option>
-                                                    <option value="Intern Mechanic">Intern Mechanic</option>
-                                                    <option value="Lead Mechanic">Lead Mechanic</option>
-                                                    <option value="Adept Mechanic">Adept Mechanic</option>
-                                                    <option value="Expert Mechanic">Expert Mechanic</option>
-                                                    <option value="Veteran Mechanic">Veteran Mechanic</option>
+                                                    <option selected value="Bartender">Bartender</option>
                                                     <option value="Manager">Manager</option>
                                                     <option value="Boss">Boss</option>
 
@@ -63,8 +58,18 @@
                                             </div>
                                             <hr>
                                             <div class="col-sm-12">
+                                                <label class="form-label"><strong>How long have you been a resident of Los Santos?</strong></label>
+                                                <p style="white-space: pre-wrap;">{!! $application->cityAge !!}</p>
+                                            </div>
+                                            <hr>
+                                            <div class="col-sm-12">
                                                 <label class="form-label"><strong>Tell us a little about yourself</strong></label>
                                                 <p style="white-space: pre-wrap;">{!! $application->about !!}</p>
+                                            </div>
+                                            <hr>
+                                            <div class="col-sm-12">
+                                                <label class="form-label"><strong>What shift do you prefer?</strong></label>
+                                                <p style="white-space: pre-wrap;">{!! ucwords($application->shift) !!}</p>
                                             </div>
                                             <hr>
                                             <div class="col-sm-12">

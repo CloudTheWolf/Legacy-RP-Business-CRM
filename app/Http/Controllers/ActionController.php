@@ -55,6 +55,7 @@ class ActionController extends BaseController
                 ]);
         }
 
+        if(env('DISCORD_TIMESHEET_WEBHOOK') == '') return;
         return Http::post(env('DISCORD_TIMESHEET_WEBHOOK'), [
             "embeds"=> [
             [
@@ -75,7 +76,7 @@ class ActionController extends BaseController
         ])->whereNull('clockOutAt')->update([
             'clockOutAt' => Carbon::now('UTC')
         ]);
-
+        if(env('DISCORD_TIMESHEET_WEBHOOK') == '') return;
         return Http::post(env('DISCORD_TIMESHEET_WEBHOOK'), [
             "embeds"=> [
                 [

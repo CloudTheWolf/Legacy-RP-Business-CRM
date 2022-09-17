@@ -51,16 +51,25 @@
                                                 <label for="inputRole" class="form-label">Job Role</label>
                                                 <select class="form-control" id="inputRole" name="role">
                                                     <option selected disabled>Please Select</option>
-                                                    <option value="Tow Driver">Tow Driver</option>
-                                                    <option value="Intern Mechanic">Intern Mechanic</option>
-                                                    <option value="Lead Mechanic">Lead Mechanic</option>
-                                                    <option value="Adept Mechanic">Adept Mechanic</option>
-                                                    <option value="Expert Mechanic">Expert Mechanic</option>
-                                                    <option value="Veteran Mechanic">Veteran Mechanic</option>
-                                                    <option value="Manager">Trainer</option>
+                                                    @if(config('app.siteMode') == "Mechanic")
+                                                        <option value="Tow Driver">Tow Driver</option>
+                                                        <option value="Intern Mechanic">Intern Mechanic</option>
+                                                        <option value="Lead Mechanic">Lead Mechanic</option>
+                                                        <option value="Adept Mechanic">Adept Mechanic</option>
+                                                        <option value="Expert Mechanic">Expert Mechanic</option>
+                                                        <option value="Veteran Mechanic">Veteran Mechanic</option>
+                                                        <option value="Manager">Trainer</option>
+                                                    @endif
+                                                    @if(config('app.siteMode') == "Arcade")
+                                                        <option value="Bartender">Bartender</option>
+                                                    @endif
                                                     <option value="Manager">Manager</option>
+                                                    @if(config('app.siteMode') == "Mechanic")
                                                     <option value="Veteran Manager">Veteran Manager</option>
-                                                    <option Value="Boss">Boss</option>
+                                                    @endif
+                                                    <option value="Boss">Boss</option>
+                                                    <option value="IT Support">IT Support</option>
+
 
                                                 </select>
                                             </div>

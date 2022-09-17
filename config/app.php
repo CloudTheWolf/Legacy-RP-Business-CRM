@@ -234,6 +234,6 @@ return [
     'companyName' => env('COMPANY_NAME',null),
     'brandingPath' => env('BRANDING_DIR',null),
     'enableWarehouse' => env('ENABLE_WAREHOUSE', false),
-    'postJobApplications' => env('POST_JOB_APP_TO_DISCORD', true)
-
+    'postJobApplications' => env('POST_JOB_APP_TO_DISCORD', true),
+    'siteMode' => env('SITE_MODE','Mechanic'),
 ];

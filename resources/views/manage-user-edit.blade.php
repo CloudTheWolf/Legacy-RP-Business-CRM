@@ -47,6 +47,7 @@
                                             <div class="col-sm-12">
                                                 <label for="inputRole" class="form-label">Job Role</label>
                                                 <select class="form-control" id="inputRole" name="role">
+                                                    @if(config('app.siteMode') == "Mechanic")
                                                     <option {{$user->role == "Tow Driver" ? 'selected' : ''}} value="Tow Driver">Tow Driver</option>
                                                     <option {{$user->role == "Intern Mechanic" ? 'selected' : ''}} value="Intern Mechanic">Intern Mechanic</option>
                                                     <option {{$user->role == "Lead Mechanic" ? 'selected' : ''}} value="Lead Mechanic">Lead Mechanic</option>
@@ -54,9 +55,16 @@
                                                     <option {{$user->role == "Expert Mechanic" ? 'selected' : ''}} value="Expert Mechanic">Expert Mechanic</option>
                                                     <option {{$user->role == "Veteran Mechanic" ? 'selected' : ''}} value="Veteran Mechanic">Veteran Mechanic</option>
                                                     <option {{$user->role == "Trainer" ? 'selected' : ''}} value="Manager">Trainer</option>
+                                                    @endif
+                                                    @if(config('app.siteMode') == "Arcade")
+                                                    <option {{$user->role == "Bartender" ? 'selected' : ''}} value="Bartender">Bartender</option>
+                                                    @endif
                                                     <option {{$user->role == "Manager" ? 'selected' : ''}} value="Manager">Manager</option>
+                                                    @if(config('app.siteMode') == "Mechanic")
                                                     <option {{$user->role == "Veteran Manager" ? 'selected' : ''}} value="Veteran Manager">Veteran Manager</option>
+                                                    @endif
                                                     <option {{$user->role == "Boss" ? 'selected' : ''}} value="Boss">Boss</option>
+                                                    <option {{$user->role == "IT Support" ? 'selected' : ''}} value="IT Support">IT Support</option>
 
                                                 </select>
                                                 <!--<input type="text" class="form-control" id="inputRole" name="role" placeholder="Tow Driver" value="{{$user->role}}">-->

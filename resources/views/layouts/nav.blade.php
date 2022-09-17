@@ -19,6 +19,7 @@
                 <div class="menu-title">@lang('pages.dashboard')</div>
             </a>
         </li>
+        @if(config('app.siteMode') == "Mechanic")
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-car"></i>
@@ -57,6 +58,28 @@
                 </li>
             </ul>
         </li>
+            @if(Auth::user()->IsAdmin == 1)
+            <li>
+                <a class="has-arrow" href="javascript:;">
+                    <div class="parent-icon"><i class='bx bx-server'></i>
+                    </div>
+                    <div class="menu-title">Warehouse</div>
+                </a>
+                <ul>
+                    <li> <a href="{{ url('warehouse') }}"><i class="bx bx-right-arrow-alt"></i>Manage</a></li>
+                </ul>
+            </li>
+            @endif
+        @endif
+        @if(config('app.siteMode') == "Arcade")
+            <li>
+                <a href="{{ url('arcade') }}" class="">
+                    <div class="parent-icon"><i class='bx bx-game'></i>
+                    </div>
+                    <div class="menu-title">Arcade Sale System</div>
+                </a>
+            </li>
+        @endif
         @if(Auth::user()->IsAdmin == 1)
             <li>
                 <a class="has-arrow" href="javascript:;">
@@ -70,23 +93,13 @@
                     <li> <a href="{{url('/admin/users/')}}"><i class="bx bx-right-arrow-alt"></i>Manage Users</a></li>
                 </ul>
             </li>
-            <li>
-                <a class="has-arrow" href="javascript:;">
-                    <div class="parent-icon"><i class='bx bx-server'></i>
-                    </div>
-                    <div class="menu-title">Warehouse</div>
-                </a>
-                <ul>
-                    <li> <a href="{{ url('warehouse') }}"><i class="bx bx-right-arrow-alt"></i>Manage</a></li>
-                </ul>
-            </li>
         @endif
         <li>
-            <a href="https://github.com/CloudTheWolf/HarmonyCRM/issues/new/choose" target="_blank" class="">
-                <div class="parent-icon"><i class='bx bxl-github'></i>
-                </div>
-                <div class="menu-title">Bug Report</div>
-            </a>
+        <a href="https://github.com/CloudTheWolf/HarmonyCRM/issues/new/choose" target="_blank" class="">
+            <div class="parent-icon"><i class='bx bxl-github'></i>
+            </div>
+            <div class="menu-title">Bug Report</div>
+        </a>
         </li>
     </ul>
     <!--end navigation-->
