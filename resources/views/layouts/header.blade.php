@@ -115,7 +115,7 @@
                                         @endif
                                     </div>
                                     @endif
-                                    @if(config('app.siteMode') == "Arcade")
+                                    @if(config('app.siteMode') == "Arcade" || config('app.siteMode') == "Bar")
                                     <div class="row row-cols-3 g-3 p-3">
                                         @if(Auth::user()->onDuty == 0)
                                             <div class="col text-center">

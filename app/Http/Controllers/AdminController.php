@@ -114,7 +114,7 @@ class AdminController extends BaseController
         if(config('app.siteMode') == "Mechanic") {
             $applications = Applications::where('state','=','0')->get();
         }
-        if(config('app.siteMode') == "Arcade") {
+        if(config('app.siteMode') == "Arcade" || config('app.siteMode') == "Bar") {
             $applications = VgApplications::where('state','=','0')->get();
         }
 
@@ -128,7 +128,7 @@ class AdminController extends BaseController
             return view('view-application',compact('application'));
         }
 
-        if(config('app.siteMode') == "Arcade") {
+        if(config('app.siteMode') == "Arcade" || config('app.siteMode') == "Bar") {
             $application = VgApplications::where('id', '=', $request->id)->first();
             return view('arcade.view-application',compact('application'));
         }
@@ -160,6 +160,7 @@ class AdminController extends BaseController
                 $application = Applications::where('id', '=', $request->id)->first();
                 break;
             case 'Arcade':
+            case 'Bar':
                 $application = VgApplications::where('id', '=', $request->id)->first();
                 break;
         }

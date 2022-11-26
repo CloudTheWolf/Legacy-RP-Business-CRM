@@ -14,6 +14,7 @@ use App\Http\Controllers\TeamsController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\ArcadeController;
+use App\Http\Controllers\BarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,7 @@ if(config('app.siteMode') == "Mechanic") {
     Route::get('/repairs', [RepairController::class, 'repairForm'])->middleware('auth');
     Route::post('/repairs', [RepairController::class, 'repairFormLog'])->middleware('auth');
     Route::get('/repairsLog', [RepairController::class, 'repairLog'])->middleware('auth');
+    Route::get('/repairsLog/{user}', [RepairController::class, 'userRepairLog'])->middleware('auth');
 
     Route::get('/receipt/{id}.{cost}', [InvoiceController::class, 'viewInvoice']);
 
@@ -71,6 +73,21 @@ if(config('app.siteMode') == "Arcade") {
 
     Route::get('/arcade', [ArcadeController::class, 'showArcadeSale'])->middleware('auth');
     Route::post('/arcade', [ArcadeController::class, 'postArcadeSale'])->middleware('auth');
+
+    Route::get('/apply', [PublicController::class, 'applicationFormAuth']);
+    Route::get('/apply/select-profile', [PublicController::class, 'applicationFormProfile']);
+    Route::post('/apply/done', [PublicController::class, 'arcadeApplicationFormSubmit']);
+    Route::post('/apply/form', [PublicController::class, 'applicationFormArcade']);
+
+}
+
+//Bar Sites
+if(config('app.siteMode') == "Bar") {
+    Route::get('/', [DashController::class, 'showBarDashboard'])->middleware('auth');
+    Route::get('/index', [DashController::class, 'showBarDashboard'])->middleware('auth');
+
+    Route::get('/bar', [BarController::class, 'showBarSale'])->middleware('auth');
+    Route::post('/bar', [BarController::class, 'postBarSale'])->middleware('auth');
 
     Route::get('/apply', [PublicController::class, 'applicationFormAuth']);
     Route::get('/apply/select-profile', [PublicController::class, 'applicationFormProfile']);

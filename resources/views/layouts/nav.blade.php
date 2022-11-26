@@ -80,6 +80,15 @@
                 </a>
             </li>
         @endif
+        @if(config('app.siteMode') == "Bar")
+            <li>
+                <a href="{{ url('bar') }}" class="">
+                    <div class="parent-icon"><i class='bx bx-drink'></i>
+                    </div>
+                    <div class="menu-title">Bar Sales System</div>
+                </a>
+            </li>
+        @endif
         @if(Auth::user()->IsAdmin == 1)
             <li>
                 <a class="has-arrow" href="javascript:;">

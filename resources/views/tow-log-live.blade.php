@@ -39,7 +39,7 @@ use Carbon\Carbon
                                 <table id="example2" class="table table-striped table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>Timestamp</th>
                                         <th>Vehicle</th>
                                         <th>Plate</th>
                                         <th>Type</th>
@@ -47,13 +47,12 @@ use Carbon\Carbon
                                         <th>Payout</th>
                                         @endif
                                         <th>Impounded By</th>
-                                        <th>Timestamp</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                                 @foreach($towImpound as $impound)
                                                     <tr>
-                                                        <td>{{$impound->id}}</td>
+                                                        <td>{{Carbon::parse($impound->timestamp)->setTimezone('GMT')}}</td>
                                                         <td>{{$impound->modelName}}</td>
                                                         <td>{{$impound->plateNumber}}</td>
                                                         <td>{{$impound->playerVehicle == 1 ? "Citizen" : "Local"}}</td>
@@ -61,7 +60,6 @@ use Carbon\Carbon
                                                         <td>{{$impound->reward}}</td>
                                                         @endif
                                                         <td>{{$impound->name}}</td>
-                                                        <td>{{Carbon::parse($impound->timestamp)->setTimezone('PST')}}</td>
                                                     </tr>
                                                 @endforeach
 
@@ -69,6 +67,7 @@ use Carbon\Carbon
                                     </tbody>
                                 </table>
                             </div>
+                            {{ $towImpound->onEachSide(5)->links() }}
                         </div>
                     </div>
                 </div>
@@ -87,8 +86,13 @@ use Carbon\Carbon
                 $(document).ready(function() {
                     var table = $('#example2').DataTable( {
                         lengthChange: false,
+                        //buttons: [ 'copy', 'excel', 'pdf', 'print'],
                         searching: false,
-                        order: [[5,"desc"]]
+                        pageLength: 100,
+                        order: [[0,"desc"]],
+                        bPaginate: false,
+                        paging: false,
+                        bInfo: false,
                     } );
 
                     table.buttons().container()

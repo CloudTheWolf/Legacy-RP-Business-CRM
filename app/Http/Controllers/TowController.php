@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CityTowLog;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -53,10 +54,15 @@ class TowController extends BaseController
     function viewLivePage()
     {
 
-        $towImpound = DB::table('cityTowLogs')
+        //$towImpound = DB::table('cityTowLogs')
+        //    ->join('users','users.cid','=', 'cityTowLogs.characterId')->where('users.disabled','=','0')
+        //    ->selectRaw('`rowId`, `cityTowLogs`.`id`, `users`.`name`, `timestamp`, `modelName`, `reward`, `playerVehicle`, `plateNumber`')->get();
+
+        $towImpound = CityTowLog::selectRaw('`rowId`, `cityTowLogs`.`id`, `users`.`name`, `timestamp`, `modelName`, `reward`, `playerVehicle`, `plateNumber`')
             ->join('users','users.cid','=', 'cityTowLogs.characterId')->where('users.disabled','=','0')
-            ->selectRaw('`rowId`, `cityTowLogs`.`id`, `users`.`name`, `timestamp`, `modelName`, `reward`, `playerVehicle`, `plateNumber`')->get();
-        return view('tow-log-live')->with("towImpound",$towImpound); 
+            ->orderBy('timestamp','desc')
+            ->paginate(25);
+        return view('tow-log-live')->with("towImpound",$towImpound);
 
     }
 

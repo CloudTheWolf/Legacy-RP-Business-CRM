@@ -5,14 +5,10 @@ namespace App\Http\Controllers;
 namespace App\Http\Controllers;
 
 use App\Models\ArcadeSales;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
+use App\Models\BarSales;
 use Illuminate\Routing\Controller as BaseController;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception;
 use Illuminate\Support\Facades\DB;
-use SebastianBergmann\CodeCoverage\Driver\Selector;
 use Carbon\Carbon;
 
 class DashController extends BaseController
@@ -94,6 +90,25 @@ class DashController extends BaseController
         $team = DB::table('users')->select(["id","name","cell","onDuty"])->where('disabled','=','0')->get();
         $onDutyList = DB::table('users')->select(["name","workingAs"])->where("onDuty","=","1")->get();
         return view('arcade.index',compact('onDuty','citizens','team','onDutyList','sales','rev'));
+    }
+
+    function showBarDashboard()
+    {
+        $onDuty = DB::table('users')->select("onDuty")->where("onDuty","=","1")->count('id');
+        $rev = BarSales::all()->sum('finalCost');
+        $sales = BarSales::all()->count('finalCost');
+        try {
+            $client = new Client(['base_uri' => env("API_BASE_URI"),'timeout' => 5]);
+            $response = $client->request('GET', '/op-framework/users.json');
+            $citizens = count(json_decode($response->getBody())->data);
+        }
+        catch(\Exception $e)
+        {
+            $citizens = 'API Error';
+        }
+        $team = DB::table('users')->select(["id","name","cell","onDuty"])->where('disabled','=','0')->get();
+        $onDutyList = DB::table('users')->select(["name","workingAs"])->where("onDuty","=","1")->get();
+        return view('bars.index',compact('onDuty','citizens','team','onDutyList','sales','rev'));
     }
 
 }

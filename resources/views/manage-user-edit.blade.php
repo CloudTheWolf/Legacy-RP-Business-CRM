@@ -56,7 +56,7 @@
                                                     <option {{$user->role == "Veteran Mechanic" ? 'selected' : ''}} value="Veteran Mechanic">Veteran Mechanic</option>
                                                     <option {{$user->role == "Trainer" ? 'selected' : ''}} value="Manager">Trainer</option>
                                                     @endif
-                                                    @if(config('app.siteMode') == "Arcade")
+                                                    @if(config('app.siteMode') == "Arcade" || config('app.siteMode') == "Bar")
                                                     <option {{$user->role == "Bartender" ? 'selected' : ''}} value="Bartender">Bartender</option>
                                                     @endif
                                                     <option {{$user->role == "Manager" ? 'selected' : ''}} value="Manager">Manager</option>

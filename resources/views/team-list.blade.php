@@ -29,12 +29,17 @@ use \App\Http\Controllers\TeamsController;
                                                         <th>CID</th>
                                                         <th>Cell</th>
                                                         <th>Tow</th>
+                                                        @if(Auth::user()->IsAdmin == 1)
                                                         <th>In City</th>
+                                                        @endif
                                                         <th>On Duty</th>
                                                     </tr>
                                             </thead>
                                             <tbody>
                                             @foreach($users as $user)
+                                                @if($user->role == "IT Support")
+                                                    @continue
+                                                @endif
                                                 <tr>
                                                     <td>{{$user->id}}</td>
                                                     <td>{{$user->name}}</td>
@@ -42,6 +47,7 @@ use \App\Http\Controllers\TeamsController;
                                                     <td>{{$user->cid}}</td>
                                                     <td>{{$user->cell}}</td>
                                                     <td>{{$user->towID}}</td>
+                                                    @if(Auth::user()->IsAdmin == 1)
                                                     <td>
                                                             @php
                                                             if($user->cid != '')
@@ -67,6 +73,7 @@ use \App\Http\Controllers\TeamsController;
                                                                      echo("<span style=\"color: orangered\">Out Of City <i class=\"bx bx-x\"></i></span>");
                                                                  }
                                                             @endphp</td>
+                                                    @endif
                                                     <td style="color: {{$user->onDuty == 1 ? "greenyellow" :  "orangered"}}">{{$user->onDuty == 1 ? $user->workingAs : "Off Duty"}}<i class="bx bx-{{$user->onDuty == 1 ? "check" : "x"}}"></i></td>
                                                 </tr>
                                             @endforeach

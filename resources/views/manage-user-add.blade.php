@@ -60,7 +60,7 @@
                                                         <option value="Veteran Mechanic">Veteran Mechanic</option>
                                                         <option value="Manager">Trainer</option>
                                                     @endif
-                                                    @if(config('app.siteMode') == "Arcade")
+                                                    @if(config('app.siteMode') == "Arcade" || config('app.siteMode') == "Bar")
                                                         <option value="Bartender">Bartender</option>
                                                     @endif
                                                     <option value="Manager">Manager</option>

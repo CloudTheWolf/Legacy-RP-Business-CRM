@@ -26,17 +26,17 @@
 
             <div class="row">
                 <div class="col-xl-11 mx-auto">
-                    <h6 class="mb-0 text-uppercase">All Repairs</h6>
+                    <h6 class="mb-0 text-uppercase">Repairs By {{$user}}</h6>
                     <hr/>
                     <div class="card">
                         <div class="card-body">
+                            <select class="form-control">
+                                <option selected>All Users</option>
+                                @foreach($users as $u)
+                                    <option @if($user == $u->name) selected @endif>{{$u->name}}</option>
+                                @endforeach
+                            </select>
                             <div class="table-responsive">
-                                <select class="form-control">
-                                    <option selected>All Users</option>
-                                    @foreach($users as $u)
-                                        <option>{{$u->name}}</option>
-                                    @endforeach
-                                </select>
                                 <table id="example2" class="table table-striped table-bordered">
                                     <thead>
                                     <tr>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RepairLog;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -206,28 +208,44 @@ class RepairController extends BaseController
     {
 
         $latest = $this->getAllRepairs();
-        return view('repair-log-full',)->with('latest',$latest);
+        $users = User::where('disabled','=',0)->orderBy('name','asc')->get();
+        return view('repair-log-full',compact('latest','users'));
+    }
+
+    function userRepairLog(Request $request,$user)
+    {
+
+        $latest = $this->getUserRepairs($user);
+        $users = User::where('disabled','=',0)->orderBy('name','asc')->get();
+        return view('repair-log-user',compact('latest','user','users'));
     }
 
     private function getLatestRepairs()
     {
-        return DB::table('repair_log')
-            ->where('deleted','=','0')
+        return RepairLog::where('users.name','=',Auth::user()->name)
             ->join('users', 'users.id','=','repair_log.mechanic')
             ->select('repair_log.id', 'users.name', 'repair_log.customer_name', 'repair_log.vehicle', 'repair_log.scrap_used', 'repair_log.alum_used', 'repair_log.steel_used', 'repair_log.glass_used', 'repair_log.rubber_used', 'repair_log.cost', 'repair_log.timestamp')
             ->limit(25)
             ->orderByDesc('repair_log.timestamp')
-            ->get();
+            ->paginate(25);
     }
 
     private function getAllRepairs()
     {
-        return DB::table('repair_log')
-            ->where('deleted','=','0')
+        return RepairLog::select('repair_log.id', 'users.name', 'repair_log.customer_name', 'repair_log.vehicle', 'repair_log.scrap_used', 'repair_log.alum_used', 'repair_log.steel_used', 'repair_log.glass_used', 'repair_log.rubber_used', 'repair_log.cost', 'repair_log.timestamp')
             ->join('users', 'users.id','=','repair_log.mechanic')
-            ->select('repair_log.id', 'users.name', 'repair_log.customer_name', 'repair_log.vehicle', 'repair_log.scrap_used', 'repair_log.alum_used', 'repair_log.steel_used', 'repair_log.glass_used', 'repair_log.rubber_used', 'repair_log.cost', 'repair_log.timestamp')
+            ->where('deleted','=','0')
             ->orderByDesc('repair_log.timestamp')
-            ->get();
+            ->paginate(25);
+    }
+
+    private function getUserRepairs($user)
+    {
+        return RepairLog::select('repair_log.id', 'users.name', 'repair_log.customer_name', 'repair_log.vehicle', 'repair_log.scrap_used', 'repair_log.alum_used', 'repair_log.steel_used', 'repair_log.glass_used', 'repair_log.rubber_used', 'repair_log.cost', 'repair_log.timestamp')
+            ->join('users', 'users.id','=','repair_log.mechanic')
+            ->where('users.name','=',$user)
+            ->orderByDesc('repair_log.timestamp')
+            ->paginate(25);
     }
 
 }
