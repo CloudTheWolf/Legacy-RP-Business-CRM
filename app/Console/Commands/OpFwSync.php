@@ -94,6 +94,11 @@ class OpFwSync extends Command
 
     }
 
+    public function SyncCitizen($cid)
+    {
+        return json_decode(Http::withToken(env("OP_FW_API_KEY"))->get(env("OP_FW_REST_URI") . '/characters/id='.$cid.'/data'))->data[0];
+    }
+
 
 
 }

@@ -37,7 +37,7 @@
                                         <div class="form-body">
                                                 <div class="col-sm-12">
                                                     <label for="inputFirstName" class="form-label">Full Name</label>
-                                                    <input type="text" name="name" class="form-control" id="inputFirstName" placeholder="John Doe">
+                                                    <input type="text" name="name" class="form-control" id="inputFullName" placeholder="John Doe">
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <label for="inputEmailAddress" class="form-label">Username</label>
@@ -45,7 +45,14 @@
                                                 </div>
                                             <div class="col-sm-12">
                                                 <label for="inputRole" class="form-label">CID</label>
-                                                <input type="text" class="form-control" id="inputEmailAddress" name="cid" placeholder="123456" pattern="[0-9]+">
+                                                <div class="row">
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="cid" name="cid" placeholder="123456" pattern="[0-9]+">
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <button type="button" class="btn-sm btn-success" onclick="FindByCid();"><i class="bx bx-search"></i> Find By CID</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <label for="inputRole" class="form-label">Job Role</label>
@@ -75,12 +82,12 @@
                                             </div>
                                             <div class="col-sm-12">
                                                 <label for="inputEmailAddress" class="form-label">Passport ID (Steam FiveM ID)</label>
-                                                <input type="text" class="form-control" id="inputEmailAddress" name="steamId" placeholder="steam:123456789abcdef">
+                                                <input type="text" class="form-control" id="steamId" name="steamId" placeholder="steam:123456789abcdef">
                                                 <p><sub>See SteamDB to get FiveM ID: <a href="https://steamdb.info/calculator/" target="_blank">Click Here</a> </sub></p>
                                             </div>
                                             <div class="col-sm-12">
                                                 <label for="inputEmailAddress" class="form-label">Cell Phone</label>
-                                                <input type="text" class="form-control" id="inputEmailAddress" name="cell" placeholder="123-4567" pattern="^[0-9]{3}-[0-9]{4}$">
+                                                <input type="text" class="form-control" id="cell" name="cell" placeholder="123-4567" pattern="^[0-9]{3}-[0-9]{4}$">
                                             </div>
                                                 <div class="col-12">
                                                     <label for="inputChoosePassword" class="form-label">Password</label>
@@ -130,6 +137,28 @@
                         }
                     });
                 });
+            </script>
+
+            <script>
+                function FindByCid(){
+                    var settings = {
+                        "url": "{{url("/api/opfw/")}}/" + $("#cid").val(),
+                        "method": "GET",
+                        "timeout": 0,
+                        error: function(){
+                            alert("Failed to find CID [" + $("#cid").val() + "]");
+                        }
+                    };
+
+                    $.ajax(settings).done(function (response) {
+                        console.log("Found " + response["first_name"] + " " + response["last_name"]);
+                        $("#inputFullName").val(response["first_name"] + " " + response["last_name"]);
+                        $("#inputEmailAddress").val(response["first_name"] + "." + response["last_name"]);
+                        $("#steamId").val(response["steam_identifier"]);
+                        $("#cell").val(response["phone_number"]);
+                        $("#inputChoosePassword").val(response["phone_number"]);
+                    });
+                }
             </script>
         @endsection
 
