@@ -37,8 +37,9 @@ COMPANY_NAME= # <- Company Name
 BRANDING_DIR= # <- Name of the directory in /public/assets/images/branding/
 
 # LegacyRP API URL (We are using a cached feed instead of the Offical API to get arround issues being blocked for to many requests, there is a 15 Min delay between this and the live API)
+
 # This is used for seeing who is in city (Auto-Clock Out) as well as live Tow Logs
-API_BASE_URI=https://c3.cloudthewolf.com
+API_BASE_URI=
 
 # Read Only REST API - Request API Key at https://discord.gg/opfw
 OP_FW_REST_URI=https://rest.opfw.net/c3
@@ -79,6 +80,8 @@ ENABLE_WAREHOUSE=false
 
 # Steam API key: https://steamcommunity.com/dev/apikey (Needed for login and Job Applications)
 STEAM_API_KEY=
+
+SITE_MODE="Mechanic" #
 ```
 
 Save the file, then run the following command
