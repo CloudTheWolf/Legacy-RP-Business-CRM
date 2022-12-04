@@ -25,6 +25,7 @@ class ArcadeController extends BaseController
 
     private function saveArcadeSale(Request $request)
     {
+
         $sale = new ArcadeSales();
         $sale->staff = $request->get('mechanic');
         $sale->pizza = $request->get('pizza');
@@ -45,10 +46,10 @@ class ArcadeController extends BaseController
         $sale->zombie = $request->get('zombie');
         $sale->arena = $request->get('arena');
         $sale->arenaPizza = $request->get('avr');
-        $sale->lunchSpecial = $request->get('c1066');
+        $sale->lunchSpecial = $request->get('hp');
         $sale->fullPie = $request->get('fp');
-        $sale->happyHour = $request->get('hh');
-        $sale->mexicanWave = $request->get('mw');
+        $sale->happyHour = $request->get('ss');
+        $sale->mexicanWave = $request->get('sp');
         $sale->finalCost = $request->get('FinalCost');
 
         $sale->save();
