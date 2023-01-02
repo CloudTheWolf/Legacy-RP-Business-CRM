@@ -141,4 +141,5 @@ class ArcadeSales extends Model
         'finalCost' => 'integer'
     ];
 
+    public $timestamps = false;
 }

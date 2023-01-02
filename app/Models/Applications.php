@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $why
  * @property string $record
  * @property bool $gang
+ * @property bool $state
  * @property \Illuminate\Support\Carbon $timestamp
  * @method static \Illuminate\Database\Eloquent\Builder|Applications newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Applications newQuery()
@@ -32,6 +33,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereSteam($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereTimestamp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereWhy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications whereState($value)
  * @mixin \Eloquent
  */
 class Applications extends Model

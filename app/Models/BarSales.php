@@ -91,4 +91,11 @@ class BarSales extends Model
         'finalCost' => 'integer'
     ];
 
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
 }

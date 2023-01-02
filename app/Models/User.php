@@ -37,11 +37,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIsAdmin($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereOnDuty($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRole($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereSteamId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTowID($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereWorkingAs($value)
@@ -99,5 +97,28 @@ class User extends Authenticatable
         'IsAdmin' => 'boolean',
         'disabled' => 'boolean',
     ];
+
+
+    /**
+     *
+     * Overwrite whereOnDuty with correct column name
+     * @param  mixed  $value
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+     public static function whereOnDuty($value)
+     {
+         return static::where('onDuty','=',$value);
+     }
+
+    /**
+     *
+     * Overwrite whereSteamId with correct column name
+     * @param  mixed  $value
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function whereSteamId($value)
+    {
+        return static::where('steamId','=',$value);
+    }
 
 }

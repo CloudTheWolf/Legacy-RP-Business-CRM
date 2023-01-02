@@ -20,26 +20,26 @@ class ActionController extends BaseController
 
     function ClockInOut(Request $request, $action)
     {
-            $state = $action == 'Off-Duty' ? 0 : 1;
-            DB::table('users')
+        $state = $action == 'Off-Duty' ? 0 : 1;
+        DB::table('users')
             ->where('id',Auth::id())
             ->update([
                 'onDuty' =>$state,
                 'workingAs' => $action
-        ]);
+            ]);
 
-            if($action === __('app.mechanic')) {
-                $route = '/repairs';
-            }
-            elseif($action === __('app.tow')){
-                $route = '/tow';
-            }
-            else {
-                $route = '/';
-            }
-            $state == 1 ? $this->OnDuty(Auth::user()->name,$action) : $this->OffDuty(Auth::user()->name);
+        if($action === __('app.mechanic')) {
+            $route = '/mechanic/repair-logger';
+        }
+        elseif($action === __('app.tow')){
+            $route = '/tow/tracker';
+        }
+        else {
+            $route = '/';
+        }
+        $state == 1 ? $this->OnDuty(Auth::user()->name,$action) : $this->OffDuty(Auth::user()->name);
 
-            return redirect($route);
+        return redirect($route);
     }
 
     function OnDuty($name,$action)
@@ -55,15 +55,15 @@ class ActionController extends BaseController
                 ]);
         }
 
-        if(env('DISCORD_TIMESHEET_WEBHOOK') == '') return;
-        return Http::post(env('DISCORD_TIMESHEET_WEBHOOK'), [
+        if(Config('app.timesheetWebhook') == '') return;
+        return Http::post(Config('app.timesheetWebhook'), [
             "embeds"=> [
-            [
-                "title"=> $name." has started work",
-                "description"=> $name." has clocked in as ".$action." @ ".now(),
-                "color"=> 1044011,
-                "author"=> [
-                    "name"=> env('COMPANY_NAME')." Time Tracker"
+                [
+                    "title"=> $name." has started work",
+                    "description"=> $name." has clocked in as ".$action." @ ".now(),
+                    "color"=> 1044011,
+                    "author"=> [
+                        "name"=> env('COMPANY_NAME')." Time Tracker"
                     ]
                 ]
             ],
@@ -76,8 +76,8 @@ class ActionController extends BaseController
         ])->whereNull('clockOutAt')->update([
             'clockOutAt' => Carbon::now('UTC')
         ]);
-        if(env('DISCORD_TIMESHEET_WEBHOOK') == '') return;
-        return Http::post(env('DISCORD_TIMESHEET_WEBHOOK'), [
+        if(Config('app.timesheetWebhook') == '') return;
+        return Http::post(Config('app.timesheetWebhook'), [
             "embeds"=> [
                 [
                     "title"=> $name." has stopped work",

@@ -19,17 +19,18 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|TowLog whereHelp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TowLog whereLocal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TowLog wherePd($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TowLog whereUserId($value)
  * @mixin \Eloquent
  */
 class TowLog extends Model
 {
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'tow_log';
+
+    protected $primaryKey = 'userId';
 
     /**
      * @var array
@@ -52,5 +53,13 @@ class TowLog extends Model
         'pd' => 'integer',
         'help' => 'integer',
     ];
+
+    public static function whereUserId($value)
+    {
+        return static::where('userId','=',$value);
+    }
+
+    public $timestamps = false;
+
 
 }

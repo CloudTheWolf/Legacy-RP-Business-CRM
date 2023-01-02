@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group(['middleware' => ['auth:sanctum']],function(){
+    Route::get('/getUsers', function (){
+        return 'true';
+    });
+});
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/opfw/{name}',[\App\Console\Commands\OpFwSync::class,'SyncCitizen']);
+Route::get('/opfw/{cid}',function (Request $request, $cid){
+    return json_decode(Http::withToken(env("OP_FW_API_KEY"))->get(env("OP_FW_REST_URI") . '/characters/id='.$cid.'/data'))->data[0];
+});

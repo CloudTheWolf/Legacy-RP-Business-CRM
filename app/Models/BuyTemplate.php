@@ -21,17 +21,18 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|BuyTemplate whereRubber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BuyTemplate whereScrap($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BuyTemplate whereSteel($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BuyTemplate whereUserId($value)
  * @mixin \Eloquent
  */
 class BuyTemplate extends Model
 {
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'buyTemplate';
+
+    protected $primaryKey = 'userId';
 
     /**
      * @var array
@@ -56,5 +57,18 @@ class BuyTemplate extends Model
         'glass' => 'integer',
         'rubber' => 'integer',
     ];
+
+    /**
+     *
+     * Overwrite whereUserId with correct column name
+     * @param  mixed  $value
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function whereUserId($value)
+    {
+        return static::where('userId','=',$value);
+    }
+
+    public $timestamps = false;
 
 }

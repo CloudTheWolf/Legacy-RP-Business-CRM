@@ -7,7 +7,7 @@ return [
     | Authentication Language Lines
     |--------------------------------------------------------------------------
     |
-    | The following language lines are used during authentication for various
+    | The following language lines are used during Authentication for various
     | messages that we need to display to the user. You are free to modify
     | these language lines according to your application's requirements.
     |
@@ -16,10 +16,5 @@ return [
     'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'disabled' => 'Your account has been disabled, please contact the administrator',
-    'signin' => 'Sign In',
-    'username'=> 'Username',
-    'password' => 'Password',
-    'remember' => 'Remember Me',
 
 ];

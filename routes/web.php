@@ -1,21 +1,51 @@
 <?php
 
+use App\Http\Controllers\Mechanic\Repair\RepairDelete;
+use App\Http\Controllers\Mechanic\Repair\RepairEdit;
 use Illuminate\Support\Facades\Route;
+/**
+ * Mechanic
+ */
+use App\Http\Controllers\Mechanic\Admin\MechanicSettings;
+use App\Http\Controllers\Mechanic\Applications\Application as MechanicApplications;
+use App\Http\Controllers\Shared\Applications\ApplicationWelcome;
+use App\Http\Controllers\Shared\Applications\ApplicationSelectProfile;
+use App\Http\Controllers\Mechanic\DashboardController as MechanicDashboard;
+use App\Http\Controllers\Mechanic\Repair\Purchase;
+use App\Http\Controllers\Mechanic\Repair\RepairLogger;
+use App\Http\Controllers\Mechanic\Repair\Repairs;
+use App\Http\Controllers\Mechanic\Tow\TowHistory;
+use App\Http\Controllers\Mechanic\Tow\TowTracker;
+use App\Http\Controllers\Mechanic\Tow\TowTally;
 
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RepairController;
-use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\DashController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AccountController;
+/**
+ * Arcade
+ */
+use App\Http\Controllers\Arcade\DashboardController as ArcadeDashboard;
+
+/**
+ * Bars
+ */
+//use App\Http\Controllers\Arcade\DashboardController as ArcadeDashboard;
+
+/**
+ * Shared
+ */
+use App\Http\Controllers\Shared\Admin\AddUserController;
+use App\Http\Controllers\Shared\Admin\ApplicationsController;
+use App\Http\Controllers\Shared\Admin\ApplicationController;
+use App\Http\Controllers\Shared\Admin\EditUserController;
+use App\Http\Controllers\Shared\Admin\SettingsController;
+use App\Http\Controllers\Shared\Admin\UsersController;
+use App\Http\Controllers\Shared\Team\TeamController;
+use App\Http\Controllers\Authentication\BasicLogin;
+use App\Http\Controllers\Authentication\Logout;
+use App\Http\Controllers\Authentication\SteamLogin;
 use App\Http\Controllers\ActionController;
-use App\Http\Controllers\TowController;
-use App\Http\Controllers\TeamsController;
-use App\Http\Controllers\PublicController;
-use App\Http\Controllers\WarehouseController;
-use App\Http\Controllers\ArcadeController;
-use App\Http\Controllers\BarController;
 
+
+/** Authentication Controllers **/
+/** Mechanic Controllers **/
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,105 +57,106 @@ use App\Http\Controllers\BarController;
 |
 */
 
-// Mechanic Sites
+Route::redirect('/', '/dashboard')->middleware('auth');
+Route::redirect('/index', '/dashboard')->middleware('auth');
 
-if(config('app.siteMode') == "Mechanic") {
-    Route::get('/', [DashController::class, 'showDashboard'])->middleware('auth');
-    Route::get('/index', [DashController::class, 'showDashboard'])->middleware('auth');
+Route::prefix('/login')->group(function()
+{
+    Route::get('/',[BasicLogin::class,'Get'])->name('login');;
+    Route::post('/',[BasicLogin::class,'Post']);
+});
+Route::get('/logout',[Logout::class,'Get'])->middleware('auth');
 
-    Route::get('/buying', [RepairController::class, 'getBuyTemplate'])->middleware('auth');
-    Route::post('/buying', [RepairController::class, 'saveBuyTemplate'])->middleware('auth');
-
-    Route::get('/repair/{id}', [RepairController::class, 'repairFormEdit'])->middleware('auth');
-    Route::get('/delete-repair/{id}', [RepairController::class, 'repairFormDelete'])->middleware('auth');
-    Route::get('/restore-repair/{id}', [RepairController::class, 'repairFormUnDelete'])->middleware('auth');
-
-    Route::post('/repair/{id}', [RepairController::class, 'repairFormUpdate'])->middleware('auth');
-
-    Route::get('/repairs', [RepairController::class, 'repairForm'])->middleware('auth');
-    Route::post('/repairs', [RepairController::class, 'repairFormLog'])->middleware('auth');
-    Route::get('/repairsLog', [RepairController::class, 'repairLog'])->middleware('auth');
-    Route::get('/repairsLog/{user}', [RepairController::class, 'userRepairLog'])->middleware('auth');
-
-    Route::get('/receipt/{id}.{cost}', [InvoiceController::class, 'viewInvoice']);
-
-    Route::get('/tow', [TowController::class, 'viewPage'])->name('tow')->middleware('auth');
-    Route::get('/tow-live', [TowController::class, 'viewLivePage'])->name('tow-live')->middleware('auth');
-
-    Route::post('/tow', [TowController::class, 'addTally'])->name('tow.tally')->middleware('auth');
-    Route::post('/tow/submit', [TowController::class, 'submit'])->middleware('auth');
-
-    Route::get('/apply', [PublicController::class, 'applicationFormAuth']);
-    Route::get('/apply/select-profile', [PublicController::class, 'applicationFormProfile']);
-    Route::post('/apply/done', [PublicController::class, 'applicationFormSubmit']);
-    Route::post('/apply/form', [PublicController::class, 'applicationForm']);
-
-    Route::get('/warehouse', [WarehouseController::class, 'ViewAllStorage'])->middleware('auth');
-    Route::post('/warehouse', [WarehouseController::class, 'AddNewStorage'])->middleware('auth');
-    Route::get('/warehouse/{id}', [WarehouseController::class, 'viewWarehouse'])->middleware('auth');
-    Route::post('/warehouse/{id}', [WarehouseController::class, 'AddWarehouseEntry'])->middleware('auth');
-}
-
-// Arcade Sites
-if(config('app.siteMode') == "Arcade") {
-    Route::get('/', [DashController::class, 'showArcadeDashboard'])->middleware('auth');
-    Route::get('/index', [DashController::class, 'showArcadeDashboard'])->middleware('auth');
-
-    Route::get('/arcade', [ArcadeController::class, 'showArcadeSale'])->middleware('auth');
-    Route::post('/arcade', [ArcadeController::class, 'postArcadeSale'])->middleware('auth');
-
-    Route::get('/apply', [PublicController::class, 'applicationFormAuth']);
-    Route::get('/apply/select-profile', [PublicController::class, 'applicationFormProfile']);
-    Route::post('/apply/done', [PublicController::class, 'arcadeApplicationFormSubmit']);
-    Route::post('/apply/form', [PublicController::class, 'applicationFormArcade']);
-
-}
-
-//Bar Sites
-if(config('app.siteMode') == "Bar") {
-    Route::get('/', [DashController::class, 'showBarDashboard'])->middleware('auth');
-    Route::get('/index', [DashController::class, 'showBarDashboard'])->middleware('auth');
-
-    Route::get('/bar', [BarController::class, 'showBarSale'])->middleware('auth');
-    Route::post('/bar', [BarController::class, 'postBarSale'])->middleware('auth');
-
-    Route::get('/apply', [PublicController::class, 'applicationFormAuth']);
-    Route::get('/apply/select-profile', [PublicController::class, 'applicationFormProfile']);
-    Route::post('/apply/done', [PublicController::class, 'arcadeApplicationFormSubmit']);
-    Route::post('/apply/form', [PublicController::class, 'applicationFormArcade']);
-
-}
+Route::prefix('/auth')->group(function ()
+{
+    Route::get('/steam', [SteamLogin::class,'get'])->name('auth.steam');
+    Route::get('/steam/handle', [SteamLogin::class,'handle'])->name('auth.steam.handle');
+});
 
 Route::get('/clock-on/{action}', [ActionController::class, 'ClockInOut'])->middleware('auth');
 
-Route::get('/edit-user', [AccountController::class, 'editUserView'])->middleware('auth');
-Route::post('/edit-user/save', [AccountController::class, 'saveUserOnPost'])->middleware('auth');
+Route::prefix('/apply')->group(function () {
+    Route::get('/', [ApplicationWelcome::class, 'Get']);
+    Route::get('/select-profile', [ApplicationSelectProfile::class, 'Get']);
+    Route::post('/select-profile', [ApplicationSelectProfile::class, 'Post']);
+    Route::prefix('/auth')->group(function () {
+        Route::get('/steam', [SteamLogin::class, 'get'])->name('apply.auth.steam');
+        Route::get('/steam/handle', [SteamLogin::class, 'handle'])->name('apply.auth.steam.handle');
+    });
+});
+if(config('app.siteMode') == "Mechanic") {
+    Route::get('/dashboard', [MechanicDashboard::class, 'Get'])->middleware('auth');
 
+    Route::get('/team', [TeamController::class,'Get'])->middleware('auth');
 
-Route::get('/login', function () {
-    return view('authentication-signin');
-})->name('login');
+    Route::prefix('/tow')->group(function () {
 
-Route::get('auth/steam', [LoginController::class,'redirectToSteam'])->name('auth.steam');
-Route::get('auth/steam/handle', [LoginController::class,'handle'])->name('auth.steam.handle');
+        Route::post('/', [TowTally::class, 'Post'])->name('tow.tally')->middleware('auth');
+        Route::get('/tracker',[TowTracker::class,'Get']);
+        Route::post('/tracker',[TowTracker::class,'Post']);
 
-Route::post('/login',[LoginController::class,'authenticate']);
-Route::get('/logout',[LoginController::class,'logout'])->middleware('auth');
+        Route::get('/history',[TowHistory::class,'Get']);
+    });
 
-Route::get('/team',[TeamsController::class,'viewTeam'])->middleware('auth');
+    Route::prefix('/mechanic')->group(function (){
+        Route::get('/repair-logger',[RepairLogger::class,'Get']);
+        Route::post('/repair-logger',[RepairLogger::class,'Post']);
 
-Route::prefix('/admin')->group(function() {
+        Route::get('/repairs',[Repairs::class,'Get']);
+        Route::get('/repairs/{id}',[RepairEdit::class,'Get']);
+        Route::post('/repairs/{id}',[RepairEdit::class,'Post']);
+        Route::get('/repairs/{id}/delete',[RepairDelete::class,'Get']);
 
-    Route::get('/add-user', [AdminController::class, 'CreateUserView'])->middleware('auth');
-    Route::post('/add-user', [AdminController::class, 'CreateUserPost'])->middleware('auth');
-    Route::get('/users/{id}', [AdminController::class, 'editUserView'])->middleware('auth');
-    Route::get('/users', [AdminController::class, 'editUserList'])->middleware('auth');
-    Route::post('/edit-user', [AdminController::class, 'saveUserOnPost'])->middleware('auth');
-    Route::get('/storage', [AdminController::class, 'ViewAllStorage'])->middleware('auth');
-    Route::get('/applications', [AdminController::class, 'viewJobApplications'])->middleware('auth');
-    Route::get('/application/{id}', [AdminController::class, 'viewSingleJobApplication'])->middleware('auth');
-    Route::post('/applications/accept', [AdminController::class, 'processJobRequest'])->middleware('auth');
+        Route::get('/purchase',[Purchase::class,'Get']);
+        Route::post('/purchase',[Purchase::class,'Post']);
+    });
+
+    Route::post('/apply/done', [MechanicApplications::class, 'Post']);
+
+    Route::prefix('/admin')->group(function (){
+
+        Route::prefix('/applications')->group(function (){
+            Route::get('/',[ApplicationsController::class,'Get']);
+            Route::get('/{id}',[ApplicationController::class,'Get']);
+            Route::post('/{id}',[ApplicationController::class,'Post']);
+        });
+
+        Route::get('/mechanic-settings',[MechanicSettings::class,'Get']);
+        Route::post('/mechanic-settings',[MechanicSettings::class,'Post']);
+
+    })->middleware('auth');
+}
+
+if(config('app.siteMode') == "Bar") {
+    Route::redirect('/', '/dashboard')->middleware('auth');
+    Route::get('/dashboard', [MechanicDashboard::class, 'Get'])->middleware('auth');
+
+    Route::get('/team', [TeamController::class,'Get'])->middleware('auth');
+}
+
+if(config('app.siteMode') == "Arcade") {
+    Route::redirect('/', '/dashboard')->middleware('auth');
+    Route::get('/dashboard', [ArcadeDashboard::class, 'Get'])->middleware('auth');
+}
+
+Route::prefix('/admin')->group(function () {
+
+    Route::get('/add-user', [AddUserController::class, 'Get']);
+    Route::post('/add-user', [AddUserController::class, 'Post']);
+
+    Route::get('/users', [UsersController::class, 'Get']);
+    Route::get('/users/{id}', [EditUserController::class, 'Get']);
+    Route::post('/users/{id}', [EditUserController::class, 'Post']);
+    Route::get('/settings',[SettingsController::class,'Get']);
+    Route::post('/settings',[SettingsController::class,'Post']);
 });
 
-Route::get('apply/auth/steam', [LoginController::class,'jobApplicationSendToSteam'])->name('apply.auth.steam');
-Route::get('apply/auth/steam/handle', [LoginController::class,'handleApplication'])->name('apply.auth.steam.handle');
+/*
+|--------------------------------------------------------------------------
+| Blank Pages
+|--------------------------------------------------------------------------
+|
+*/
+//Route::view('/Horizontal', 'horizontal');
+//Route::view('/Vertical', 'vertical');
+

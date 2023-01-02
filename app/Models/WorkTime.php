@@ -19,14 +19,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|WorkTime whereClockInAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkTime whereClockOutAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkTime whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WorkTime whereTotalTime($value)
  * @mixin \Eloquent
  */
 class WorkTime extends Model
 {
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'workTime';
@@ -51,5 +50,12 @@ class WorkTime extends Model
         'cid' => 'integer',
         'totalTime' => 'integer',
     ];
+
+    public static function whereTotalTime($value)
+    {
+        return static::where('totalTime','=',$value);
+    }
+
+    public $timestamps = false;
 
 }

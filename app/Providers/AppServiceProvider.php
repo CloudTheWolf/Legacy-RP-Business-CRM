@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-//use Illuminate\Support\Facades\Paginator;
+use App\Models\Configuration;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,8 +26,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //Paginator::useBootstrapFour();
-        //Paginator::useBootstrapFive();
-        Paginator::useBootstrap();
+            foreach (Configuration::all() as $setting) {
+                if($setting->value == "true" || $setting->value == "false")
+                {
+                    Config::set('app.'.$setting->name, ($setting->value) == "true" );
+                    continue;
+                }
+                Config::set('app.'.$setting->name, $setting->value);
+            }
+        Paginator::useBootstrapFive();
     }
 }

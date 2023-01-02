@@ -4,6 +4,8 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -12,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\OpFwSync::class,
+        //
     ];
 
     /**
@@ -23,10 +25,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         //$schedule->command('inspire')->hourly();
-        //$schedule->job(new CheckActive())->everyMinute()->emailOutputTo('ukkmmichael@gmail.com');;
-        //$schedule->job()->everyFiveMinutes();
-        $schedule->command('opfw:sync')->everyFiveMinutes();
+        // $schedule->command('inspire')->hourly();
+        $schedule->command('staff:clockout')->everyFiveMinutes();
+        $schedule->command('staff:updatetime')->everyMinute();
     }
 
     /**

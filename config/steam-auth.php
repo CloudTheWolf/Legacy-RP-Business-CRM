@@ -9,7 +9,7 @@ return [
 
     /*
      * Realm override. Bypass domain ban by Valve.
-     * Use alternative domain with redirection to main for authentication (banned by valve).
+     * Use alternative domain with redirection to main for Authentication (banned by valve).
      */
     //'realm' => 'redirected.com',
 

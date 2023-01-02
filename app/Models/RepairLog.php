@@ -40,7 +40,7 @@ class RepairLog extends Model
 {
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'repair_log';
@@ -79,5 +79,7 @@ class RepairLog extends Model
         'timestamp' => 'datetime',
         'deleted' => 'boolean',
     ];
+
+    public $timestamps = false;
 
 }
