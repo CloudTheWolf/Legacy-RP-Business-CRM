@@ -23,20 +23,27 @@ class DashboardController extends Controller
         // Calculate Income Values
         $month = Carbon::now()->format('M');
         $year = $month == "Jan" ? "YEAR(CURRENT_TIMESTAMP) -1" : "YEAR(CURRENT_TIMESTAMP)";
+
         $total = RepairLog::whereDeleted(0);
         $totalCount = $total->count();
         $totalIncome = $total->select('cost')->sum('cost');
+
         $lastMonthCount = $total->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) -1 and '.
             'YEAR(`repair_log`.`timestamp`) = '.$year)->count();
         $lastMonthIncome = $total->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) -1 and '.
             'YEAR(`repair_log`.`timestamp`) = '.$year)->select('cost')->sum('cost');
+
         $thisMonthCount = RepairLog::query()->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) and '.
             'YEAR(`repair_log`.`timestamp`) = YEAR(CURRENT_TIMESTAMP)')->count();
         $thisMonthIncome = RepairLog::query()->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) and '.
             'YEAR(`repair_log`.`timestamp`) = YEAR(CURRENT_TIMESTAMP)')->select('cost')->sum('cost');
 
         $pie  = DB::select('SELECT users.name,COUNT(repair_log.id) as count FROM `repair_log` inner join users on `users`.`id` = `repair_log`.`mechanic` where `repair_log`.`deleted` = 0 AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
-        $pie2 = DB::select('SELECT users.name,COUNT(repair_log.id) as count FROM `repair_log` inner join users on `users`.`id` = `repair_log`.`mechanic` where `repair_log`.`deleted` = 0 AND MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) - 1 AND YEAR(`repair_log`.`timestamp`) = YEAR(CURRENT_TIMESTAMP) AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
+        if($month == "Jan") {
+            $pie2 = DB::select('SELECT users.name,COUNT(repair_log.id) as count FROM `repair_log` inner join users on `users`.`id` = `repair_log`.`mechanic` where `repair_log`.`deleted` = 0 AND MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) + 11 AND YEAR(`repair_log`.`timestamp`) = YEAR(CURRENT_TIMESTAMP) - 1 AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
+        } else {
+            $pie2 = DB::select('SELECT users.name,COUNT(repair_log.id) as count FROM `repair_log` inner join users on `users`.`id` = `repair_log`.`mechanic` where `repair_log`.`deleted` = 0 AND MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) - 1 AND YEAR(`repair_log`.`timestamp`) = YEAR(CURRENT_TIMESTAMP) AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
+        }
         $pie3 = DB::select('SELECT users.name,COUNT(repair_log.id) as count FROM `repair_log` inner join users on `users`.`id` = `repair_log`.`mechanic` where `repair_log`.`deleted` = 0 AND MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) AND YEAR(`repair_log`.`timestamp`) = YEAR(CURRENT_TIMESTAMP) AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
 
         $tJan = $this->GetChartData(1);
