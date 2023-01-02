@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\VgApplications;
+use App\Models\Applications;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -12,27 +13,29 @@ class PublicController extends Controller
 {
     function applicationForm(Request $request)
     {
-        if($request->input('steamID') == null)
+        if($request->input('cid') == null)
         {
             return redirect('/apply');
         }
-        $steamID = $request->input('steamID');
+        $user = Http::withToken(env('OP_FW_API_KEY'))->acceptJson()->get(env('OP_FW_REST_URI').'/characters/id='.$request->input('cid') .'/data')->json('data')[0];
+        $steamID = $request->input('steamId');
         $cid = $request->input('cid');
-        $name = $request->input('name');
-        $cell = $request->input('cell');
+        $name = $user["first_name"] . " " . $user["last_name"];
+        $cell = $user["phone_number"];
         return view('applicationForm',compact('cell','name','cid','steamID'));
     }
 
     function applicationFormArcade(Request $request)
     {
-        if($request->input('steamID') == null)
+        if($request->input('cid') == null)
         {
             return redirect('/apply');
         }
-        $steamID = $request->input('steamID');
+        $user = Http::withToken(env('OP_FW_API_KEY'))->acceptJson()->get(env('OP_FW_REST_URI').'/characters/id='.$request->input('cid') .'/data')->json('data')[0];
+        $steamID = $request->input('steamId');
         $cid = $request->input('cid');
-        $name = $request->input('name');
-        $cell = $request->input('cell');
+        $name = $user["first_name"] . " " . $user["last_name"];
+        $cell = $user["phone_number"];
         return view('arcade.applicationForm',compact('cell','name','cid','steamID'));
     }
 
@@ -47,9 +50,8 @@ class PublicController extends Controller
         {
             return redirect('/apply');
         }
-        $user = Http::withToken(env('OP_FW_API_KEY'))->acceptJson()->get(env('OP_FW_REST_URI').'/characters/steam='.Session::get('steamID').'/data');
-        $characters = json_decode($user->body())->data;
-        return view('applicationFormCharList')->with('characters',$characters);
+        $steamId = Session::get('steamID');
+        return view('applicationFormCharList',compact('steamId'));
     }
 
 

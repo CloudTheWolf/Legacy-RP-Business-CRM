@@ -31,7 +31,7 @@
 <body>
 
 
-            <div class="page-wrapper">
+            <div class="page-wrapper" style="margin-left: unset !important;">
                 <div class="page-content">
                     <div class="card">
                         <div class="card-header">

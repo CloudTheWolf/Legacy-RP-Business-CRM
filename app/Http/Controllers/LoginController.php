@@ -76,8 +76,9 @@ class LoginController extends Controller
         return $this->steam->redirect();
     }
 
-    public function jobApplicationSendToSteam()
+    public function jobApplicationSendToSteam(Request $request)
     {
+
         $this->steam->setRedirectUrl(route('apply.auth.steam.handle'));
         return $this->steam->redirect();
     }

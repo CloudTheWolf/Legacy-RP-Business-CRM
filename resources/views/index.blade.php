@@ -393,7 +393,6 @@
                     });
                 })
             </script>
-
             <!-- Last Month -->
             <script type="text/javascript">
                 $(function() {

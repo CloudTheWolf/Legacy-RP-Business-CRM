@@ -31,7 +31,7 @@
 <body>
 
 <div class="container-fluid">
-            <div class="page-wrapper">
+            <div class="page-wrapper" style="margin-left: unset !important;">
                 <div class="page-content">
                     <div class="card">
                         <div class="card-header">
@@ -54,25 +54,21 @@
                             <img src="{!! url('/assets/images/branding/'.config('app.brandingPath').'/job_banner.png') !!}" width="100%">
                         </div>
                     </div>
-                                <div class="row">
-                                    @foreach($characters as $character)
-                                            <div class="col-sm-4">
-                                                <div class="card" style="width: 18rem;">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Apply As...</h5>
-                                                        <p class="card-text">{!! $character->first_name !!} {!! $character->last_name !!} ({!! $character->character_id !!}).</p>
-                                                        {{ Form::open(array('id'=>'apply','url' => 'apply/form', 'class' => 'row g-3')) }}
-                                                        <input type="hidden" value="{!! $character->first_name !!} {!! $character->last_name !!}" name="name">
-                                                        <input type="hidden" value="{!! $character->character_id !!}" name="cid">
-                                                        <input type="hidden" value="{!! $character->phone_number !!}" name="cell">
-                                                        <input type="hidden" value="{!! $character->steam_identifier !!}" name="steamID">
-                                                        <button type="submit" class="btn btn-primary">Continue...</button>
-                                                        {{Form::close()}}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                    @endforeach
+                        <div class="row">
+                            <div class="col-md-12" style="align-content: center">
+                                <div class="card" style="position: absolute;left: 40%; margin-top: 5px; width: 25rem;height: 100px;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Apply As...</h5>
+                                        {{ Form::open(array('id'=>'apply','url' => 'apply/form', 'class' => 'row g-3')) }}
+                                        <label for="cid">Enter your Character ID (Use <code>/info</code> in city to get this)</label>
+                                        <input type="hidden" value="{{Session::get('steamID')}}" name="steamId">
+                                        <input type="text" placeholder="53676" name="cid">
+                                        <button type="submit" class="btn btn-primary">Continue...</button>
+                                        {{Form::close()}}
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
 
                             </div>
                         </div>
