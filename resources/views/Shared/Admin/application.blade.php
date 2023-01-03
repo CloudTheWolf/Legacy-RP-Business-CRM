@@ -88,32 +88,27 @@
                             <hr>
                             <div class="row text-center">
                                 <div class="form-group col-md-12">
-                                    <label class="form-label"><strong>Tell us a little about yourself</strong></label>
+                                    <h6 class="form-label" style="font-weight: bold"><strong>Tell us a little about yourself</strong></h6>
                                     <p style="white-space: pre-wrap;">{!! $application->about !!}</p>
                                 </div>
                             </div>
+
                             <div class="row text-center">
                                 <div class="form-group col-md-12">
-                                    <label class="form-label"><strong>Tell us a little about yourself</strong></label>
+                                    <h6 class="form-label"><strong>Tell us why you want a job at
+                                            {!! config('app.companyName') !!} and why we should hire you!</strong></h6>
                                     <p style="white-space: pre-wrap;">{!! $application->why !!}</p>
                                 </div>
                             </div>
                             <div class="row text-center">
                                 <div class="form-group col-md-12">
-                                    <label class="form-label"><strong>Tell us why you want a job at
-                                            {!! config('app.companyName') !!} and why we should hire you!</strong></label>
+                                    <h6 class="form-label"><strong>Tell us about your Criminal Record</strong></h6>
                                     <p style="white-space: pre-wrap;">{!! $application->record !!}</p>
                                 </div>
                             </div>
                             <div class="row text-center">
                                 <div class="form-group col-md-12">
-                                    <label class="form-label"><strong>Tell us about your Criminal Record</strong></label>
-                                    <p style="white-space: pre-wrap;">{!! $application->about !!}</p>
-                                </div>
-                            </div>
-                            <div class="row text-center">
-                                <div class="form-group col-md-12">
-                                    <label class="form-label"><strong>Do you have any gang ties, or affiliations that may affect your employment?</strong></label>
+                                    <h6 class="form-label"><strong>Do you have any gang ties, or affiliations that may affect your employment?</strong></h6>
                                     <p style="white-space: pre-wrap;">{!! $application->gang == 1 ? 'Yes' : 'No' !!}</p>
                                 </div>
                             </div>
