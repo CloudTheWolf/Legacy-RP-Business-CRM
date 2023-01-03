@@ -9,7 +9,7 @@
                 <div class="col-sm-6 d-none d-sm-block">
                     <ul class="breadcrumb pt-0 pe-0 mb-0 float-end">
                         <li class="breadcrumb-item mb-0 text-medium">
-                            <a href="#" target="_blank" class="btn-link">GitHub</a>
+                            <a href="https://github.com/CloudTheWolf/Legacy-RP-Business-CRM" target="_blank" class="btn-link">GitHub</a>
                         </li>
                     </ul>
                 </div>
