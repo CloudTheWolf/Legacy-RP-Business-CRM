@@ -92,7 +92,20 @@
                                     <p style="white-space: pre-wrap;">{!! $application->about !!}</p>
                                 </div>
                             </div>
-
+                            @if(Config('app.siteMode') == "Bar")
+                                <div class="row text-center">
+                                    <div class="form-group col-md-12">
+                                        <h6 class="form-label" style="font-weight: bold"><strong>How long have you been a resident of Los Santos?</strong></h6>
+                                        <p style="white-space: pre-wrap;">{!! $application->cityAge !!}</p>
+                                    </div>
+                                </div>
+                                <div class="row text-center">
+                                    <div class="form-group col-md-12">
+                                        <h6 class="form-label" style="font-weight: bold"><strong>How long have you been a resident of Los Santos?</strong></h6>
+                                        <p style="white-space: pre-wrap;">{!! ucwords($application->shift) !!} Shift</p>
+                                    </div>
+                                </div>
+                            @endif
                             <div class="row text-center">
                                 <div class="form-group col-md-12">
                                     <h6 class="form-label"><strong>Tell us why you want a job at
@@ -120,13 +133,22 @@
                                         <div class="form-group col-md-12">
                                             <label for="inputRole" class="form-label">Job Role</label>
                                             <select class="form-control" id="inputRole" name="role" required>
-                                                <option selected value="Tow Driver">Tow Driver</option>
-                                                <option value="Intern Mechanic">Intern Mechanic</option>
-                                                <option value="Lead Mechanic">Lead Mechanic</option>
-                                                <option value="Adept Mechanic">Adept Mechanic</option>
-                                                <option value="Expert Mechanic">Expert Mechanic</option>
-                                                <option value="Veteran Mechanic">Veteran Mechanic</option>
+                                                @if(config('app.siteMode') == "Mechanic")
+                                                    <option value="Tow Driver">Tow Driver</option>
+                                                    <option value="Intern Mechanic">Intern Mechanic</option>
+                                                    <option value="Lead Mechanic">Lead Mechanic</option>
+                                                    <option value="Adept Mechanic">Adept Mechanic</option>
+                                                    <option value="Expert Mechanic">Expert Mechanic</option>
+                                                    <option value="Veteran Mechanic">Veteran Mechanic</option>
+                                                    <option value="Trainer">Trainer</option>
+                                                @endif
+                                                @if(config('app.siteMode') == "Arcade" || config('app.siteMode') == "Bar")
+                                                    <option value="Bartender">Bartender</option>
+                                                @endif
                                                 <option value="Manager">Manager</option>
+                                                @if(config('app.siteMode') == "Mechanic")
+                                                    <option value="Veteran Manager">Veteran Manager</option>
+                                                @endif
                                                 <option value="Boss">Boss</option>
 
                                             </select>

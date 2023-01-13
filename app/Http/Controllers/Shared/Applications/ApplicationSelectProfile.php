@@ -40,6 +40,10 @@ class ApplicationSelectProfile extends Controller
         $cid = $request->input('cid');
         $name = $user["first_name"] . " " . $user["last_name"];
         $cell = $user["phone_number"];
+        if(config('app.siteMode') == "Bar" || config('app.siteMode') == "Arcade")
+        {
+            return view('Public.vg-application-form',compact('cell','name','cid','steamID','lastArrest'));
+        }
         return view('Mechanics.Public.application-form',compact('cell','name','cid','steamID','lastArrest'));
     }
 

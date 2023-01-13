@@ -131,24 +131,28 @@
                                     <input id="job-discord" name="job-discord" class="form-control" type="text" value="{{Config('app.jobWebhook')}}" placeholder="https://discord.com/api/webhooks/..." autocomplete="off">
                                 </div>
                             </div>
+                            @if(Config('app.siteMode') == "Mechanic")
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <label for="app-name">Sale Webhook URL</label>
                                     <input id="sale-discord" name="sale-discord" class="form-control" type="text" value="{{Config('app.saleWebhook')}}" placeholder="https://discord.com/api/webhooks/..." autocomplete="off">
                                 </div>
                             </div>
+                            @endif
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <label for="app-name">Timesheet Webhook URL</label>
                                     <input id="timesheet-discord" name="timesheet-discord" class="form-control" type="text" value="{{Config('app.timesheetWebhook')}}" placeholder="https://discord.com/api/webhooks/..." autocomplete="off">
                                 </div>
                             </div>
+                            @if(Config('app.siteMode') == "Mechanic")
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <label for="app-name">Tow Log Webhook URL</label>
                                     <input id="tow-discord" name="tow-discord" class="form-control" type="text" value="{{Config('app.towWebhook')}}" placeholder="https://discord.com/api/webhooks/..." autocomplete="off">
                                 </div>
                             </div>
+                            @endif
                             <hr>
                             <div class="row">
                                 <div class="form-group col-md-12">

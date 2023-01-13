@@ -26,7 +26,16 @@ class ApplicationController extends Controller
 
     public function Get(Request $request, $id)
     {
-        $application = Applications::whereId($id)->firstOrFail();
+        switch(config('app.siteMode')){
+            default:
+                $application = Applications::whereId($id)->firstOrFail();
+                break;
+            case 'Arcade':
+            case 'Bar':
+                $application = VgApplications::whereId($id)->firstOrFail();
+                break;
+        }
+
         return view("Shared.Admin.application",compact("application"));
     }
 

@@ -265,6 +265,33 @@
                     </a>
                 </li>
             @endif
+            @if(Config("app.siteMode") == "Bar")
+                <li>
+                    <a href="#shop-bar" data-href="/Shop-Bar">
+                        <span class="icon material-symbols-outlined">point_of_sale</span>
+                        <span class="label">Sales</span>
+                    </a>
+                    <ul id="shop-bar">
+                        <li>
+                            <a href="/bar/sale-logger">
+                                <span class="label">Sales Logger</span>
+                            </a>
+                        </li>
+                        <!--TODO: Add All Sales Page? -->
+                        <!--<li>
+                            <a href="/bar/sales">
+                                <span class="label">All Sales</span>
+                            </a>
+                        </li>-->
+                    </ul>
+                </li>
+            @endif
+            <li>
+                <a href="/team" data-href="/Team">
+                    <span class="icon material-symbols-outlined">diversity_1</span>
+                    <span class="label">Team</span>
+                </a>
+            </li>
             @if(Auth::user()->IsAdmin == 1)
             <li>
                 <a href="#admin" data-href="/Admin">
@@ -299,7 +326,22 @@
                         </a>
                     </li>
                     @endif
+                    @if(Config("app.siteMode") == "Bar")
+                        <li>
+                            <a href="/admin/bar-settings">
+                                <span class="label">Bar Settings</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if(Config("app.siteMode") == "Bar" || Config("app.siteMode") == "Arcade")
+                        <li>
+                            <a href="/admin/specials">
+                                <span class="label">Manage Specials</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
+
             </li>
             @endif
         </ul>

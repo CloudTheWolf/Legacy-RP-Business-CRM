@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Shared\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Applications;
-use App\Models\Configuration;
-use Illuminate\Http\Request;
+use App\Models\VgApplications;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -22,7 +21,15 @@ class ApplicationsController extends Controller
 
     public function Get()
     {
-        $applications = Applications::whereState('0')->get();
+        switch(config('app.siteMode')){
+            default:
+                $applications = Applications::whereState('0')->get();
+                break;
+            case 'Arcade':
+            case 'Bar':
+            $applications = VgApplications::whereState('0')->get();
+                break;
+        }
         return view("Shared.Admin.applications",compact("applications"));
     }
 

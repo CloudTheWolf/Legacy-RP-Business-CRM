@@ -9,7 +9,7 @@
     <style>
         .fixed-background
         {
-            background:url({{url('/assets/images/branding')}}/{{env('BRANDING_DIR')}}/bg.png) no-repeat 50% fixed !important;
+            background:url({{url('/assets/images/branding')}}/{{config('app.brandingPath')}}/bg.png) no-repeat 50% fixed !important;
             background-size:cover;
             width:100%;height:100%;
             position:fixed;
@@ -20,7 +20,7 @@
         }
         .logo-default
         {
-            background-image: url({{url('/assets/images/branding')}}/{{env('BRANDING_DIR')}}/logo-img2.png) !important;
+            background-image: url({{url('/assets/images/branding')}}/{{config('app.brandingPath')}}/logo-img2.png) !important;
             width: 100% !important;
             height: 250px !important;
 

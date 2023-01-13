@@ -86,7 +86,9 @@
                                     <td>{{$user->role}}</td>
                                     <td>{{$user->cid}}</td>
                                     <td>{{$user->cell}}</td>
+                                    @if(config('app.siteMode') == "Mechanic")
                                     <td>{{$user->towID}}</td>
+                                    @endif
                                     @if(Auth::user()->IsAdmin == 1)
                                         <td>
                                             @php

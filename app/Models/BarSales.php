@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $rum
  * @property int $whiskey
  * @property int $oiler
+ * @property string $specialJson
+ * @property string $finalCost
  * @method static \Illuminate\Database\Eloquent\Builder|BarSales newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BarSales newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BarSales query()
@@ -35,7 +37,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|BarSales whereVodka($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BarSales whereWhiskey($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BarSales whereWine($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BarSales whereOiler($value)
  * @mixin \Eloquent
  */
 class BarSales extends Model
@@ -68,6 +69,7 @@ class BarSales extends Model
         'rum',
         'whiskey',
         'oiler',
+        'specialJson',
         'finalCost'
     ];
 
@@ -88,6 +90,7 @@ class BarSales extends Model
         'rum' => 'integer',
         'whiskey' => 'integer',
         'oiler' => 'integer',
+        'specialJson' => 'string',
         'finalCost' => 'integer'
     ];
 

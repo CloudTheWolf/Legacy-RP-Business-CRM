@@ -35,17 +35,35 @@ class SettingsController extends Controller
         //Discord Settings
         $this->updateSettings('postJobApplications',$request->get('post-job'));
         $this->updateSettings('jobWebhook',$request->get('job-discord'));
-        $this->updateSettings('saleWebhook',$request->get('sale-discord'));
-        $this->updateSettings('timesheetWebhook',$request->get('timesheet-discord'));
-        $this->updateSettings('towWebhook',$request->get('tow-discord'));
+
+        if($request->has('timesheet-discord'))
+        {
+            $val = $request->get('timesheet-discord') == null ? '' : $request->get('timesheet-discord');
+            $this->updateSettings('timesheetWebhook',$val);
+        }
+        else
+        {
+            $this->updateSettings('timesheetWebhook',"");
+        }
+
+
+
         $this->updateSettings('autoClockOut',$request->get('auto-clockout'));
 
+        if($request->get('site-mode') == "Mechanic") {
+
+            $this->updateSettings('saleWebhook', $request->get('sale-discord'));
+            $this->updateSettings('towWebhook', $request->get('tow-discord'));
+        }
 
         return back()->with(['message' => 'Settings Saved']);
     }
 
     private function updateSettings($setting,$value)
     {
+        if($value == null) {
+            dd($setting);
+        }
         $config = Configuration::whereName($setting)->first();
         $config->value = $value;
         $config->save();
