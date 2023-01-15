@@ -47,74 +47,10 @@ class RepairEdit extends Controller
         $repair->scrap_used = $scrap;
         $repair->alum_used = $aluminium;
         $repair->steel_used = $steel;
+        $repair->glass_used = $glass;
         $repair->rubber_used = $rubber;
         $repair->cost = $total;
         $repair->save();
-
-        $mechanicName = User::whereId($mechanic)->select()->get();
-
-        Http::post(Config('app.saleWebhook'), [
-            "embeds"=> [
-                [
-                    "title"=> $mechanicName[0]->name." has logged a repair!",
-                    "description"=> "See the repair details below:",
-                    "color"=> 15358714,
-                    "fields" =>
-                        [
-                            [
-                                "name" => "Mechanic",
-                                "value"=> $mechanicName[0]->name,
-                                "inline" => false
-                            ],
-                            [
-                                "name" => "Customer",
-                                "value"=> empty($customer) ? "N/A" : $customer,
-                                "inline" => true
-                            ],
-                            [
-                                "name" => "Vehicle",
-                                "value"=> empty($vehicle) ? "Not Set" : $vehicle,
-                                "inline" => true
-                            ],
-                            [
-                                "name" => "Scrap Used",
-                                "value"=> $scrap,
-                                "inline" => false
-                            ],
-                            [
-                                "name" => "Aluminium Used",
-                                "value"=> $aluminium,
-                                "inline" => true
-                            ],
-                            [
-                                "name" => "Steel Used",
-                                "value"=> $steel,
-                                "inline" => true
-                            ],
-                            [
-                                "name" => "Glass Used",
-                                "value"=> $glass,
-                                "inline" => true
-                            ],
-                            [
-                                "name" => "Rubber Used",
-                                "value"=> $rubber,
-                                "inline" => true
-                            ],
-                            [
-                                "name" => "Total",
-                                "value"=> "$".$total,
-                                "inline" => false
-                            ],
-                        ],
-                    "author"=> [
-                        "name"=> Config('app.companyName')." Live Repair Logger"
-                    ]
-                ]
-            ],
-        ]);
-
-
     }
 
 }

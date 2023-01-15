@@ -47,6 +47,7 @@ class RepairLogger extends Controller
         $repair->scrap_used = $scrap;
         $repair->alum_used = $aluminium;
         $repair->steel_used = $steel;
+        $repair->glass_used = $glass;
         $repair->rubber_used = $rubber;
         $repair->cost = $total;
         $repair->save();
