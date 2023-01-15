@@ -23,14 +23,14 @@ class DashboardController extends Controller
         // Calculate Income Values
         $month = Carbon::now()->format('M');
         $year = $month == "Jan" ? "YEAR(CURRENT_TIMESTAMP) -1" : "YEAR(CURRENT_TIMESTAMP)";
-
+        $lastMonth = Carbon::now()->subMonth()->format('m');
         $total = RepairLog::whereDeleted(0);
         $totalCount = $total->count();
         $totalIncome = $total->select('cost')->sum('cost');
 
-        $lastMonthCount = $total->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) -1 and '.
+        $lastMonthCount = $total->whereRaw('MONTH(`repair_log`.`timestamp`) = \''.$lastMonth.'\' and '.
             'YEAR(`repair_log`.`timestamp`) = '.$year)->count();
-        $lastMonthIncome = $total->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) -1 and '.
+        $lastMonthIncome = $total->whereRaw('MONTH(`repair_log`.`timestamp`) = \''.$lastMonth.'\' and '.
             'YEAR(`repair_log`.`timestamp`) = '.$year)->select('cost')->sum('cost');
 
         $thisMonthCount = RepairLog::query()->whereRaw('MONTH(`repair_log`.`timestamp`) = MONTH(CURRENT_TIMESTAMP) and '.

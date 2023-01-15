@@ -258,12 +258,6 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="/team" data-href="/Team">
-                        <span class="icon material-symbols-outlined">diversity_1</span>
-                        <span class="label">Team</span>
-                    </a>
-                </li>
             @endif
             @if(Config("app.siteMode") == "Bar")
                 <li>

@@ -81,5 +81,4 @@ class RepairLog extends Model
     ];
 
     public $timestamps = false;
-
 }
