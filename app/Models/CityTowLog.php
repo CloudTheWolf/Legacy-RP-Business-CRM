@@ -32,17 +32,24 @@ class CityTowLog extends Model
 {
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'cityTowLogs';
 
     /**
      * The primary key for the model.
-     * 
+     *
      * @var string
      */
     protected $primaryKey = 'rowId';
+
+    /**
+     * Does table use Eloquent Timestamps?
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * @var array

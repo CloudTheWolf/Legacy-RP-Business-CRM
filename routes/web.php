@@ -20,6 +20,8 @@ use App\Http\Controllers\Mechanic\Tow\TowTally;
  * Arcade
  */
 use App\Http\Controllers\Arcade\DashboardController as ArcadeDashboard;
+use App\Http\Controllers\Arcade\Sales\SalesLogger as ArcadeSalesLogger;
+use App\Http\Controllers\Arcade\Admin\ArcadeSettings;
 
 /**
  * Bars
@@ -27,6 +29,7 @@ use App\Http\Controllers\Arcade\DashboardController as ArcadeDashboard;
 use App\Http\Controllers\Bars\DashboardController as BarDashboard;
 use App\Http\Controllers\Bars\Sales\SalesLogger as BarSalesLogger;
 use App\Http\Controllers\Bars\Admin\BarSettings;
+
 /**
  * Shared
  */
@@ -153,8 +156,8 @@ if(config('app.siteMode') == "Bar") {
         Route::get('/specials/enable/{id}',[SpecialsController::class,'Enable']);
         Route::get('/specials/disable/{id}',[SpecialsController::class,'Disable']);
 
-        Route::get('/bar-settings',[BarSettings::class,'Get']);
-        Route::post('/bar-settings',[BarSettings::class,'Post']);
+        Route::get('/bar-settings',[ArcadeSettings::class,'Get']);
+        Route::post('/bar-settings',[ArcadeSettings::class,'Post']);
 
         Route::prefix('/applications')->group(function (){
             Route::get('/',[ApplicationsController::class,'Get']);
@@ -168,6 +171,30 @@ if(config('app.siteMode') == "Bar") {
 if(config('app.siteMode') == "Arcade") {
     Route::redirect('/', '/dashboard')->middleware('auth');
     Route::get('/dashboard', [ArcadeDashboard::class, 'Get'])->middleware('auth');
+
+    Route::prefix('/arcade')->group(function () {
+        Route::get('/sale-logger',[ArcadeSalesLogger::class,'Get']);
+        Route::post('/sale-logger',[ArcadeSalesLogger::class,'Post']);
+
+        Route::get('/repairs',[Repairs::class,'Get']);
+    });
+
+    Route::prefix('/admin')->group(function () {
+
+        Route::get('/specials',[SpecialsController::class,'Get']);
+        Route::post('/specials',[SpecialsController::class,'Post']);
+        Route::get('/specials/enable/{id}',[SpecialsController::class,'Enable']);
+        Route::get('/specials/disable/{id}',[SpecialsController::class,'Disable']);
+
+        Route::get('/arcade-settings',[ArcadeSettings::class,'Get']);
+        Route::post('/arcade-settings',[ArcadeSettings::class,'Post']);
+
+        Route::prefix('/applications')->group(function (){
+            Route::get('/',[ApplicationsController::class,'Get']);
+            Route::get('/{id}',[ApplicationController::class,'Get']);
+            Route::post('/{id}',[ApplicationController::class,'Post']);
+        });
+    });
 }
 
 Route::prefix('/admin')->group(function () {

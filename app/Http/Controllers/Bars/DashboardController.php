@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Bars;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Shared\GetCityData;
 use App\Models\BarSales;
-use App\Models\RepairLog;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;

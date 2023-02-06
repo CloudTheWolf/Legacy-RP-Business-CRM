@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Arcade;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Shared\GetCityData;
+use App\Models\ArcadeSales;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -15,8 +18,73 @@ class DashboardController extends Controller
         $onDuty = User::whereOnDuty('1')->count();
         $onDutyList = User::whereOnDuty('1')->select(["name","workingAs"])->get();
 
+        // Get chart sales data
+        $tJan = $this->GetChartData(1);
+        $tFeb = $this->GetChartData(2);
+        $tMar = $this->GetChartData(3);
+        $tApr = $this->GetChartData(4);
+        $tMay = $this->GetChartData(5);
+        $tJun = $this->GetChartData(6);
+        $tJul = $this->GetChartData(7);
+        $tAug = $this->GetChartData(8);
+        $tSep = $this->GetChartData(9);
+        $tOct = $this->GetChartData(10);
+        $tNov = $this->GetChartData(11);
+        $tDec = $this->GetChartData(12);
+        $lJan = $this->GetChartData(1,false);
+        $lFeb = $this->GetChartData(2,false);
+        $lMar = $this->GetChartData(3,false);
+        $lApr = $this->GetChartData(4,false);
+        $lMay = $this->GetChartData(5,false);
+        $lJun = $this->GetChartData(6,false);
+        $lJul = $this->GetChartData(7,false);
+        $lAug = $this->GetChartData(8,false);
+        $lSep = $this->GetChartData(9,false);
+        $lOct = $this->GetChartData(10,false);
+        $lNov = $this->GetChartData(11,false);
+        $lDec = $this->GetChartData(12,false);
+
         //Get In City Count
         $citizens = GetCityData::GetInCityCount();
+
+        // Calculate Income Values
+        $month = Carbon::now()->format('M');
+        $year = $month == "Jan" ? "YEAR(CURRENT_TIMESTAMP) -1" : "YEAR(CURRENT_TIMESTAMP)";
+
+        $total = ArcadeSales::whereDeleted(0);
+        $totalCount = $total->count();
+        $totalIncome = $total->select('finalCost')->sum('finalCost');
+
+        $lastMonthCount = $total->whereRaw('MONTH(`arcadeSales`.`created_at`) = MONTH(CURRENT_TIMESTAMP) -1 and '.
+            'YEAR(`arcadeSales`.`created_at`) = '.$year)->count();
+        $lastMonthIncome = $total->whereRaw('MONTH(`arcadeSales`.`created_at`) = MONTH(CURRENT_TIMESTAMP) -1 and '.
+            'YEAR(`arcadeSales`.`created_at`) = '.$year)->select('finalCost')->sum('finalCost');
+
+        $thisMonthCount = ArcadeSales::query()->whereRaw('MONTH(`arcadeSales`.`created_at`) = MONTH(CURRENT_TIMESTAMP) and '.
+            'YEAR(`arcadeSales`.`created_at`) = YEAR(CURRENT_TIMESTAMP)')->count();
+        $thisMonthIncome = ArcadeSales::query()->whereRaw('MONTH(`arcadeSales`.`created_at`) = MONTH(CURRENT_TIMESTAMP) and '.
+            'YEAR(`arcadeSales`.`created_at`) = YEAR(CURRENT_TIMESTAMP)')->select('finalCost')->sum('finalCost');
+
+        $pie  = DB::select('SELECT users.name,COUNT(arcadeSales.id) as count FROM `arcadeSales` inner join users on `users`.`id` = `arcadeSales`.`staff` where `arcadeSales`.`deleted` = 0 AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
+        if($month == "Jan") {
+            $pie2 = DB::select('SELECT users.name,COUNT(arcadeSales.id) as count FROM `arcadeSales` inner join users on `users`.`id` = `arcadeSales`.`staff` where `arcadeSales`.`deleted` = 0 AND MONTH(`arcadeSales`.`created_at`) = MONTH(CURRENT_TIMESTAMP) + 11 AND YEAR(`arcadeSales`.`created_at`) = YEAR(CURRENT_TIMESTAMP) - 1 AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
+        } else {
+            $pie2 = DB::select('SELECT users.name,COUNT(arcadeSales.id) as count FROM `arcadeSales` inner join users on `users`.`id` = `arcadeSales`.`staff` where `arcadeSales`.`deleted` = 0 AND MONTH(`arcadeSales`.`created_at`) = MONTH(CURRENT_TIMESTAMP) - 1 AND YEAR(`arcadeSales`.`created_at`) = YEAR(CURRENT_TIMESTAMP) AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
+        }
+        $pie3 = DB::select('SELECT users.name,COUNT(arcadeSales.id) as count FROM `arcadeSales` inner join users on `users`.`id` = `arcadeSales`.`staff` where `arcadeSales`.`deleted` = 0 AND MONTH(`arcadeSales`.`created_at`) = MONTH(CURRENT_TIMESTAMP) AND YEAR(`arcadeSales`.`created_at`) = YEAR(CURRENT_TIMESTAMP) AND `users`.`disabled` = 0 GROUP BY users.name ORDER BY count DESC');
+
+
+        return view("Arcade.dashboard",compact("onDuty","onDutyList","citizens","totalCount",
+            "totalIncome","lastMonthCount","lastMonthIncome","thisMonthCount","thisMonthIncome","pie","pie2","pie3",
+            "tJan","tFeb","tMar","tApr","tMay","tJun","tJul","tAug","tSep","tOct","tNov","tDec",
+            "lJan","lFeb","lMar","lApr","lMay","lJun","lJul","lAug","lSep","lOct","lNov","lDec"));
+
+    }
+
+    private function GetChartData($month,$thisYear = true): int
+    {
+        $yearQuery = $thisYear ? 'YEAR(created_at) = YEAR(CURRENT_TIMESTAMP)' : 'YEAR(created_at) = YEAR(CURRENT_TIMESTAMP) - 1';
+        return ArcadeSales::query()->where('deleted','=','0')->whereRaw($yearQuery)->whereRaw("MONTH(created_at) =".$month)->count();
     }
 
 }

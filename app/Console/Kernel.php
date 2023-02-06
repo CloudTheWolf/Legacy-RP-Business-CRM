@@ -28,6 +28,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->command('staff:clockout')->everyFiveMinutes();
         $schedule->command('staff:updatetime')->everyMinute();
+        $schedule->command('staff:synctow')->everyMinute();
     }
 
     /**

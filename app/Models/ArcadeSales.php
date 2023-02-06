@@ -32,6 +32,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $lunchSpecial
  * @property int $fullPie
  * @property int $mexicanWave
+ * @property string $specialJson
+ * @property boolean $deleted
  * @method static \Illuminate\Database\Eloquent\Builder|ArcadeSales newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ArcadeSales newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ArcadeSales query()
@@ -60,6 +62,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|ArcadeSales whereWhiskey($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ArcadeSales whereWine($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ArcadeSales whereZombie($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ArcadeSales whereDeleted($value)
  * @mixin \Eloquent
  */
 class ArcadeSales extends Model
@@ -105,7 +108,9 @@ class ArcadeSales extends Model
         'fullPie',
         'happyHour',
         'mexicanWave',
-        'finalCost'
+        'finalCost',
+        'specialJson',
+        'deleted'
     ];
 
     /**
@@ -138,7 +143,9 @@ class ArcadeSales extends Model
         'fullPie' => 'integer',
         'happyHour' => 'integer',
         'mexicanWave' => 'integer',
-        'finalCost' => 'integer'
+        'finalCost' => 'integer',
+        'specialJson' => 'string',
+        'deleted' => 'boolean'
     ];
 
     public $timestamps = false;

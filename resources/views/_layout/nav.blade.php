@@ -259,7 +259,7 @@
                     </ul>
                 </li>
             @endif
-            @if(Config("app.siteMode") == "Bar")
+            @if(Config("app.siteMode") == "Bar" || Config("app.siteMode") == "Arcade")
                 <li>
                     <a href="#shop-bar" data-href="/Shop-Bar">
                         <span class="icon material-symbols-outlined">point_of_sale</span>
@@ -267,13 +267,13 @@
                     </a>
                     <ul id="shop-bar">
                         <li>
-                            <a href="/bar/sale-logger">
+                            <a href="/{{strtolower(Config("app.siteMode"))}}/sale-logger">
                                 <span class="label">Sales Logger</span>
                             </a>
                         </li>
                         <!--TODO: Add All Sales Page? -->
                         <!--<li>
-                            <a href="/bar/sales">
+                            <a href="/{{strtolower(Config("app.siteMode"))}}/sales">
                                 <span class="label">All Sales</span>
                             </a>
                         </li>-->
@@ -324,6 +324,13 @@
                         <li>
                             <a href="/admin/bar-settings">
                                 <span class="label">Bar Settings</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if(Config("app.siteMode") == "Arcade")
+                        <li>
+                            <a href="/admin/arcade-settings">
+                                <span class="label">Arcade Settings</span>
                             </a>
                         </li>
                     @endif

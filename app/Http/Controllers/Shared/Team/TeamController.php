@@ -25,7 +25,7 @@ class TeamController extends Controller
         try {
             $response = $client->request('GET', '/op-framework/users.json');
         } catch (GuzzleException $e) {
-            return 500;
+            return $e;
         }
         return json_decode($response->getBody(),true);
     }

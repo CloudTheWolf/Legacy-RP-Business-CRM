@@ -62,7 +62,8 @@ class SettingsController extends Controller
     private function updateSettings($setting,$value)
     {
         if($value == null) {
-            dd($setting);
+            return;
+            //dd($setting);
         }
         $config = Configuration::whereName($setting)->first();
         $config->value = $value;
