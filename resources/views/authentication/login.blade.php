@@ -44,7 +44,7 @@
             <div style="color: #fff !important;">
                 <div class="mb-5">
                     <h1 class="display-3 text-white">Welcome To</h1>
-                    <h1 class="display-3 text-white">{{env('COMPANY_NAME')}}</h1>
+                    <h1 class="display-3 text-white">{{Config('app.APP_NAME')}}</h1>
                 </div>
                 <p class="h6 text-white lh-1-5 mb-5">
                     Login to the Staff Panel to begin!

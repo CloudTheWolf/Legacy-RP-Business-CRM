@@ -197,6 +197,11 @@ if(config('app.siteMode') == "Arcade") {
     });
 }
 
+if(config('app.siteMode') == "Motorcycle Club")
+{
+    Route::get('/dashboard', [MechanicDashboard::class, 'Get'])->middleware('auth');
+}
+
 Route::prefix('/admin')->group(function () {
 
     Route::get('/add-user', [AddUserController::class, 'Get']);

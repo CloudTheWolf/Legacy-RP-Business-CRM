@@ -41,7 +41,7 @@ class EditUserController extends Controller
         $user->IsAdmin = $admin;
         $user->disabled = $disabled;
         $user->role = $request->input('role');
-
+        
         if(strlen($request->input('password')) > 0)
         {
             $user->password = Hash::make($request->input('password'));

@@ -120,7 +120,20 @@
                                             @if(config('app.siteMode') == "Mechanic")
                                                 <option {{$user->role == "Veteran Manager" ? 'selected' : ''}} value="Veteran Manager">Veteran Manager</option>
                                             @endif
+                                            @if(config('app.siteMode')!= 'Motorcycle Club')
                                                 <option {{$user->role == "Boss" ? 'selected' : ''}} value="Boss">Boss</option>
+                                            @endif
+                                            @if(config('app.siteMode') == 'Motorcycle Club')
+                                                <option {{$user->role == "Prospect" ? 'selected' : ''}} value="Prospect">Prospect</option>
+                                                <option {{$user->role == "Member" ? 'selected' : ''}} value="Member">Member</option>
+                                                <option {{$user->role == "Enforcer" ? 'selected' : ''}} value="Enforcer">Enforcer</option>
+                                                <option {{$user->role == "Treasurer" ? 'selected' : ''}} value="Treasurer">Treasurer</option>
+                                                <option {{$user->role == "Secretary" ? 'selected' : ''}} value="Secretary">Secretary</option>
+                                                <option {{$user->role == "Road Captain" ? 'selected' : ''}} value="Road Captain">Road Captain</option>
+                                                <option {{$user->role == "SGT at Arms" ? 'selected' : ''}} value="SGT at Arms">SGT at Arms</option>
+                                                <option {{$user->role == "Vice President" ? 'selected' : ''}} value="Vice President">Vice President</option>
+                                                <option {{$user->role == "President" ? 'selected' : ''}} value="President">President</option>
+                                            @endif
                                                 <option {{$user->role == "IT Support" ? 'selected' : ''}} value="IT Support">IT Support</option>
 
                                         </select>

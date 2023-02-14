@@ -91,6 +91,9 @@
                                             <option @if(Config('app.brandingPath') == "splitsides") selected @endif value="splitsides">Split Sides</option>
                                             <option @if(Config('app.brandingPath') == "vg") selected @endif value="vg">Videogeddon</option>
                                         </optgroup>
+                                        <optgroup label="Gangs">
+                                            <option @if(Config('app.brandingPath') == "aod") selected @endif value="aod">Angels Of Death</option>
+                                        </optgroup>
                                     </select>
                                 </div>
                             </div>
@@ -101,10 +104,12 @@
                                         <option {{Config('app.siteMode') == "Arcade" ? "selected" : ""}} value="Arcade">Arcade</option>
                                         <option {{Config('app.siteMode') == "Bar" ? "selected" : ""}} value="Bar">Bars/Clubs</option>
                                         <option {{Config('app.siteMode') == "Mechanic" ? "selected" : ""}} value="Mechanic">Mechanic</option>
+                                        <option {{Config('app.siteMode') == "Motorcycle Club" ? "selected" : ""}} value="Motorcycle Club">Motorcycle Club</option>
                                     </select>
                                 </div>
                             </div>
                             <hr class="form-control-separator">
+                            @if(Config('app.siteMode') == "Mechanic" || Config('app.siteMode') == "Bar" || Config('app.siteMode') == "Arcade")
                             <h5>Discord Settings</h5>
                             <hr class="form-control-separator">
                             <div class="row">
@@ -125,12 +130,14 @@
                                         </select>
                                     </div>
                                 </div>
+
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <label for="app-name">Job Applications Webhook URL</label>
                                     <input id="job-discord" name="job-discord" class="form-control" type="text" value="{{Config('app.jobWebhook')}}" placeholder="https://discord.com/api/webhooks/..." autocomplete="off">
                                 </div>
                             </div>
+                            @endif
                             @if(Config('app.siteMode') == "Mechanic")
                             <div class="row">
                                 <div class="form-group col-md-12">
@@ -139,12 +146,14 @@
                                 </div>
                             </div>
                             @endif
+                            @if(Config('app.siteMode') == "Mechanic" || Config('app.siteMode') == "Bar" || Config('app.siteMode') == "Arcade")
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <label for="app-name">Timesheet Webhook URL</label>
                                     <input id="timesheet-discord" name="timesheet-discord" class="form-control" type="text" value="{{Config('app.timesheetWebhook')}}" placeholder="https://discord.com/api/webhooks/..." autocomplete="off">
                                 </div>
                             </div>
+                            @endif
                             @if(Config('app.siteMode') == "Mechanic")
                             <div class="row">
                                 <div class="form-group col-md-12">

@@ -53,6 +53,7 @@
                 <i data-acorn-icon="light-off" class="dark" data-acorn-size="18"></i>
             </a>
         </li>
+        @if(config('app.siteMode') == "Mechanic" || config('app.siteMode') == "Bar" || config('app.siteMode') == "Arcade")
         <li class="list-inline-item">
             <a href="#" data-bs-toggle="dropdown" data-bs-target="#notifications" aria-haspopup="true" aria-expanded="false" class="notification-button">
                 <div class="position-relative d-inline-flex">
@@ -203,6 +204,7 @@
                     @endif
             </div>
         </li>
+        @endif
     </ul>
     <!-- Icons Menu End -->
 
@@ -293,11 +295,13 @@
                     <span class="label">Admin</span>
                 </a>
                 <ul id="admin">
+                    @if(config('app.siteMode') == "Mechanic" || config('app.siteMode') == "Bar" || config('app.siteMode') == "Arcade")
                     <li>
                         <a href="/admin/applications">
                             <span class="label">Job Applications</span>
                         </a>
                     </li>
+                    @endif
                     <li>
                         <a href="/admin/add-user">
                             <span class="label">Add User</span>
