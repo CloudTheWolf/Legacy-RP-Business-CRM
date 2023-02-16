@@ -40,7 +40,7 @@
             <div class="col-8 col-sm-8 col-lg-8">
                 <div class="card radius-10">
                     <div class="card-header">
-                        <h4>Add User</h4>
+                        <h4>Update Account</h4>
                     </div>
                     @if (\Session::has('message'))
                         <div class="alert border-0 border-start border-5 border-success alert-dismissible fade show py-2">

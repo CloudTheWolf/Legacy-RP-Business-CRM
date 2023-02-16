@@ -27,7 +27,13 @@
                 <div class="col-6 pe-1 ps-1">
                     <ul class="list-unstyled">
                         <li>
-                            <a href="logout">
+                            <a href="{{url("/account/settings")}}">
+                                <i data-acorn-icon="gear" class="me-2" data-acorn-size="17"></i>
+                                <span class="align-middle">Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url('/logout')}}">
                                 <i data-acorn-icon="logout" class="me-2" data-acorn-size="17"></i>
                                 <span class="align-middle">Logout</span>
                             </a>

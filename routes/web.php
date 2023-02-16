@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Mechanic\Repair\RepairDelete;
 use App\Http\Controllers\Mechanic\Repair\RepairEdit;
+use App\Http\Controllers\Shared\Account\EditAccountController;
 use Illuminate\Support\Facades\Route;
 /**
  * Mechanic
@@ -214,6 +215,9 @@ Route::prefix('/admin')->group(function () {
     Route::post('/settings',[SettingsController::class,'Post']);
 
 });
+
+Route::get('/account/settings',[EditAccountController::class, 'Get'])->middleware('auth');
+Route::post('/account/settings',[EditAccountController::class, 'Post'])->middleware('auth');
 
 /*
 |--------------------------------------------------------------------------
