@@ -107,8 +107,8 @@
                                             @if(config('app.siteMode') == "Mechanic")
                                                 <option {{$user->role == "Tow Driver" ? 'selected' : ''}} value="Tow Driver">Tow Driver</option>
                                                 <option {{$user->role == "Intern Mechanic" ? 'selected' : ''}} value="Intern Mechanic">Intern Mechanic</option>
+                                                <option {{$user->role == "Mechanic" ? 'selected' : ''}} value="Mechanic">Mechanic</option>
                                                 <option {{$user->role == "Lead Mechanic" ? 'selected' : ''}} value="Lead Mechanic">Lead Mechanic</option>
-                                                <option {{$user->role == "Adept Mechanic" ? 'selected' : ''}} value="Adept Mechanic">Adept Mechanic</option>
                                                 <option {{$user->role == "Expert Mechanic" ? 'selected' : ''}} value="Expert Mechanic">Expert Mechanic</option>
                                                 <option {{$user->role == "Veteran Mechanic" ? 'selected' : ''}} value="Veteran Mechanic">Veteran Mechanic</option>
                                                 <option {{$user->role == "Trainer" ? 'selected' : ''}} value="Trainer">Trainer</option>

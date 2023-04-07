@@ -21,6 +21,7 @@
 @endsection
 
 @section('js_page')
+
     <script>
         function resize() {
             if($(window).width() > 800) {

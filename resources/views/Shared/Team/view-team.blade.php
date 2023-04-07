@@ -66,7 +66,11 @@
                             <thead>
                                 <th>#</th>
                                 <th>Name</th>
+                                @if(config("app.siteMode") == "Motorcycle Club")
+                                <th>Role</th>
+                                @else
                                 <th>Job Title</th>
+                                @endif
                                 <th>CID</th>
                                 <th>Cell Phone</th>
                                 @if(config('app.siteMode') == "Mechanic")
@@ -75,7 +79,9 @@
                                 @if(Auth::user()->IsAdmin == 1)
                                 <th>In City</th>
                                 @endif
+                                @if(config("app.siteMode") != "Motorcycle Club")
                                 <th>On Duty</th>
+                                @endif
                             </thead>
                             <tbody>
                             @php $i = 1; @endphp
@@ -116,7 +122,9 @@
                                                      }
                                             @endphp</td>
                                     @endif
+                                    @if(config("app.siteMode") != "Motorcycle Club")
                                     <td style="color: {{$user->onDuty == 1 ? "greenyellow" :  "orangered"}}">{{$user->onDuty == 1 ? $user->workingAs : "Off Duty"}}<i class="bx bx-{{$user->onDuty == 1 ? "check" : "x"}}"></i></td>
+                                    @endif
                                 </tr>
                                 @php ++$i; @endphp
                             @endforeach

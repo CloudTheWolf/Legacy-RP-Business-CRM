@@ -50,6 +50,8 @@ use App\Http\Controllers\ActionController;
 use App\Http\Controllers\Shared\Applications\ApplicationWelcome;
 use App\Http\Controllers\Shared\Applications\ApplicationSelectProfile;
 use App\Http\Controllers\Shared\Applications\BarApplication;
+use App\Http\Controllers\Shared\Warehouse\viewAllWarehousesController;
+use App\Http\Controllers\Shared\Warehouse\viewWarehouseController;
 
 
 /** Authentication Controllers **/
@@ -157,8 +159,8 @@ if(config('app.siteMode') == "Bar") {
         Route::get('/specials/enable/{id}',[SpecialsController::class,'Enable']);
         Route::get('/specials/disable/{id}',[SpecialsController::class,'Disable']);
 
-        Route::get('/bar-settings',[ArcadeSettings::class,'Get']);
-        Route::post('/bar-settings',[ArcadeSettings::class,'Post']);
+        Route::get('/bar-settings',[BarSettings::class,'Get']);
+        Route::post('/bar-settings',[BarSettings::class,'Post']);
 
         Route::prefix('/applications')->group(function (){
             Route::get('/',[ApplicationsController::class,'Get']);
@@ -201,6 +203,10 @@ if(config('app.siteMode') == "Arcade") {
 if(config('app.siteMode') == "Motorcycle Club")
 {
     Route::get('/dashboard', [MechanicDashboard::class, 'Get'])->middleware('auth');
+    Route::prefix("/storage")->group(function (){
+        Route::get('/',[viewAllWarehousesController::class,'get']);
+        Route::get('/{id}',[viewWarehouseController::class,'get']);
+    })->middleware('auth');
 }
 
 Route::prefix('/admin')->group(function () {

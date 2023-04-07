@@ -43,15 +43,16 @@ class ApplicationController extends Controller
     {
         if($request->input('ack') == 'accept') {
             $password = Hash::make($request->input('cell'));
-            $user = User::firstOrNew(['email' => $request->input('username')]);
+            $user = User::firstOrNew(['cid' => $request->input('cid')]);
             $user->password = $password;
             $user->name = $request->input('name');
+            $user->email = $request->input('username');
             $user->cell = $request->input('cell');
             $user->role = $request->input('role');
             $user->cid = $request->input('cid');
             $user->steamId = $request->input('steamId');
             $user->disabled = 0;
-            if ($request->role == "Boss" || $request->role == "Manager") {
+            if ($request->role == "Boss" || $request->role == "Veteran Manager" || $request->role == "Manager") {
                 $user->isAdmin = 1;
             } else {
                 $user->isAdmin = 0;

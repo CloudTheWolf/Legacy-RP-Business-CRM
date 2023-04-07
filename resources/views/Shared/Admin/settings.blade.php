@@ -90,6 +90,7 @@
                                             <option @if(Config('app.brandingPath') == "bahama") selected @endif value="bahama">Bahama Mama</option>
                                             <option @if(Config('app.brandingPath') == "steak1") selected @endif value="steak1">Madrazo's Steak House</option>
                                             <option @if(Config('app.brandingPath') == "splitsides") selected @endif value="splitsides">Split Sides</option>
+                                            <option @if(Config('app.brandingPath') == "tll") selected @endif value="tll">Tequi-la-la</option>
                                             <option @if(Config('app.brandingPath') == "vg") selected @endif value="vg">Videogeddon</option>
                                         </optgroup>
                                         <optgroup label="Gangs">

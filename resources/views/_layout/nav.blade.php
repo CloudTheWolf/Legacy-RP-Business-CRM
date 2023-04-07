@@ -71,19 +71,21 @@
                 @if(config('app.siteMode') == "Mechanic")
                         @if(Auth::user()->onDuty == 0)
                             <div class="col text-center">
-                                <a href="{{url('clock-on/Mechanic')}}" >
-                                    <div class="app-box mx-auto btn btn-tertiary text-white" style="width: 125px">
-                                        <span class="material-symbols-outlined">home_repair_service</span>
-                                        <div class="app-title">Mechanic</div>
-                                    </div></a>
-                            </div>
-                            <div class="col text-center">
                                 <a href="{{url('clock-on/Tow')}}">
                                     <div class="app-box mx-auto btn btn-warning text-white" style="width: 125px">
                                         <span class="material-symbols-outlined">rv_hookup</span>
                                         <div class="app-title">Tow</div>
                                     </div></a>
                             </div>
+                            @if(Auth::user()->role != "Tow Driver")
+                                <div class="col text-center">
+                                    <a href="{{url('clock-on/Mechanic')}}" >
+                                        <div class="app-box mx-auto btn btn-tertiary text-white" style="width: 125px">
+                                            <span class="material-symbols-outlined">home_repair_service</span>
+                                            <div class="app-title">Mechanic</div>
+                                        </div></a>
+                                </div>
+                            @endif
                             <div class="col text-center">
                                 <a href="{{url('clock-on/Scuba')}}">
                                     <div class="app-box mx-auto btn btn-info text-white" style="width: 125px">
@@ -110,7 +112,7 @@
                                 </div>
                             @endif
                         @else
-                            @if(Auth::user()->workingAs != __('app.mechanic'))
+                            @if(Auth::user()->workingAs != __('app.mechanic') && Auth::user()->role != "Tow Driver")
                                 <div class="col text-center">
                                     <a href="{{url('clock-on/Mechanic')}}" >
                                         <div class="app-box mx-auto btn btn-tertiary text-white" style="width: 125px">
@@ -231,6 +233,7 @@
                         <span class="label">Mechanic Tools</span>
                     </a>
                     <ul id="shop-mechanic">
+                        @if(Auth::user()->role != "Tow Driver")
                         <li>
                             <a href="/mechanic/repair-logger">
                                 <span class="label">Repair Logger</span>
@@ -241,6 +244,7 @@
                                 <span class="label">All Repairs</span>
                             </a>
                         </li>
+                        @endif
                         <li>
                             <a href="/mechanic/purchase">
                                 <span class="label">Purchase Calculator</span>
@@ -291,9 +295,15 @@
             <li>
                 <a href="/team" data-href="/Team">
                     <span class="icon material-symbols-outlined">diversity_1</span>
-                    <span class="label">Team</span>
+                    <span class="label">@if(config("app.siteMode") == "Motorcycle Club") Members @else Team @endif</span>
                 </a>
             </li>
+            @if(config("app.siteMode") == "Motorcycle Club" || config("app.siteMode") == "Mechanic")
+                <li><a href="{{url("/storage")}}" data-href="/Storage">
+                    <span class="icon material-symbols-outlined">warehouse</span>
+                    <span class="label">Storage</span>
+                </a></li>
+            @endif
             @if(Auth::user()->IsAdmin == 1)
             <li>
                 <a href="#admin" data-href="/Admin">

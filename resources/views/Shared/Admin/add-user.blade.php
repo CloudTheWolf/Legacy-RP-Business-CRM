@@ -123,8 +123,8 @@
                                             @if(config('app.siteMode') == "Mechanic")
                                                 <option value="Tow Driver">Tow Driver</option>
                                                 <option value="Intern Mechanic">Intern Mechanic</option>
+                                                <option value="Mechanic">Mechanic</option>
                                                 <option value="Lead Mechanic">Lead Mechanic</option>
-                                                <option value="Adept Mechanic">Adept Mechanic</option>
                                                 <option value="Expert Mechanic">Expert Mechanic</option>
                                                 <option value="Veteran Mechanic">Veteran Mechanic</option>
                                                 <option value="Trainer">Trainer</option>
