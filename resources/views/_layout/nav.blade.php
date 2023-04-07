@@ -223,7 +223,7 @@
                 <a href="/dashboard">
                     <!--<i data-acorn-icon="dashboard" class="icon" data-acorn-size="18"></i>-->
                     <span class="icon material-symbols-outlined">home</span>
-                    <span class="label">Dashboard</span>
+                    <span class="label">Dashboard A</span>
                 </a>
             </li>
             @if(Config("app.siteMode") == "Mechanic")
