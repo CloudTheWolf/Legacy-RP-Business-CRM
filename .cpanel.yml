@@ -1,0 +1,16 @@
+---
+deployment:
+  tasks:
+    # Deploy To Mechanic Shops
+    - export HARMONY=/home/cloudthe/harmonycrm.fluxhosts.com
+    - export SOL=/home/cloudthe/sol.legacyrp.company
+    - export MIRRORPARK=/home/cloudthe/mpar.legacyrp.company
+    - export MOSLEYS=/home/cloudthe/mosleys.legacyrp.company
+    - export HAYES=/home/cloudthe/hayes.legacyrp.company
+    # Deploy To Bars/Clubs/ Etc madrazos
+    - export MADRAZOS=/home/cloudthe/madrazos.legacyrp.company
+    - export BAHAMA=/home/cloudthe/bahama-mamas.legacyrp.company
+    - export TLL=/home/cloudthe/tequilala.legacyrp.company
+    - export ARCADE=/home/cloudthe/videogeddon.legacyrp.company
+    - export SPLITSIDES=/home/cloudthe/splitsides.legacyrp.company
+    - /bin/cp -R * $HARMONY
