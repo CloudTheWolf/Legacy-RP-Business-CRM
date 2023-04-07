@@ -13,4 +13,14 @@ deployment:
     - export TLL=/home/cloudthe/tequilala.legacyrp.company
     - export ARCADE=/home/cloudthe/videogeddon.legacyrp.company
     - export SPLITSIDES=/home/cloudthe/splitsides.legacyrp.company
+    # Start Deployment
     - /bin/cp -R * $HARMONY
+    - /bin/cp -R * $SOL
+    - /bin/cp -R * $MIRRORPARK
+    - /bin/cp -R * $MOSLEYS
+    - /bin/cp -R * $HAYES
+    - /bin/cp -R * $MADRAZOS
+    - /bin/cp -R * $BAHAMA
+    - /bin/cp -R * $TLL
+    - /bin/cp -R * $ARCADE
+    - /bin/cp -R * $SPLITSIDES
