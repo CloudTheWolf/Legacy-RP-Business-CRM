@@ -129,10 +129,12 @@
 
         $(function() {
             resize();
+            @if($repair->vehicle != null)
             $('#select2Basic').val('{{$repair->vehicle}}');
             $('#select2Basic').trigger('change');
+            @endif
             multiply(document.getElementById('scrap').value,{!! config('app.scrap-sell') !!},'scrapCost');
-            multiply(document.getElementById('alum').value,{!! config('app.aluminium-sell') !!},'alumCost');
+            multiply(document.getElementById('aluminium').value,{!! config('app.aluminium-sell') !!},'alumCost');
             multiply(document.getElementById('steel').value,{!! config('app.steel-sell') !!},'steelCost');
             multiply(document.getElementById('glass').value,{!! config('app.glass-sell') !!},'glassCost');
             multiply(document.getElementById('rubber').value,{!! config('app.rubber-sell') !!},'rubberCost');
@@ -193,7 +195,7 @@
                                 <label for="inputPhoneNo" class="form-label">Vehicle</label>
                                 <div class="input">
                                     <select name="vehicle" id="select2Basic" class="vehicle" style="width: 100% !important;" required>
-                                        <option selected disabled>--- Please Select ---</option>
+                                        <option disabled selected value="null">--- Please Select ---</option>
                                         <optgroup label="Items">
                                             <option value="Advanced Repair Kit">Advanced Repair Kit</option>
                                         </optgroup>
