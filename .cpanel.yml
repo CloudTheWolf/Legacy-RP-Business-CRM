@@ -25,3 +25,4 @@ deployment:
     - /bin/cp -R * $TLL
     - /bin/cp -R * $ARCADE
     - /bin/cp -R * $SPLITSIDES
+    - /bin/cp -R * $YELLOWJACK
