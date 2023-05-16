@@ -16,6 +16,7 @@ class TeamController extends Controller
     {
         $users = User::whereDisabled(0)->get();
         $onlineUsers = $this->getOnlineUsers();
+        
         return view('Shared.Team.view-team',compact('users','onlineUsers'));
     }
 
@@ -27,6 +28,9 @@ class TeamController extends Controller
         } catch (GuzzleException $e) {
             return $e;
         }
+
+
+
         return json_decode($response->getBody(),true);
     }
 }

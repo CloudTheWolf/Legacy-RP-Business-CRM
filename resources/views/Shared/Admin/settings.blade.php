@@ -92,6 +92,7 @@
                                             <option @if(Config('app.brandingPath') == "splitsides") selected @endif value="splitsides">Split Sides</option>
                                             <option @if(Config('app.brandingPath') == "tll") selected @endif value="tll">Tequi-la-la</option>
                                             <option @if(Config('app.brandingPath') == "vg") selected @endif value="vg">Videogeddon</option>
+                                            <option @if(Config('app.brandingPath') == "yellowjack") selected @endif value="yellowjack">Yellow Jack Inn</option>
                                         </optgroup>
                                         <optgroup label="Gangs">
                                             <option @if(Config('app.brandingPath') == "aod") selected @endif value="aod">Angels Of Death</option>
