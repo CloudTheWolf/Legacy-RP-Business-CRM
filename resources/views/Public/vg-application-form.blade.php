@@ -135,7 +135,7 @@
                     </div>
                     <hr>
                     <div class="form-group col-md-3">
-                        <label for="name" class="form-label">Your Email (Discord Name with # number)</label>
+                        <label for="name" class="form-label">Your Email</label>
                         <input type="text" class="form-control" name="discord" placeholder="John#1234" required aria-required="true">
                         <div class="invalid-feedback">This is required.</div>
                     </div>
