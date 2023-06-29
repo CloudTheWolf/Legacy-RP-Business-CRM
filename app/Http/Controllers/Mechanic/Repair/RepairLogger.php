@@ -17,7 +17,7 @@ class RepairLogger extends Controller
     public function Get()
     {
         try {
-            $client = new Client(['base_uri' => env("API_BASE_URI"),'timeout' => 60]);
+            $client = new Client(['base_uri' => env("API_BASE_URI"),'timeout' => 5]);
             $response = $client->request('GET', '/op-framework/vehicles.json');
             $vehicles = json_decode($response->getBody());
         }
