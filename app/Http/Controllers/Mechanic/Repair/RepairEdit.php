@@ -17,7 +17,7 @@ class RepairEdit extends Controller
     public function Get(Request $request, $id)
     {
         try{
-            $client = new Client(['base_uri' => env("API_BASE_URI"),'timeout' => 5]);
+            $client = new Client(['base_uri' => "https://legacyrp.company/",'timeout' => 5]);
             $response = $client->request('GET', '/op-framework/vehicles.json');
             $vehicles = json_decode($response->getBody());
         }
