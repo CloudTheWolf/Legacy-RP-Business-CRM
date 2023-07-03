@@ -299,10 +299,10 @@
                 </a>
             </li>
             @if(config("app.siteMode") == "Motorcycle Club" || config("app.siteMode") == "Mechanic")
-                <li><a href="{{url("/storage")}}" data-href="/Storage">
+                <!--<li><a href="{{url("/storage")}}" data-href="/Storage">
                     <span class="icon material-symbols-outlined">warehouse</span>
                     <span class="label">Storage</span>
-                </a></li>
+                </a></li>-->
             @endif
             @if(Auth::user()->IsAdmin == 1)
             <li>
@@ -313,9 +313,17 @@
                 <ul id="admin">
                     @if(config('app.siteMode') == "Mechanic" || config('app.siteMode') == "Bar" || config('app.siteMode') == "Arcade")
                     <li>
-                        <a href="/admin/applications">
+                        <a href="#applications">
                             <span class="label">Job Applications</span>
                         </a>
+                        <ul id="applications">
+                            <li>
+                                <a href="/admin/applications">Active Applications</a>
+                            </li>
+                            <li>
+                                <a href="/admin/past-applications">Past Applications</a>
+                            </li>
+                        </ul>
                     </li>
                     @endif
                     <li>

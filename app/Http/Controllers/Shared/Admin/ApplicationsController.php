@@ -33,5 +33,19 @@ class ApplicationsController extends Controller
         return view("Shared.Admin.applications",compact("applications"));
     }
 
+    public function GetDone()
+    {
+        switch(config('app.siteMode')){
+            default:
+                $applications = Applications::whereState('1')->get();
+                break;
+            case 'Arcade':
+            case 'Bar':
+                $applications = VgApplications::whereState('1')->get();
+                break;
+        }
+        return view("Shared.Admin.applications",compact("applications"));
+    }
+
 
 }

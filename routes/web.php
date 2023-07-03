@@ -132,7 +132,7 @@ if(config('app.siteMode') == "Mechanic") {
             Route::get('/{id}',[ApplicationController::class,'Get']);
             Route::post('/{id}',[ApplicationController::class,'Post']);
         });
-
+        Route::get('/past-applications',[ApplicationsController::class,'GetDone']);
         Route::get('/mechanic-settings',[MechanicSettings::class,'Get']);
         Route::post('/mechanic-settings',[MechanicSettings::class,'Post']);
 
