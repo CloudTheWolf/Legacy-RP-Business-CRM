@@ -14,7 +14,11 @@ deployment:
     - export ARCADE=/home/cloudthe/videogeddon.legacyrp.company
     - export SPLITSIDES=/home/cloudthe/splitsides.legacyrp.company
     - export YELLOWJACK=/home/cloudthe/yellowjack.legacyrp.company
+    # Other
+    - export DOJ=/home/cloudthe/doj.legacyrp.company
+    - export DEV=/home/cloudthe/dev.legacyrp.company
     # Start Deployment
+    - /bin/cp -R * $DEV
     - /bin/cp -R * $HARMONY
     - /bin/cp -R * $SOL
     - /bin/cp -R * $MIRRORPARK
@@ -26,3 +30,4 @@ deployment:
     - /bin/cp -R * $ARCADE
     - /bin/cp -R * $SPLITSIDES
     - /bin/cp -R * $YELLOWJACK
+    - /bin/cp -R * $DOJ
