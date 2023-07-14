@@ -56,6 +56,8 @@ class SettingsController extends Controller
             $this->updateSettings('towWebhook', $request->get('tow-discord'));
         }
 
+        $this->updateSettings('botName',$request->get('botName'));
+
         return back()->with(['message' => 'Settings Saved']);
     }
 
