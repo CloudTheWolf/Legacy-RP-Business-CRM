@@ -97,6 +97,9 @@
                                         <optgroup label="Gangs">
                                             <option @if(Config('app.brandingPath') == "aod") selected @endif value="aod">Angels Of Death</option>
                                         </optgroup>
+                                        <optgroup label="Law">
+                                            <option @if(Config('app.brandingPath') == "doj") selected @endif value="doj">DOJ</option>
+                                        </optgroup>
                                     </select>
                                 </div>
                             </div>
@@ -108,6 +111,7 @@
                                         <option {{Config('app.siteMode') == "Bar" ? "selected" : ""}} value="Bar">Bars/Clubs</option>
                                         <option {{Config('app.siteMode') == "Mechanic" ? "selected" : ""}} value="Mechanic">Mechanic</option>
                                         <option {{Config('app.siteMode') == "Motorcycle Club" ? "selected" : ""}} value="Motorcycle Club">Motorcycle Club</option>
+                                        <option {{Config('app.siteMode') == "DOJ" ? "selected" : ""}} value="DOJ">DOJ</option>
                                     </select>
                                 </div>
                             </div>

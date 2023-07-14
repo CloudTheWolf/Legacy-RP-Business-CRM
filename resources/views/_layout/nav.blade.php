@@ -292,12 +292,22 @@
                     </ul>
                 </li>
             @endif
+            @if(config("app.siteMode") == "DOJ")
+            <li>
+                <a href="#doj-cases">
+                    <span class="icon material-symbols-outlined">work</span>
+                    <span class="label">Cases</span>
+                </a>
+            </li>
+            @endif
+            @if(config("app.siteMode") != "DOJ")
             <li>
                 <a href="/team" data-href="/Team">
                     <span class="icon material-symbols-outlined">diversity_1</span>
                     <span class="label">@if(config("app.siteMode") == "Motorcycle Club") Members @else Team @endif</span>
                 </a>
             </li>
+            @endif
             @if(config("app.siteMode") == "Motorcycle Club" || config("app.siteMode") == "Mechanic")
                 <!--<li><a href="{{url("/storage")}}" data-href="/Storage">
                     <span class="icon material-symbols-outlined">warehouse</span>
@@ -368,6 +378,26 @@
                                 <span class="label">Manage Specials</span>
                             </a>
                         </li>
+                    @endif
+                    @if(Config("app.botName") != null)
+                            <a href="https://c3.cloudthewolf.com/services/bots/restart.php?bot=<?=Config("app.botName");?>&popup=1" id="open-popup">open popup</a>
+                            <script>
+                                (() => {
+                                    let id = document.getElementById("open-popup");
+                                    let popupWindow = null;
+                                    let windowSize = 'width=800,height=500,left=560,top=290';
+
+                                    id.addEventListener("click", function(event){
+                                        let url = this.href;
+                                        if (popupWindow === null || popupWindow.closed) {
+                                            popupWindow = window.open(url, 'RestartBot', windowSize);
+                                        } else {
+                                            popupWindow.focus();
+                                        }
+                                        event.preventDefault();
+                                    });
+                                })();
+                            </script>
                     @endif
                 </ul>
 
