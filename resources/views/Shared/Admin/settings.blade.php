@@ -73,6 +73,13 @@
 
                             <div class="row">
                                 <div class="form-group col-md-12">
+                                    <label for="app-name">Bot Service Name</label>
+                                    <input id="company-name" name="company-name" class="form-control" type="text" value="{{Config('app.botName')}}" placeholder="Harmony" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
                                     <label for="app-name">Branding Directory Name</label>
                                     <!--<input id="branding-dir" name="branding-dir" class="form-control" type="text" value="{{Config('app.brandingPath')}}" placeholder="harmony" autocomplete="off">-->
                                     <select class="form-control" id="branding-dir" name="branding-dir">

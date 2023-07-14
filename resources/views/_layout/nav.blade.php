@@ -380,24 +380,8 @@
                         </li>
                     @endif
                     @if(Config("app.botName") != null)
-                            <a href="https://c3.cloudthewolf.com/services/bots/restart.php?bot=<?=Config("app.botName");?>&popup=1" id="open-popup">open popup</a>
-                            <script>
-                                (() => {
-                                    let id = document.getElementById("open-popup");
-                                    let popupWindow = null;
-                                    let windowSize = 'width=800,height=500,left=560,top=290';
+                            <a class="botReset" target="_blank" href="https://c3.cloudthewolf.com/services/bots/restart.php?bot=<?=Config("app.botName");?>&popup=1"><span class="label">Restart Bot</a>
 
-                                    id.addEventListener("click", function(event){
-                                        let url = this.href;
-                                        if (popupWindow === null || popupWindow.closed) {
-                                            popupWindow = window.open(url, 'RestartBot', windowSize);
-                                        } else {
-                                            popupWindow.focus();
-                                        }
-                                        event.preventDefault();
-                                    });
-                                })();
-                            </script>
                     @endif
                 </ul>
 
@@ -428,3 +412,4 @@
     <!-- Mobile Buttons End -->
 </div>
 <div class="nav-shadow"></div>
+
