@@ -23,8 +23,10 @@
 
 
 <script>
-    $('.botReset').click(function (event) {
-        event.preventDefault();
-        window.open($(this).attr("href"), "popupWindow", "width=600,height=600,scrollbars=yes");
+    $(function () {
+        $('.botReset').click(function (event) {
+            event.preventDefault();
+            window.open($(this).attr("href"), "popupWindow", "width=600,height=600,scrollbars=yes");
+        })
     });
 </script>
