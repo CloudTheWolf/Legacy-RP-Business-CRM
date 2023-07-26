@@ -4,6 +4,7 @@ deployment:
     # Deploy To Mechanic Shops
     - export HARMONY=/home/cloudthe/harmonycrm.fluxhosts.com
     - export SOL=/home/cloudthe/sol.legacyrp.company
+    - export PBAY=/home/cloudthe/pbay.legacyrp.company
     - export MIRRORPARK=/home/cloudthe/mpar.legacyrp.company
     - export MOSLEYS=/home/cloudthe/mosleys.legacyrp.company
     - export HAYES=/home/cloudthe/hayes.legacyrp.company
@@ -21,6 +22,7 @@ deployment:
     - /bin/cp -R * $DEV
     - /bin/cp -R * $HARMONY
     - /bin/cp -R * $SOL
+    - /bin/cp -R * $PBAY
     - /bin/cp -R * $MIRRORPARK
     - /bin/cp -R * $MOSLEYS
     - /bin/cp -R * $HAYES
