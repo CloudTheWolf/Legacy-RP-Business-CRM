@@ -90,8 +90,9 @@
                                             <option @if(Config('app.brandingPath') == "lost") selected @endif value="lost">Lost</option>
                                             <option @if(Config('app.brandingPath') == "mpar") selected @endif value="mpar">Mirror Park</option>
                                             <option @if(Config('app.brandingPath') == "mosleys") selected @endif value="mosleys">Mosley's</option>
+                                            <option @if(Config('app.brandingPath') == "pbay") selected @endif value="pbay">Paleto Bay</option>
                                             <option @if(Config('app.brandingPath') == "2g") selected @endif value="2g">Second Gear</option>
-                                            <option @if(Config('app.brandingPath') == "sol") selected @endif value="sol">SOL</option>
+
                                         </optgroup>
                                         <optgroup label="Bars/Clubs/Arcade">
                                             <option @if(Config('app.brandingPath') == "bahama") selected @endif value="bahama">Bahama Mama</option>
@@ -103,6 +104,7 @@
                                         </optgroup>
                                         <optgroup label="Gangs">
                                             <option @if(Config('app.brandingPath') == "aod") selected @endif value="aod">Angels Of Death</option>
+                                            <option @if(Config('app.brandingPath') == "sol") selected @endif value="sol">SOL</option>
                                         </optgroup>
                                         <optgroup label="Law">
                                             <option @if(Config('app.brandingPath') == "doj") selected @endif value="doj">DOJ</option>
