@@ -74,7 +74,7 @@
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <label for="app-name">Bot Service Name</label>
-                                    <input id="company-name" name="company-name" class="form-control" type="text" value="{{Config('app.botName')}}" placeholder="Harmony" autocomplete="off">
+                                    <input id="company-name" name="botName" class="form-control" type="text" value="{{Config('app.botName')}}" placeholder="Harmony" autocomplete="off">
                                 </div>
                             </div>
 
