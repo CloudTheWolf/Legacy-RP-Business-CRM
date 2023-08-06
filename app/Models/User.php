@@ -43,7 +43,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTowID($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereWorkingAs($value)
- * @mixin \Eloquent
+ * @mixin \Eloquent 
  */
 class User extends Authenticatable
 {
