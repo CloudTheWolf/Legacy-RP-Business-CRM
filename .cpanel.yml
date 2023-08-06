@@ -19,6 +19,34 @@ deployment:
     - export DOJ=/home/cloudthe/doj.legacyrp.company
     - export DEV=/home/cloudthe/dev.legacyrp.company
     # Start Deployment
+    - - command: php artisan down --status=418 --retry=60
+        base_directory: $DEV
+      - command: php artisan down --status=418 --retry=60
+        base_directory: $HARMONY
+      - command: php artisan down --status=418 --retry=60
+        base_directory: $SOL
+      - command: php artisan down --status=418 --retry=60
+        base_directory: $PBAY
+      - command: php artisan down --status=418 --retry=60
+        base_directory: $MIRRORPARK
+      - command: php artisan down --status=418 --retry=60
+        base_directory: $MOSLEYS
+      - command: php artisan down --status=418 --retry=60
+        base_directory: $HAYES
+      - command: php artisan down --status=418 --retry=60
+        base_directory: $MADRAZOS
+      - command: php artisan down --status=418 --retry=60
+        base_directory: $BAHAMA
+      - command: php artisan down --status=418 --retry=60
+        base_directory: $TLL
+      - command: php artisan down --status=418 --retry=60
+        base_directory: $ARCADE
+      - command: php artisan down --status=418 --retry=60
+        base_directory: $SPLITSIDES
+      - command: php artisan down --status=418 --retry=60
+        base_directory: $YELLOWJACK
+      - command: php artisan down --status=418 --retry=60
+        base_directory: $DOJ
     - /bin/cp -R * $DEV
     - /bin/cp -R * $HARMONY
     - /bin/cp -R * $SOL
@@ -33,3 +61,31 @@ deployment:
     - /bin/cp -R * $SPLITSIDES
     - /bin/cp -R * $YELLOWJACK
     - /bin/cp -R * $DOJ
+    - command: php artisan up
+      base_directory: $DEV
+    - command: php artisan up
+      base_directory: $HARMONY
+    - command: php artisan up
+      base_directory: $SOL
+    - command: php artisan up
+      base_directory: $PBAY
+    - command: php artisan up
+      base_directory: $MIRRORPARK
+    - command: php artisan up
+      base_directory: $MOSLEYS
+    - command: php artisan up
+      base_directory: $HAYES
+    - command: php artisan up
+      base_directory: $MADRAZOS
+    - command: php artisan down up
+      base_directory: $BAHAMA
+    - command: php artisan up
+      base_directory: $TLL
+    - command: php artisan up
+      base_directory: $ARCADE
+    - command: php artisan up
+      base_directory: $SPLITSIDES
+    - command: php artisan up
+      base_directory: $YELLOWJACK
+    - command: php artisan up
+      base_directory: $DOJ
