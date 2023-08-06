@@ -62,7 +62,7 @@ class SteamLogin extends Controller
 
     protected function findUser($info)
     {
-        $user = User::whereSteamId('steam:' . dechex((int)$info->steamID64))->first();
+        $user = User::whereSteamId('steam:' . dechex((int)$info->steamID64))->whereDisabled(0)->first();
 
         if (!is_null($user)) {
             return $user;
