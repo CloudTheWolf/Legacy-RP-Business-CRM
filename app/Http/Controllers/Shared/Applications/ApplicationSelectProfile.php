@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Shared\Applications;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class ApplicationSelectProfile extends Controller
@@ -27,14 +29,21 @@ class ApplicationSelectProfile extends Controller
         {
             return redirect('/apply');
         }
-        $client = new Client(['base_uri' =>Config('app.mdtUrl'),'timeout' => 60]);
-        $headers = ['Accept' => 'application/json'];
-        $response = $client->request('GET','/arrests/'.$request->input('cid'),$headers);
-        //$request = new Request('GET', $url, $headers);
-        $arrestData = json_decode($response->getBody(),true);
-        $lastArrest = array_key_exists('lastArrestedDate',$arrestData) ?
-            Carbon::parse($arrestData['lastArrestedDate'])->format("l F dS Y") . " at " .
-            Carbon::parse($arrestData['lastArrestedDate'])->format("h:i A") . " (UTC) for..." : "Never";
+
+        try {
+            $client = new Client(['base_uri' => Config('app.mdtUrl'), 'timeout' => 60]);
+            $headers = ['Accept' => 'application/json'];
+            $response = $client->request('GET', '/arrests/' . $request->input('cid'), $headers);
+            $arrestData = json_decode($response->getBody(), true);
+            $lastArrest = array_key_exists('lastArrestedDate', $arrestData) ?
+                Carbon::parse($arrestData['lastArrestedDate'])->format("l F dS Y") . " at " .
+                Carbon::parse($arrestData['lastArrestedDate'])->format("h:i A") . " (UTC) for..." : "Never";
+        }
+        catch(GuzzleException $e)
+        {
+            Log::warning($e->getMessage());
+            $lastArrest = "{{Error getting information from MDT, Please manually put details here.}}";
+        }
         $user = Http::withToken(env('OP_FW_API_KEY'))->acceptJson()->get(env('OP_FW_REST_URI').'/characters/id='.$request->input('cid') .'/data')->json('data')[0];
         $steamID = $request->input('steamId');
         $cid = $request->input('cid');
