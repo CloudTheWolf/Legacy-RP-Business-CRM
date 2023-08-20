@@ -25,13 +25,6 @@ use App\Http\Controllers\Arcade\Sales\SalesLogger as ArcadeSalesLogger;
 use App\Http\Controllers\Arcade\Admin\ArcadeSettings;
 
 /**
- * Bars
- */
-use App\Http\Controllers\Bars\DashboardController as BarDashboard;
-use App\Http\Controllers\Bars\Sales\SalesLogger as BarSalesLogger;
-use App\Http\Controllers\Bars\Admin\BarSettings;
-
-/**
  * Shared
  */
 
@@ -43,13 +36,7 @@ use App\Http\Controllers\Shared\Admin\SettingsController;
 use App\Http\Controllers\Shared\Admin\UsersController;
 use App\Http\Controllers\Shared\Admin\SpecialsController;
 use App\Http\Controllers\Shared\Team\TeamController;
-use App\Http\Controllers\Authentication\BasicLogin;
-use App\Http\Controllers\Authentication\Logout;
-use App\Http\Controllers\Authentication\SteamLogin;
 use App\Http\Controllers\ActionController;
-use App\Http\Controllers\Shared\Applications\ApplicationWelcome;
-use App\Http\Controllers\Shared\Applications\ApplicationSelectProfile;
-use App\Http\Controllers\Shared\Applications\BarApplication;
 use App\Http\Controllers\Shared\Warehouse\viewAllWarehousesController;
 use App\Http\Controllers\Shared\Warehouse\viewWarehouseController;
 
@@ -65,170 +52,26 @@ use App\Http\Controllers\Shared\Warehouse\viewWarehouseController;
 |
 */
 
-Route::redirect('/', '/dashboard')->middleware('auth');
-Route::redirect('/index', '/dashboard')->middleware('auth');
-
-Route::prefix('/login')->group(function()
-{
-    Route::get('/',[BasicLogin::class,'Get'])->name('login');;
-    Route::post('/',[BasicLogin::class,'Post']);
-});
-Route::get('/logout',[Logout::class,'Get'])->middleware('auth');
-
-Route::prefix('/auth')->group(function ()
-{
-    Route::get('/steam', [SteamLogin::class,'get'])->name('auth.steam');
-    Route::get('/steam/handle', [SteamLogin::class,'handle'])->name('auth.steam.handle');
-});
-
-Route::get('/clock-on/{action}', [ActionController::class, 'ClockInOut'])->middleware('auth');
-
-Route::prefix('/apply')->group(function () {
-    Route::get('/', [ApplicationWelcome::class, 'Get']);
-    Route::get('/select-profile', [ApplicationSelectProfile::class, 'Get']);
-    Route::post('/select-profile', [ApplicationSelectProfile::class, 'Post']);
-    Route::prefix('/auth')->group(function () {
-        Route::get('/steam', [SteamLogin::class, 'get'])->name('apply.auth.steam');
-        Route::get('/steam/handle', [SteamLogin::class, 'handle'])->name('apply.auth.steam.handle');
-    });
-});
-
-Route::get('/team', [TeamController::class,'Get'])->middleware('auth');
+require __DIR__ . '/auth.php';
+require __DIR__ . '/admin.php';
+require __DIR__ . '/shared.php';
 
 if(config('app.siteMode') == "Mechanic") {
-    Route::get('/dashboard', [MechanicDashboard::class, 'Get'])->middleware('auth');
-
-
-    Route::prefix('/tow')->group(function () {
-
-        Route::post('/', [TowTally::class, 'Post'])->name('tow.tally')->middleware('auth');
-        Route::get('/tracker',[TowTracker::class,'Get'])->middleware('auth');
-        Route::post('/tracker',[TowTracker::class,'Post'])->middleware('auth');
-
-        Route::get('/history',[TowHistory::class,'Get'])->middleware('auth');
-    });
-
-    Route::prefix('/mechanic')->group(function (){
-        Route::get('/repair-logger',[RepairLogger::class,'Get'])->middleware('auth');
-        Route::post('/repair-logger',[RepairLogger::class,'Post'])->middleware('auth');
-
-        Route::get('/repairs',[Repairs::class,'Get'])->middleware('auth');
-        Route::get('/repairs/{id}',[RepairEdit::class,'Get'])->middleware('auth');
-        Route::post('/repairs/{id}',[RepairEdit::class,'Post'])->middleware('auth');
-        Route::get('/repairs/{id}/delete',[RepairDelete::class,'Get'])->middleware('auth');
-
-        Route::get('/purchase',[Purchase::class,'Get'])->middleware('auth');
-        Route::post('/purchase',[Purchase::class,'Post'])->middleware('auth');
-    });
-
-    Route::post('/apply/done', [MechanicApplications::class, 'Post']);
-
-    Route::prefix('/admin')->group(function (){
-
-        Route::prefix('/applications')->group(function (){
-            Route::get('/',[ApplicationsController::class,'Get'])->middleware('auth');
-            Route::get('/{id}',[ApplicationController::class,'Get'])->middleware('auth');
-            Route::post('/{id}',[ApplicationController::class,'Post'])->middleware('auth');
-        });
-        Route::get('/past-applications',[ApplicationsController::class,'GetDone'])->middleware('auth');
-        Route::get('/mechanic-settings',[MechanicSettings::class,'Get'])->middleware('auth');
-        Route::post('/mechanic-settings',[MechanicSettings::class,'Post'])->middleware('auth');
-
-    });
+    require __DIR__ . '/mechanic.php';
 }
 
 if(config('app.siteMode') == "Bar") {
-    Route::redirect('/', '/dashboard')->middleware('auth');
-    Route::get('/dashboard', [BarDashboard::class, 'Get'])->middleware('auth');
-
-    Route::prefix('/bar')->group(function () {
-        Route::get('/sale-logger',[BarSalesLogger::class,'Get'])->middleware('auth');
-        Route::post('/sale-logger',[BarSalesLogger::class,'Post'])->middleware('auth');
-
-        Route::get('/repairs',[Repairs::class,'Get'])->middleware('auth');
-    });
-
-    Route::post('/apply/done', [BarApplication::class, 'Post']);
-
-    Route::prefix('/admin')->group(function (){
-
-        Route::get('/specials',[SpecialsController::class,'Get'])->middleware('auth');
-        Route::post('/specials',[SpecialsController::class,'Post'])->middleware('auth');
-        Route::get('/specials/enable/{id}',[SpecialsController::class,'Enable'])->middleware('auth');
-        Route::get('/specials/disable/{id}',[SpecialsController::class,'Disable'])->middleware('auth');
-
-        Route::get('/bar-settings',[BarSettings::class,'Get'])->middleware('auth');
-        Route::post('/bar-settings',[BarSettings::class,'Post'])->middleware('auth');
-
-        Route::prefix('/applications')->group(function (){
-            Route::get('/',[ApplicationsController::class,'Get'])->middleware('auth');
-            Route::get('/{id}',[ApplicationController::class,'Get'])->middleware('auth');
-            Route::post('/{id}',[ApplicationController::class,'Post'])->middleware('auth');
-        });
-
-    });
+    require __DIR__ . '/bar.php';
 }
 
 if(config('app.siteMode') == "Arcade") {
-    Route::redirect('/', '/dashboard')->middleware('auth');
-    Route::get('/dashboard', [ArcadeDashboard::class, 'Get'])->middleware('auth');
-
-    Route::prefix('/arcade')->group(function () {
-        Route::get('/sale-logger',[ArcadeSalesLogger::class,'Get'])->middleware('auth');
-        Route::post('/sale-logger',[ArcadeSalesLogger::class,'Post'])->middleware('auth');
-
-        Route::get('/repairs',[Repairs::class,'Get'])->middleware('auth');
-    });
-
-    Route::prefix('/admin')->group(function () {
-
-        Route::get('/specials',[SpecialsController::class,'Get'])->middleware('auth');
-        Route::post('/specials',[SpecialsController::class,'Post'])->middleware('auth');
-        Route::get('/specials/enable/{id}',[SpecialsController::class,'Enable'])->middleware('auth');
-        Route::get('/specials/disable/{id}',[SpecialsController::class,'Disable'])->middleware('auth');
-
-        Route::get('/arcade-settings',[ArcadeSettings::class,'Get'])->middleware('auth');
-        Route::post('/arcade-settings',[ArcadeSettings::class,'Post'])->middleware('auth');
-
-        Route::prefix('/applications')->group(function (){
-            Route::get('/',[ApplicationsController::class,'Get'])->middleware('auth');
-            Route::get('/{id}',[ApplicationController::class,'Get'])->middleware('auth');
-            Route::post('/{id}',[ApplicationController::class,'Post'])->middleware('auth');
-        });
-    });
+    require __DIR__ . '/arcade.php';
 }
 
-if(config('app.siteMode') == "Motorcycle Club")
-{
-    Route::get('/dashboard', [MechanicDashboard::class, 'Get'])->middleware('auth');
-    Route::prefix("/storage")->group(function (){
-        Route::get('/',[viewAllWarehousesController::class,'get'])->middleware('auth');
-        Route::get('/{id}',[viewWarehouseController::class,'get'])->middleware('auth');
-    })->middleware('auth');
+if(config('app.siteMode') == "Motorcycle Club") {
+    require __DIR__ . '/motorcycle_club.php';
 }
 
-Route::prefix('/admin')->group(function () {
-
-    Route::get('/add-user', [AddUserController::class, 'Get'])->middleware('auth');
-    Route::post('/add-user', [AddUserController::class, 'Post'])->middleware('auth');
-
-    Route::get('/users', [UsersController::class, 'Get'])->middleware('auth');
-    Route::get('/users/{id}', [EditUserController::class, 'Get'])->middleware('auth');
-    Route::post('/users/{id}', [EditUserController::class, 'Post'])->middleware('auth');
-    Route::get('/settings',[SettingsController::class,'Get'])->middleware('auth');
-    Route::post('/settings',[SettingsController::class,'Post'])->middleware('auth');
-
-});
-
-Route::get('/account/settings',[EditAccountController::class, 'Get'])->middleware('auth');
-Route::post('/account/settings',[EditAccountController::class, 'Post'])->middleware('auth');
-
-/*
-|--------------------------------------------------------------------------
-| Blank Pages
-|--------------------------------------------------------------------------
-|
-*/
-//Route::view('/Horizontal', 'horizontal');
-//Route::view('/Vertical', 'vertical');
-
+if(config('app.siteMode') == "DOJ") {
+    require __DIR__ . '/doj.php';
+}
