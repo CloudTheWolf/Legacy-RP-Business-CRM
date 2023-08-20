@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -25,25 +27,25 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string|null $steamId
  * @property bool $IsAdmin
  * @property bool $disabled
- * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|User query()
- * @method static \Illuminate\Database\Eloquent\Builder|User whereCell($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereCid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereDisabled($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereIsAdmin($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereRole($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereTowID($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereWorkingAs($value)
- * @mixin \Eloquent 
+ * @method static Builder|User newModelQuery()
+ * @method static Builder|User newQuery()
+ * @method static Builder|User query()
+ * @method static Builder|User whereCell($value)
+ * @method static Builder|User whereCid($value)
+ * @method static Builder|User whereCreatedAt($value)
+ * @method static Builder|User whereDisabled($value)
+ * @method static Builder|User whereEmail($value)
+ * @method static Builder|User whereEmailVerifiedAt($value)
+ * @method static Builder|User whereId($value)
+ * @method static Builder|User whereIsAdmin($value)
+ * @method static Builder|User whereName($value)
+ * @method static Builder|User wherePassword($value)
+ * @method static Builder|User whereRememberToken($value)
+ * @method static Builder|User whereRole($value)
+ * @method static Builder|User whereTowID($value)
+ * @method static Builder|User whereUpdatedAt($value)
+ * @method static Builder|User whereWorkingAs($value)
+ * @mixin \Eloquent
  */
 class User extends Authenticatable
 {
@@ -103,7 +105,7 @@ class User extends Authenticatable
      *
      * Overwrite whereOnDuty with correct column name
      * @param  mixed  $value
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
      public static function whereOnDuty($value)
      {
@@ -114,7 +116,7 @@ class User extends Authenticatable
      *
      * Overwrite whereSteamId with correct column name
      * @param  mixed  $value
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public static function whereSteamId($value)
     {
