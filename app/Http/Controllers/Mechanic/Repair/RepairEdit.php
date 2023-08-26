@@ -34,11 +34,21 @@ class RepairEdit extends Controller
 
     public function Post(Request $request,$id)
     {
-        $this->logRepair($id,$request->input('mechanic'),$request->input('customer'),$request->input('vehicle'),$request->input('scrap'),$request->input('aluminium'),$request->input('steel'),$request->input('glass'),$request->input('rubber'),$request->input('FinalCost'));
+        $this->logRepair($id,$request->input('mechanic'),
+            $request->input('customer'),
+            $request->input('vehicle'),
+            $request->input('scrap'),
+            $request->input('aluminium'),
+            $request->input('steel'),
+            $request->input('glass'),
+            $request->input('rubber'),
+            $request->input('advKit'),
+            $request->input('oil'),
+            $request->input('FinalCost'));
         return back()->with(['message' => "Log Updated"]);
     }
 
-    private function logRepair($id,$mechanic,$customer, $vehicle, $scrap, $aluminium, $steel, $glass, $rubber, $total)
+    private function logRepair($id,$mechanic,$customer, $vehicle, $scrap, $aluminium, $steel, $glass, $rubber,$advKit, $oil, $total)
     {
         $repair = RepairLog::whereId($id)->first();
         $repair->mechanic = $mechanic;
@@ -49,6 +59,8 @@ class RepairEdit extends Controller
         $repair->steel_used = $steel;
         $repair->glass_used = $glass;
         $repair->rubber_used = $rubber;
+        $repair->advKit = $advKit;
+        $repair->oil = $oil;
         $repair->cost = $total;
         $repair->save();
     }

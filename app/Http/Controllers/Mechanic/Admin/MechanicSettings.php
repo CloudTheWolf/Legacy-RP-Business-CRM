@@ -25,6 +25,7 @@ class MechanicSettings extends Controller
 
     public function Post(Request $request)
     {
+
         $this->updateSettings("scrap-buy",$request->get('scrap-buy'));
         $this->updateSettings("scrap-sell",$request->get('scrap-sell'));
 
@@ -45,15 +46,19 @@ class MechanicSettings extends Controller
 
         $this->updateSettings("adv-repair-kit-sell",$request->get('adv-repair-kit-sell'));
 
+        $this->updateSettings('oil-sell',$request->get('oil-sell'));
+
+
 
         return back()->with(["message" => "Success"]);
     }
 
     private function updateSettings($setting,$value)
     {
-        $config = Configuration::whereName($setting)->first();
+        $config = Configuration::whereName($setting)->firstOrNew();
+        $config->name = $setting;
         $config->value = $value;
+        $config->group = "mechanic";
         $config->save();
     }
-
 }

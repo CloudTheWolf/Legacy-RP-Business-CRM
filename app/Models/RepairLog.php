@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $steel_used
  * @property int $glass_used
  * @property int $rubber_used
+ * @property int $advKit
+ * @property int $oil
  * @property int $cost
  * @property \Illuminate\Support\Carbon $timestamp
  * @property bool $deleted
@@ -57,6 +59,8 @@ class RepairLog extends Model
         'steel_used',
         'glass_used',
         'rubber_used',
+        'advKit',
+        'oil',
         'cost',
         'timestamp',
         'deleted',
@@ -75,6 +79,8 @@ class RepairLog extends Model
         'steel_used' => 'integer',
         'glass_used' => 'integer',
         'rubber_used' => 'integer',
+        'advKit' => 'integer',
+        'oil' => 'integer',
         'cost' => 'integer',
         'timestamp' => 'datetime',
         'deleted' => 'boolean',

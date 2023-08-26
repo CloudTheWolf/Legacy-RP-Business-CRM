@@ -34,11 +34,21 @@ class RepairLogger extends Controller
 
     public function Post(Request $request)
     {
-        $this->logRepair($request->input('mechanic'),$request->input('customer'),$request->input('vehicle'),$request->input('scrap'),$request->input('aluminium'),$request->input('steel'),$request->input('glass'),$request->input('rubber'),$request->input('FinalCost'));
+        $this->logRepair($request->input('mechanic'),
+            $request->input('customer'),
+            $request->input('vehicle'),
+            $request->input('scrap'),
+            $request->input('aluminium'),
+            $request->input('steel'),
+            $request->input('glass'),
+            $request->input('rubber'),
+            $request->input('advKit'),
+            $request->input('oil'),
+            $request->input('FinalCost'));
         return back()->with(['message' => "Log Added"]);
     }
 
-    private function logRepair($mechanic,$customer, $vehicle, $scrap, $aluminium, $steel, $glass, $rubber, $total)
+    private function logRepair($mechanic,$customer, $vehicle, $scrap, $aluminium, $steel, $glass, $rubber,$advKit, $oil, $total)
     {
         $repair = new RepairLog();
         $repair->mechanic = $mechanic;
@@ -49,6 +59,8 @@ class RepairLogger extends Controller
         $repair->steel_used = $steel;
         $repair->glass_used = $glass;
         $repair->rubber_used = $rubber;
+        $repair->advKit = $advKit;
+        $repair->oil = $oil;
         $repair->cost = $total;
         $repair->save();
 
@@ -100,6 +112,16 @@ class RepairLogger extends Controller
                             [
                                 "name" => "Rubber Used",
                                 "value"=> $rubber,
+                                "inline" => true
+                            ],
+                            [
+                                "name" => "Adv Repair Kits Sold",
+                                "value"=> $advKit,
+                                "inline" => true
+                            ],
+                            [
+                                "name" => "Motor Oil",
+                                "value"=> $oil,
                                 "inline" => true
                             ],
                             [

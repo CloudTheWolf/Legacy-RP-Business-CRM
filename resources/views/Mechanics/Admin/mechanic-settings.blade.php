@@ -132,6 +132,13 @@
                                     </div>
                                 </div>
                                 <hr class="form-control-separator">
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label for="app-name">Motor Oil Price</label>
+                                        <input id="oil-sell" name="oil-sell" class="form-control" type="text" value="{{Config('app.oil-sell') ?? null}}" placeholder="600" autocomplete="off">
+                                    </div>
+                                </div>
+                                <hr class="form-control-separator">
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <button type="submit" class="btn btn-outline-success col-md-12"><span class="material-symbols-outlined">save</span>Save</button>
