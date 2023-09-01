@@ -164,7 +164,7 @@
                                 <label for="vehicle" class="form-label">Vehicle</label>
                                 <div class="input">
                                     <select name="vehicle" id="select2Basic" class="vehicle" style="width: 100% !important;" required>
-                                        <option selected disabled>--- Please Select ---</option>
+                                        <option selected value="No Vehicle Specified">Unknown / No Vehicle</option>
                                         <optgroup label="Generic Types">
                                             <option value="Boat">Boat</option>
                                             <option value="Commercial">Commercial</option>
@@ -217,35 +217,35 @@
                             <div id="scrapDiv" class="col-2">
                                 <label for="scrapCost" class="form-label">Scrap</label>
                                 <div class="input">
-                                    <input type="number" min="0" class="form-control" id="scrap" name="scrap" onchange="multiply(this.value,{!! Config('app.scrap-sell') !!},'scrapCost')" value="0" />
+                                    <input type="number" min="0" class="form-control" id="scrap" name="scrap" onchange="multiply(this.value,{!! Config('app.scrap-sell') !!},'scrapCost')" value="0" required/>
                                     <input type="hidden" class="form-control" id="scrapCost" value="0" required="required" onchange="finalValue()" onClick="this.setSelectionRange(0, this.value.length)" />
                                 </div>
                             </div>
                             <div id="alumDiv" class="col-2">
                                 <label for="aluminium" class="form-label">Alum</label>
                                 <div class="input">
-                                    <input type="number" min="0" class="form-control" id="aluminium" name="aluminium" value="0" onchange="multiply(this.value,{!! Config('app.aluminium-sell') !!},'alumCost')"/>
+                                    <input type="number" min="0" class="form-control" id="aluminium" name="aluminium" value="0" onchange="multiply(this.value,{!! Config('app.aluminium-sell') !!},'alumCost')" required/>
                                     <input type="hidden" class="form-control" id="alumCost" value="0" required="required" onchange="finalValue()" />
                                 </div>
                             </div>
                             <div id="steelDiv" class="col-2">
                                 <label for="inputConfirmPassword" class="form-label">Steel</label>
                                 <div class="input">
-                                    <input type="number" min="0" class="form-control" id="steel" name="steel" value="0" onchange="multiply(this.value,{!! Config('app.steel-sell') !!},'steelCost')"/>
+                                    <input type="number" min="0" class="form-control" id="steel" name="steel" value="0" onchange="multiply(this.value,{!! Config('app.steel-sell') !!},'steelCost')" required/>
                                     <input type="hidden" class="form-control" id="steelCost" value="0" required="required" onchange="finalValue()" />
                                 </div>
                             </div>
                             <div id="glassDiv" class="col-2">
                                 <label for="inputConfirmPassword" class="form-label">Glass</label>
                                 <div class="input">
-                                    <input type="number" min="0" class="form-control" id="glass" name="glass" value="0" onchange="multiply(this.value,{!! Config('app.glass-sell') !!},'glassCost')"/>
+                                    <input type="number" min="0" class="form-control" id="glass" name="glass" value="0" onchange="multiply(this.value,{!! Config('app.glass-sell') !!},'glassCost')" required/>
                                     <input type="hidden" class="form-control" id="glassCost" value="0" required="required" onchange="finalValue()" />
                                 </div>
                             </div>
                             <div id="rubberDiv" class="col-2">
                                 <label for="inputConfirmPassword" class="form-label">Rubber</label>
                                 <div class="input">
-                                    <input type="number" min="0" class="form-control" id="rubber" name="rubber" value="0" onchange="multiply(this.value,{!! Config('app.rubber-sell') !!},'rubberCost')"/>
+                                    <input type="number" min="0" class="form-control" id="rubber" name="rubber" value="0" onchange="multiply(this.value,{!! Config('app.rubber-sell') !!},'rubberCost')" required/>
                                     <input type="hidden" class="form-control" id="rubberCost" value="0" required="required" onchange="finalValue()" />
                                 </div>
                             </div>
@@ -256,14 +256,14 @@
                             <div id="repairKitDiv" class="col-3">
                                 <label for="inputConfirmPassword" class="form-label">Adv. Repair Kit</label>
                                 <div class="input">
-                                    <input type="number" min="0" class="form-control" id="advKit" name="advKit" value="0" onchange="multiply(this.value,{!! Config('app.adv-repair-kit-sell') !!},'advKitCost')"/>
+                                    <input type="number" min="0" class="form-control" id="advKit" name="advKit" value="0" onchange="multiply(this.value,{!! Config('app.adv-repair-kit-sell') !!},'advKitCost')" required/>
                                     <input type="hidden" class="form-control" id="advKitCost" value="0" required="required" onchange="finalValue()" />
                                 </div>
                             </div>
                             <div id="oilDiv" class="col-2">
                                 <label for="inputConfirmPassword" class="form-label">Motor Oil</label>
                                 <div class="input">
-                                    <input type="number" min="0" class="form-control" id="oil" name="oil" value="0" onchange="multiply(this.value,{!! Config('app.oil-sell') ?? 700 !!},'oilCost')"/>
+                                    <input type="number" min="0" class="form-control" id="oil" name="oil" value="0" onchange="multiply(this.value,{!! Config('app.oil-sell') ?? 700 !!},'oilCost')" required/>
                                     <input type="hidden" class="form-control" id="oilCost" value="0" required="required" onchange="finalValue()" />
                                 </div>
                             </div>
