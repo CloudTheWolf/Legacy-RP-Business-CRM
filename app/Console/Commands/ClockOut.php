@@ -36,7 +36,7 @@ class ClockOut extends Command
         {
             $this->info("Starting Auto Clockout Process");
             $usersOnDuty = User::whereOnDuty(1)->get();
-            $usersInCity = Http::withToken(env("OP_FW_API_KEY"))->acceptJson()->get(env("API_BASE_URI")."/op-framework/users.json")->json()["data"];
+            $usersInCity = Http::withToken(env("OP_FW_API_KEY"))->acceptJson()->get(env("API_BASE_URI")."/op-framework/players.json")->json()["data"];
 
             foreach ($usersOnDuty as $user) {
                 $this->info("Checking If ".$user->name." Is still in the city");
