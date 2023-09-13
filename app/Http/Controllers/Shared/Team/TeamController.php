@@ -16,7 +16,7 @@ class TeamController extends Controller
     {
         $users = User::whereDisabled(0)->get();
         $onlineUsers = $this->getOnlineUsers();
-        
+
         return view('Shared.Team.view-team',compact('users','onlineUsers'));
     }
 
@@ -24,9 +24,11 @@ class TeamController extends Controller
     {
         $client = new Client(['base_uri' => env("API_BASE_URI")]);
         try {
-            $response = $client->request('GET', '/op-framework/users.json');
+            $response = $client->request('GET', '/op-framework/players.json');
         } catch (GuzzleException $e) {
-            return $e;
+            $error = array();
+            $error['data'] = array();
+            return $error;
         }
 
 
