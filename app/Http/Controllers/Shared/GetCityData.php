@@ -10,7 +10,7 @@ class GetCityData
     {
         try {
             $client = new Client(['base_uri' => env("API_BASE_URI"),'timeout' => 5]);
-            $response = $client->request('GET', '/op-framework/users.json');
+            $response = $client->request('GET', '/op-framework/players.json');
             return count(json_decode($response->getBody())->data);
         }
         catch(\Exception $e)
