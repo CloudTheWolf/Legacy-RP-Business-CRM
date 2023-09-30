@@ -21,5 +21,5 @@ return [
     /*
      * Is using https ?
      */
-    'https' => true,
+    'https' => env("OAUTH_HTTPS",true),
 ];
