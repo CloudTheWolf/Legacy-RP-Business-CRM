@@ -88,24 +88,24 @@
                         </div>
                     </div>
                 @endif
-                <!--<form method="post" id="loginForm" class="tooltip-end-bottom" novalidate>-->
-                    {{ Form::open(array('url' => 'login/', 'id' => 'loginForm', 'class' => 'tooltip-end-bottom', 'novalidate' => 'novalidate')) }}
-                    <div class="mb-3 filled form-group tooltip-end-top">
-                        <i data-acorn-icon="user"></i>
-                        <input class="form-control" placeholder="Username" name="username" />
-                    </div>
-                    <div class="mb-3 filled form-group tooltip-end-top">
-                        <i data-acorn-icon="lock-off"></i>
-                        <input class="form-control pe-7" name="password" type="password" placeholder="Password" />
-                    </div>
-                    <div class="mb-3 filled form-group tooltip-end-top">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" name="rememberMe" id="flexSwitchCheckChecked" checked>
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
+                    <form id="loginForm" class="tooltip-end-bottom" novalidate="novalidate" method="post">
+                        @csrf
+                        <div class="mb-3 filled form-group tooltip-end-top">
+                            <i data-acorn-icon="user"></i>
+                            <input class="form-control" placeholder="Username" name="username" />
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-lg btn-primary" style="width: 100% !important;">Login...</button>
-                    {{Form::close()}}
+                        <div class="mb-3 filled form-group tooltip-end-top">
+                            <i data-acorn-icon="lock-off"></i>
+                            <input class="form-control pe-7" name="password" type="password" placeholder="Password" />
+                        </div>
+                        <div class="mb-3 filled form-group tooltip-end-top">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="rememberMe" id="flexSwitchCheckChecked" checked>
+                                <label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-primary" style="width: 100% !important;">Login...</button>
+                    </form>
                     <hr>
 
                     <a href="{{route("auth.steam")}}" class="btn btn-lg btn-outline-info" style="width: 100% !important;"><i class="lni lni-steam"></i> Steam Login</a>
