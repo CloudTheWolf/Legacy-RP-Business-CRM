@@ -108,7 +108,14 @@
                     </form>
                     <hr>
 
-                    <a href="{{route("auth.steam")}}" class="btn btn-lg btn-outline-info" style="width: 100% !important;"><i class="lni lni-steam"></i> Steam Login</a>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="{{route("auth.steam")}}" class="btn btn-lg btn-outline-quaternary" style="width: 100% !important;"><i class="lni lni-steam"></i> Steam</a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{{route("auth.discord")}}" class="btn btn-lg btn-outline-primary" style="width: 100% !important;"><i class="lni lni-discord"></i> Discord</a>
+                        </div>
+                    </div>
 
             </div>
         </div>
