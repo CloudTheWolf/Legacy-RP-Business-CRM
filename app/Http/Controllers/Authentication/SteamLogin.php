@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Authentication;
 
 use App\Http\Controllers\Controller;
-use App\Steam\SteamAuth;
+use App\ThirdPartyAuth\SteamAuth;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -30,6 +31,9 @@ class SteamLogin extends Controller
         return $this->steam->redirect();
     }
 
+    /**
+     * @throws GuzzleException
+     */
     function handle(Request $request)
     {
         if (!$this->steam->validate()) {

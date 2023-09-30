@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Steam;
+namespace App\ThirdPartyAuth;
 
 use Illuminate\Support\Fluent;
 

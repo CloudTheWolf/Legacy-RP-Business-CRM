@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Steam;
+namespace App\ThirdPartyAuth;
 
-use App\Interfaces\SteamAuthInterface;
+use App\Contracts\SteamAuthInterface;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
