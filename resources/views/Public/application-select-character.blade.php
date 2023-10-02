@@ -89,12 +89,15 @@
                     </div>
                 @endif
                     <h5 class="card-title">Apply As...</h5>
-                    {{ Form::open(array('id'=>'apply', 'class' => 'row g-3')) }}
-                    <label for="cid">Enter your Character ID (Use <code>/info</code> in city to get this)</label>
-                    <input type="hidden" value="{{Session::get('steamID')}}" name="steamId">
-                    <input type="text" placeholder="53676" name="cid">
-                    <button type="submit" class="btn btn-primary">Continue...</button>
-                    {{Form::close()}}
+                    <form method="post" id="apply" class="row g-3" autocomplete="off">
+                        @csrf
+                        <label for="cid">Enter your Character ID (Use <code>/info</code> in city to get this)</label>
+                        <input type="hidden" value="{{$steamId}}" name="steamId">
+                        <input type="hidden" value="{{$discordId}}" name="discordId">
+                        <input type="hidden" value="{{$discordName}}" name="discordName">
+                        <input type="text" placeholder="53676" name="cid">
+                        <button type="submit" class="btn btn-primary">Continue...</button>
+                    </form>
             </div>
         </div>
     </div>

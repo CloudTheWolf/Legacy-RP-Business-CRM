@@ -19,6 +19,12 @@ return [
     'client_secret' => env('DISCORD_SECRET', ''),
 
     /*
+     * Bot Token, Allows for adding users to server
+     */
+
+    'bot_token' => env('DISCORD_TOKEN'),
+
+    /*
      * Is using https ?
      */
     'https' => env("OAUTH_HTTPS",true),

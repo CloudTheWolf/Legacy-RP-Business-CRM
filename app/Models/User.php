@@ -99,7 +99,7 @@ class User extends Authenticatable
         'onDuty' => 'boolean',
         'cid' => 'integer',
         'steamId' => 'string',
-        'discord' => 'unsignedBigInteger',
+        'discord' => 'string',
         'IsAdmin' => 'boolean',
         'disabled' => 'boolean',
     ];

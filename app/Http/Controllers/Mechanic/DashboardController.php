@@ -19,7 +19,8 @@ class DashboardController extends Controller
         $onDutyList = User::whereOnDuty('1')->select(["name","workingAs"])->get();
 
         //Get In City Count
-        $citizens = GetCityData::GetInCityCount();
+        //$citizens = GetCityData::GetInCityCount();
+
         // Calculate Income Values
         $month = Carbon::now()->format('M');
         $year = $month == "Jan" ? "YEAR(CURRENT_TIMESTAMP) -1" : "YEAR(CURRENT_TIMESTAMP)";
@@ -71,7 +72,7 @@ class DashboardController extends Controller
         $lNov = $this->GetChartData(11,false);
         $lDec = $this->GetChartData(12,false);
 
-        return view("Mechanics.dashboard",compact("onDuty","onDutyList","citizens","totalCount",
+        return view("Mechanics.dashboard",compact("onDuty","onDutyList","totalCount",
             "totalIncome","lastMonthCount","lastMonthIncome","thisMonthCount","thisMonthIncome","pie","pie2","pie3",
             "tJan","tFeb","tMar","tApr","tMay","tJun","tJul","tAug","tSep","tOct","tNov","tDec",
             "lJan","lFeb","lMar","lApr","lMay","lJun","lJul","lAug","lSep","lOct","lNov","lDec"));

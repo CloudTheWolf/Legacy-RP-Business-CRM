@@ -88,7 +88,7 @@ class SteamAuth implements  SteamAuthInterface
             url($redirect_url, [], Config::get('steam-auth.https'))
         );
 
-        $this->guzzleClient = new GuzzleClient(['verify' => env('OAUTH_VERIFY_HTTPS',true)]);
+        $this->guzzleClient = new GuzzleClient(['verify' => env('VERIFY_HTTPS',true)]);
     }
 
     /**

@@ -155,7 +155,8 @@ changeClasses('#sp_{{$special->id}}Div',"6",false)
                         <h4>Sales Calculator</h4>
                     </div>
                     <div class="card-body">
-                        {{ Form::open(array('class' => 'row g-3',"autocomplete"=>"off")) }}
+                        <form method="post" class="row g-3" autocomplete="off">
+                            @csrf
                         <input autocomplete="false" name="hidden" type="text" style="display:none;">
 
                         <div class="col-md-6">
@@ -287,7 +288,7 @@ changeClasses('#sp_{{$special->id}}Div',"6",false)
                             <div class="col-12">
                                 <button type="submit" class="btn btn-success px-5 col-md-12">Log Sale</button>
                             </div>
-                        {{Form::close()}}
+                        </form>
                     </div>
                 </div>
             </div>

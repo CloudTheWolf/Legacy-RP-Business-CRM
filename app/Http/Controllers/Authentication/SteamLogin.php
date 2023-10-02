@@ -40,7 +40,7 @@ class SteamLogin extends Controller
             return redirect((route("auth.steam")));
         }
 
-        if (($request->getPathInfo()) == "/apply/auth/steam/handle") {
+        if (($request->getPathInfo()) == "/apply/auth/steam/handle") {;
             return redirect(url('/apply/select-profile'))->with('steamID', 'steam:' . dechex((int)$this->steam->getUserInfo()->steamID64));
         }
 

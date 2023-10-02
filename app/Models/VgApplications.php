@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $name
  * @property string $discord
+ * @property int|null $discordId
  * @property string $steam
  * @property int $cid
  * @property string $cell
@@ -54,6 +55,7 @@ class VgApplications extends Model
     protected $fillable = [
         'name',
         'discord',
+        'discordId',
         'steam',
         'cid',
         'cell',
@@ -74,6 +76,7 @@ class VgApplications extends Model
         'id' => 'integer',
         'name' => 'string',
         'discord' => 'string',
+        'discordId' => 'string',
         'steam' => 'string',
         'cid' => 'integer',
         'cell' => 'string',

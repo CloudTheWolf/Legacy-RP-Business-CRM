@@ -77,7 +77,8 @@
                         </div>
                     @endif
                     <div class="card-body">
-                        {{Form::open()}}
+                        <form method="post">
+                        @csrf
                         <hr class="form-control-separator">
                         <div class="row">
                             <div class="form-group col-md-12">
@@ -159,7 +160,7 @@
                                 <button type="submit" class="btn btn-outline-success col-md-12"><span class="material-symbols-outlined">save</span>Save</button>
                             </div>
                         </div>
-                        {{Form::close()}}
+                        </form>
                     </div>
                 </div>
             </div>

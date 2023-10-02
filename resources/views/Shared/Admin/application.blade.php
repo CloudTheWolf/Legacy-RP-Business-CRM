@@ -44,7 +44,8 @@
                             <h4>Job Application | {{$application->name}}</h4>
                         </div>
                         <div class="card-body">
-                            {{Form::open()}}
+                            <form method="post">
+                            @csrf
                             <input name="id" type="hidden" value="{!! $application->id !!}">
                             <h5 class="text-center">Details</h5>
                             <hr class="form-control-separator">
@@ -64,7 +65,13 @@
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <label for="app-name" class="form-label" >Discord</label>
-                                    <input type="text" name="discord" class="form-control" id="inputEmailAddress" value="{{str_replace(' ','.',$application->discord)}}" readonly="readonly" required>
+                                    <input type="text" name="discord" class="form-control" id="inputEmailAddress" value="{{str_replace(' ','.',$application->discord)}}" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label for="app-name" class="form-label" >Discord ID</label>
+                                    <input type="text" name="discordId" class="form-control" id="inputEmailAddress" value="{{$application->discordId}}" readonly="readonly">
                                 </div>
                             </div>
                             <div class="row">
@@ -169,7 +176,7 @@
                                     <button type="submit" class="btn btn-outline-success col-md-12"><span class="material-symbols-outlined">save</span>Save</button>
                                 </div>
                             </div>
-                            {{Form::close()}}
+                            </form>
                         </div>
                     </div>
                 </div>

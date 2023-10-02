@@ -54,7 +54,8 @@
                                     </div>
                                 </div>
                             @endif
-                            {{Form::open()}}
+                            <form method="post">
+                            @csrf
                             <h5>Site Settings</h5>
                             <hr class="form-control-separator">
                             <div class="row">
@@ -184,7 +185,7 @@
                                     <button type="submit" class="btn btn-outline-success col-md-12"><span class="material-symbols-outlined">save</span>Save</button>
                                 </div>
                             </div>
-                            {{Form::close()}}
+                            </form>
                         </div>
                     </div>
                 </div>

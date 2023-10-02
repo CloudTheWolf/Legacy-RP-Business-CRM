@@ -116,8 +116,9 @@
                         <li>Understand that, unless otherwise stated, you will start as a Tow Driver</li>
                     </ul>
                     <hr>
-                    {{ Form::open(array('id'=>'apply','url' => 'apply/done', 'class' => 'row g-3 needs-validation', '')) }}
-                    {{ csrf_field() }}
+                    <form id="apply" method="post" action="apply/done" class="row g-3 needs-validation">
+
+                    @csrf
                     <div class="form-group col-md-3">
 
                         <label for="name" class="form-label">Your Timezone</label>
@@ -135,14 +136,19 @@
                     </div>
                     <hr>
                     <div class="form-group col-md-3">
-                        <label for="name" class="form-label">Your Email (Discord Name with)</label>
-                        <input type="text" class="form-control" name="discord" placeholder="John" required aria-required="true">
+                        <label for="name" class="form-label">Your Email (Discord Name)</label>
+                        <input type="text" class="form-control" name="discord" value="{!! $discordName !!}" placeholder="John" readonly>
+                        <div class="invalid-feedback">This is required.</div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="name" class="form-label">Email ID</label>
+                        <input type="text" class="form-control" name="discordId" value="{!! $discordId !!}" readonly>
                         <div class="invalid-feedback">This is required.</div>
                     </div>
                     <hr>
                     <div class="form-group col-md-3">
                         <label for="name" class="form-label">Your Passport ID (Steam FiveM ID)</label>
-                        <input type="text" readonly class="form-control" name="steam" placeholder="steam:112233445abc6de" pattern="^steam:+[a-zA-Z0-9]{13,16}" required aria-required="true" value="{!! $steamID !!}">
+                        <input type="text" readonly class="form-control" name="steam" placeholder="steam:112233445abc6de" pattern="^steam:+[a-zA-Z0-9]{13,16}" value="{!! $steamID !!}">
                         <!--sub class="form-help"><a href="https://steamdb.info/calculator/" target="_blank">Click Here</a> to find this. Enter your Steam Username and then copy the FiveM value under SteamID</sub>-->
                         <div class="invalid-feedback">
                             Invalid Steam FiveM ID
@@ -205,7 +211,7 @@
                         </div>
                     </div>
 
-                    {{Form::submit('Submit Application!',array('class'=>'btn btn-success'))}}
+                    <button type="submit" class="btn btn-success">Submit Application</button>
                     </form>
 
             </div>

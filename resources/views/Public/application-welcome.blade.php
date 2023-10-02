@@ -88,7 +88,7 @@
                         </div>
                     </div>
                 @endif
-                <a href="{{route("apply.auth.steam")}}" class="btn btn-lg btn-outline-info" style="width: 100% !important;"><i class="lni lni-steam"></i> Steam Login</a>
+                <a href="{{route("apply.auth.discord")}}" class="btn btn-lg btn-outline-info" style="width: 100% !important;"><i class="lni lni-discord"></i> Discord Login</a>
             </div>
         </div>
     </div>
