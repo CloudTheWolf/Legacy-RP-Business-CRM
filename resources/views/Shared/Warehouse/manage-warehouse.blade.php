@@ -66,7 +66,9 @@
                         <h4>{{$storage->name}}</h4>
                     </div>
                     <div class="card-body">
-                        {{ Form::open(array('class' => 'row g-3',"autocomplete"=>"off")) }}
+
+                        <form method="post" class="row g-3" autocomplete="off">
+                        @csrf
                         <div class="col-md-9">
                             <label for="item">Item</label>
                             <select name="item" id="select2Basic" class="vehicle" style="width: 100% !important;" required>
@@ -83,7 +85,7 @@
                         <div class="col-md-12">
                             <button type="submit" class="btn btn-primarytt col-md-12">Add Item</button>
                         </div>
-                        {{Form::close()}}
+                        </form>
                     </div>
                 </div>
             </div>

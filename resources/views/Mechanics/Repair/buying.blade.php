@@ -147,7 +147,8 @@
                         <h4>Purchase Calculator</h4>
                     </div>
                     <div class="card-body">
-                        {{ Form::open(array('class' => 'row g-3', 'name'=>'buy')) }}
+                        <form class="row g-3" name="buy">
+                            @csrf
                         <div id="scrapDiv" class="col-2">
                             <label for="inputEmailAddress" class="form-label">Scrap</label>
                             <div class="input-group">
@@ -196,7 +197,7 @@
                         <div class="col-md-6">
                             <a id="reset" class="btn btn-outline-danger px-5" style="width: 100%"> <span class="material-symbols-outlined">delete_sweep</span>@lang('app.clearPurchase')</a>
                         </div>
-                        {{Form::close()}}
+                        </form>
                     </div>
                 </div>
             </div>

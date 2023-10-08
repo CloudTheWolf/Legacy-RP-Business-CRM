@@ -16,7 +16,7 @@ class Select2Controls {
     }
 
     this._initSelect2Basic();
-    this._initSelect2Basic2();
+    //this._initSelect2Basic2();
     this._initSelect2Multiple();
     this._initTags();
     this._initSearchHidden();

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Brick\Math\BigInteger;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -25,6 +26,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property bool|null $onDuty
  * @property int|null $cid
  * @property string|null $steamId
+ * @property int|null $discord
  * @property bool $IsAdmin
  * @property bool $disabled
  * @method static Builder|User newModelQuery()
@@ -73,6 +75,7 @@ class User extends Authenticatable
         'onDuty',
         'cid',
         'steamId',
+        'discord',
         'IsAdmin',
         'disabled',
     ];
@@ -96,6 +99,7 @@ class User extends Authenticatable
         'onDuty' => 'boolean',
         'cid' => 'integer',
         'steamId' => 'string',
+        'discord' => 'string',
         'IsAdmin' => 'boolean',
         'disabled' => 'boolean',
     ];
@@ -121,6 +125,17 @@ class User extends Authenticatable
     public static function whereSteamId($value)
     {
         return static::where('steamId','=',$value);
+    }
+
+    /**
+     *
+     * Search user based on Discord ID
+     * @param $value
+     * @return Builder
+     */
+    public static function whereDiscord($value)
+    {
+        return static::where('discord','=',$value);
     }
 
 }

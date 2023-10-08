@@ -44,3 +44,5 @@
         background: #555;
     }
 </style>
+
+@livewireStyles

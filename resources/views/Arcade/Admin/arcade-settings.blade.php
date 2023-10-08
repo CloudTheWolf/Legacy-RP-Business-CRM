@@ -54,7 +54,8 @@
                                     </div>
                                 </div>
                             @endif
-                            {{Form::open()}}
+                                <form method="post">
+                                    @csrf
                                 <hr class="form-control-separator">
                                 <h4>Drink Prices</h4>
                                 <hr class="form-control-separator">
@@ -176,7 +177,7 @@
                                     <button type="submit" class="btn btn-outline-success col-md-12"><span class="material-symbols-outlined">save</span>Save</button>
                                 </div>
                             </div>
-                            {{Form::close()}}
+                            </form>
                         </div>
                     </div>
                 </div>

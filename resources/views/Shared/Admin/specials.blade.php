@@ -77,7 +77,8 @@
                                     </table>
                                 </div>
                                 <hr>
-                            {{Form::open()}}
+                            <form method="post">
+                                @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5>Add Special</h5>
@@ -101,7 +102,7 @@
                                 </div>
 
                             </div>
-                            {{Form::close()}}
+                            </form>
                         </div>
                     </div>
                 </div>

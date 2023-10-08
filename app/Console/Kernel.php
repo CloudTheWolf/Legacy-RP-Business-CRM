@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\RefreshDiscordTokens;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -29,6 +30,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('staff:clockout')->everyFiveMinutes();
         $schedule->command('staff:updatetime')->everyMinute();
         $schedule->command('staff:synctow')->everyMinute();
+        $schedule->job(new RefreshDiscordTokens)->hourly();
     }
 
     /**

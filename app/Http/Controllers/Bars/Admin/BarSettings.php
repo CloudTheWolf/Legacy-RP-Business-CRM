@@ -32,7 +32,9 @@ class BarSettings extends Controller
         $this->updateSettings("vodka-sell",$request->get('vodka-sell'));
         $this->updateSettings("absinthe-sell",$request->get('absinthe-sell'));
         $this->updateSettings("whiskey-sell",$request->get('whiskey-sell'));
-
+        $this->updateSettings('rum-sell', $request->get('rum-sell'));
+        $this->updateSettings('coke-sell', $request->get('coke-sell'));
+        $this->updateSettings('smore-sell', $request->get('smore-sell'));
 
         return back()->with(["message" => "Success"]);
     }
@@ -40,8 +42,10 @@ class BarSettings extends Controller
     private function updateSettings($setting,$value)
     {
 
-        $config = Configuration::whereName($setting)->first();
+        $config = Configuration::whereName($setting)->firstorNew();
+        $config->name = $setting;
         $config->value = $value;
+        $config->group = 'BarClub';
         $config->save();
     }
 

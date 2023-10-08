@@ -1,8 +1,8 @@
 @php
     //$html_tag_data = ["override"=>'{ "attributes" : { "placement" : "horizontal", "layout":"boxed", "color": "dark-green"  }, "storagePrefix" : "legacy-rp", "showSettings" : true }'];
     $html_tag_data = [];
-    $title = 'Login Page';
-    $description = 'Login Page'
+    $title = 'Job Application - Get Started';
+    $description = ''
 @endphp
 @extends('layout_full',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 @section('css')
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                 @endif
-                <a href="{{route("apply.auth.steam")}}" class="btn btn-lg btn-outline-info" style="width: 100% !important;"><i class="lni lni-steam"></i> Steam Login</a>
+                <a href="{{route("apply.auth.discord")}}" class="btn btn-lg btn-outline-info" style="width: 100% !important;"><i class="lni lni-discord"></i> Discord Login</a>
             </div>
         </div>
     </div>

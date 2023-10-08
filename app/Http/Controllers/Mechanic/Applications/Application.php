@@ -23,6 +23,7 @@ class Application extends Controller
 
         $application->name = $request->input('name');
         $application->discord = $request->input('discord');
+        $application->discordId = $request->input('discordId');
         $application->steam = $request->input('steam');
         $application->cid = $request->input('cid');
         $application->cell = $request->input('cell');
@@ -33,7 +34,7 @@ class Application extends Controller
         $application->save();
 
         if(config('app.postJobApplications')) {
-            $x = Http::post(config('app.jobWebhook'), [
+            Http::withoutVerifying()->post(config('app.jobWebhook'), [
                 "username" => "Application From: " . $request->input('name'),
                 "embeds" => [
                     [

@@ -13,15 +13,26 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
-        });
+        if(!Schema::hasTable('users')) {
+            Schema::create('users', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->string('email')->unique('users_email_unique');
+                $table->string('cell', 9);
+                $table->string('towID')->nullable();
+                $table->string('role', 100)->default('');
+                $table->string('workingAs', 100)->default('');
+                $table->timestamp('email_verified_at')->default('current_timestamp()');
+                $table->string('password');
+                $table->rememberToken();
+                $table->timestamps()->default('current_timestamp()');
+                $table->boolean('onDuty')->default(0);
+                $table->integer('cid')->nullable();
+                $table->string('steamId', 100)->nullable();
+                $table->boolean('IsAdmin')->default(0);
+                $table->boolean('disabled')->default(0);
+            });
+        }
     }
 
     /**

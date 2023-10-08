@@ -54,7 +54,8 @@
                                     </div>
                                 </div>
                             @endif
-                            {{Form::open()}}
+                            <form method="post" >
+                            @csrf
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <label for="app-name">Beer Price</label>
@@ -128,7 +129,7 @@
                                     <button type="submit" class="btn btn-outline-success col-md-12"><span class="material-symbols-outlined">save</span>Save</button>
                                 </div>
                             </div>
-                            {{Form::close()}}
+                            </form>
                         </div>
                     </div>
                 </div>

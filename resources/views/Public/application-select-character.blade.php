@@ -1,8 +1,8 @@
 @php
     //$html_tag_data = ["override"=>'{ "attributes" : { "placement" : "horizontal", "layout":"boxed", "color": "dark-green"  }, "storagePrefix" : "legacy-rp", "showSettings" : true }'];
     $html_tag_data = [];
-    $title = 'Login Page';
-    $description = 'Login Page'
+    $title = 'Job Application - Enter CID';
+    $description = ''
 @endphp
 @extends('layout_full',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 @section('css')
@@ -69,8 +69,8 @@
                 </a>
             </div>
             <div class="mb-5">
-                <h2 class="cta-1 mb-0 text-primary">Welcome,</h2>
-                <h2 class="cta-1 text-primary">let's get started!</h2>
+                <h2 class="cta-1 mb-0 text-primary">Provide your CID</h2>
+                <h2 class="cta-1 text-primary">Please enter your CID</h2>
             </div>
             <div class="mb-5">
 
@@ -89,12 +89,15 @@
                     </div>
                 @endif
                     <h5 class="card-title">Apply As...</h5>
-                    {{ Form::open(array('id'=>'apply', 'class' => 'row g-3')) }}
-                    <label for="cid">Enter your Character ID (Use <code>/info</code> in city to get this)</label>
-                    <input type="hidden" value="{{Session::get('steamID')}}" name="steamId">
-                    <input type="text" placeholder="53676" name="cid">
-                    <button type="submit" class="btn btn-primary">Continue...</button>
-                    {{Form::close()}}
+                    <form method="post" id="apply" class="row g-3" autocomplete="off">
+                        @csrf
+                        <label for="cid">Enter your Character ID (Use <code>/info</code> in city to get this)</label>
+                        <input type="hidden" value="{{$steamId}}" name="steamId">
+                        <input type="hidden" value="{{$discordId}}" name="discordId">
+                        <input type="hidden" value="{{$discordName}}" name="discordName">
+                        <input type="text" placeholder="53676" name="cid">
+                        <button type="submit" class="btn btn-primary">Continue...</button>
+                    </form>
             </div>
         </div>
     </div>

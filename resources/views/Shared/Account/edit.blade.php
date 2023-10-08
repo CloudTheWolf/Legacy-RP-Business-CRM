@@ -33,6 +33,7 @@
         </div>
         <!-- Title and Top Buttons End -->
 
+
         <!-- Content Start -->
         <div class="row g-4">
             <div class="col-2 col-sm-2 col-lg-2">
@@ -56,7 +57,17 @@
                         </div>
                     @endif
                     <div class="card-body">
-                        {{Form::open()}}
+                        @if(is_null($user->discord) || $user->discord == 0)
+                            <div class="col-md-12">
+                                <a href="{{route("auth.discord-profile-link")}}" class="btn btn-lg btn-primary" style="width: 100% !important;"><i class="lni lni-discord"></i> Link Discord</a>
+                            </div>
+                        @else
+                            <div class="col-md-12">
+                                <p class="alert alert-success" style="width: 100% !important;"><i class="lni lni-discord"></i> Discord Linked</p>
+                            </div>
+                        @endif
+                        <form method="post">
+                        @csrf
                         <hr class="form-control-separator">
                         <div class="row">
                             <div class="form-group col-md-12">
@@ -110,7 +121,7 @@
                                 <button type="submit" class="btn btn-outline-success col-md-12"><span class="material-symbols-outlined">save</span>Save</button>
                             </div>
                         </div>
-                        {{Form::close()}}
+                        </form>
                     </div>
                 </div>
             </div>

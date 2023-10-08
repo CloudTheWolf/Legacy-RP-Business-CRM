@@ -21,6 +21,7 @@
 <script src="/js/scripts.js"></script>
 <!-- Page Specific Scripts End -->
 
+@livewireScripts
 
 <script>
     $(function () {

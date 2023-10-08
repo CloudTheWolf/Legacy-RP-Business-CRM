@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $name
  * @property string $discord
+ * @property int|null $discordId
  * @property string $steam
  * @property int $cid
  * @property string $cell
@@ -19,21 +21,21 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool $gang
  * @property bool $state
  * @property \Illuminate\Support\Carbon $timestamp
- * @method static \Illuminate\Database\Eloquent\Builder|Applications newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Applications newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Applications query()
- * @method static \Illuminate\Database\Eloquent\Builder|Applications whereAbout($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Applications whereCell($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Applications whereCid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Applications whereDiscord($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Applications whereGang($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Applications whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Applications whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Applications whereRecord($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Applications whereSteam($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Applications whereTimestamp($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Applications whereWhy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Applications whereState($value)
+ * @method static Builder|Applications newModelQuery()
+ * @method static Builder|Applications newQuery()
+ * @method static Builder|Applications query()
+ * @method static Builder|Applications whereAbout($value)
+ * @method static Builder|Applications whereCell($value)
+ * @method static Builder|Applications whereCid($value)
+ * @method static Builder|Applications whereDiscord($value)
+ * @method static Builder|Applications whereGang($value)
+ * @method static Builder|Applications whereId($value)
+ * @method static Builder|Applications whereName($value)
+ * @method static Builder|Applications whereRecord($value)
+ * @method static Builder|Applications whereSteam($value)
+ * @method static Builder|Applications whereTimestamp($value)
+ * @method static Builder|Applications whereWhy($value)
+ * @method static Builder|Applications whereState($value)
  * @mixin \Eloquent
  */
 class Applications extends Model
@@ -44,6 +46,7 @@ class Applications extends Model
     protected $fillable = [
         'name',
         'discord',
+        'discordId',
         'steam',
         'cid',
         'cell',
@@ -62,6 +65,7 @@ class Applications extends Model
         'id' => 'integer',
         'name' => 'string',
         'discord' => 'string',
+        'discordId' => 'string',
         'steam' => 'string',
         'cid' => 'integer',
         'cell' => 'string',

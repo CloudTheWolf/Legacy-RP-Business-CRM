@@ -156,8 +156,8 @@
                         <h4>Repair Calculator</h4>
                     </div>
                     <div class="card-body">
-                        {{ Form::open(array('class' => 'row g-3',"autocomplete"=>"off")) }}
-                        <input autocomplete="false" name="hidden" type="text" style="display:none;">
+                        <form class="row g-3" autocomplete="off">
+                        @csrf
 
                         <div class="col-md-6">
                                 <label for="inputLastName1" class="form-label">Logged By</label>
@@ -331,7 +331,7 @@
                                     <a href="{{url('mechanic/repairs')}}/{{$repair->id}}/delete" class="btn btn-outline-danger px-5">Delete Repair</a>
                                 </div>
                             </div>
-                        {{Form::close()}}
+                        </form>
                     </div>
                 </div>
             </div>

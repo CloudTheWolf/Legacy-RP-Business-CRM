@@ -3,6 +3,7 @@
 use App\Http\Controllers\Authentication\BasicLogin;
 use App\Http\Controllers\Authentication\Logout;
 use App\Http\Controllers\Authentication\SteamLogin;
+use App\Http\Controllers\Authentication\DiscordLogin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +26,8 @@ Route::prefix('/auth')->group(function ()
 {
     Route::get('/steam', [SteamLogin::class,'get'])->name('auth.steam');
     Route::get('/steam/handle', [SteamLogin::class,'handle'])->name('auth.steam.handle');
+    Route::get('/discord', [DiscordLogin::class,'get'])->name('auth.discord');
+    Route::get('/discord-link', [DiscordLogin::class,'getFromProfile'])->name('auth.discord-profile-link');
+    Route::get('/discord/handle',[DiscordLogin::class,'handle'])->name('auth.discord.handle');
+    Route::get('/discord/handle/link',[DiscordLogin::class,'handleLink'])->name('auth.discord.handle');
 });

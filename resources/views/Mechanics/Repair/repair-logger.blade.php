@@ -21,6 +21,30 @@
     <script src="/js/forms/controls.select2.js"></script>
 
     <script>
+        function initializeSelect2() {
+            $('select').select2({placeholder: ''});
+
+            $('#select_mechanic').on('change', function() {
+                let selectedValue = $(this).val();
+                $('#input_mechanic').val(selectedValue);
+            });
+
+            $('#select_vehicle').on('change', function() {
+                let selectedValue = $(this).val();
+                $('#input_vehicle').val(selectedValue);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            initializeSelect2();
+            $('#select_mechanic').trigger('change');
+            $('#select_vehicle').trigger('change');
+        });
+
+    </script>
+    <!--LW_SCRIPTS-->
+    @stack('scripts')
+    <script>
         function multiply(value,multiplier,element) {
             const multiplicand = value || 0;
             const product = parseInt(multiplicand) * parseInt(multiplier);
@@ -43,7 +67,7 @@
             document.getElementById('15Cost').value = Math.floor(85/100*parseInt(fullCost));
             document.getElementById('20Cost').value = Math.floor(80/100*parseInt(fullCost));
             document.getElementById('25Cost').value = Math.floor(75/100*parseInt(fullCost));
-
+            setInterval(finalValue, 2000);
         }
     </script>
 
@@ -140,178 +164,7 @@
                         <h4>Repair Calculator</h4>
                     </div>
                     <div class="card-body">
-                        {{ Form::open(array('class' => 'row g-3',"autocomplete"=>"off")) }}
-                        <input autocomplete="false" name="hidden" type="text" style="display:none;">
-
-                        <div class="col-md-6">
-                                <label for="inputLastName1" class="form-label">Logged By</label>
-                                <div class="input-group">
-                                    <select name="mechanic" id="searchHidden" class="form-control" required>
-                                        <option disabled>-- Please Select  --</option>
-                                        @foreach($mechanics as $mechanic)
-                                            <option value="{{$mechanic->id}}" {{Auth::id() == $mechanic->id ? 'selected' : ''}}>{{$mechanic->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputLastName2" class="form-label">Customer Name</label>
-                                <div class="input">
-                                    <input type="text" class="form-control" id="inputLastName1" placeholder="John Doe" name="customer" autocomplete="off"/>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <label for="vehicle" class="form-label">Vehicle</label>
-                                <div class="input">
-                                    <select name="vehicle" id="select2Basic" class="vehicle" style="width: 100% !important;" required>
-                                        <option selected value="No Vehicle Specified">Unknown / No Vehicle</option>
-                                        <optgroup label="Generic Types">
-                                            <option value="Boat">Boat</option>
-                                            <option value="Commercial">Commercial</option>
-                                            <option value="Compact">Compact</option>
-                                            <option value="Coupe">Coupe</option>
-                                            <option value="Cycle">Cycle</option>
-                                            <option value="Helicopter">Helicopter</option>
-                                            <option value="Industrial">Industrial</option>
-                                            <option value="Military">Military</option>
-                                            <option value="Motorcycle">Motorcycle</option>
-                                            <option value="Muscle Car">Muscle Car</option>
-                                            <option value="Off-Road">Off-Road</option>
-                                            <option value="Plane">Plane</option>
-                                            <option value="Sedan">Sedan</option>
-                                            <option value="Service">Service</option>
-                                            <option value="Sports Car">Sports Car</option>
-                                            <option value="Sports Classic">Sports Classic</option>
-                                            <option value="Special">Special</option>
-                                            <option value="Super Car">Super Car</option>
-                                            <option value="SUV">SUV</option>
-                                            <option value="Utility">Utility</option>
-                                            <option value="Van">Van</option>
-                                        </optgroup>
-                                        <optgroup label="PDM">
-                                            @foreach($vehicles->data->pdm as $pdm)
-                                                <option value="{{$pdm->label}}">{{$pdm->label}}</option>
-                                            @endforeach
-                                        </optgroup>
-                                        <optgroup label="EDM">
-                                            @foreach($vehicles->data->edm as $edm)
-                                                <option value="{{$edm->label}}">{{$edm->label}}</option>
-                                            @endforeach
-                                        </optgroup>
-                                        <optgroup label="Addon">
-                                            @foreach($vehicles->data->addon as $ao)
-                                                <option value="{{$ao->label == '' ? $ao->modelName : $ao->label }}">{{$ao->label == '' ? $ao->modelName : $ao->label }}</option>
-                                            @endforeach
-                                        </optgroup>
-                                        <optgroup label="Work Vehicles">
-                                            <option value="Phantom">Phantom</option>
-                                            <option value="Taxi">Taxi</option>
-                                            <option value="EMS Vehicle">EMS Vehicle</option>
-                                            <option value="PD Vehicle">PD Vehicle</option>
-                                            <option value="Aircraft">Aircraft</option>
-                                            <option value="Boat">Boat</option>
-                                        </optgroup>
-                                    </select>
-                                </div>
-                            </div>
-                            <div id="scrapDiv" class="col-2">
-                                <label for="scrapCost" class="form-label">Scrap</label>
-                                <div class="input">
-                                    <input type="number" min="0" class="form-control" id="scrap" name="scrap" onchange="multiply(this.value,{!! Config('app.scrap-sell') !!},'scrapCost')" value="0" required/>
-                                    <input type="hidden" class="form-control" id="scrapCost" value="0" required="required" onchange="finalValue()" onClick="this.setSelectionRange(0, this.value.length)" />
-                                </div>
-                            </div>
-                            <div id="alumDiv" class="col-2">
-                                <label for="aluminium" class="form-label">Alum</label>
-                                <div class="input">
-                                    <input type="number" min="0" class="form-control" id="aluminium" name="aluminium" value="0" onchange="multiply(this.value,{!! Config('app.aluminium-sell') !!},'alumCost')" required/>
-                                    <input type="hidden" class="form-control" id="alumCost" value="0" required="required" onchange="finalValue()" />
-                                </div>
-                            </div>
-                            <div id="steelDiv" class="col-2">
-                                <label for="inputConfirmPassword" class="form-label">Steel</label>
-                                <div class="input">
-                                    <input type="number" min="0" class="form-control" id="steel" name="steel" value="0" onchange="multiply(this.value,{!! Config('app.steel-sell') !!},'steelCost')" required/>
-                                    <input type="hidden" class="form-control" id="steelCost" value="0" required="required" onchange="finalValue()" />
-                                </div>
-                            </div>
-                            <div id="glassDiv" class="col-2">
-                                <label for="inputConfirmPassword" class="form-label">Glass</label>
-                                <div class="input">
-                                    <input type="number" min="0" class="form-control" id="glass" name="glass" value="0" onchange="multiply(this.value,{!! Config('app.glass-sell') !!},'glassCost')" required/>
-                                    <input type="hidden" class="form-control" id="glassCost" value="0" required="required" onchange="finalValue()" />
-                                </div>
-                            </div>
-                            <div id="rubberDiv" class="col-2">
-                                <label for="inputConfirmPassword" class="form-label">Rubber</label>
-                                <div class="input">
-                                    <input type="number" min="0" class="form-control" id="rubber" name="rubber" value="0" onchange="multiply(this.value,{!! Config('app.rubber-sell') !!},'rubberCost')" required/>
-                                    <input type="hidden" class="form-control" id="rubberCost" value="0" required="required" onchange="finalValue()" />
-                                </div>
-                            </div>
-                            <div class="col-2">
-
-                            </div>
-
-                            <div id="repairKitDiv" class="col-3">
-                                <label for="inputConfirmPassword" class="form-label">Adv. Repair Kit</label>
-                                <div class="input">
-                                    <input type="number" min="0" class="form-control" id="advKit" name="advKit" value="0" onchange="multiply(this.value,{!! Config('app.adv-repair-kit-sell') !!},'advKitCost')" required/>
-                                    <input type="hidden" class="form-control" id="advKitCost" value="0" required="required" onchange="finalValue()" />
-                                </div>
-                            </div>
-                            <div id="oilDiv" class="col-2">
-                                <label for="inputConfirmPassword" class="form-label">Motor Oil</label>
-                                <div class="input">
-                                    <input type="number" min="0" class="form-control" id="oil" name="oil" value="0" onchange="multiply(this.value,{!! Config('app.oil-sell') ?? 700 !!},'oilCost')" required/>
-                                    <input type="hidden" class="form-control" id="oilCost" value="0" required="required" onchange="finalValue()" />
-                                </div>
-                            </div>
-                            <div class="col-2"></div>
-                            <div class="col-2"></div>
-                            <div class="col-3"></div>
-
-                            <div id="totalDiv" class="col-3">
-                                <label for="inputAddress3" class="form-label">Total ($)</label>
-                                <div class="input-group">
-                                    <input  type="currency" class="form-control" id="fullCost" name="FinalCost" value="0" readonly/>
-                                </div>
-                            </div>
-                            <div id="10Div" class="col-2">
-                                <label for="inputAddress3" class="form-label"><span class="badge rounded-pill bg-gradient-ibiza">10% Off</span></label>
-                                <div class="input-group">
-                                    <input  type="currency" class="form-control" id="10Cost" name="10Cost" value="0" readonly/>
-                                </div>
-                            </div>
-                            <div id="15Div" class="col-2">
-                                <label for="inputAddress3" class="form-label"><span class="badge rounded-pill bg-gradient-ibiza">15% Off</span></label>
-                                <div class="input-group">
-                                    <input  type="currency" class="form-control" id="15Cost" name="15Cost" value="0" readonly/>
-                                </div>
-                            </div>
-                            <div id="20Div" class="col-2">
-                                <label for="inputAddress3" class="form-label"><span class="badge rounded-pill bg-gradient-ibiza">20% Off</span></label>
-                                <div class="input-group">
-                                    <input  type="currency" class="form-control" id="20Cost" name="20Cost" value="0" readonly/>
-                                </div>
-                            </div>
-                            <div id="25Div" class="col-2">
-                                <label for="inputAddress3" class="form-label"><span class="badge rounded-pill bg-gradient-ibiza">25% Off</span></label>
-                                <div class="input-group">
-                                    <input  type="currency" class="form-control" id="25Cost" name="25Cost" value="0" readonly/>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <hr/>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" required>
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">Ready to submit</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-danger px-5">Log Repair</button>
-                            </div>
-                        {{Form::close()}}
+                        <livewire:forms.mechanic.add-repair />
                     </div>
                 </div>
             </div>

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Authentication;
 
 use App\Http\Controllers\Controller;
-use Invisnik\LaravelSteamAuth\SteamAuth;
+use App\ThirdPartyAuth\SteamAuth;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -30,13 +31,16 @@ class SteamLogin extends Controller
         return $this->steam->redirect();
     }
 
+    /**
+     * @throws GuzzleException
+     */
     function handle(Request $request)
     {
         if (!$this->steam->validate()) {
             return redirect((route("auth.steam")));
         }
 
-        if (($request->getPathInfo()) == "/apply/auth/steam/handle") {
+        if (($request->getPathInfo()) == "/apply/auth/steam/handle") {;
             return redirect(url('/apply/select-profile'))->with('steamID', 'steam:' . dechex((int)$this->steam->getUserInfo()->steamID64));
         }
 

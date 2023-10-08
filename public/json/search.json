@@ -1,6 +1,10 @@
 [
     {
-        "label": "Dashboard",
-        "url": "/dashboard"
+        "label": "Horizontal",
+        "url": "/Horizontal"
+    },
+    {
+        "label": "Vertical",
+        "url": "/Vertical"
     }
 ]
