@@ -63,8 +63,6 @@ deployment:
     #- $YELLOWJACK/down.sh $YELLOWJACK/
     #- $DOJ/down.sh $DOJ/
     # Deploy
-    - /bin/rm -rf ./vendor
-    - /usr/local/bin/php composer.phar install
     - /bin/cp -R * $DEV
     #- /bin/cp -R * $HARMONY
     #- /bin/cp -R * $SOL
