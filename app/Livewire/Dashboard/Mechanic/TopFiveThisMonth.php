@@ -35,13 +35,13 @@ class TopFiveThisMonth extends Component
 
         $this->chart = (new PieChartModel())
             ->darkMode()
-            ->asPie()
+            ->asDonut()
             ->setAnimated(true)
             ->setLegendPosition('right');
         $sliceId = 0;
         foreach ($data as $slice)
         {
-            $this->chart->addSlice("$slice->name - $slice->rCount",$slice->rCount,$sliceColors[$sliceId]);
+            $this->chart->addSlice("$slice->name - $slice->rCount",(int)$slice->rCount,$sliceColors[$sliceId]);
             $sliceId++;
         }
     }
