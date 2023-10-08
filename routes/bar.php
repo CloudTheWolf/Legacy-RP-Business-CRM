@@ -22,7 +22,7 @@ use App\Http\Controllers\Shared\Admin\SpecialsController;
 Route::get('/dashboard', [DashboardController::class, 'Get'])->middleware('auth');
 
 Route::prefix('/bar')->group(function () {
-    Route::get('/sale-logger',[DashboardController::class,'Get'])->middleware('auth');
+    Route::get('/sale-logger',[SalesLogger::class,'Get'])->middleware('auth');
     Route::post('/sale-logger',[SalesLogger::class,'Post'])->middleware('auth');
 
 });

@@ -1,8 +1,8 @@
 @php
     //$html_tag_data = ["override"=>'{ "attributes" : { "placement" : "horizontal", "layout":"boxed", "color": "dark-green"  }, "storagePrefix" : "legacy-rp", "showSettings" : true }'];
     $html_tag_data = [];
-    $title = 'Login Page';
-    $description = 'Login Page'
+    $title = 'Job Application - Steam Link';
+    $description = 'Link your steam profile'
 @endphp
 @extends('layout_full',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 @section('css')
@@ -69,8 +69,8 @@
                 </a>
             </div>
             <div class="mb-5">
-                <h2 class="cta-1 mb-0 text-primary">Welcome,</h2>
-                <h2 class="cta-1 text-primary">let's get started!</h2>
+                <h2 class="cta-1 mb-0 text-primary">Link Steam Profile</h2>
+                <h2 class="cta-1 text-primary">This is optional, so feel free to click Skip</h2>
             </div>
             <div class="mb-5">
 

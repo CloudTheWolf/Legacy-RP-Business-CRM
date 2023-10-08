@@ -1,8 +1,8 @@
 @php
     //$html_tag_data = ["override"=>'{ "attributes" : { "placement" : "horizontal", "layout":"boxed", "color": "dark-green"  }, "storagePrefix" : "legacy-rp", "showSettings" : true }'];
     $html_tag_data = [];
-    $title = 'Login Page';
-    $description = 'Login Page'
+    $title = 'Job Application - Get Started';
+    $description = ''
 @endphp
 @extends('layout_full',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 @section('css')

@@ -1,8 +1,8 @@
 @php
     //$html_tag_data = ["override"=>'{ "attributes" : { "placement" : "horizontal", "layout":"boxed", "color": "dark-green"  }, "storagePrefix" : "legacy-rp", "showSettings" : true }'];
     $html_tag_data = [];
-    $title = 'Login Page';
-    $description = 'Login Page'
+    $title = 'Apply';
+    $description = 'Application Page'
 @endphp
 @extends('layout_full',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
 @section('css')
@@ -116,8 +116,9 @@
                         <li>Understand that, unless otherwise stated, you will start as a Tow Driver</li>
                     </ul>
                     <hr>
-                    {{ Form::open(array('id'=>'apply','url' => 'apply/done', 'class' => 'row g-3 needs-validation', '')) }}
-                    {{ csrf_field() }}
+
+                    <form class="row g-3 needs-validation" action="apply/done" id="apply">
+                    @csrf
                     <div class="form-group col-md-3">
 
                         <label for="name" class="form-label">Your Timezone</label>
@@ -217,8 +218,7 @@
                             <label class="form-check-label" for="flexRadioDefault2">Yes</label>
                         </div>
                     </div>
-
-                    {{Form::submit('Submit Application!',array('class'=>'btn btn-success'))}}
+                        <button type="submit" class="btn btn-success">Submit Application</button>
                     </form>
 
             </div>

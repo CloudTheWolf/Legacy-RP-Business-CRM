@@ -241,7 +241,9 @@
                             </div>
                         @endif
                         <hr>
-                        {{ Form::open(array('class' => 'row g-3')) }}
+
+                        <form class="row g-3">
+                        @csrf
                         <div id="localDiv" class="col-3">
                             <input type="number" min="0" class="form-control" value="{{$local ?? '0'}}" name="local">
                             <button style="width: 100%;" class="btn btn-outline-success col-md-12"><span class="material-symbols-outlined">add_box</span><br>@lang('app.add') @lang('app.local')</button>

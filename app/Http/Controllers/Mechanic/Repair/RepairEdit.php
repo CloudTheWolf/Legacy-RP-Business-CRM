@@ -16,6 +16,7 @@ class RepairEdit extends Controller
 {
     public function Get(Request $request, $id)
     {
+        bdump("here");
         try{
             $client = new Client(['base_uri' => "https://legacyrp.company/",'timeout' => 5]);
             $response = $client->request('GET', '/op-framework/vehicles.json');

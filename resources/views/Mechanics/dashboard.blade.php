@@ -17,300 +17,10 @@
     <script src="js/vendor/chartjs-plugin-crosshair.js"></script>
 
     <script src="js/vendor/chartjs-plugin-streaming.min.js"></script>
+    @livewireChartsScripts
 @endsection
 
 @section('js_page')
-    <script src="/js/cs/charts.extend.js"></script>
-    <script src="/js/pages/dashboard.analytic.js"></script>
-
-    <script type="text/javascript">
-        console.log({{$lDec[0]->count}});
-        $(function() {
-            "use strict";
-            var ctx = document.getElementById("allTime").getContext('2d');
-            var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke1.addColorStop(0, '#60ea7c');
-            gradientStroke1.addColorStop(1, '#3eea17');
-
-            var gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke2.addColorStop(0, '#60e5ea');
-            gradientStroke2.addColorStop(1, '#17caea');
-
-            const d = new Date();
-            let year = d.getFullYear();
-
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['@lang("app.month1")','@lang("app.month2")','@lang("app.month3")','@lang("app.month4")','@lang("app.month5")','@lang("app.month6")','@lang("app.month7")',
-                        '@lang("app.month8")','@lang("app.month9")','@lang("app.month10")','@lang("app.month11")','@lang("app.month12")',],
-                    datasets: [{
-                        data: [{{$tJan[0]->count}},{{$tFeb[0]->count}},{{$tMar[0]->count}},{{$tApr[0]->count}},{{$tMay[0]->count}},{{$tJun[0]->count}},{{$tJul[0]->count}},{{$tAug[0]->count}},{{$tSep[0]->count}},{{$tOct[0]->count}},{{$tNov[0]->count}},{{$tDec[0]->count}}],
-                        borderColor: gradientStroke1,
-                        backgroundColor: gradientStroke1,
-                        hoverBackgroundColor: gradientStroke1,
-                        pointStyle: 'circle',
-                        pointRadius: 5,
-                        pointHoverRadius: 7,
-                        fill: false,
-                        borderWidth: 0,
-                        label: year,
-                    },{
-                        data: [{{$lJan[0]->count}},{{$lFeb[0]->count}},{{$lMar[0]->count}},{{$lApr[0]->count}},{{$lMay[0]->count}},{{$lJun[0]->count}},{{$lJul[0]->count}},{{$lAug[0]->count}},{{$lSep[0]->count}},{{$lOct[0]->count}},{{$lNov[0]->count}},{{$lDec[0]->count}}],
-                        borderColor: gradientStroke2,
-                        backgroundColor: gradientStroke2,
-                        hoverBackgroundColor: gradientStroke2,
-                        pointStyle: 'triangle',
-                        pointRadius: 5,
-                        pointHoverRadius: 7,
-                        fill: false,
-                        borderWidth: 0,
-                        label: year - 1,
-                    }]
-                },
-
-                options: {
-                    maintainAspectRatio: false,
-                    legend: {
-                        position: 'bottom',
-                        display: true,
-                        labels: {
-                            boxWidth: 8
-                        }
-                    },
-                    tooltips: {
-                        displayColors: false,
-                    },
-                    scales: {
-                        xAxes: [{
-                            barPercentage: 1
-                        }]
-                    }
-                }
-            });
-        })
-    </script>
-
-    <!-- All Time -->
-    <script type="text/javascript">
-        $(function() {
-            "use strict";
-            var ctx = document.getElementById("chart2").getContext('2d');
-
-            var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke1.addColorStop(0, '#15ca20');
-            gradientStroke1.addColorStop(1, '#3cdc48');
-
-            var gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke2.addColorStop(0, '#fd3550');
-            gradientStroke2.addColorStop(1, '#fd5a35');
-
-
-            var gradientStroke3 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke3.addColorStop(0, '#008cff');
-            gradientStroke3.addColorStop(1, '#009dff');
-
-            var gradientStroke4 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke4.addColorStop(0, '#ffc107');
-            gradientStroke4.addColorStop(1, '#fdcd3c');
-
-            var gradientStroke5 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke5.addColorStop(0, '#0dcaf0');
-            gradientStroke5.addColorStop(1, '#82e7ff');
-
-            var myChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ["{{count($pie) > 0 ? $pie[0]->name : 'N/A'}}", "{{count($pie) > 1 ? $pie[1]->name : 'N/A'}}", "{{count($pie) > 2 ? $pie[2]->name : 'N/A'}}", "{{count($pie) > 3 ? $pie[3]->name : 'N/A'}}", "{{count($pie) > 4 ? $pie[4]->name : 'N/A'}}"],
-                    datasets: [{
-                        backgroundColor: [
-                            gradientStroke1,
-                            gradientStroke2,
-                            gradientStroke3,
-                            gradientStroke4,
-                            gradientStroke5
-                        ],
-                        hoverBackgroundColor: [
-                            gradientStroke1,
-                            gradientStroke2,
-                            gradientStroke3,
-                            gradientStroke4,
-                            gradientStroke5
-                        ],
-                        data: [{{count($pie) > 0 ? $pie[0]->count : 0}}, {{count($pie) > 1 ? $pie[1]->count: 0}}, {{count($pie) >2 ? $pie[2]->count : 0}}, {{count($pie) > 3 ? $pie[3]->count : 0}},{{count($pie) > 4 ?  $pie[4]->count : 0}}],
-                        borderWidth: [1, 1, 1, 1]
-                    }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    cutoutPercentage: 75,
-                    legend: {
-                        position: 'bottom',
-                        display: false,
-                        labels: {
-                            boxWidth: 8
-                        }
-                    },
-                    tooltips: {
-                        displayColors: false,
-                    }
-                }
-            });
-        })
-    </script>
-    <!-- Last Month -->
-    <script type="text/javascript">
-        $(function() {
-            "use strict";
-            var ctx = document.getElementById("chart3").getContext('2d');
-
-            var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke1.addColorStop(0, '#15ca20');
-            gradientStroke1.addColorStop(1, '#3cdc48');
-
-            var gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke2.addColorStop(0, '#fd3550');
-            gradientStroke2.addColorStop(1, '#fd5a35');
-
-
-            var gradientStroke3 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke3.addColorStop(0, '#008cff');
-            gradientStroke3.addColorStop(1, '#009dff');
-
-            var gradientStroke4 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke4.addColorStop(0, '#ffc107');
-            gradientStroke4.addColorStop(1, '#fdcd3c');
-
-            var gradientStroke5 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke5.addColorStop(0, '#0dcaf0');
-            gradientStroke5.addColorStop(1, '#82e7ff');
-
-            var myChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ["{{count($pie2) > 0 ? $pie2[0]->name : 'N/A'}}", "{{count($pie2) > 1 ? $pie2[1]->name : 'N/A'}}", "{{count($pie2) > 2 ? $pie2[2]->name : 'N/A'}}", "{{count($pie2) > 3 ? $pie2[3]->name : 'N/A'}}", "{{count($pie2) > 4 ? $pie2[4]->name : 'N/A'}}"],
-                    datasets: [{
-                        backgroundColor: [
-                            gradientStroke1,
-                            gradientStroke2,
-                            gradientStroke3,
-                            gradientStroke4,
-                            gradientStroke5
-                        ],
-                        hoverBackgroundColor: [
-                            gradientStroke1,
-                            gradientStroke2,
-                            gradientStroke3,
-                            gradientStroke4,
-                            gradientStroke5
-                        ],
-                        data: [{{count($pie2) > 0 ? $pie2[0]->count : 0}}, {{count($pie2) > 1 ? $pie2[1]->count: 0}}, {{count($pie2) >2 ? $pie2[2]->count : 0}}, {{count($pie2) > 3 ? $pie2[3]->count : 0}},{{count($pie2) > 4 ?  $pie2[4]->count : 0}}],
-                        borderWidth: [1, 1, 1, 1]
-                    }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    cutoutPercentage: 75,
-                    legend: {
-                        position: 'bottom',
-                        display: false,
-                        labels: {
-                            boxWidth: 8
-                        }
-                    },
-                    tooltips: {
-                        displayColors: false,
-                    }
-                }
-            });
-        })
-    </script>
-    <!-- This Month -->
-    <script type="text/javascript">
-        $(function() {
-            "use strict";
-            var ctx = document.getElementById("chart4").getContext('2d');
-
-            var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke1.addColorStop(0, '#15ca20');
-            gradientStroke1.addColorStop(1, '#3cdc48');
-
-            var gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke2.addColorStop(0, '#fd3550');
-            gradientStroke2.addColorStop(1, '#fd5a35');
-
-
-            var gradientStroke3 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke3.addColorStop(0, '#008cff');
-            gradientStroke3.addColorStop(1, '#009dff');
-
-            var gradientStroke4 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke4.addColorStop(0, '#ffc107');
-            gradientStroke4.addColorStop(1, '#fdcd3c');
-
-            var gradientStroke5 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke5.addColorStop(0, '#0dcaf0');
-            gradientStroke5.addColorStop(1, '#82e7ff');
-
-            var myChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ["{{count($pie3) > 0 ? $pie3[0]->name : 'N/A'}}", "{{count($pie3) > 1 ? $pie3[1]->name : 'N/A'}}", "{{count($pie3) > 2 ? $pie3[2]->name : 'N/A'}}", "{{count($pie3) > 3 ? $pie3[3]->name : 'N/A'}}", "{{count($pie3) > 4 ? $pie3[4]->name : 'N/A'}}"],
-                    datasets: [{
-                        backgroundColor: [
-                            gradientStroke1,
-                            gradientStroke2,
-                            gradientStroke3,
-                            gradientStroke4,
-                            gradientStroke5
-                        ],
-                        hoverBackgroundColor: [
-                            gradientStroke1,
-                            gradientStroke2,
-                            gradientStroke3,
-                            gradientStroke4,
-                            gradientStroke5
-                        ],
-                        data: [{{count($pie3) > 0 ? $pie3[0]->count : 0}}, {{count($pie3) > 1 ? $pie3[1]->count: 0}}, {{count($pie3) >2 ? $pie3[2]->count : 0}}, {{count($pie3) > 3 ? $pie3[3]->count : 0}},{{count($pie3) > 4 ?  $pie3[4]->count : 0}}],
-                        borderWidth: [1, 1, 1, 1]
-                    }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    cutoutPercentage: 75,
-                    legend: {
-                        position: 'bottom',
-                        display: false,
-                        labels: {
-                            boxWidth: 8
-                        }
-                    },
-                    tooltips: {
-                        displayColors: false,
-                    }
-                }
-            });
-        })
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#example').DataTable();
-        } );
-    </script>
-    <script>
-        $(document).ready(function() {
-            var table = $('#example2').DataTable( {
-                lengthChange: false,
-                pageLength: 100,
-                searching: false,
-                info: false,
-            } );
-
-            table.buttons().container()
-                .appendTo( '#example2_wrapper .col-lg-12:eq(0)' );
-        } );
-    </script>
 
     <script>
         function resize() {
@@ -383,48 +93,24 @@
 
         <!-- Content Start -->
         <div class="row g-4">
-            <div id="head-card1" class="col-3 col-sm-3 col-lg-3">
-                <div class="card radius-10 border-start border-0 border-3 border-info">
-                    <div class="card-body">
-                        <div class="d-flex text-center">
-                            <div>
-                                <p class="mb-0 text-secondary">@lang('app.totalRepairs')</p>
-                                <h4 class="my-1 text-info"><i class="icon material-symbols-outlined">home_repair_service</i> {{$totalCount}} </h4>
-                            </div>
-                            <div class="widgets-icons-2 rounded-circle bg-gradient-scooter text-white ms-auto"><i class='bx bxs-wrench'></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="head-card2" class="col-3 col-sm-3 col-lg-3">
-                <div class="card radius-10 border-start border-0 border-3 border-danger">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div>
-                                <p class="mb-0 text-secondary">@lang('app.totalRevenue')</p>
-                                <h4 class="my-1 text-danger"><i class="icon material-symbols-outlined">wallet</i> ${{$totalIncome}}</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="head-card3" class="col-3 col-sm-3 col-lg-3">
-                <div class="card radius-10 border-start border-0 border-3 border-success">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div>
-                                <p class="mb-0 text-secondary">@lang('app.onDuty')</p>
-                                <h4 class="my-1 text-success"><i class="icon material-symbols-outlined">badge</i> {{$onDuty}}</h4>
-                            </div>
-                            <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i class='bx bxs-user' ></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Here -->
-            <livewire:dashboard.active-players/>
+            <x-dashboard-stat-panel :icon="'bx bxs-wrench'" :class="'border-info'">
+                <p class="mb-0 text-secondary">@lang('app.totalRepairs')</p>
+                <h4 class="my-1 text-info"><i class="icon material-symbols-outlined">home_repair_service</i> {{$totalCount}} </h4>
+            </x-dashboard-stat-panel>
+            <x-dashboard-stat-panel :icon="'bx bxs-wrench'" :class="'border-info'">
+                <p class="mb-0 text-secondary">@lang('app.totalRevenue')</p>
+                <h4 class="my-1 text-danger"><i class="icon material-symbols-outlined">wallet</i> {{$totalIncome}} </h4>
+            </x-dashboard-stat-panel>
+            <x-dashboard-stat-panel :icon="'bx bxs-wrench'" :class="'border-info'">
+                <p class="mb-0 text-secondary">@lang('app.onDuty')</p>
+                <h4 class="my-1 text-success"><i class="icon material-symbols-outlined">badge</i> {{$onDuty}} </h4>
+            </x-dashboard-stat-panel>
+            <x-dashboard-stat-panel>
+                <p class="mb-0 text-secondary">@lang('app.activeInCity')</p>
+                <livewire:dashboard.active-players lazy/>
+
+
+            </x-dashboard-stat-panel>
         </div>
             <!--end row-->
         <hr>
@@ -432,11 +118,16 @@
             <!-- Sales Start -->
             <div id="head-data1" class="col-5 col-sm-5 col-lg-5">
                 <div class="card mb-5 sh-40">
-                    <div class="card-header">
-                        <h4>Sales</h4>
-                    </div>
                     <div class="card-body">
-                        <canvas id="allTime"></canvas>
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h6 class="mb-0">Sales</h6>
+                            </div>
+
+                        </div>
+                        <livewire:dashboard.mechanic.monthly-sales lazy/>
+
+                        <!--<canvas id="allTime"></canvas>-->
                     </div>
                 </div>
             </div>
@@ -505,31 +196,9 @@
 
                         </div>
                         <div class="chart-container-2 mt-4">
-                            <canvas id="chart2"></canvas>
+                            <livewire:dashboard.mechanic.top-five-all-time />
                         </div>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        @if (count($pie) > 0)
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie[0]->name}} <span class="badge bg-success rounded-pill">{{$pie[0]->count}}</span>
-                            </li>
-                        @endif
-                        @if (count($pie) > 1)
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie[1]->name}} <span class="badge bg-danger rounded-pill">{{$pie[1]->count}}</span>
-                            </li>
-                        @endif
-                        @if (count($pie) > 2)
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie[2]->name}} <span class="badge bg-primary rounded-pill">{{$pie[2]->count}}</span>
-                            </li>
-                        @endif
-                        @if (count($pie) > 3)
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie[3]->name}} <span class="badge bg-warning text-dark rounded-pill">{{$pie[3]->count}}</span>
-                            </li>
-                        @endif
-                        @if (count($pie) > 4)
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie[4]->name}} <span class="badge bg-info text-dark rounded-pill">{{$pie[4]->count}}</span>
-                            </li>
-                        @endif
-                    </ul>
                 </div>
             </div>
             <!-- Last Month-->
@@ -543,31 +212,9 @@
 
                         </div>
                         <div class="chart-container-2 mt-4">
-                            <canvas id="chart3"></canvas>
+                            <livewire:dashboard.mechanic.top-five-last-month />
                         </div>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        @if (count($pie2) > 0)
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie2[0]->name}} <span class="badge bg-success rounded-pill">{{$pie2[0]->count}}</span>
-                            </li>
-                        @endif
-                        @if (count($pie2) > 1)
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie2[1]->name}} <span class="badge bg-danger rounded-pill">{{$pie2[1]->count}}</span>
-                            </li>
-                        @endif
-                        @if (count($pie2) > 2)
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie2[2]->name}} <span class="badge bg-primary rounded-pill">{{$pie2[2]->count}}</span>
-                            </li>
-                        @endif
-                        @if (count($pie2) > 3)
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie2[3]->name}} <span class="badge bg-warning text-dark rounded-pill">{{$pie2[3]->count}}</span>
-                            </li>
-                        @endif
-                        @if (count($pie2) > 4)
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie2[4]->name}} <span class="badge bg-info text-dark rounded-pill">{{$pie2[4]->count}}</span>
-                            </li>
-                        @endif
-                    </ul>
                 </div>
             </div>
             <!-- This Month-->
@@ -581,31 +228,9 @@
 
                         </div>
                         <div class="chart-container-2 mt-4">
-                            <canvas id="chart4"></canvas>
+                            <livewire:dashboard.mechanic.top-five-this-month />
                         </div>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        @if (count($pie3) > 0)
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie3[0]->name}} <span class="badge bg-success rounded-pill">{{$pie3[0]->count}}</span>
-                            </li>
-                        @endif
-                        @if (count($pie3) > 1)
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie3[1]->name}} <span class="badge bg-danger rounded-pill">{{$pie3[1]->count}}</span>
-                            </li>
-                        @endif
-                        @if (count($pie3) > 2)
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie3[2]->name}} <span class="badge bg-primary rounded-pill">{{$pie3[2]->count}}</span>
-                            </li>
-                        @endif
-                        @if (count($pie3) > 3)
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie3[3]->name}} <span class="badge bg-warning text-dark rounded-pill">{{$pie3[3]->count}}</span>
-                            </li>
-                        @endif
-                        @if (count($pie3) > 4)
-                            <li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">{{$pie3[4]->name}} <span class="badge bg-info text-dark rounded-pill">{{$pie3[4]->count}}</span>
-                            </li>
-                        @endif
-                    </ul>
                 </div>
             </div>
         </div><!--end row-->

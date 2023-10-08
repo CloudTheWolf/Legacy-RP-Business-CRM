@@ -116,7 +116,7 @@
                         <li>Understand that, unless otherwise stated, you will start as a Tow Driver</li>
                     </ul>
                     <hr>
-                    <form id="apply" method="post" action="apply/done" class="row g-3 needs-validation">
+                    <form id="apply" method="post" action="done" class="row g-3 needs-validation">
 
                     @csrf
                     <div class="form-group col-md-3">
