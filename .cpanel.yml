@@ -78,7 +78,7 @@ deployment:
     #- /bin/cp -R * $YELLOWJACK
     #- /bin/cp -R * $DOJ
     # Bring Back Up
-    - $DEV/up.sh $DEV/
+    # - $DEV/up.sh $DEV/
     #- $HARMONY/up.sh $HARMONY/
     #- $SOL/up.sh $SOL/
     #- $PBAY/up.sh $PBAY/

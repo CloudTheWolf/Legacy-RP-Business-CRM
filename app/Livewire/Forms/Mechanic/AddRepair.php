@@ -47,8 +47,8 @@ class AddRepair extends Component
     public function save()
     {
         $this->logRepair();
-        $this->dispatch('resetSelect2');
         $this->resetForm();
+        $this->dispatch('resetSelect2');
 
     }
 
@@ -90,6 +90,7 @@ class AddRepair extends Component
 
         $repair = new RepairLog();
         $repair->mechanic = $this->input_mechanic;
+        $repair->cid = $mechanic->cid;
         $repair->customer_name = $this->input_customer;
         $repair->vehicle = $this->input_vehicle;
         $repair->scrap_used = $this->input_scrap;

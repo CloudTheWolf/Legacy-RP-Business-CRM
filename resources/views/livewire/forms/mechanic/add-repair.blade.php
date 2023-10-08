@@ -1,8 +1,8 @@
 <div>
-    <form class="row g-3" autocomplete="off" wire:submit.prevent="save">
+    <form class="row g-3" autocomplete="off" wire:submit="save">
         <div class="col-md-6">
             <label for="inputLastName1" class="form-label">Logged By</label>
-            <div class="input-group" wire:ignore>
+            <div class="input-group">
                 <select name="select_mechanic" id="select_mechanic" class="form-control">
                     <option disabled>-- Please Select  --</option>
                     @foreach($mechanics as $mechanic)
@@ -24,7 +24,7 @@
             <label for="input_vehicle" class="form-label">Vehicle</label>
             <div class="input">
                 <select name="select_vehicle" id="select_vehicle" class="form-control" style="width: 100% !important;" >
-                    <option selected value="No Vehicle Specified">Unknown / No Vehicle</option>
+                    <option value="No Vehicle Specified">Unknown / No Vehicle</option>
                     <optgroup label="Generic Types">
                         <option value="Boat">Boat</option>
                         <option value="Commercial">Commercial</option>
@@ -73,7 +73,7 @@
                     </optgroup>
                 </select>
             </div>
-            <input type="hidden" wire:model="input_vehicle" id="input_vehicle" value="No Vehicle Specified">
+            <input type="hidden" id="input_vehicle" name="input_vehicle" wire:model="input_vehicle">
         </div>
         <div id="scrapDiv" class="col-2">
             <label for="scrapCost" class="form-label">Scrap</label>
@@ -178,12 +178,5 @@
 
 @push('scripts')
     <!-- Listen -->
-    <script>
-        document.addEventListener('livewire:initialized', () => {
-            @this.on('resetSelect2', (event) => {
-                $('#select_mechanic').val({{Auth::id()}}).trigger('change');
-                $('#select_vehicle').val(null).trigger('change');
-            });
-        ]);
-    </script>
+
 @endpush
