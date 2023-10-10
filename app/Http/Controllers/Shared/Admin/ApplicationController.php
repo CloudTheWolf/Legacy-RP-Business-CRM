@@ -44,7 +44,9 @@ class ApplicationController extends Controller
     public function Post(Request $request)
     {
         if($request->input('ack') == 'accept') {
-            $this->AddToDiscord($request->input('discordId'));
+            if($request->input('discordId') != null) {
+                $this->AddToDiscord($request->input('discordId'));
+            }
             $password = Hash::make($request->input('cell'));
             $user = User::firstOrNew(['cid' => $request->input('cid')]);
             $user->password = $password;
