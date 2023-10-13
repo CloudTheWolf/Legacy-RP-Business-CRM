@@ -75,3 +75,7 @@ if(config('app.siteMode') == "Motorcycle Club") {
 if(config('app.siteMode') == "DOJ") {
     require __DIR__ . '/doj.php';
 }
+
+if(config('app.siteMode') == "Dealership") {
+    require __DIR__ . '/dealership.php';
+}

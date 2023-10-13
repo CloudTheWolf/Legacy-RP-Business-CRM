@@ -16,20 +16,7 @@ class RepairLogger extends Controller
 {
     public function Get()
     {
-        try {
-            $client = new Client(['base_uri' => "https://legacyrp.company/",'timeout' => 5]);
-            $response = $client->request('GET', '/op-framework/vehicles.json');
-            $vehicles = json_decode($response->getBody());
-        }
-        catch (\Exception $e)
-        {
-            $vehicles = json_decode('{"data":{"pdm":[],"edm":[],"addon":[]}}');
-        }
-        $latest = RepairLog::whereMechanic(Auth::user()->id)->orderByDesc("timestamp")->limit(25)->get();
-
-        $mechanics = User::whereDisabled('0')->get();
-        $settings = Configuration::whereGroup("mechanic")->get();
-        return view('Mechanics.Repair.repair-logger',compact("vehicles","latest","mechanics","settings"));
+        return view('Mechanics.Repair.repair-logger');
     }
 
     public function Post(Request $request)

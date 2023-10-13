@@ -214,38 +214,7 @@
                         <h4>My Recent Repairs</h4>
                     </div>
                     <div class="card-body">
-                        <table id="example2" class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Customer</th>
-                                <th>Vehicle</th>
-                                <th>Materials Used</th>
-                                <th>Base Cost</th>
-                                <th>Timestamp</th>
-                                <!--<th>Receipt</th>-->
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($latest as $repair)
-                                <tr>
-                                    <td>{{$repair->id}}</td>
-                                    <td>{{$repair->customer_name}}</td>
-                                    <td>{{$repair->vehicle}}</td>
-                                    <td>SC: {{$repair->scrap_used}} · AL: {{$repair->alum_used}} · ST: {{$repair->steel_used}} · GL: {{$repair->glass_used}} · RB: {{$repair->rubber_used}}</td>
-                                    <td>${{$repair->cost}}</td>
-                                    <td>{{$repair->timestamp}}</td>
-                                    <!--<td>
-                                        <a href="{{url('/repair/'.$repair->id)}}" >
-                                            <span class="material-symbols-outlined">edit</span>
-                                        </a> &nbsp;&nbsp;
-                                        <a href="{{url('/receipt/'.$repair->id.'.'.$repair->cost)}}" target="_blank">
-                                            <span class="material-symbols-outlined">receipt_long</span></a>
-                                    </td>-->
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                        <livewire:tables.mechanic.recent-repairs />
                     </div>
                 </div>
             </div>
