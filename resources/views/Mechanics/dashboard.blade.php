@@ -196,7 +196,7 @@
 
                         </div>
                         <div class="chart-container-2 mt-4">
-                            <livewire:dashboard.mechanic.top-five-all-time />
+                            <livewire:dashboard.mechanic.top-five-alltime />
                         </div>
                     </div>
                 </div>
