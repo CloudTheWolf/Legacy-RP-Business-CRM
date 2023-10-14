@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Authentication;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\SessionToggleController;
 use App\Models\DiscordToken;
 use App\Models\User;
 use App\ThirdPartyAuth\DiscordAuth;

@@ -16,7 +16,23 @@ class RepairLogger extends Controller
 {
     public function Get()
     {
-        return view('Mechanics.Repair.repair-logger');
+        $mechanics = User::whereDisabled('0')->get();
+        $vehicles = $this->getVehicles();
+        $latest = RepairLog::whereMechanic(Auth::user()->id)->orderByDesc("timestamp")->limit(25)->get();
+        return view('Mechanics.Repair.repair-logger',compact('vehicles','mechanics','latest'));
+    }
+
+    private function getVehicles()
+    {
+        try {
+            $client = new Client(['base_uri' => "https://legacyrp.company/",'timeout' => 5, 'verify' => false]);
+            $response = $client->request('GET', '/op-framework/vehicles.json');
+            return json_decode($response->getBody());
+        }
+        catch (\Exception $e)
+        {
+            return json_decode('{"data":{"pdm":[],"edm":[],"addon":[]}}');
+        }
     }
 
     public function Post(Request $request)
@@ -123,7 +139,6 @@ class RepairLogger extends Controller
                 ]
             ],
         ]);
-
 
     }
 

@@ -1,9 +1,7 @@
 <?php
 
-use App\Http\Controllers\Mechanic\Repair\RepairDelete;
-use App\Http\Controllers\Mechanic\Repair\RepairEdit;
-use App\Http\Controllers\Shared\Account\EditAccountController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SessionToggleController;
 /**
  * Mechanic
  */
@@ -51,6 +49,9 @@ use App\Http\Controllers\Shared\Warehouse\viewWarehouseController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::post('/set-session', [SessionToggleController::class,'setSession'])->name('set.session');
+
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

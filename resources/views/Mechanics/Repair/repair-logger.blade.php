@@ -198,7 +198,11 @@
                         <h4>Repair Calculator</h4>
                     </div>
                     <div class="card-body">
-                        <livewire:forms.mechanic.add-repair />
+                        @if(isset($live))
+                            <livewire:forms.mechanic.add-repair />
+                        @else
+                            @include('Mechanics/Repair/staticwire/add-repair')
+                        @endif
                     </div>
                 </div>
             </div>
@@ -214,7 +218,11 @@
                         <h4>My Recent Repairs</h4>
                     </div>
                     <div class="card-body">
-                        <livewire:tables.mechanic.recent-repairs />
+                        @if(isset($live))
+                            <livewire:tables.mechanic.recent-repairs lazy/>
+                        @else
+                            @include('Mechanics/Repair/staticwire/recent-repairs')
+                        @endif
                     </div>
                 </div>
             </div>
