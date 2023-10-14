@@ -52,12 +52,12 @@ class MonthlySales extends Component
 
         foreach($repairsThisYear as $month => $count)
         {
-            $this->chart->addSeriesPoint(now()->format('Y'),$month,$count);
+            $this->chart->addSeriesPoint(now()->format('Y'),$month,(int)$count);
         }
 
         foreach($repairsLastYear as $month => $count)
         {
-            $this->chart->addSeriesPoint((now()->format('Y')) - 1,$month,$count);
+            $this->chart->addSeriesPoint((now()->format('Y')) - 1,$month,(int)$count);
         }
     }
 

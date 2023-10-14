@@ -47,30 +47,9 @@ class AddRepair extends Component
     public function save()
     {
         $this->logRepair();
-        $this->dispatch('resetSelect2');
-        $this->resetForm();
+        $this->redirect('/mechanic/repair-logger',false);
 
     }
-
-    public function resetForm(){
-        $this->reset();
-        $this->mechanics = User::whereDisabled('0')->get();
-        $this->getVehicles();
-
-        $this->input_mechanic = Auth::id();
-        $this->input_vehicle = "No Vehicle Specified";
-
-        $this->input_customer = "Unknown";
-        $this->input_scrap = 0 ;
-        $this->input_aluminium = 0;
-        $this->input_steel = 0;
-        $this->input_glass = 0;
-        $this->input_rubber = 0;
-        $this->input_advKit = 0;
-        $this->input_oil = 0;
-        $this->input_finalCost = 0;
-    }
-
     private function getVehicles()
     {
         try {
@@ -90,6 +69,7 @@ class AddRepair extends Component
 
         $repair = new RepairLog();
         $repair->mechanic = $this->input_mechanic;
+        $repair->cid = $mechanic->cid;
         $repair->customer_name = $this->input_customer;
         $repair->vehicle = $this->input_vehicle;
         $repair->scrap_used = $this->input_scrap;
@@ -101,8 +81,6 @@ class AddRepair extends Component
         $repair->oil = $this->input_oil;
         $repair->cost = $this->input_finalCost;
         $repair->save();
-
-
 
         if (strlen(Config('app.saleWebhook')) > 0)
         {
@@ -181,6 +159,7 @@ class AddRepair extends Component
                 ],
             ]);
         }
+
 
     }
 }

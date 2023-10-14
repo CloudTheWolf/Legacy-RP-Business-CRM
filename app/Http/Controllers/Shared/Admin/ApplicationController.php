@@ -44,7 +44,10 @@ class ApplicationController extends Controller
     public function Post(Request $request)
     {
         if($request->input('ack') == 'accept') {
-            $this->AddToDiscord($request->input('discordId'));
+
+            if($request->input('discordId') != null) {
+                $this->AddToDiscord($request->input('discordId'));
+            }
             $password = Hash::make($request->input('cell'));
             $user = User::firstOrNew(['cid' => $request->input('cid')]);
             $user->password = $password;
@@ -54,6 +57,7 @@ class ApplicationController extends Controller
             $user->role = $request->input('role');
             $user->cid = $request->input('cid');
             $user->steamId = $request->input('steamId');
+            $user->discord = $request->input('discordId');
             $user->disabled = 0;
             if ($request->role == "Boss" || $request->role == "Veteran Manager" || $request->role == "Manager") {
                 $user->isAdmin = 1;
@@ -80,26 +84,26 @@ class ApplicationController extends Controller
 
     private function AddToDiscord($discordId)
     {
-        $auth = DiscordToken::whereDiscordId($discordId)->firstOrFail();
-        $userAccessToken = $auth->access_token;
-        $guildId = config('app.guild');
-        if(strlen($guildId) == 0) return;
-        $client = new Client([
-            'base_uri' => 'https://discord.com/api/v10/',
-            'verify' => env('VERIFY_HTTPS',true)
-        ]);
 
-        $response = $client->put("guilds/{$guildId}/members/{$discordId}", [
-            'headers' => [
-                'Authorization' => 'Bot ' . config('discord-auth.bot_token'),
-                'Content-Type' => 'application/json',
-            ],
-            'json' => [
-                'access_token' => $userAccessToken,
-            ],
-        ]);
+            $auth = DiscordToken::whereDiscordId($discordId)->firstOrFail();
+            $userAccessToken = $auth->access_token;
+            $guildId = config('app.guild');
+            if (strlen($guildId) == 0) return;
+            $client = new Client([
+                'base_uri' => 'https://discord.com/api/v10/',
+                'verify' => env('VERIFY_HTTPS', false)
+            ]);
+            $response = $client->put("guilds/{$guildId}/members/{$discordId}", [
+                'headers' => [
+                    'Authorization' => 'Bot ' . config('discord-auth.bot_token'),
+                    'Content-Type' => 'application/json',
+                ],
+                'json' => [
+                    'access_token' => $userAccessToken,
+                ],
+            ]);
+            json_decode($response->getBody()->getContents(), true);
 
-        json_decode($response->getBody()->getContents(), true);
     }
 
 }

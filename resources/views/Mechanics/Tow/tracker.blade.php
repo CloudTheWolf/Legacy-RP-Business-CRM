@@ -242,7 +242,7 @@
                         @endif
                         <hr>
 
-                        <form class="row g-3">
+                        <form class="row g-3" method="post">
                         @csrf
                         <div id="localDiv" class="col-3">
                             <input type="number" min="0" class="form-control" value="{{$local ?? '0'}}" name="local">

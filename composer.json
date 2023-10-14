@@ -11,6 +11,7 @@
         "laravel/framework": "^10.0",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "3.0",
+        "rappasoft/laravel-livewire-tables": "3.0.0-beta2",
         "recca0120/laravel-tracy": "^1.16",
         "spatie/laravel-html": "^3.2",
         "tracy/tracy": "*"

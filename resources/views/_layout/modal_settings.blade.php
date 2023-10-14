@@ -1,12 +1,12 @@
 <!-- Theme Settings Modal Start -->
 <div
-        class="modal fade modal-right scroll-out-negative"
-        id="settings"
-        data-bs-backdrop="true"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="settings"
-        aria-hidden="true"
+    class="modal fade modal-right scroll-out-negative"
+    id="settings"
+    data-bs-backdrop="true"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="settings"
+    aria-hidden="true"
 >
     <div class="modal-dialog modal-dialog-scrollable full" role="document">
         <div class="modal-content">
@@ -17,6 +17,16 @@
 
             <div class="modal-body">
                 <div class="scroll-track-visible">
+                    <div class="mb-5" id="Live View">
+                        <label class="mb-3 d-inline-block form-label">Toggle Live Mode</label>
+                        <form action="{{ route('set.session') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="session_value" value="{{session('LiveMode') !== null && session('LiveMode') == "True" ? "False" : "True"}}">
+                            <button type="submit" class="btn {{session('LiveMode') !== null && session('LiveMode') == "True" ? "btn-outline-secondary" : "btn-outline-primary"}} ">
+                                {{session('LiveMode') !== null && session('LiveMode') == "True" ? "Disable" : "Enable"}} Live Mode
+                            </button>
+                        </form>
+                    </div>
                     <div class="mb-5" id="color">
                         <label class="mb-3 d-inline-block form-label">Color</label>
                         <div class="row d-flex g-3 justify-content-between flex-wrap mb-3">
@@ -92,7 +102,8 @@
                             </a>
                         </div>
                         <div class="row d-flex g-3 justify-content-between flex-wrap mb-3">
-                            <a href="#" class="flex-grow-1 w-50 option col" data-value="light-green" data-parent="color">
+                            <a href="#" class="flex-grow-1 w-50 option col" data-value="light-green"
+                               data-parent="color">
                                 <div class="card rounded-md p-3 mb-1 no-shadow color">
                                     <div class="green-light"></div>
                                 </div>
@@ -146,7 +157,8 @@
                             </a>
                         </div>
                         <div class="row d-flex g-3 justify-content-between flex-wrap mb-3">
-                            <a href="#" class="flex-grow-1 w-50 option col" data-value="light-purple" data-parent="color">
+                            <a href="#" class="flex-grow-1 w-50 option col" data-value="light-purple"
+                               data-parent="color">
                                 <div class="card rounded-md p-3 mb-1 no-shadow color">
                                     <div class="purple-light"></div>
                                 </div>
@@ -154,7 +166,8 @@
                                     <span class="text-extra-small align-middle">LIGHT PURPLE</span>
                                 </div>
                             </a>
-                            <a href="#" class="flex-grow-1 w-50 option col" data-value="dark-purple" data-parent="color">
+                            <a href="#" class="flex-grow-1 w-50 option col" data-value="dark-purple"
+                               data-parent="color">
                                 <div class="card rounded-md p-3 mb-1 no-shadow color">
                                     <div class="purple-dark"></div>
                                 </div>
@@ -201,7 +214,8 @@
                     <div class="mb-5" id="placement">
                         <label class="mb-3 d-inline-block form-label">Menu Placement</label>
                         <div class="row d-flex g-3 justify-content-between flex-wrap">
-                            <a href="#" class="flex-grow-1 w-50 option col" data-value="horizontal" data-parent="placement">
+                            <a href="#" class="flex-grow-1 w-50 option col" data-value="horizontal"
+                               data-parent="placement">
                                 <div class="card rounded-md p-3 mb-1 no-shadow">
                                     <div class="figure figure-primary top"></div>
                                     <div class="figure figure-secondary bottom"></div>
@@ -210,7 +224,8 @@
                                     <span class="text-extra-small align-middle">HORIZONTAL</span>
                                 </div>
                             </a>
-                            <a href="#" class="flex-grow-1 w-50 option col" data-value="vertical" data-parent="placement">
+                            <a href="#" class="flex-grow-1 w-50 option col" data-value="vertical"
+                               data-parent="placement">
                                 <div class="card rounded-md p-3 mb-1 no-shadow">
                                     <div class="figure figure-primary left"></div>
                                     <div class="figure figure-secondary right"></div>
@@ -234,7 +249,8 @@
                                     <span class="text-extra-small align-middle">PINNED</span>
                                 </div>
                             </a>
-                            <a href="#" class="flex-grow-1 w-50 option col" data-value="unpinned" data-parent="behaviour">
+                            <a href="#" class="flex-grow-1 w-50 option col" data-value="unpinned"
+                               data-parent="behaviour">
                                 <div class="card rounded-md p-3 mb-1 no-shadow">
                                     <div class="figure figure-primary left"></div>
                                     <div class="figure figure-secondary right"></div>
@@ -311,8 +327,10 @@
 
 <!-- Theme Settings & Niches Buttons Start -->
 <div class="settings-buttons-container">
-    <button type="button" class="btn settings-button btn-primary p-0" data-bs-toggle="modal" data-bs-target="#settings" id="settingsButton">
-    <span class="d-inline-block no-delay" data-bs-delay="0" data-bs-offset="0,3" data-bs-toggle="tooltip" data-bs-placement="left" title="Settings">
+    <button type="button" class="btn settings-button btn-primary p-0" data-bs-toggle="modal" data-bs-target="#settings"
+            id="settingsButton">
+    <span class="d-inline-block no-delay" data-bs-delay="0" data-bs-offset="0,3" data-bs-toggle="tooltip"
+          data-bs-placement="left" title="Settings">
       <i data-acorn-icon="paint-roller" class="position-relative"></i>
     </span>
     </button>

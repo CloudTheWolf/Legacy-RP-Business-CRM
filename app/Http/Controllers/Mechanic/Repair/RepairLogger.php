@@ -16,20 +16,23 @@ class RepairLogger extends Controller
 {
     public function Get()
     {
+        $mechanics = User::whereDisabled('0')->get();
+        $vehicles = $this->getVehicles();
+        $latest = RepairLog::whereMechanic(Auth::user()->id)->orderByDesc("timestamp")->limit(25)->get();
+        return view('Mechanics.Repair.repair-logger',compact('vehicles','mechanics','latest'));
+    }
+
+    private function getVehicles()
+    {
         try {
-            $client = new Client(['base_uri' => "https://legacyrp.company/",'timeout' => 5]);
+            $client = new Client(['base_uri' => "https://legacyrp.company/",'timeout' => 5, 'verify' => false]);
             $response = $client->request('GET', '/op-framework/vehicles.json');
-            $vehicles = json_decode($response->getBody());
+            return json_decode($response->getBody());
         }
         catch (\Exception $e)
         {
-            $vehicles = json_decode('{"data":{"pdm":[],"edm":[],"addon":[]}}');
+            return json_decode('{"data":{"pdm":[],"edm":[],"addon":[]}}');
         }
-        $latest = RepairLog::whereMechanic(Auth::user()->id)->orderByDesc("timestamp")->limit(25)->get();
-
-        $mechanics = User::whereDisabled('0')->get();
-        $settings = Configuration::whereGroup("mechanic")->get();
-        return view('Mechanics.Repair.repair-logger',compact("vehicles","latest","mechanics","settings"));
     }
 
     public function Post(Request $request)
@@ -136,7 +139,6 @@ class RepairLogger extends Controller
                 ]
             ],
         ]);
-
 
     }
 

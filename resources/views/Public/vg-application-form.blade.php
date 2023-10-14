@@ -117,7 +117,7 @@
                     </ul>
                     <hr>
 
-                    <form class="row g-3 needs-validation" action="apply/done" id="apply">
+                    <form class="row g-3 needs-validation" action="apply/done" id="apply" method="post">
                     @csrf
                     <div class="form-group col-md-3">
 

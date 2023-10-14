@@ -6,6 +6,7 @@
 <script src="/js/vendor/clamp.min.js"></script>
 <script src="/icon/acorn-icons.js"></script>
 <script src="/icon/acorn-icons-interface.js"></script>
+
 @yield('js_vendor')
 <!-- Vendor Scripts End -->
 <!-- Template Base Scripts Start -->
@@ -21,7 +22,7 @@
 <script src="/js/scripts.js"></script>
 <!-- Page Specific Scripts End -->
 
-@livewireScripts
+
 
 <script>
     $(function () {

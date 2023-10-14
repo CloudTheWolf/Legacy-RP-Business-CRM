@@ -1,5 +1,6 @@
 <div>
-    <form class="row g-3" autocomplete="off" wire:submit="save">
+    <form class="row g-3" autocomplete="off" method="post">
+        @csrf
         <div class="col-md-6">
             <label for="inputLastName1" class="form-label">Logged By</label>
             <div class="input-group">
@@ -11,13 +12,12 @@
                 </select>
                 <div>@error('input_mechanic') {{ $message }} @enderror</div>
             </div>
-            <input type="hidden" name="input_mechanic" id="input_mechanic" wire:model="input_mechanic" value="{{Auth::id()}}">
+            <input type="hidden" name="input_mechanic" id="mechanic" value="{{Auth::id()}}">
         </div>
         <div class="col-md-6">
             <label for="input_customer" class="form-label">Customer Name</label>
             <div class="input">
-                <input type="text" class="form-control" id="input_customer" placeholder="John Doe" name="input_customer" wire:model="input_customer" required/>
-                <div>@error('input_customer') {{ $message }} @enderror</div>
+                <input type="text" class="form-control" id="customer" placeholder="John Doe" name="input_customer" value="Unknown"/>
             </div>
         </div>
         <div class="col-12">
@@ -73,12 +73,12 @@
                     </optgroup>
                 </select>
             </div>
-            <input type="hidden" id="input_vehicle" name="input_vehicle" wire:model="input_vehicle">
+            <input type="hidden" id="vehicle" name="input_vehicle" wire:model="input_vehicle">
         </div>
         <div id="scrapDiv" class="col-2">
             <label for="scrapCost" class="form-label">Scrap</label>
             <div class="input">
-                <input type="number" min="0" class="form-control" id="input_scrap" name="input_scrap" onchange="multiply(this.value,{!! Config('app.scrap-sell') !!},'scrapCost')" value="0" wire:model="input_scrap" required/>
+                <input type="number" min="0" class="form-control" id="scrap" name="input_scrap" onchange="multiply(this.value,{!! Config('app.scrap-sell') !!},'scrapCost')" value="0" wire:model="input_scrap" required/>
                 <input type="hidden" class="form-control" id="scrapCost" value="0" required="required" onchange="finalValue()" onClick="this.setSelectionRange(0, this.value.length)" />
                 <div>@error('input_scrap') {{ $message }} @enderror</div>
             </div>
@@ -86,28 +86,28 @@
         <div id="alumDiv" class="col-2">
             <label for="aluminium" class="form-label">Alum</label>
             <div class="input">
-                <input type="number" min="0" class="form-control" id="input_aluminium" name="input_aluminium" value="0" onchange="multiply(this.value,{!! Config('app.aluminium-sell') !!},'alumCost')" wire:model="input_aluminium" required/>
+                <input type="number" min="0" class="form-control" id="aluminium" name="input_aluminium" value="0" onchange="multiply(this.value,{!! Config('app.aluminium-sell') !!},'alumCost')" wire:model="input_aluminium" required/>
                 <input type="hidden" class="form-control" id="alumCost" value="0" required="required" onchange="finalValue()" />
             </div>
         </div>
         <div id="steelDiv" class="col-2">
             <label for="inputConfirmPassword" class="form-label">Steel</label>
             <div class="input">
-                <input type="number" min="0" class="form-control" id="input_steel" name="steel" value="0" onchange="multiply(this.value,{!! Config('app.steel-sell') !!},'steelCost')" wire:model="input_steel" required/>
+                <input type="number" min="0" class="form-control" id="steel" name="steel" value="0" onchange="multiply(this.value,{!! Config('app.steel-sell') !!},'steelCost')" wire:model="input_steel" required/>
                 <input type="hidden" class="form-control" id="steelCost" value="0" required="required" onchange="finalValue()" />
             </div>
         </div>
         <div id="glassDiv" class="col-2">
             <label for="inputConfirmPassword" class="form-label">Glass</label>
             <div class="input">
-                <input type="number" min="0" class="form-control" id="input_glass" name="glass" value="0" onchange="multiply(this.value,{!! Config('app.glass-sell') !!},'glassCost')" wire:model="input_glass" required/>
+                <input type="number" min="0" class="form-control" id="glass" name="glass" value="0" onchange="multiply(this.value,{!! Config('app.glass-sell') !!},'glassCost')" wire:model="input_glass" required/>
                 <input type="hidden" class="form-control" id="glassCost" value="0" required="required" onchange="finalValue()" />
             </div>
         </div>
         <div id="rubberDiv" class="col-2">
             <label for="inputConfirmPassword" class="form-label">Rubber</label>
             <div class="input">
-                <input type="number" min="0" class="form-control" id="input_rubber" name="input_rubber" value="0" onchange="multiply(this.value,{!! Config('app.rubber-sell') !!},'rubberCost')" wire:model="input_rubber" required/>
+                <input type="number" min="0" class="form-control" id="rubber" name="input_rubber" value="0" onchange="multiply(this.value,{!! Config('app.rubber-sell') !!},'rubberCost')" wire:model="input_rubber" required/>
                 <input type="hidden" class="form-control" id="rubberCost" value="0" required="required" onchange="finalValue()" />
             </div>
         </div>
@@ -118,14 +118,14 @@
         <div id="repairKitDiv" class="col-3">
             <label for="inputConfirmPassword" class="form-label">Adv. Repair Kit</label>
             <div class="input">
-                <input type="number" min="0" class="form-control" id="input_advKit" name="input_advKit" value="0" onchange="multiply(this.value,{!! Config('app.adv-repair-kit-sell') !!},'advKitCost')" wire:model="input_advKit" required/>
+                <input type="number" min="0" class="form-control" id="advKit" name="input_advKit" value="0" onchange="multiply(this.value,{!! Config('app.adv-repair-kit-sell') !!},'advKitCost')" wire:model="input_advKit" required/>
                 <input type="hidden" class="form-control" id="advKitCost" value="0" required="required" onchange="finalValue()" />
             </div>
         </div>
         <div id="oilDiv" class="col-2">
             <label for="inputConfirmPassword" class="form-label">Motor Oil</label>
             <div class="input">
-                <input type="number" min="0" class="form-control" id="input_oil" name="input_oil" value="0" onchange="multiply(this.value,{!! Config('app.oil-sell') ?? 600 !!},'oilCost')" wire:model="input_oil" required/>
+                <input type="number" min="0" class="form-control" id="oil" name="input_oil" value="0" onchange="multiply(this.value,{!! Config('app.oil-sell') ?? 600 !!},'oilCost')" wire:model="input_oil" required/>
                 <input type="hidden" class="form-control" id="oilCost" value="0" required="required" onchange="finalValue()" />
             </div>
         </div>

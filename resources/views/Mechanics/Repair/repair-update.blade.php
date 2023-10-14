@@ -156,7 +156,7 @@
                         <h4>Repair Calculator</h4>
                     </div>
                     <div class="card-body">
-                        <form class="row g-3" autocomplete="off">
+                        <form class="row g-3" autocomplete="off" method="post">
                         @csrf
 
                         <div class="col-md-6">

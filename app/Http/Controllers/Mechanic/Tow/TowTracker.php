@@ -17,7 +17,6 @@ class TowTracker extends Controller
     {
 
         $stats = TowLog::whereUserId(Auth::id())->get();
-            //DB::table('tow_log')->where("userId","=",Auth::id())->get();
         $local = "0";
         $citizen = "0";
         $pd = "0";
@@ -51,7 +50,6 @@ class TowTracker extends Controller
         $log->pd = 0;
         $log->help = 0;
         $log->save();
-
         Http::post(Config('app.towWebhook'), [
             "embeds"=> [
                 [

@@ -22,17 +22,40 @@
 
     <script>
         function initializeSelect2() {
-            $('select').select2({placeholder: ''});
+                $('#select_mechanic').select2({placeholder: ''});
+                $('#select_mechanic').on('change', function() {
+                    let selectedValue = $(this).val();
+                    $('#input_mechanic').val(selectedValue);
 
-            $('#select_mechanic').on('change', function() {
-                let selectedValue = $(this).val();
-                $('#input_mechanic').val(selectedValue);
-            });
+                    // Dispatch the input event so that Livewire recognizes the change
+                    document.querySelector('#input_mechanic').dispatchEvent(new Event('input', { bubbles: true }));
+                });
 
-            $('#select_vehicle').on('change', function() {
-                let selectedValue = $(this).val();
-                $('#input_vehicle').val(selectedValue);
-            });
+                $('#select_vehicle').select2({placeholder: ''});
+                $('#select_vehicle').on('change', function () {
+                    let selectedValue = $(this).val();
+                    $('#input_vehicle').val(selectedValue);
+                    console.log(selectedValue);
+                    // Dispatch the input event so that Livewire recognizes the change
+                    document.querySelector('#input_vehicle').dispatchEvent(new Event('input', {bubbles: true}));
+                });
+
+                setInterval(reviveSelect2,2000)
+        }
+
+        function reviveSelect2()
+        {
+            if((!($('#select_mechanic').data('select2'))))
+            {
+                console.log('revive')
+                initializeSelect2();
+            }
+
+            if((!($('#select_vehicle').data('select2'))))
+            {
+                console.log('revive')
+                initializeSelect2();
+            }
         }
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -41,8 +64,19 @@
             $('#select_vehicle').trigger('change');
         });
 
+        document.addEventListener('livewire:initialized', () => {
+            Livewire.on('resetSelect2', (event) => {
+                $('#select_vehicle').select2("destroy");
+                $('#select_mechanic').select2("destroy");
+                $('#select_mechanic').val({{ Auth::id() }}).trigger('change');
+                $('#select_vehicle').val(null).trigger('change');
+            });
+        });
+
+
+
     </script>
-    <!--LW_SCRIPTS-->
+
     @stack('scripts')
     <script>
         function multiply(value,multiplier,element) {
@@ -67,6 +101,7 @@
             document.getElementById('15Cost').value = Math.floor(85/100*parseInt(fullCost));
             document.getElementById('20Cost').value = Math.floor(80/100*parseInt(fullCost));
             document.getElementById('25Cost').value = Math.floor(75/100*parseInt(fullCost));
+            document.getElementById('fullCost').dispatchEvent(new Event('input', { bubbles: true }))
             setInterval(finalValue, 2000);
         }
     </script>
@@ -137,7 +172,6 @@
     </script>
 
 
-
 @endsection
 
 @section('content')
@@ -164,7 +198,11 @@
                         <h4>Repair Calculator</h4>
                     </div>
                     <div class="card-body">
-                        <livewire:forms.mechanic.add-repair />
+                        @if(isset($live))
+                            <livewire:forms.mechanic.add-repair />
+                        @else
+                            @include('Mechanics/Repair/staticwire/add-repair')
+                        @endif
                     </div>
                 </div>
             </div>
@@ -180,38 +218,11 @@
                         <h4>My Recent Repairs</h4>
                     </div>
                     <div class="card-body">
-                        <table id="example2" class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Customer</th>
-                                <th>Vehicle</th>
-                                <th>Materials Used</th>
-                                <th>Base Cost</th>
-                                <th>Timestamp</th>
-                                <!--<th>Receipt</th>-->
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($latest as $repair)
-                                <tr>
-                                    <td>{{$repair->id}}</td>
-                                    <td>{{$repair->customer_name}}</td>
-                                    <td>{{$repair->vehicle}}</td>
-                                    <td>SC: {{$repair->scrap_used}} · AL: {{$repair->alum_used}} · ST: {{$repair->steel_used}} · GL: {{$repair->glass_used}} · RB: {{$repair->rubber_used}}</td>
-                                    <td>${{$repair->cost}}</td>
-                                    <td>{{$repair->timestamp}}</td>
-                                    <!--<td>
-                                        <a href="{{url('/repair/'.$repair->id)}}" >
-                                            <span class="material-symbols-outlined">edit</span>
-                                        </a> &nbsp;&nbsp;
-                                        <a href="{{url('/receipt/'.$repair->id.'.'.$repair->cost)}}" target="_blank">
-                                            <span class="material-symbols-outlined">receipt_long</span></a>
-                                    </td>-->
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                        @if(isset($live))
+                            <livewire:tables.mechanic.recent-repairs lazy/>
+                        @else
+                            @include('Mechanics/Repair/staticwire/recent-repairs')
+                        @endif
                     </div>
                 </div>
             </div>

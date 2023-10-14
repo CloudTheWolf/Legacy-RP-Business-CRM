@@ -49,46 +49,46 @@ deployment:
     - chmod +x $DOJ/up.sh
     # Take Sites Down
     - $DEV/down.sh $DEV/
-    #- $HARMONY/down.sh $HARMONY/
-    #- $SOL/down.sh $SOL/
-    #- $PBAY/down.sh $PBAY/
-    #- $MIRRORPARK/down.sh $MIRRORPARK/
-    #- $MOSLEYS/down.sh $MOSLEYS/
-    #- $HAYES/down.sh $HAYES/
-    #- $MADRAZOS/down.sh $MADRAZOS/
-    #- $BAHAMA/down.sh $BAHAMA/
-    #- $TLL/down.sh $TLL/
-    #- $ARCADE/down.sh $ARCADE/
-    #- $SPLITSIDES/down.sh $SPLITSIDES/
-    #- $YELLOWJACK/down.sh $YELLOWJACK/
-    #- $DOJ/down.sh $DOJ/
+    - $HARMONY/down.sh $HARMONY/
+    - $SOL/down.sh $SOL/
+    - $PBAY/down.sh $PBAY/
+    - $MIRRORPARK/down.sh $MIRRORPARK/
+    - $MOSLEYS/down.sh $MOSLEYS/
+    - $HAYES/down.sh $HAYES/
+    - $MADRAZOS/down.sh $MADRAZOS/
+    - $BAHAMA/down.sh $BAHAMA/
+    - $TLL/down.sh $TLL/
+    - $ARCADE/down.sh $ARCADE/
+    - $SPLITSIDES/down.sh $SPLITSIDES/
+    - $YELLOWJACK/down.sh $YELLOWJACK/
+    - $DOJ/down.sh $DOJ/
     # Deploy
     - /bin/cp -R * $DEV
-    #- /bin/cp -R * $HARMONY
-    #- /bin/cp -R * $SOL
-    #- /bin/cp -R * $PBAY
-    #- /bin/cp -R * $MIRRORPARK
-    #- /bin/cp -R * $MOSLEYS
-    #- /bin/cp -R * $HAYES
-    #- /bin/cp -R * $MADRAZOS
-    #- /bin/cp -R * $BAHAMA
-    #- /bin/cp -R * $TLL
-    #- /bin/cp -R * $ARCADE
-    #- /bin/cp -R * $SPLITSIDES
-    #- /bin/cp -R * $YELLOWJACK
-    #- /bin/cp -R * $DOJ
+    - /bin/cp -R * $HARMONY
+    - /bin/cp -R * $SOL
+    - /bin/cp -R * $PBAY
+    - /bin/cp -R * $MIRRORPARK
+    - /bin/cp -R * $MOSLEYS
+    - /bin/cp -R * $HAYES
+    - /bin/cp -R * $MADRAZOS
+    - /bin/cp -R * $BAHAMA
+    - /bin/cp -R * $TLL
+    - /bin/cp -R * $ARCADE
+    - /bin/cp -R * $SPLITSIDES
+    - /bin/cp -R * $YELLOWJACK
+    - /bin/cp -R * $DOJ
     # Bring Back Up
     - $DEV/up.sh $DEV/
-    #- $HARMONY/up.sh $HARMONY/
-    #- $SOL/up.sh $SOL/
-    #- $PBAY/up.sh $PBAY/
-    #- $MIRRORPARK/up.sh $MIRRORPARK/
-    #- $MOSLEYS/up.sh $MOSLEYS/
-    #- $HAYES/up.sh $HAYES/
-    #- $MADRAZOS/up.sh $MADRAZOS/
-    #- $BAHAMA/up.sh $BAHAMA/
-    #- $TLL/up.sh $TLL/
-    #- $ARCADE/up.sh $ARCADE/
-    #- $SPLITSIDES/up.sh $SPLITSIDES/
-    #- $YELLOWJACK/up.sh $YELLOWJACK/
-    #- $DOJ/up.sh $DOJ/
+    - $HARMONY/up.sh $HARMONY/
+    - $SOL/up.sh $SOL/
+    - $PBAY/up.sh $PBAY/
+    - $MIRRORPARK/up.sh $MIRRORPARK/
+    - $MOSLEYS/up.sh $MOSLEYS/
+    - $HAYES/up.sh $HAYES/
+    - $MADRAZOS/up.sh $MADRAZOS/
+    - $BAHAMA/up.sh $BAHAMA/
+    - $TLL/up.sh $TLL/
+    - $ARCADE/up.sh $ARCADE/
+    - $SPLITSIDES/up.sh $SPLITSIDES/
+    - $YELLOWJACK/up.sh $YELLOWJACK/
+    - $DOJ/up.sh $DOJ/

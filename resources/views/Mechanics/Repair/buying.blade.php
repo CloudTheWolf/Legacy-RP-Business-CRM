@@ -147,7 +147,7 @@
                         <h4>Purchase Calculator</h4>
                     </div>
                     <div class="card-body">
-                        <form class="row g-3" name="buy">
+                        <form class="row g-3" name="buy" method="post">
                             @csrf
                         <div id="scrapDiv" class="col-2">
                             <label for="inputEmailAddress" class="form-label">Scrap</label>

@@ -1,9 +1,7 @@
 <?php
 
-use App\Http\Controllers\Mechanic\Repair\RepairDelete;
-use App\Http\Controllers\Mechanic\Repair\RepairEdit;
-use App\Http\Controllers\Shared\Account\EditAccountController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SessionToggleController;
 /**
  * Mechanic
  */
@@ -52,6 +50,9 @@ use App\Http\Controllers\Shared\Warehouse\viewWarehouseController;
 |
 */
 
+Route::post('/set-session', [SessionToggleController::class,'setSession'])->name('set.session');
+
+
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
 require __DIR__ . '/shared.php';
@@ -74,4 +75,8 @@ if(config('app.siteMode') == "Motorcycle Club") {
 
 if(config('app.siteMode') == "DOJ") {
     require __DIR__ . '/doj.php';
+}
+
+if(config('app.siteMode') == "Dealership") {
+    require __DIR__ . '/dealership.php';
 }

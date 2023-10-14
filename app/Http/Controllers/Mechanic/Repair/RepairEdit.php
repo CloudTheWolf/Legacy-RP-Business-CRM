@@ -16,7 +16,6 @@ class RepairEdit extends Controller
 {
     public function Get(Request $request, $id)
     {
-        bdump("here");
         try{
             $client = new Client(['base_uri' => "https://legacyrp.company/",'timeout' => 5]);
             $response = $client->request('GET', '/op-framework/vehicles.json');
@@ -51,8 +50,11 @@ class RepairEdit extends Controller
 
     private function logRepair($id,$mechanic,$customer, $vehicle, $scrap, $aluminium, $steel, $glass, $rubber,$advKit, $oil, $total)
     {
+        $mechanicUser = User::whereId($mechanic)->select()->first();
+
         $repair = RepairLog::whereId($id)->first();
-        $repair->mechanic = $mechanic;
+        $repair->mechanic = $mechanicUser->id;
+        $repair->cid = $mechanicUser->cid;
         $repair->customer_name = $customer;
         $repair->vehicle = $vehicle;
         $repair->scrap_used = $scrap;

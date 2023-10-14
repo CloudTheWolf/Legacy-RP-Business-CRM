@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property int $mechanic
+ * @property int $cid
  * @property string|null $customer_name
  * @property string|null $vehicle
  * @property int $scrap_used
@@ -53,6 +54,7 @@ class RepairLog extends Model
     protected $fillable = [
         'mechanic',
         'customer_name',
+        'cid',
         'vehicle',
         'scrap_used',
         'alum_used',
@@ -72,6 +74,7 @@ class RepairLog extends Model
     protected $casts = [
         'id' => 'integer',
         'mechanic' => 'integer',
+        'cid' => 'integer',
         'customer_name' => 'string',
         'vehicle' => 'string',
         'scrap_used' => 'integer',
