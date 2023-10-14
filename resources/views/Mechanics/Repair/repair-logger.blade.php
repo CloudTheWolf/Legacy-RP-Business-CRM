@@ -198,7 +198,8 @@
                         <h4>Repair Calculator</h4>
                     </div>
                     <div class="card-body">
-                        @if(isset($live))
+                        @if(Session::get('LiveMode') != null && Session::get('LiveMode') == "True")
+                            <!-- Live Mode -->
                             <livewire:forms.mechanic.add-repair />
                         @else
                             @include('Mechanics/Repair/staticwire/add-repair')
@@ -218,7 +219,7 @@
                         <h4>My Recent Repairs</h4>
                     </div>
                     <div class="card-body">
-                        @if(isset($live))
+                        @if(Session::get('LiveMode') != null && Session::get('LiveMode') == "True")
                             <livewire:tables.mechanic.recent-repairs lazy/>
                         @else
                             @include('Mechanics/Repair/staticwire/recent-repairs')
