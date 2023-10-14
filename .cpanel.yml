@@ -3,7 +3,7 @@ deployment:
   tasks:
     # Deploy To Mechanic Shops
     - export HARMONY=/home/cloudthe/harmonycrm.fluxhosts.com
-    - export SOL=/home/cloudthe/sol.legacyrp.company
+    # - export SOL=/home/cloudthe/sol.legacyrp.company
     - export PBAY=/home/cloudthe/pbay.legacyrp.company
     - export MIRRORPARK=/home/cloudthe/mpar.legacyrp.company
     - export MOSLEYS=/home/cloudthe/mosleys.legacyrp.company
@@ -13,7 +13,7 @@ deployment:
     - export BAHAMA=/home/cloudthe/bahama-mamas.legacyrp.company
     - export TLL=/home/cloudthe/tequilala.legacyrp.company
     - export ARCADE=/home/cloudthe/videogeddon.legacyrp.company
-    - export SPLITSIDES=/home/cloudthe/splitsides.legacyrp.company
+    # - export SPLITSIDES=/home/cloudthe/splitsides.legacyrp.company
     - export YELLOWJACK=/home/cloudthe/yellowjack.legacyrp.company
     # Other
     - export DOJ=/home/cloudthe/doj.legacyrp.company
@@ -21,7 +21,7 @@ deployment:
     # Make Script Executable
     - chmod +x $DEV/down.sh
     - chmod +x $HARMONY/down.sh
-    - chmod +x $SOL/down.sh
+    # - chmod +x $SOL/down.sh
     - chmod +x $PBAY/down.sh
     - chmod +x $MIRRORPARK/down.sh
     - chmod +x $MOSLEYS/down.sh
@@ -30,7 +30,7 @@ deployment:
     - chmod +x $BAHAMA/down.sh
     - chmod +x $TLL/down.sh
     - chmod +x $ARCADE/down.sh
-    - chmod +x $SPLITSIDES/down.sh
+   # - chmod +x $SPLITSIDES/down.sh
     - chmod +x $YELLOWJACK/down.sh
     - chmod +x $DOJ/down.sh
     - chmod +x $DEV/up.sh
@@ -44,13 +44,13 @@ deployment:
     - chmod +x $BAHAMA/up.sh
     - chmod +x $TLL/up.sh
     - chmod +x $ARCADE/up.sh
-    - chmod +x $SPLITSIDES/up.sh
+    # - chmod +x $SPLITSIDES/up.sh
     - chmod +x $YELLOWJACK/up.sh
     - chmod +x $DOJ/up.sh
     # Take Sites Down
     - $DEV/down.sh $DEV/
     - $HARMONY/down.sh $HARMONY/
-    - $SOL/down.sh $SOL/
+    # - $SOL/down.sh $SOL/
     - $PBAY/down.sh $PBAY/
     - $MIRRORPARK/down.sh $MIRRORPARK/
     - $MOSLEYS/down.sh $MOSLEYS/
@@ -59,13 +59,13 @@ deployment:
     - $BAHAMA/down.sh $BAHAMA/
     - $TLL/down.sh $TLL/
     - $ARCADE/down.sh $ARCADE/
-    - $SPLITSIDES/down.sh $SPLITSIDES/
+    # - $SPLITSIDES/down.sh $SPLITSIDES/
     - $YELLOWJACK/down.sh $YELLOWJACK/
     - $DOJ/down.sh $DOJ/
     # Deploy
     - /bin/cp -R * $DEV
     - /bin/cp -R * $HARMONY
-    - /bin/cp -R * $SOL
+    # - /bin/cp -R * $SOL
     - /bin/cp -R * $PBAY
     - /bin/cp -R * $MIRRORPARK
     - /bin/cp -R * $MOSLEYS
@@ -74,13 +74,13 @@ deployment:
     - /bin/cp -R * $BAHAMA
     - /bin/cp -R * $TLL
     - /bin/cp -R * $ARCADE
-    - /bin/cp -R * $SPLITSIDES
+    # - /bin/cp -R * $SPLITSIDES
     - /bin/cp -R * $YELLOWJACK
     - /bin/cp -R * $DOJ
     # Bring Back Up
     - $DEV/up.sh $DEV/
     - $HARMONY/up.sh $HARMONY/
-    - $SOL/up.sh $SOL/
+    # - $SOL/up.sh $SOL/
     - $PBAY/up.sh $PBAY/
     - $MIRRORPARK/up.sh $MIRRORPARK/
     - $MOSLEYS/up.sh $MOSLEYS/
@@ -89,6 +89,6 @@ deployment:
     - $BAHAMA/up.sh $BAHAMA/
     - $TLL/up.sh $TLL/
     - $ARCADE/up.sh $ARCADE/
-    - $SPLITSIDES/up.sh $SPLITSIDES/
+    # - $SPLITSIDES/up.sh $SPLITSIDES/
     - $YELLOWJACK/up.sh $YELLOWJACK/
     - $DOJ/up.sh $DOJ/
