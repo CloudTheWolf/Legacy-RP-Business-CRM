@@ -11,9 +11,9 @@ class BasicLogin extends Controller
     public function Get(Request $request)
     {
         if (Auth::check()) {
-            return redirect(url('/'));
+            return redirect(url('/dashboard'));
         }
-        return view("authentication.login",compact("request"));
+        return view("auth.login",compact("request"));
     }
 
     public function Post(Request $request)
