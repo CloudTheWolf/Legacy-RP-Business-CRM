@@ -40,10 +40,16 @@ class ApplicationSelectProfile extends Controller
         }
 
         try {
-            $client = new Client(['base_uri' => Config('app.mdtUrl'), 'timeout' => 60]);
-            $headers = ['Accept' => 'application/json'];
-            $response = $client->request('GET', '/arrests/' . $request->input('cid'), $headers);
+            $client = new Client(['base_uri' => Config('app.mdtUrl'), 'timeout' => 60, 'headers' =>[
+                'referer' => url('/'),
+                'accept' => 'application/json',
+                'origin' => url('/'),
+            ]]);
+            $response = $client->get('/arrests/' . $request->input('cid'));
             $arrestData = json_decode($response->getBody(), true);
+            bdump($response,"HTTP Response ");
+            bdump($arrestData,"Body");
+            bdump($client,"client");
             $lastArrest = array_key_exists('lastArrestedDate', $arrestData) ?
                 Carbon::parse($arrestData['lastArrestedDate'])->format("l F dS Y") . " at " .
                 Carbon::parse($arrestData['lastArrestedDate'])->format("h:i A") . " (UTC) for..." : "Never";
