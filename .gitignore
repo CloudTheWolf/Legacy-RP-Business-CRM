@@ -17,3 +17,5 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/public/vendor/livewire-charts/app.js.LICENSE.txt
+/public/error_log
