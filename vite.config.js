@@ -17,7 +17,7 @@ export default defineConfig({
     ],
     build: {
         // Specify the output directory for the built files
-        outDir: 'public',
+        outDir: 'public/styles',
         assetsDir: 'css',
         // Specify fixed filenames for the output JavaScript and CSS files
         rollupOptions: {

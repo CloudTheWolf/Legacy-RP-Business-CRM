@@ -27,6 +27,7 @@ use Laravel\Jetstream\HasProfilePhoto;
  * @property int|null $cid
  * @property string|null $steamId
  * @property int|null $discord
+ * @property string|null $avatar_url
  * @property bool $IsAdmin
  * @property bool $disabled
  * @method static Builder|User newModelQuery()
@@ -79,6 +80,7 @@ class User extends Authenticatable
         'cid',
         'steamId',
         'discord',
+        'avatar_url',
         'IsAdmin',
         'disabled',
         'two_factor_recovery_codes',

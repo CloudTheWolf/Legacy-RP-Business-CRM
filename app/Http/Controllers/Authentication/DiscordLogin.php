@@ -10,6 +10,7 @@ use App\ThirdPartyAuth\DiscordAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Session;
 
 class DiscordLogin extends Controller
 {
@@ -57,8 +58,11 @@ class DiscordLogin extends Controller
                 return redirect('/login')->with('error', "No active user found linked to this discord");
             }
 
+            $user->avatar_url = 'https://cdn.discordapp.com/avatars/'.$discordInfo->id.'/'.$discordInfo->avatar.'.png';
+            $user->save();
             Auth::login($user, true);
 
+            //session(['avatar' => 'https://cdn.discordapp.com/avatars/'.$discordInfo->id.'/'.$discordInfo->avatar.'.png']);
             return redirect('/dashboard')->with('success', 'Successfully authenticated with Discord.');
 
         } catch (\Exception $e) {

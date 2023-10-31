@@ -11,16 +11,61 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
         <link rel="icon" type="image/png" href="{{url('/assets/images/branding')}}/{!! config('app.brandingPath') !!}/logo-icon2.png">
+
         <!-- Scripts -->
-        @if (app()->runningInConsole())
+        @if (config('app.url') == 'http://localhost:8000')
             <!-- Include Vite assets for development -->
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @else
-            <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
-            <script src="{{ asset('js/app.js') }}"></script>
-            <script src="{{ asset('js/app2.js') }}"></script>
+            <link rel="stylesheet" href="{{ asset('/styles/css/app.css') }}">
+            <script src="{{ asset('/styles/js/app.js') }}"></script>
+            <script src="{{ asset('/styles/js/app2.js') }}"></script>
         @endif
+
+        <style>
+            /* width */
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            /* Track */
+            ::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+                background: #888;
+            }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+
+            .disable-link {
+                pointer-events: none; /* Makes the link not clickable */
+            }
+
+            .disable-link::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(91, 91, 91, 0.71); /* Grey overlay with 50% opacity */
+                z-index: 999; /* Ensure the overlay is above the link content */
+            }
+
+            .apexcharts-svg {
+                background-color: transparent !important;
+            }
+
+        </style>
 
         <!-- Styles -->
         @livewireStyles
@@ -49,5 +94,6 @@
         @stack('modals')
 
         @livewireScripts
+        @livewireChartsScripts
     </body>
 </html>

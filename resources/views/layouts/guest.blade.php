@@ -11,16 +11,18 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+        <link rel="icon" type="image/png" href="{{url('/assets/images/branding')}}/{!! config('app.brandingPath') !!}/logo-icon2.png">
 
         <!-- Scripts -->
-        @if (app()->runningInConsole())
+        @if (config('app.url') == 'http://localhost:8000')
             <!-- Include Vite assets for development -->
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @else
-            <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
-            <script src="{{ asset('js/app.js') }}"></script>
-            <script src="{{ asset('js/app2.js') }}"></script>
+            <link rel="stylesheet" href="{{ asset('styles/css/app.css') }}">
+            <script src="{{ asset('styles/js/app.js') }}"></script>
+            <script src="{{ asset('styles/js/app2.js') }}"></script>
         @endif
 
         <!-- Styles -->

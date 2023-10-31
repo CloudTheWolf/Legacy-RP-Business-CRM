@@ -1,7 +1,7 @@
-
-<div id="head-card" class="w-1/4 sm:w-1/4 pr-4 pl-4 lg:w-1/4 pr-4 pl-4">
+@props(['textclass' => 'yellow-500'])
+<div id="head-card">
     <div
-         {{ $attributes->merge(['class' => 'card radius-10 border-start border-0 border-3']) }}>
+         {{ $attributes->merge(['class' => "relative flex flex-col min-w-0 rounded break-words border-300 border-l-4 bg-gray-800"]) }}>
         {{ $slot }}
     </div>
 </div>

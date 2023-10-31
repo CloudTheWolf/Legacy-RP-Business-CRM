@@ -2,6 +2,13 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
 
+const colors = require('tailwindcss/colors')
+
+delete colors['lightBlue'];
+delete colors['warmGray'];
+delete colors['trueGray'];
+delete colors['coolGray'];
+delete colors['blueGray'];
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -18,11 +25,14 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                ...colors,
+            },
         },
     },
 
     plugins: [
-        'flowbite/plugin'   ,
+        'flowbite/plugin',
         forms,
         typography
     ],
