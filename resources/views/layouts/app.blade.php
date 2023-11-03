@@ -16,12 +16,13 @@
         <link rel="icon" type="image/png" href="{{url('/assets/images/branding')}}/{!! config('app.brandingPath') !!}/logo-icon2.png">
 
         <!-- Scripts -->
+
+
         @if (config('app.url') == 'http://localhost:8000')
             <!-- Include Vite assets for development -->
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @else
             <link rel="stylesheet" href="{{ asset('/styles/css/app.css') }}">
-            <script src="{{ asset('/styles/js/app.js') }}"></script>
             <script src="{{ asset('/styles/js/app2.js') }}"></script>
         @endif
 
@@ -93,7 +94,7 @@
 
         @stack('modals')
 
-        @livewireScripts
         @livewireChartsScripts
+
     </body>
 </html>

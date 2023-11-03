@@ -1,9 +1,14 @@
 import { defineConfig } from 'vite';
 import laravel, { refreshPaths } from 'laravel-vite-plugin';
+import inject from "@rollup/plugin-inject";
 
 
 export default defineConfig({
     plugins: [
+        inject({
+            $: 'jquery',
+            jQuery: 'jquery',
+        }),
         laravel({
             input: [
                 'resources/css/app.css',
@@ -27,7 +32,7 @@ export default defineConfig({
                 assetFileNames: 'css/app.css',
             },
         },
-        cssCodeSplit: false,
+        cssCodeSplit: true,
         minify: 'esbuild',
     },
 });
