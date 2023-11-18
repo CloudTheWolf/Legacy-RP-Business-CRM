@@ -19,7 +19,7 @@ class BasicLogin extends Controller
     public function Post(Request $request)
     {
         $credentials = array(
-            'email' => $request->input('username'),
+            'email' => $request->input('email'),
             'password' => $request->input('password'),
         );
 

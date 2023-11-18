@@ -12,7 +12,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" wire:navigate>
                         <span class="material-symbols-outlined">home</span> {{ __('Dashboard') }}
                     </x-nav-link>
 
@@ -25,13 +25,13 @@
                             <x-slot name="content">
                                 <ul class="text-sm text-gray-700 dark:text-gray-400" aria-labelledby="mechanicMenu">
                                     <li>
-                                        <a href="{{route('repair-log-index')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Repair Logger')}}</a>
+                                        <a href="{{route('mechanic-repair-log-index')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Repair Logger')}}</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('All Repairs')}}</a>
+                                        <a href="{{route('mechanic-all-repairs')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('All Repairs')}}</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Purchase Calculator')}}</a>
+                                        <a href="{{route('mechanic-purchase-calculator')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Purchase Calculator')}}</a>
                                     </li>
                                 </ul>
                             </x-slot>
@@ -47,51 +47,53 @@
                             <x-slot name="content">
                                 <ul class="text-sm text-gray-700 dark:text-gray-400" aria-labelledby="towMenu">
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Tow Tracker')}}</a>
+                                        <a href="{{route('tow-tracker')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Tow Tracker')}}</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Impound History')}}</a>
+                                        <a href="{{route('tow-impound-history')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Impound History')}}</a>
                                     </li>
                                 </ul>
                             </x-slot>
                         </x-slot>
                     </x-nav-dropdown>
 
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('team')">
+                    <x-nav-link href="{{ route('team-page') }}" :active="request()->routeIs('team')" wire:navigate>
                         <span class="material-symbols-outlined">groups</span> {{ __('Team') }}
                     </x-nav-link>
-
+                    @if(Auth::user()->IsAdmin == 1)
                     <x-nav-dropdown :active="request()->routeIs('admin*')" :title="__('Admin')" :toggle="'adminMenu'" :mt="'mt-[17rem]'">
                         <x-slot name="trigger" :active="request()->routeIs('admin*')" >
-                            <x-nav-link-parent :active="request()->routeIs('admin*')">
+                            <x-nav-link-parent :active="request()->routeIs('admin*')" wire:navigate>
                                 <span class="material-symbols-outlined">admin_panel_settings</span> {{__('Admin')}}
                             </x-nav-link-parent>
 
                             <x-slot name="content">
                                 <ul class="text-sm text-gray-700 dark:text-gray-400" aria-labelledby="adminMenu">
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Job Applications')}}</a>
+                                        <a href="{{route('admin-pending-applications')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Job Applications')}}</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Add User')}}</a>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Add User')}}</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Manage Users')}}</a>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Manage Users')}}</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Site Settings')}}</a>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Site Settings')}}</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Mechanic Settings')}}</a>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Mechanic Settings')}}</a>
                                     </li>
+                                    @if(Config("app.botName") != null)
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Restart Bot')}}</a>
+                                        <a href="https://c3.cloudthewolf.com/services/bots/restart.php?bot={{Config("app.botName")}}&popup=1" target="_blank" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Restart Bot')}}</a>
                                     </li>
+                                    @endif
                                 </ul>
                             </x-slot>
                         </x-slot>
                     </x-nav-dropdown>
-
+                    @endif
                 </div>
             </div>
 
@@ -103,9 +105,6 @@
                                 <span class="inline-flex rounded-md">
                                     <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700 transition ease-in-out duration-150">
                                         <span class="material-symbols-outlined">schedule</span>
-                                        <!--<svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                                        </svg>-->
                                     </button>
                                 </span>
                             </x-slot>
@@ -150,27 +149,24 @@
                                 {{ __('Manage Account') }}
                             </div>
 
-                            <x-dropdown-link href="{{ route('profile.show') }}">
+                            <x-dropdown-link href="{{ route('profile.show') }}" wire:navigate>
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
-                            @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                <x-dropdown-link href="{{ route('api-tokens.index') }}">
-                                    {{ __('API Tokens') }}
-                                </x-dropdown-link>
-                            @endif
+                            <div class="border-t border-gray-200 dark:border-gray-600"></div>
+                            <x-dropdown-link href="{{ route('logout') }}" wire:navigate>
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
 
                             <div class="border-t border-gray-200 dark:border-gray-600"></div>
 
-                            <!-- Authentication -->
-                            <form method="POST" action="{{ route('logout') }}" x-data>
-                                @csrf
+                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                <a href="https://github.com/CloudTheWolf/Legacy-RP-Business-CRM" target="_blank">
+                                    Version 4.0.0<br>
+                                    Developed with 💖 By CloudTheWolf
+                                </a>
+                            </div>
 
-                                <x-dropdown-link href="{{ route('logout') }}"
-                                         @click.prevent="$root.submit();">
-                                    {{ __('Log Out') }}
-                                </x-dropdown-link>
-                            </form>
                         </x-slot>
                     </x-dropdown>
                 </div>
@@ -191,7 +187,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" wire:navigate>
                 <span class="material-symbols-outlined">home</span> {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
@@ -205,13 +201,13 @@
                     <x-slot name="content">
                         <ul class="text-sm text-gray-700 dark:text-gray-400" aria-labelledby="mechanicMenu">
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Repair Logger')}}</a>
+                                <a href="{{route('mechanic-repair-log-index')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Repair Logger')}}</a>
                             </li>
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('All Repairs')}}</a>
+                                <a href="{{route('mechanic-all-repairs')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('All Repairs')}}</a>
                             </li>
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Purchase Calculator')}}</a>
+                                <a href="{{route('mechanic-purchase-calculator')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Purchase Calculator')}}</a>
                             </li>
                         </ul>
                     </x-slot>
@@ -228,10 +224,10 @@
                     <x-slot name="content">
                         <ul class="text-sm text-gray-700 dark:text-gray-400" aria-labelledby="towMenu">
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Tow Tracker')}}</a>
+                                <a href="{{route('tow-tracker')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Tow Tracker')}}</a>
                             </li>
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Impound History')}}</a>
+                                <a href="{{route('tow-impound-history')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Impound History')}}</a>
                             </li>
                         </ul>
                     </x-slot>
@@ -239,9 +235,10 @@
             </x-responsive-nav-dropdown>
 
             <!-- Team -->
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('team')">
+            <x-responsive-nav-link href="{{ route('team-page') }}" :active="request()->routeIs('team')" wire:navigate>
                 <span class="material-symbols-outlined">groups</span> {{ __('Team') }}
             </x-responsive-nav-link>
+            @if(Auth::user()->IsAdmin == 1)
             <!-- Admin -->
             <x-responsive-nav-dropdown :active="request()->routeIs('admin*')" :title="__('Admin')" :toggle="'adminMenu'" :mt="'mt-[17rem]'">
                 <x-slot name="trigger" :active="request()->routeIs('admin*')" >
@@ -252,27 +249,30 @@
                     <x-slot name="content">
                         <ul class="text-sm text-gray-700 dark:text-gray-400" aria-labelledby="adminMenu">
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Job Applications')}}</a>
+                                <a href="{{route('admin-pending-applications')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Job Applications')}}</a>
                             </li>
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Add User')}}</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Add User')}}</a>
                             </li>
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Manage Users')}}</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Manage Users')}}</a>
                             </li>
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Site Settings')}}</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Site Settings')}}</a>
                             </li>
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Mechanic Settings')}}</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Mechanic Settings')}}</a>
                             </li>
+                            @if(Config("app.botName") != null)
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Restart Bot')}}</a>
+                                <a href="https://c3.cloudthewolf.com/services/bots/restart.php?bot={{Config("app.botName")}}&popup=1" target="_blank" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" >{{__('Restart Bot')}}</a>
                             </li>
+                            @endif
                         </ul>
                     </x-slot>
                 </x-slot>
             </x-responsive-nav-dropdown>
+            @endif
 
         </div>
 
@@ -287,19 +287,14 @@
 
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
-                <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')" wire:navigate>
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}" x-data>
-                    @csrf
-
-                    <x-responsive-nav-link href="{{ route('logout') }}"
-                                   @click.prevent="$root.submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
-                </form>
+                <x-responsive-nav-link href="{{ route('profile.show') }}" wire:navigate>
+                    {{ __('Log Out') }}
+                </x-responsive-nav-link>
 
 
                 <div class="border-t border-gray-200 dark:border-gray-600"></div>
@@ -310,6 +305,14 @@
 
                 <x-clockin />
 
+                <div class="border-t border-gray-200 dark:border-gray-600"></div>
+
+                <div class="block px-4 py-2 text-xs text-gray-400">
+                    <a href="https://github.com/CloudTheWolf/Legacy-RP-Business-CRM" target="_blank">
+                        Version 4.0.0<br>
+                        Developed with 💖 By CloudTheWolf
+                    </a>
+                </div>
 
             </div>
         </div>

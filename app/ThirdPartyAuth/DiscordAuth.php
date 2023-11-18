@@ -3,7 +3,9 @@
 namespace App\ThirdPartyAuth;
 
 use App\Contracts\DiscordAuthInterface;
+use App\Models\DiscordRole;
 use App\Models\DiscordToken;
+use GuzzleHttp\Client;
 use GuzzleHttp\Client as GuzzleClient;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -38,12 +40,12 @@ class DiscordAuth implements DiscordAuthInterface
         $this->guzzleClient = new GuzzleClient(['verify' => env('VERIFY_HTTPS',true)]);
     }
 
-    public function redirectToProvider(): RedirectResponse
+    public function RedirectToProvider(): RedirectResponse
     {
         return redirect($this->getAuthUrl());
     }
 
-    public function redirectApplyToProvider(): RedirectResponse
+    public function RedirectApplyToProvider(): RedirectResponse
     {
         $this->authUrl = $this->buildUrl(
             url('/apply/auth/discord/handle',[],Config::get('discord-auth.https'))
@@ -52,7 +54,7 @@ class DiscordAuth implements DiscordAuthInterface
         return redirect($this->getAuthUrl());
     }
 
-    public function redirectExistingToProvider(): RedirectResponse
+    public function RedirectExistingToProvider(): RedirectResponse
     {
         $this->authUrl = $this->buildUrl(
             url('/auth/discord/handle/link',[],Config::get('discord-auth.https'))
@@ -60,6 +62,7 @@ class DiscordAuth implements DiscordAuthInterface
 
         return redirect($this->authUrl);
     }
+
     public function handleProviderCallback(Request $request, $callback = null)
     {
         $code = $request->get('code');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Shared\Team;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,8 +21,10 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified', ])->group(function () {
-    if (config('app.siteMode') == "Mechanic") {
-        require __DIR__ . '/mechanic.php';
-    }
+    Route::get('/team',[Team::class,'index'])->name('team-page');
+
 });
 
+if (config('app.siteMode') == "Mechanic") {
+    require __DIR__ . '/mechanic.php';
+}

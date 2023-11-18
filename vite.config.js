@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel, { refreshPaths } from 'laravel-vite-plugin';
 import inject from "@rollup/plugin-inject";
+import {onMounted} from "vue";
 
 
 export default defineConfig({

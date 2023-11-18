@@ -23,17 +23,17 @@ class DiscordLogin extends Controller
 
     function get(Request $request)
     {
-        return $this->discord->redirectToProvider();
+        return $this->discord->RedirectToProvider();
     }
 
     public function getFromProfile(Request $request)
     {
-        return $this->discord->redirectExistingToProvider();
+        return $this->discord->RedirectExistingToProvider();
     }
 
     public function getFromApply(Request $request)
     {
-        return $this->discord->redirectApplyToProvider();
+        return $this->discord->RedirectApplyToProvider();
     }
 
     public function handle(Request $request)

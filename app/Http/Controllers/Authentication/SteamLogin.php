@@ -41,7 +41,8 @@ class SteamLogin extends Controller
         }
 
         if (($request->getPathInfo()) == "/apply/auth/steam/handle") {;
-            return redirect(url('/apply/select-profile'))->with('steamID', 'steam:' . dechex((int)$this->steam->getUserInfo()->steamID64));
+            session(['steamID' => 'steam:' . dechex((int)$this->steam->getUserInfo()->steamID64)]);
+            return redirect(url('/apply/cid'));
         }
 
         $info = $this->steam->getUserInfo();

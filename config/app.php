@@ -188,4 +188,6 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'siteMode' => env('SITE_MODE','Mechanic'),
+
 ];

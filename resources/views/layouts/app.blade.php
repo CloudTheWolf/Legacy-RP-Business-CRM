@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,13 +17,12 @@
 
         <!-- Scripts -->
 
-
         @if (config('app.url') == 'http://localhost:8000')
             <!-- Include Vite assets for development -->
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @else
-            <link rel="stylesheet" href="{{ asset('/styles/css/app.css') }}">
-            <script src="{{ asset('/styles/js/app2.js') }}"></script>
+            <link rel="stylesheet" href="{{ asset('/styles/css/app.css') }}?v={{\Carbon\Carbon::now()->timestamp}}">
+            <script src="{{ asset('/styles/js/app2.js') }}?v={{\Carbon\Carbon::now()->timestamp}}"></script>
         @endif
 
         <style>
@@ -77,7 +76,14 @@
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             @livewire('navigation-menu')
 
+            @if(!Config('app.is-stable'))
+                <div class="p-4 text-sm text-center text-gray-50 bg-red-500" role="alert">
+                    <span class="font-medium">Error!</span> Config table missing. Did you remember to run "<code>php artisan migrate</code>"?
+                </div>
+            @endif
+
             <!-- Page Heading -->
+
             @if (isset($header))
                 <header class="bg-white dark:bg-gray-800 shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
