@@ -9,6 +9,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -106,14 +107,14 @@ class ApplicationAuth extends Controller
         $application->save();
         $status = null;
         if(config('app.postJobApplications')) {
-            $status = Http::withoutVerifying()->post(config('app.jobWebhook'), [
+           Http::withoutVerifying()->post(config('app.jobWebhook'), [
                 "username" => "Application From: " . $request->input('name'),
                 "content" => "[Click Here To View On Website](<".url(env('app_url') . "/admin/applications/". $application->id).">)",
                 "embeds" => [
                     [
                         "title" => "New Job Application",
                         "description" => "A new job application has been submitted",
-                        "color" => 15358714,
+                        "color" => hexdec(Config::get('app.discord-embed-color','EA5AFA')),
                         "fields" =>
                             [
                                 [
@@ -163,9 +164,12 @@ class ApplicationAuth extends Controller
                                 ],
                             ],
                         "author" => [
-                            "name" => "Developed By CloudTheWolf 🐺",
+                            "name" => "🔔 New Job Application",
+                        ],
+                        "footer" => [
+                            "text" => "Developed By CloudTheWolf 🐺",
                             "icon_url" => "https://cloudthewolf.com/images/pngtuber-closed-2.png"
-                        ]
+                        ],
                     ]
                 ]
             ]);

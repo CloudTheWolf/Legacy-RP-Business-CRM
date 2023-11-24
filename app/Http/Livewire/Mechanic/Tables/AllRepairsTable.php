@@ -26,7 +26,7 @@ class AllRepairsTable extends DataTableComponent
             })
             ->setTableRowUrlTarget(function($row) {
                 return 'navigate';
-            });;
+            });
     }
 
     public function columns(): array

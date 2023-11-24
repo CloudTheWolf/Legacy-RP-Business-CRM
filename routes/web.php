@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-require __DIR__ . '/auth.php';
+include_once __DIR__ . '/auth.php';
+include_once __DIR__ . '/shared.php';
 
 Route::get('/', function () {
     return redirect('/dashboard');
@@ -26,5 +27,5 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 });
 
 if (config('app.siteMode') == "Mechanic") {
-    require __DIR__ . '/mechanic.php';
+    include_once __DIR__ . '/mechanic.php';
 }

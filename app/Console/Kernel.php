@@ -12,7 +12,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('staff:clockout')->everyFiveMinutes();
+        $schedule->command('staff:updatetime')->everyMinute();
+        $schedule->command('staff:synctow')->everyMinute();
+        $schedule->command("discord:sync")->hourly();
     }
 
     /**

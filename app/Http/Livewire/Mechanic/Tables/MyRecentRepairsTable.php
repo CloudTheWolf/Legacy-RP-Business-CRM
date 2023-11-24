@@ -20,7 +20,13 @@ class MyRecentRepairsTable extends DataTableComponent
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id');
+        $this->setPrimaryKey('id')
+            ->setTableRowUrl(function($row) {
+                return route('mechanic-repair-log-edit',['id' => $row]);
+            })
+            ->setTableRowUrlTarget(function($row) {
+                return 'navigate';
+            });
         $this->setSearchDisabled();
         $this->setColumnSelectDisabled();
         $this->setPerPageVisibilityStatus(false);

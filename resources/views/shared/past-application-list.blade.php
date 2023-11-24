@@ -13,7 +13,7 @@
                     <div class="grid md:grid-cols-1 sm:grid-cols-1 gap-4 sm:content-center	md:content-normal">
                         <div class="relative flex flex-col min-w-0 rounded break-words bg-gray-800">
                             <div class="flex flex-col px-2 py-1 content-center items-center">
-                                <a href="{{route('admin-past-applications')}}" wire:navigate  class="bg-transparent text-violet-500 border border-violet-700 hover:text-white hover:bg-violet-700 hover:border-transparent focus:outline-none focus:ring-4 focus:ring-violet-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 my-2 dark:focus:ring-violet-900"><span class="flex flex-col material-symbols-outlined">history</span>Past Applications</a>
+                                <a href="{{route('admin-pending-applications')}}" wire:navigate  class="bg-transparent text-violet-500 border border-violet-700 hover:text-white hover:bg-violet-700 hover:border-transparent focus:outline-none focus:ring-4 focus:ring-violet-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 my-2 dark:focus:ring-violet-900"><span class="flex flex-col material-symbols-outlined">pending</span>Pending Applications</a>
                             </div>
                         </div>
                     </div>

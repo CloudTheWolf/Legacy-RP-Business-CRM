@@ -41,14 +41,14 @@
 
 
             </div>
-            <div class="columns-3">
-                <div class="w-full">
+            <div class="grid md:grid-cols-3 grid-cols-1 content-center">
+                <div class="w-full col-span-1 mb-2">
                     <a href="{{route("auth.steam")}}" class="bg-black hover:bg-black text-white font-semibold hover:text-[#FAF9F6] py-2 px-4 border border-black hover:border-white rounded"><i class="text-lg lni lni-steam"></i> Steam</a>
                 </div>
-                <div class="w-full">
+                <div class="md:w-full w-fit">
                     <a href="{{route("auth.discord")}}" class="bg-[#7289da] hover:bg-[#98abed] text-white font-semibold hover:text-[#FAF9F6] py-2 px-4 border border-[#7289da] hover:border-[#98abed] rounded"><i class="text-lg lni lni-discord"></i> Discord</a>
                 </div>
-                <x-button class="ml-4">
+                <x-button class="ml-1 md:w-full w-1/2 md:mt-0 mt-3">
                     {{ __('Log in') }}
                 </x-button>
             </div>

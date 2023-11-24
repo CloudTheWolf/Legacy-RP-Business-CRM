@@ -36,7 +36,7 @@ class ClockOut extends Command
         {
             $this->info("Starting Auto Clockout Process");
             $usersOnDuty = User::whereOnDuty(1)->get();
-            $usersInCity = Http::withToken(env("OP_FW_API_KEY"))->acceptJson()->get(env("API_BASE_URI")."/op-framework/players.json")->json()["data"];
+            $usersInCity = Http::withoutVerifying()->withToken(env("OP_FW_API_KEY"))->acceptJson()->get(env("API_BASE_URI")."/op-framework/players.json")->json()["data"];
 
             foreach ($usersOnDuty as $user) {
                 $this->info("Checking If ".$user->name." Is still in the city");
@@ -90,7 +90,7 @@ class ClockOut extends Command
 
                 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
 
-                Http::withBody($hookObject,"application/json")->post(Config("app.timesheetWebhook"));
+                Http::withoutVerifying()->withBody($hookObject,"application/json")->post(Config("app.timesheetWebhook"));
                 $user->onDuty = 0;
                 $user->workingAs = "Off-Duty";
                 $user->save();

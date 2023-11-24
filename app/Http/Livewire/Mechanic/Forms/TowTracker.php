@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Mechanic\Forms;
 
 use App\Models\TowLog;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 
@@ -18,10 +19,10 @@ class TowTracker extends Component
     public function mount()
     {
         $towTally = TowLog::query()->where('userId','=',Auth::user()->id)->first();
-        $this->local = $towTally->local;
-        $this->citizen = $towTally->citizen;
-        $this->pd_ems = $towTally->pd;
-        $this->help = $towTally->help;
+        $this->local = $towTally->local ?? 0;
+        $this->citizen = $towTally->citizen ?? 0;
+        $this->pd_ems = $towTally->pd ?? 0;
+        $this->help = $towTally->help ?? 0;
 
     }
     public function render()
@@ -105,7 +106,7 @@ class TowTracker extends Component
                 [
                     "title"=> Auth::user()->name." Tow Log",
                     "description"=> Auth::user()->name." Tow Log Submitted At ".now(),
-                    "color"=> 11022999,
+                    "color"=> hexdec(Config::get('app.discord-embed-color','EA5AFA')),
                     "author"=> [
                         "name"=> env('COMPANY_NAME')." Tow Log System"
                     ],
@@ -130,7 +131,12 @@ class TowTracker extends Component
                             "value" => $help,
                             "inline" => true
                         ]
-                    ]
+                    ],
+
+                    "footer" => [
+                        "text" => "Developed By CloudTheWolf 🐺",
+                        "icon_url" => "https://cloudthewolf.com/images/pngtuber-closed-2.png"
+                    ],
                 ]
             ],
         ]);

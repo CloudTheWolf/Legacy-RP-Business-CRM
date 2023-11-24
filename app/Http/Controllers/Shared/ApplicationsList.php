@@ -25,4 +25,9 @@ class ApplicationsList extends Controller
         $applications = Applications::query()->whereState(0)->get();
         return view('shared.application-list',compact('applications'));
     }
+    public function past()
+    {
+        $applications = Applications::query()->whereState(1)->get();
+        return view('shared.past-application-list',compact('applications'));
+    }
 }

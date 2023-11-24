@@ -12,6 +12,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Application;
 use \Illuminate\Contracts\Foundation\Application as ContractedApplication;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Throwable;
@@ -62,8 +65,9 @@ class RepairLogger extends Component
         return view('mechanic.forms.repair-logger',compact('mechanics'));
     }
 
-    public function save(): RedirectResponse
+    public function save()
     {
+
         try {
             $mechanic = User::query()->whereId($this->mechanic)->first();
             $repair = new RepairLog();
@@ -81,12 +85,17 @@ class RepairLogger extends Component
             $repair->customer_name = $this->customer;
             $repair->cost = $this->final_cost;
             $repair->saveOrFail();
-            //TODO: Add Discord Notification
+            if(Config::get('app.postSales') != 1)
+            {
+                return redirect()->route('mechanic-repair-log-index')->with('repair-log-success', 'Success');
+            }
+            $this->LogToDiscord();
         } catch (Throwable $t) {
             return redirect()->back()->with('repair-log-error', 'Error'.$t->getMessage());
+        } finally {
+            $this->reset();
         }
-        $this->mount();
-        return redirect()->back()->with('repair-log-success', 'Repair Logged Successful');
+        return redirect()->route('mechanic-repair-log-index')->with('repair-log-success', 'Success');
 
     }
 
@@ -164,6 +173,84 @@ class RepairLogger extends Component
     private function getAllMechanics() : Collection
     {
         return User::query()->whereDisabled(0)->where('role','!=', 'Tow Driver')->orderBy('name')->get();
+    }
+
+    private function LogToDiscord()
+    {
+        Http::withoutVerifying()->withOptions(["verify"=>false])->post(Config('app.saleWebhook'), [
+            "embeds"=> [
+                [
+                    "title"=> Auth::user()->name ." has logged a repair!",
+                    "description"=> "See the repair details below:",
+                    "color"=> hexdec(Config::get('app.discord-embed-color','EA5AFA')),
+                    "fields" =>
+                        [
+                            [
+                                "name" => "Mechanic",
+                                "value"=> Auth::user()->name,
+                                "inline" => false
+                            ],
+                            [
+                                "name" => "Customer",
+                                "value"=> $this->customer,
+                                "inline" => true
+                            ],
+                            [
+                                "name" => "Vehicle",
+                                "value"=> $this->vehicle_name,
+                                "inline" => true
+                            ],
+                            [
+                                "name" => "Scrap Used",
+                                "value"=> $this->scrap,
+                                "inline" => false
+                            ],
+                            [
+                                "name" => "Aluminium Used",
+                                "value"=> $this->aluminium,
+                                "inline" => true
+                            ],
+                            [
+                                "name" => "Steel Used",
+                                "value"=> $this->steel,
+                                "inline" => true
+                            ],
+                            [
+                                "name" => "Glass Used",
+                                "value"=> $this->glass,
+                                "inline" => true
+                            ],
+                            [
+                                "name" => "Rubber Used",
+                                "value"=> $this->rubber,
+                                "inline" => true
+                            ],
+                            [
+                                "name" => "Adv Repair Kits Sold",
+                                "value"=> $this->advanced_repair_kit,
+                                "inline" => true
+                            ],
+                            [
+                                "name" => "Motor Oil",
+                                "value"=> $this->motor_oil,
+                                "inline" => true
+                            ],
+                            [
+                                "name" => "Total",
+                                "value"=> "$".$this->final_cost,
+                                "inline" => false
+                            ],
+                        ],
+                    "author"=> [
+                        "name"=> Config('app.companyName')." Live Repair Logger"
+                    ],
+                    "footer" => [
+                        "text" => "Developed By CloudTheWolf 🐺",
+                        "icon_url" => "https://cloudthewolf.com/images/pngtuber-closed-2.png"
+                    ],
+                ]
+            ],
+        ]);
     }
 
 }

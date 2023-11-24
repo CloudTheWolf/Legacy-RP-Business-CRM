@@ -4,6 +4,7 @@ use App\Http\Controllers\Mechanic\AllRepairs;
 use App\Http\Controllers\Mechanic\ApplicationsView;
 use App\Http\Controllers\Mechanic\Dashboard;
 use App\Http\Controllers\Mechanic\ImpoundHistory;
+use App\Http\Controllers\Mechanic\MechanicSettings;
 use App\Http\Controllers\Mechanic\PurchaseCalculator;
 use App\Http\Controllers\Mechanic\RepairEditor;
 use App\Http\Controllers\Mechanic\RepairLogger;
@@ -34,7 +35,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::prefix('/admin')->group(function () {
         Route::get('/applications', [ApplicationsList::class, 'index'])->name('admin-pending-applications');
+        Route::get('/past-applications', [ApplicationsList::class, 'past'])->name('admin-past-applications');
         Route::get('/applications/{id}', [ApplicationsView::class, 'index'])->name('admin-view-application');
         Route::post('/applications/{id}', [ApplicationsView::class, 'post'])->name('admin-accept-application');
+        Route::get('/mechanic-settings',[MechanicSettings::class,'index'])->name('admin-mechanic-settings');
     });
 });

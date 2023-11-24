@@ -72,12 +72,12 @@ class ApplicationsView extends Controller
                 ];
 
                 $staffRole = DiscordRole::whereRoleName('Staff');
-                if (!$staffRole->count() == 0 || !is_null($staffRole->first()->role_id)) {
+                if (!$staffRole->count() == 0 || $staffRole->first()->role_id != -1) {
                     $jsonBody['json']['roles'][] = $staffRole->first()->role_id;
                 }
 
                 $jobRole = DiscordRole::whereRoleName($request->input('role'));
-                if (!$jobRole->count() == 0 || !is_null($jobRole->first()->role_id)) {
+                if (!$jobRole->count() == 0 || $jobRole->first()->role_id != -1) {
                     $jsonBody['json']['roles'][] = $jobRole->first()->role_id;
                 }
 

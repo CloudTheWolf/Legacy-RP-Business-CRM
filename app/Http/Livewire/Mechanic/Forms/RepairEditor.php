@@ -88,7 +88,7 @@ class RepairEditor extends Component
         } catch (Throwable $t) {
             return redirect()->back()->with('repair-log-error', 'Error'.$t->getMessage())->with('navigate', true);
         }
-        return redirect()->route('mechanic-repair-log-index')->with('repair-log-success', 'Repair Updated Successful')->with('navigate', true);
+        return $this->redirect(route('mechanic-repair-log-index'))->with('repair-log-success', 'Repair Updated Successful')->with('navigate', true);
 
     }
 

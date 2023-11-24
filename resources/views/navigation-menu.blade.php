@@ -18,7 +18,7 @@
 
                     <x-nav-dropdown :active="request()->routeIs('mechanic*')" :title="__('Mechanic Tools')" :toggle="'mechanicMenu'" >
                         <x-slot name="trigger" :active="request()->routeIs('mechanic*')" >
-                            <x-nav-link-parent :active="request()->routeIs('mechanic*')">
+                            <x-nav-link-parent  href="#" :active="request()->routeIs('mechanic*')">
                                 <span class="material-symbols-outlined">service_toolbox</span> {{__('Mechanic Tools')}}
                             </x-nav-link-parent>
 
@@ -40,7 +40,7 @@
 
                     <x-nav-dropdown :active="request()->routeIs('tow*')" :title="__('Tow Tools')" :toggle="'towMenu'" :mt="'mt-[8rem]'" >
                         <x-slot name="trigger" :active="request()->routeIs('tow*')" >
-                            <x-nav-link-parent :active="request()->routeIs('tow*')">
+                            <x-nav-link-parent  href="#" :active="request()->routeIs('tow*')">
                                 <span class="material-symbols-outlined">auto_towing</span> {{__('Tow Tools')}}
                             </x-nav-link-parent>
 
@@ -63,7 +63,7 @@
                     @if(Auth::user()->IsAdmin == 1)
                     <x-nav-dropdown :active="request()->routeIs('admin*')" :title="__('Admin')" :toggle="'adminMenu'" :mt="'mt-[17rem]'">
                         <x-slot name="trigger" :active="request()->routeIs('admin*')" >
-                            <x-nav-link-parent :active="request()->routeIs('admin*')" wire:navigate>
+                            <x-nav-link-parent href="#" :active="request()->routeIs('admin*')" wire:navigate>
                                 <span class="material-symbols-outlined">admin_panel_settings</span> {{__('Admin')}}
                             </x-nav-link-parent>
 
@@ -73,16 +73,16 @@
                                         <a href="{{route('admin-pending-applications')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Job Applications')}}</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Add User')}}</a>
+                                        <a href="{{route('admin-manage-users')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Manage Users')}}</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Manage Users')}}</a>
+                                        <a href="{{route('admin-site-settings')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Site Settings')}}</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Site Settings')}}</a>
+                                        <a href="{{route('admin-mechanic-settings')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Mechanic Settings')}}</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Mechanic Settings')}}</a>
+                                        <a href="{{route('admin-discord-settings')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Discord Settings')}}</a>
                                     </li>
                                     @if(Config("app.botName") != null)
                                     <li>
@@ -162,7 +162,7 @@
 
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 <a href="https://github.com/CloudTheWolf/Legacy-RP-Business-CRM" target="_blank">
-                                    Version 4.0.0<br>
+                                    Version 4.0.2<br>
                                     Developed with 💖 By CloudTheWolf
                                 </a>
                             </div>
@@ -252,16 +252,16 @@
                                 <a href="{{route('admin-pending-applications')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Job Applications')}}</a>
                             </li>
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Add User')}}</a>
+                                <a href="{{route('admin-manage-users')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Manage Users')}}</a>
                             </li>
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Manage Users')}}</a>
+                                <a href="{{route('admin-site-settings')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Site Settings')}}</a>
                             </li>
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Site Settings')}}</a>
+                                <a href="{{route('admin-mechanic-settings')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Mechanic Settings')}}</a>
                             </li>
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Mechanic Settings')}}</a>
+                                <a href="{{route('admin-discord-settings')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Discord Settings')}}</a>
                             </li>
                             @if(Config("app.botName") != null)
                             <li>
@@ -292,7 +292,7 @@
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
-                <x-responsive-nav-link href="{{ route('profile.show') }}" wire:navigate>
+                <x-responsive-nav-link href="{{ route('logout') }}" wire:navigate>
                     {{ __('Log Out') }}
                 </x-responsive-nav-link>
 
@@ -309,7 +309,7 @@
 
                 <div class="block px-4 py-2 text-xs text-gray-400">
                     <a href="https://github.com/CloudTheWolf/Legacy-RP-Business-CRM" target="_blank">
-                        Version 4.0.0<br>
+                        Version 4.0.2<br>
                         Developed with 💖 By CloudTheWolf
                     </a>
                 </div>

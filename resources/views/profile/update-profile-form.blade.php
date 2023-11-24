@@ -26,6 +26,15 @@
             <x-input-error for="towID" class="mt-2" />
             <x-input-error for="towID" class="mt-2" />
         </div>
+
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="password" value="{{ __('Discord ID') }}" />
+            <x-input id="password" type="text" class="mt-1 block w-full cursor-not-allowed" wire:model="state.discord" readonly />
+            <div class="mt-1 md:w-full w-fit">
+                <a href="{{route("auth.discord-profile-link")}}" class="bg-[#7289da] hover:bg-[#98abed] text-white font-semibold hover:text-[#FAF9F6] py-2 px-4 border border-[#7289da] hover:border-[#98abed] rounded"><i class="text-lg lni lni-discord"></i> Link Account</a>
+            </div>
+            <x-input-error for="password" class="mt-2" />
+        </div>
     </x-slot>
 
     <x-slot name="actions">

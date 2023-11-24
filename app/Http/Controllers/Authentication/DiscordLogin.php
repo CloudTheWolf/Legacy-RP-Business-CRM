@@ -77,24 +77,25 @@ class DiscordLogin extends Controller
             $code = $request->get('code');
 
             if (!$code) {
-                return redirect('/account/settings')->with('error', 'Missing authorization code.');
+                return redirect('/user/profile')->with('error', 'Missing authorization code.');
             }
 
             $discordInfo = $this->discord->handleProviderCallback($request,"/auth/discord/handle/link");
 
             if (!$discordInfo || !$discordInfo->id) {
-                return redirect('/account/settings')->with('error', 'Error Getting Discord ID');
+                return redirect('/user/profile')->with('error', 'Error Getting Discord ID');
             }
 
 
             $user = User::whereId(Auth::user()->id)->first();
             $user->discord = $discordInfo->id;
+            $user->avatar_url = 'https://cdn.discordapp.com/avatars/'.$discordInfo->id.'/'.$discordInfo->avatar.'.png';
             $user->saveOrFail();
-            return redirect('/account/settings');
+            return redirect('/user/profile');
 
         } catch (\Exception $e) {
             // Log the exception or handle it differently if needed.
-            return redirect('/account/settings')->with('error', 'An error occurred while trying to authenticate with Discord.');
+            return redirect('/user/profile')->with('error', 'An error occurred while trying to authenticate with Discord.');
         }
     }
 
