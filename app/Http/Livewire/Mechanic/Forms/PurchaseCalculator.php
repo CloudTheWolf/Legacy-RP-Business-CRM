@@ -67,6 +67,17 @@ class PurchaseCalculator extends Component
         $this->final_cost = $scrap + $aluminium + $steel + $glass + $rubber;
     }
 
+    public function SetToZero()
+    {
+        $this->scrap = 0;
+        $this->aluminium = 0;
+        $this->steel = 0;
+        $this->glass = 0;
+        $this->rubber = 0;
+        $this->save();
+
+    }
+
     public function save()
     {
         $buy = BuyTemplate::whereUserId(Auth::id())->firstOrNew();
@@ -78,5 +89,6 @@ class PurchaseCalculator extends Component
         $buy->save();
         $this->mount();
         return redirect()->back()->with('save-success', 'Calculator Saved');
+
     }
 }

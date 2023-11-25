@@ -57,10 +57,13 @@
         </div>
 
         <div class="grid grid-cols-5">
-            <div class="col-span-2">
-                <button wire:loading.attr="disabled" type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Save</button>
+            <div class="md:col-span-1 col-span-5 mb-2">
+                <button wire:loading.attr="disabled" type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Save</button>
             </div>
-            @if(session('repair-log-success'))
+            <div class="md:col-span-1 col-span-5">
+                <button wire:loading.attr="disabled" wire:click="SetToZero" class="text-red-700 hover:text-white bg-transparent border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Reset</button>
+            </div>
+            @if(session('save-success'))
                 <div class="col-span-2" x-data="{ showAlert: true }" x-init="setTimeout(() => showAlert = false, 3000)">
                     <div id="alert"
                          x-show="showAlert"
@@ -69,12 +72,12 @@
                          class="relative flex items-center p-1 text-white bg-green-600 rounded-lg transition-opacity ease-in duration-700" role="alert">
                         <span class="material-symbols-outlined">save</span>
                         <div class="ml-3 text-sm font-medium">
-                            {{ session('repair-log-success') }}
+                            {{ session('save-success') }}
                         </div>
                     </div>
                 </div>
             @endif
-            @if(session('repair-log-error'))
+            @if(session('save-error'))
                 <div class="col-span-2" x-data="{ showAlert: true }" x-init="setTimeout(() => showAlert = false, 9000)">
                     <div id="alert"
                          x-show="showAlert"
@@ -83,7 +86,7 @@
                          class="relative flex items-center p-1 text-white bg-red-600 rounded-lg transition-opacity ease-in duration-700" role="alert">
                         <span class="material-symbols-outlined">save</span>
                         <div class="ml-3 text-sm font-medium">
-                            {{ session('repair-log-error') }}
+                            {{ session('save-error') }}
                         </div>
                     </div>
                 </div>
