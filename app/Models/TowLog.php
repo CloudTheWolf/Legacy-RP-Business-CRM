@@ -54,11 +54,6 @@ class TowLog extends Model
         'help' => 'integer',
     ];
 
-    public static function whereUserId($value)
-    {
-        return static::where('userId','=',$value);
-    }
-
     public $timestamps = false;
 
 

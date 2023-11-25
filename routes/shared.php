@@ -1,22 +1,30 @@
 <?php
 
-use App\Http\Controllers\ActionController;
-use App\Http\Controllers\Shared\Account\EditAccountController;
-use App\Http\Controllers\Shared\Team\TeamController;
+use App\Http\Controllers\Shared\ClockInSystem;
+use App\Http\Controllers\Shared\DiscordSettings;
+use App\Http\Controllers\Shared\ManageUsers;
+use App\Http\Controllers\Shared\SiteSettings;
 use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Shared Routes
+| Web Routes
 |--------------------------------------------------------------------------
 |
-| Shared Non-Admin routes used by regardless of site mode.
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
 |
 */
 
-Route::redirect('/', '/dashboard')->middleware('auth');
-Route::redirect('/index', '/dashboard')->middleware('auth');
-Route::get('/clock-on/{action}', [ActionController::class, 'ClockInOut'])->middleware('auth');
-Route::get('/team', [TeamController::class,'Get'])->middleware('auth');
-Route::get('/account/settings',[EditAccountController::class, 'Get'])->middleware('auth');
-Route::post('/account/settings',[EditAccountController::class, 'Post'])->middleware('auth');
+Route::prefix('/admin')->middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified', ])->group(function (){
+    Route::get('/discord-settings',[DiscordSettings::class,'index'])->name('admin-discord-settings');
+    Route::get('/manage-users',[ManageUsers::class, 'List'])->name('admin-manage-users');
+    Route::get('/manage-disabled-users',[ManageUsers::class, 'ListDisabled'])->name('admin-manage-disabled-users');
+    Route::get('/add-user',[ManageUsers::class, 'Add'])->name('admin-add-user');
+    Route::get('/manage-users/{id}',[ManageUsers::class, 'Edit'])->name('admin-manage-user');
+    Route::get('/site-settings',[SiteSettings::class,'index'])->name('admin-site-settings');
+});
+
+Route::get('clock-on/{action}',[ClockInSystem::class,'handle'])->name('clock-in-system')
+    ->middleware(['auth:sanctum', config('jetstream.auth_session')]);

@@ -78,4 +78,8 @@ class CityTowLog extends Model
         'plateNumber' => 'string',
     ];
 
+    public function users() {
+        return $this->belongsTo(User::class, 'characterId','cid');
+    }
+
 }

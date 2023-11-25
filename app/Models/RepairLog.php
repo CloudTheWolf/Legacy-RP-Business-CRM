@@ -90,4 +90,9 @@ class RepairLog extends Model
     ];
 
     public $timestamps = false;
+
+    public function users() {
+        return $this->belongsTo(User::class, 'cid','cid');
+    }
+
 }

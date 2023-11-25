@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 interface DiscordAuthInterface
 {
-    public function redirectToProvider(): RedirectResponse;
+    public function RedirectToProvider(): RedirectResponse;
 
     public function handleProviderCallback(Request $request);
 }

@@ -1,66 +1,43 @@
 <?php
 
+use App\Http\Controllers\Mechanic\AllRepairs;
+use App\Http\Controllers\Mechanic\ApplicationsView;
+use App\Http\Controllers\Mechanic\Dashboard;
+use App\Http\Controllers\Mechanic\ImpoundHistory;
+use App\Http\Controllers\Mechanic\MechanicSettings;
+use App\Http\Controllers\Mechanic\PurchaseCalculator;
+use App\Http\Controllers\Mechanic\RepairEditor;
+use App\Http\Controllers\Mechanic\RepairLogger;
+use App\Http\Controllers\Mechanic\TowTracker;
+use App\Http\Controllers\Shared\ApplicationsList;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Mechanic\Repair\RepairDelete;
-use App\Http\Controllers\Mechanic\Repair\RepairEdit;
-use App\Http\Controllers\Mechanic\Admin\MechanicSettings;
-use App\Http\Controllers\Mechanic\Applications\Application;
-use App\Http\Controllers\Mechanic\DashboardController;
-use App\Http\Controllers\Mechanic\Repair\Purchase;
-use App\Http\Controllers\Mechanic\Repair\RepairLogger;
-use App\Http\Controllers\Mechanic\Repair\Repairs;
-use App\Http\Controllers\Mechanic\Tow\TowHistory;
-use App\Http\Controllers\Mechanic\Tow\TowTracker;
-use App\Http\Controllers\Mechanic\Tow\TowTally;
-use App\Http\Controllers\Shared\Admin\ApplicationsController;
-use App\Http\Controllers\Shared\Admin\ApplicationController;
 
-/*
-|--------------------------------------------------------------------------
-| Mechanic Routes
-|--------------------------------------------------------------------------
-|
-| All routes specific the Mechanic Mode
-|
-*/
+require_once __DIR__ . '/apply.php';
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified', ])->group(function () {
+    Route::get('/dashboard', [Dashboard::class, 'index'])->name('dashboard')->middleware('auth');
 
-Route::get('/dashboard', [DashboardController::class, 'Get'])->middleware('auth');
+    Route::prefix('/mechanic')->group(function () {
+        Route::get('/repair-logger', [RepairLogger::class, 'index'])->name('mechanic-repair-log-index');
+        Route::get('/repair-logger/{id}', [RepairEditor::class, 'index'])->name('mechanic-repair-log-edit');
 
-Route::prefix('/tow')->group(function () {
+        Route::get('/repairs', [AllRepairs::class, 'index'])->middleware('auth')->name('mechanic-all-repairs');
+        //Route::get('/repairs/{id}/delete',[RepairDelete::class,'Get'])->middleware('auth');
 
-    Route::post('/', [TowTally::class, 'Post'])->name('tow.tally')->middleware('auth');
-    Route::get('/tracker',[TowTracker::class,'Get'])->middleware('auth');
-    Route::post('/tracker',[TowTracker::class,'Post'])->middleware('auth');
+        Route::get('/purchase', [PurchaseCalculator::class, 'index'])->middleware('auth')->name('mechanic-purchase-calculator');
+    })->middleware('auth');
 
-    Route::get('/history',[TowHistory::class,'Get'])->middleware('auth');
-});
+    Route::prefix('/tow')->group(function () {
+        Route::get('/tracker', [TowTracker::class, 'index'])->name('tow-tracker');
+        Route::get('/impound-history', [ImpoundHistory::class, 'index'])->name('tow-impound-history');
+    })->middleware('auth');
 
-Route::prefix('/mechanic')->group(function (){
-    Route::get('/repair-logger',[RepairLogger::class,'Get'])->middleware('auth');
-    Route::post('/repair-logger',[RepairLogger::class,'Post'])->middleware('auth');
 
-    Route::get('/repairs',[Repairs::class,'Get'])->middleware('auth');
-    Route::get('/repairs/{id}',[RepairEdit::class,'Get'])->middleware('auth');
-    Route::post('/repairs/{id}',[RepairEdit::class,'Post'])->middleware('auth');
-    Route::get('/repairs/{id}/delete',[RepairDelete::class,'Get'])->middleware('auth');
-
-    Route::get('/purchase',[Purchase::class,'Get'])->middleware('auth');
-    Route::post('/purchase',[Purchase::class,'Post'])->middleware('auth');
-});
-
-Route::post('/apply/done', [Application::class, 'Post']);
-
-Route::prefix('/admin')->group(function (){
-
-    Route::prefix('/applications')->group(function (){
-        Route::get('/',[ApplicationsController::class,'Get'])->middleware('auth');
-        Route::get('/{id}',[ApplicationController::class,'Get'])->middleware('auth');
-        Route::post('/{id}',[ApplicationController::class,'Post'])->middleware('auth');
+    Route::prefix('/admin')->group(function () {
+        Route::get('/applications', [ApplicationsList::class, 'index'])->name('admin-pending-applications');
+        Route::get('/past-applications', [ApplicationsList::class, 'past'])->name('admin-past-applications');
+        Route::get('/applications/{id}', [ApplicationsView::class, 'index'])->name('admin-view-application');
+        Route::post('/applications/{id}', [ApplicationsView::class, 'post'])->name('admin-accept-application');
+        Route::get('/mechanic-settings',[MechanicSettings::class,'index'])->name('admin-mechanic-settings');
     });
-    Route::get('/past-applications',[ApplicationsController::class,'GetDone'])->middleware('auth');
-    Route::get('/mechanic-settings',[MechanicSettings::class,'Get'])->middleware('auth');
-    Route::post('/mechanic-settings',[MechanicSettings::class,'Post'])->middleware('auth');
-
 });
-
-require __DIR__ . '/apply.php';

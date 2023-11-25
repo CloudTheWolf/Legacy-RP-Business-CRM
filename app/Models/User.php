@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Brick\Math\BigInteger;
-use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Jetstream\HasProfilePhoto;
 
 /**
  * App\Models\User
@@ -27,6 +27,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property int|null $cid
  * @property string|null $steamId
  * @property int|null $discord
+ * @property string|null $avatar_url
  * @property bool $IsAdmin
  * @property bool $disabled
  * @method static Builder|User newModelQuery()
@@ -51,6 +52,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
+    use HasProfilePhoto;
+    use Notifiable;
+    use HasFactory;
 
     /**
      * The "type" of the auto-incrementing ID.
@@ -76,8 +80,11 @@ class User extends Authenticatable
         'cid',
         'steamId',
         'discord',
+        'avatar_url',
         'IsAdmin',
         'disabled',
+        'two_factor_recovery_codes',
+        'two_factor_secret',
     ];
 
     /**
@@ -137,5 +144,14 @@ class User extends Authenticatable
     {
         return static::where('discord','=',$value);
     }
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = [
+        'profile_photo_url',
+    ];
 
 }
