@@ -99,3 +99,5 @@ VALUES ('Firstname Lastname','Firstname.Lastnane','123-4567','Tow Licence Plate'
 ```
 
 With that you will be able to log into the control panel and should see the Admin section where you can add new users!
+
+It is also advised to change the session driver from `file` to `database` in the `.env` file
