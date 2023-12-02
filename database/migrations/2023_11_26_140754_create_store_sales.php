@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(!Schema::hasTable('specials')) {
-            Schema::create('specials', function (Blueprint $table) {
-                $table->id();
-                $table->string('name');
-                $table->integer('price');
-                $table->tinyInteger('deleted')->default(0);
-            });
-        }
+        Schema::create('store_sales', function (Blueprint $table) {
+            $table->id();
+            $table->integer('cid');
+            $table->longText('saleJson');
+            $table->tinyInteger('deleted')->default(0);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('specials');
+        Schema::dropIfExists('store_sales');
     }
 };

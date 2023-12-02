@@ -15,7 +15,7 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" wire:navigate>
                         <span class="material-symbols-outlined">home</span> {{ __('Dashboard') }}
                     </x-nav-link>
-
+                    @if(Config::get('siteMode') == 'Mechanic')
                     <x-nav-dropdown :active="request()->routeIs('mechanic*')" :title="__('Mechanic Tools')" :toggle="'mechanicMenu'" >
                         <x-slot name="trigger" :active="request()->routeIs('mechanic*')" >
                             <x-nav-link-parent  href="#" :active="request()->routeIs('mechanic*')">
@@ -56,7 +56,7 @@
                             </x-slot>
                         </x-slot>
                     </x-nav-dropdown>
-
+                    @endif
                     <x-nav-link href="{{ route('team-page') }}" :active="request()->routeIs('team')" wire:navigate>
                         <span class="material-symbols-outlined">groups</span> {{ __('Team') }}
                     </x-nav-link>
@@ -69,18 +69,22 @@
 
                             <x-slot name="content">
                                 <ul class="text-sm text-gray-700 dark:text-gray-400" aria-labelledby="adminMenu">
+                                    @if(Config::get('siteMode') == 'Mechanic')
                                     <li>
                                         <a href="{{route('admin-pending-applications')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Job Applications')}}</a>
                                     </li>
+                                    @endif
                                     <li>
                                         <a href="{{route('admin-manage-users')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Manage Users')}}</a>
                                     </li>
                                     <li>
                                         <a href="{{route('admin-site-settings')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Site Settings')}}</a>
                                     </li>
+                                    @if(Config::get('siteMode') == 'Mechanic')
                                     <li>
                                         <a href="{{route('admin-mechanic-settings')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Mechanic Settings')}}</a>
                                     </li>
+                                    @endif
                                     <li>
                                         <a href="{{route('admin-discord-settings')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Discord Settings')}}</a>
                                     </li>
@@ -162,7 +166,7 @@
 
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 <a href="https://github.com/CloudTheWolf/Legacy-RP-Business-CRM" target="_blank">
-                                    Version 4.0.2<br>
+                                    Version 4.0.3<br>
                                     Developed with 💖 By CloudTheWolf
                                 </a>
                             </div>
@@ -190,7 +194,7 @@
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" wire:navigate>
                 <span class="material-symbols-outlined">home</span> {{ __('Dashboard') }}
             </x-responsive-nav-link>
-
+            @if(Config::get('siteMode') == 'Mechanic')
             <!-- Mechanic -->
             <x-responsive-nav-dropdown :active="request()->routeIs('mechanic*')" :title="__('Mechanic Tools')" :toggle="'mechanicMenu'" >
                 <x-slot name="trigger" :active="request()->routeIs('mechanic*')" >
@@ -233,7 +237,7 @@
                     </x-slot>
                 </x-slot>
             </x-responsive-nav-dropdown>
-
+            @endif
             <!-- Team -->
             <x-responsive-nav-link href="{{ route('team-page') }}" :active="request()->routeIs('team')" wire:navigate>
                 <span class="material-symbols-outlined">groups</span> {{ __('Team') }}
@@ -248,18 +252,22 @@
 
                     <x-slot name="content">
                         <ul class="text-sm text-gray-700 dark:text-gray-400" aria-labelledby="adminMenu">
+                            @if(Config::get('siteMode') == 'Mechanic')
                             <li>
                                 <a href="{{route('admin-pending-applications')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Job Applications')}}</a>
                             </li>
+                            @endif
                             <li>
                                 <a href="{{route('admin-manage-users')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Manage Users')}}</a>
                             </li>
                             <li>
                                 <a href="{{route('admin-site-settings')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Site Settings')}}</a>
                             </li>
+                            @if(Config::get('siteMode') == 'Mechanic')
                             <li>
                                 <a href="{{route('admin-mechanic-settings')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Mechanic Settings')}}</a>
                             </li>
+                            @endif
                             <li>
                                 <a href="{{route('admin-discord-settings')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Discord Settings')}}</a>
                             </li>
