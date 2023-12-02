@@ -32,7 +32,8 @@ class TowTracker extends Component
 
     public function updated()
     {
-        $towTally = TowLog::query()->where('userId','=',Auth::user()->id)->first();
+        $towTally = TowLog::query()->where('userId','=',Auth::user()->id)->firstOrNew();
+        $towTally->userId = Auth::user()->id;
         $towTally->local = $this->local;
         $towTally->citizen = $this->citizen;
         $towTally->pd = $this->pd_ems;
