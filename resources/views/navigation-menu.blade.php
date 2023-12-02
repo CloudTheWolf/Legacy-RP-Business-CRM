@@ -15,7 +15,7 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" wire:navigate>
                         <span class="material-symbols-outlined">home</span> {{ __('Dashboard') }}
                     </x-nav-link>
-                    @if(Config::get('siteMode') == 'Mechanic')
+                    @if(Config::get('app.siteMode') == 'Mechanic')
                     <x-nav-dropdown :active="request()->routeIs('mechanic*')" :title="__('Mechanic Tools')" :toggle="'mechanicMenu'" >
                         <x-slot name="trigger" :active="request()->routeIs('mechanic*')" >
                             <x-nav-link-parent  href="#" :active="request()->routeIs('mechanic*')">
@@ -69,7 +69,7 @@
 
                             <x-slot name="content">
                                 <ul class="text-sm text-gray-700 dark:text-gray-400" aria-labelledby="adminMenu">
-                                    @if(Config::get('siteMode') == 'Mechanic')
+                                    @if(Config::get('app.siteMode') == 'Mechanic')
                                     <li>
                                         <a href="{{route('admin-pending-applications')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Job Applications')}}</a>
                                     </li>
@@ -80,7 +80,7 @@
                                     <li>
                                         <a href="{{route('admin-site-settings')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Site Settings')}}</a>
                                     </li>
-                                    @if(Config::get('siteMode') == 'Mechanic')
+                                    @if(Config::get('app.siteMode') == 'Mechanic')
                                     <li>
                                         <a href="{{route('admin-mechanic-settings')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Mechanic Settings')}}</a>
                                     </li>
@@ -167,7 +167,7 @@
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 <a href="https://github.com/CloudTheWolf/Legacy-RP-Business-CRM" target="_blank">
                                     Version 4.0.3<br>
-                                    Developed with 💖 By CloudTheWolf
+                                    Developed with 💖 By CloudTheWolf ({{Config::get('app.siteMode')}})
                                 </a>
                             </div>
 
@@ -194,7 +194,7 @@
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" wire:navigate>
                 <span class="material-symbols-outlined">home</span> {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            @if(Config::get('siteMode') == 'Mechanic')
+            @if(Config::get('app.siteMode') == 'Mechanic')
             <!-- Mechanic -->
             <x-responsive-nav-dropdown :active="request()->routeIs('mechanic*')" :title="__('Mechanic Tools')" :toggle="'mechanicMenu'" >
                 <x-slot name="trigger" :active="request()->routeIs('mechanic*')" >
@@ -252,7 +252,7 @@
 
                     <x-slot name="content">
                         <ul class="text-sm text-gray-700 dark:text-gray-400" aria-labelledby="adminMenu">
-                            @if(Config::get('siteMode') == 'Mechanic')
+                            @if(Config::get('app.siteMode') == 'Mechanic')
                             <li>
                                 <a href="{{route('admin-pending-applications')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Job Applications')}}</a>
                             </li>
@@ -263,7 +263,7 @@
                             <li>
                                 <a href="{{route('admin-site-settings')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Site Settings')}}</a>
                             </li>
-                            @if(Config::get('siteMode') == 'Mechanic')
+                            @if(Config::get('app.siteMode') == 'Mechanic')
                             <li>
                                 <a href="{{route('admin-mechanic-settings')}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" wire:navigate>{{__('Mechanic Settings')}}</a>
                             </li>
