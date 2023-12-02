@@ -29,3 +29,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 if (config('app.siteMode') == "Mechanic") {
     include_once __DIR__ . '/mechanic.php';
 }
+
+if (config('app.siteMode') == "Shop") {
+    include_once __DIR__ . '/shop.php';
+}

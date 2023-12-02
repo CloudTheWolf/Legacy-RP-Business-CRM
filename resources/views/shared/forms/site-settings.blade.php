@@ -40,11 +40,10 @@
     </div>
     <div class="relative z-0 w-full mb-6">
         <select wire:model="site_mode" class="block py-2.5 px-0 w-full text-sm bg-transparent focus:bg-gray-800 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
-            <option value="Arcade">Arcade</option>
-            <option value="Bar">Bars/Clubs</option>
-            <option selected="" value="Mechanic">Mechanic</option>
-            <option value="Motorcycle Club">Motorcycle Club</option>
             <option value="DOJ">DOJ</option>
+            <option value="Mechanic">Mechanic</option>
+            <option value="Motorcycle Club">Motorcycle Club</option>
+            <option value="Shop">Shop</option>
         </select>
         <label for="site_mode" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400  duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7">Site Mode</label>
     </div>

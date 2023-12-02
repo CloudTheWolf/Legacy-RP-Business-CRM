@@ -8,7 +8,7 @@
                        pattern="[0-9]*"
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                        placeholder="0"
-                       wire:model.live="scrap">
+                       wire:model.live.debounce="scrap">
             </div>
             <div>
                 <label for="aluminium" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('Aluminium')}}</label>
@@ -16,7 +16,7 @@
                        pattern="[0-9]*"
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                        placeholder="0"
-                       wire:model.live="aluminium">
+                       wire:model.live.debounce="aluminium">
             </div>
             <div class="col-span-1">
                 <label for="steel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('Steel')}}</label>
@@ -24,7 +24,7 @@
                        pattern="[0-9]*"
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                        placeholder="0"
-                       wire:model.live="steel">
+                       wire:model.live.debounce="steel">
             </div>
             <div class="col-span-1">
                 <label for="glass" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('Glass')}}</label>
@@ -32,7 +32,7 @@
                        pattern="[0-9]*"
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                        placeholder="0"
-                       wire:model.live="glass">
+                       wire:model.live.debounce="glass">
             </div>
             <div class="col-span-1">
                 <label for="rubber" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{__('Rubber')}}</label>
@@ -40,7 +40,7 @@
                        pattern="[0-9]*"
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                        placeholder="0"
-                       wire:model.live="rubber">
+                       wire:model.live.debounce="rubber">
             </div>
         </div>
 
