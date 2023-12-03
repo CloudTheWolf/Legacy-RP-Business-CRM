@@ -10,7 +10,7 @@ class ManageUsers extends Controller
 {
     public function List()
     {
-        $users = User::query()->whereDisabled(0)->get();
+        $users = User::query()->whereDisabled(0)->where('role','!=','IT Support')->get();
         return view('shared.manage-users',compact('users'));
     }
 
