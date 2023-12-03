@@ -40,54 +40,13 @@
             </div>
         @endif
    @endif
-    @if(config('app.siteMode') == "Arcade" || config('app.siteMode') == "Bar")
-        @if(Auth::user()->onDuty == 0)
-            <div class="relative flex-grow max-w-full flex-1 px-4 text-center">
-                <a href="{{url('clock-on/Bar')}}" wire:navigate>
-                    <div class="app-box mx-auto inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline btn-gradient-primary text-white" style="width: 125px">
-                        <span class="material-symbols-outlined">admin_panel_settings</span>
-                        <div class="app-title">Bar</div>
-                    </div></a>
-            </div>
-            @if(Auth::user()->role == "Boss" || Auth::user()->role == "IT Support" || Auth::user()->role == "Veteran Manager" || Auth::user()->role == "Manager")
 
-                <div class="relative flex-grow max-w-full flex-1 px-4 text-center">
-                    <a href="{{url('clock-on/Management')}}" wire:navigate>
-                        <div class="app-box mx-auto inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline btn-gradient-secondary text-white" style="width: 125px">
-                            <span class="material-symbols-outlined">admin_panel_settings</span>
-                            <div class="app-title">Management</div>
-                        </div></a>
-                </div>
-
-
-            @endif
-        @else
-            @if(Auth::user()->workingAs != 'Bar')
-                <div class="relative flex-grow max-w-full flex-1 px-4 text-center">
-                    <a href="{{url('clock-on/Bar')}}" wire:navigate>
-                        <div class="app-box mx-auto inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline btn-gradient-primary text-white" style="width: 125px">
-                            <span class="material-symbols-outlined">admin_panel_settings</span>
-                            <div class="app-title">Bar</div>
-                        </div></a>
-                </div>
-            @endif
-            @if(Auth::user()->workingAs != __('app.mgmt') && (Auth::user()->role == "Boss" || Auth::user()->role == "IT Support" || Auth::user()->role == "Veteran Manager" || Auth::user()->role == "Manager"))
-                <div class="relative flex-grow max-w-full flex-1 px-4 text-center">
-                    <a href="{{url('clock-on/Management')}}" wire:navigate>
-                        <div class="app-box mx-auto inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline btn-gradient-secondary text-white" style="width: 125px">
-                            <span class="material-symbols-outlined">admin_panel_settings</span>
-                            <div class="app-title">Management</div>
-                        </div></a>
-                </div>
-            @endif
-        @endif
-    @endif
-    @if(config('app.siteMode') == "Dealership")
+    @if(config('app.siteMode') == "Dealership" || config('app.siteMode') == "Shop")
         @if(Auth::user()->workingAs != 'On-Duty')
-            <div class="relative flex-grow max-w-full flex-1 px-4 md:w-full pr-4 pl-4 text-center">
+                <div class="relative flex-grow min-w-full text-center {{Auth()->user()->workingAs ==  "On-Duty" ? 'disable-link' : ''}}">
                 <a href="{{url('clock-on/On-Duty')}}" wire:navigate>
-                    <div class="app-box mx-auto inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-red-600 text-white hover:bg-red-700 text-white" style="width: 100%">
-                        <span class="material-symbols-outlined">alarm_oon</span>
+                    <div class="no-underline bg-green-500 text-white hover:bg-green-600 border-green-600 min-w-full {{Auth()->user()->workingAs == "On-Duty" ? 'disable-link' : ''}}">
+                        <span class="material-symbols-outlined">alarm_on</span>
                         <div class="app-title">Clock On</div>
                     </div></a>
             </div>
