@@ -166,7 +166,7 @@
 
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 <a href="https://github.com/CloudTheWolf/Legacy-RP-Business-CRM" target="_blank">
-                                    Version 4.0.3<br>
+                                    Version {{Config::get('version.major')}}.{{Config::get('version.minor')}}.{{Config::get('version.build')}}<br>
                                     Developed with 💖 By CloudTheWolf ({{Config::get('app.siteMode')}})
                                 </a>
                             </div>
@@ -317,7 +317,7 @@
 
                 <div class="block px-4 py-2 text-xs text-gray-400">
                     <a href="https://github.com/CloudTheWolf/Legacy-RP-Business-CRM" target="_blank">
-                        Version 4.0.2<br>
+                        Version {{Config::get('version.major')}}.{{Config::get('version.minor')}}.{{Config::get('version.build')}}<br>
                         Developed with 💖 By CloudTheWolf
                     </a>
                 </div>
