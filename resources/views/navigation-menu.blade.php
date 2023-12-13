@@ -15,7 +15,8 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" wire:navigate>
                         <span class="material-symbols-outlined">home</span> {{ __('Dashboard') }}
                     </x-nav-link>
-                    @if(Config::get('app.siteMode') == 'Mechanic')
+                @if(Config::get('app.siteMode') == 'Mechanic')
+                    @if(Auth::user()->role != "Tow Driver")
                     <x-nav-dropdown :active="request()->routeIs('mechanic*')" :title="__('Mechanic Tools')" :toggle="'mechanicMenu'" >
                         <x-slot name="trigger" :active="request()->routeIs('mechanic*')" >
                             <x-nav-link-parent  href="#" :active="request()->routeIs('mechanic*')">
@@ -37,7 +38,7 @@
                             </x-slot>
                         </x-slot>
                     </x-nav-dropdown>
-
+                    @endif
                     <x-nav-dropdown :active="request()->routeIs('tow*')" :title="__('Tow Tools')" :toggle="'towMenu'" :mt="'mt-[8rem]'" >
                         <x-slot name="trigger" :active="request()->routeIs('tow*')" >
                             <x-nav-link-parent  href="#" :active="request()->routeIs('tow*')">
@@ -90,7 +91,7 @@
                                     </li>
                                     @if(Config("app.botName") != null)
                                     <li>
-                                        <a href="https://c3.cloudthewolf.com/services/bots/restart.php?bot={{Config("app.botName")}}&popup=1" target="_blank" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Restart Bot')}}</a>
+                                        <a href="https://c3.cloudthewolf.com:9443/" target="_blank" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Restart Bot')}}</a>
                                     </li>
                                     @endif
                                 </ul>
@@ -194,7 +195,8 @@
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" wire:navigate>
                 <span class="material-symbols-outlined">home</span> {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            @if(Config::get('app.siteMode') == 'Mechanic')
+        @if(Config::get('app.siteMode') == 'Mechanic')
+            @if(Auth::user()->role != "Tow Driver")
             <!-- Mechanic -->
             <x-responsive-nav-dropdown :active="request()->routeIs('mechanic*')" :title="__('Mechanic Tools')" :toggle="'mechanicMenu'" >
                 <x-slot name="trigger" :active="request()->routeIs('mechanic*')" >
@@ -217,7 +219,7 @@
                     </x-slot>
                 </x-slot>
             </x-responsive-nav-dropdown>
-
+            @endif
             <!-- Tow -->
             <x-responsive-nav-dropdown :active="request()->routeIs('tow*')" :title="__('Tow Tools')" :toggle="'towMenu'" >
                 <x-slot name="trigger" :active="request()->routeIs('tow*')" >
@@ -273,7 +275,7 @@
                             </li>
                             @if(Config("app.botName") != null)
                             <li>
-                                <a href="https://c3.cloudthewolf.com/services/bots/restart.php?bot={{Config("app.botName")}}&popup=1" target="_blank" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" >{{__('Restart Bot')}}</a>
+                                <a href="https://c3.cloudthewolf.com:9443/" target="_blank" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" >{{__('Restart Bot')}}</a>
                             </li>
                             @endif
                         </ul>
