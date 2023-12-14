@@ -104,7 +104,8 @@ class RepairLogger extends Component
         $this->checkbox = false;
         if ($propertyName === 'vehicle_name') {
             if (strlen($this->vehicle_name) >= 3) {
-                $client = new Client(['base_uri' => env("API_BASE_URI"), 'timeout' => 5, 'verify' => env('VERIFY_HTTPS', true)]);
+                $client = new Client(['base_uri' => env("API_BASE_URI"), 'timeout' => 5, 'verify' => env('VERIFY_HTTPS', true),
+                    'Authorization' => 'Bearer '.env("OP_FW_API_KEY")]);
                 $response = $client->request('GET', '/op-framework/vehicles.json');
                 $data = json_decode($response->getBody())->data;
                 $this->options = collect($data)

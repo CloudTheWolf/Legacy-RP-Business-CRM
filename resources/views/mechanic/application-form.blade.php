@@ -45,15 +45,15 @@
             <hr class="py-1" />
             <div class="pb-1">
                 <x-label for="about" value="{{ __('Tell us a little about yourself.') }}" />
-                <textarea id="about" name="about" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required></textarea>
+                <textarea id="about" maxlength="200" name="about" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required></textarea>
             </div>
             <div class="pb-1">
                 <x-label for="why" value="{{ __('Tell us why you want a job at '.config('app.companyName').' and why we should hire you?') }}" />
-                <textarea id="why" name="why" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required></textarea>
+                <textarea id="why" maxlength="200" name="why" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required></textarea>
             </div>
             <div class="pb-1">
                 <x-label for="record" value="{{ __('Tell us about your Criminal Record!') }}" />
-                <textarea id="record" name="record" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>My Last Arrest Was {{$lastArrest}}</textarea>
+                <textarea id="record" maxlength="200" name="record" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>My Last Arrest Was {{$lastArrest}}</textarea>
             </div>
             <div class="pb-1">
                 <x-label for="gang" value="{{ __('Do you have any gang ties, or affiliations that may affect your employment?') }}" />

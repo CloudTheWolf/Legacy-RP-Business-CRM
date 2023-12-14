@@ -24,6 +24,7 @@ class InCity extends Component
             'base_uri' => env("API_BASE_URI"),
             'timeout' => 5,
             'verify' => env('VERIFY_HTTPS',true),
+            'Authorization' => 'Bearer '.env("OP_FW_API_KEY")
         ]);
         $response = $client->request('GET', '/op-framework/players.json');
         $this->inCity = count(json_decode($response->getBody())->data);

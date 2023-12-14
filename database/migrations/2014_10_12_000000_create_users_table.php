@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
                 $table->timestamp('email_verified_at')->default('current_timestamp()');
                 $table->string('password');
                 $table->rememberToken();
-                $table->timestamps()->default('current_timestamp()');
+                $table->timestamps();
                 $table->boolean('onDuty')->default(0);
                 $table->integer('cid')->nullable();
                 $table->string('steamId', 100)->nullable();

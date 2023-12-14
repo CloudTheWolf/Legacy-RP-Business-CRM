@@ -10,7 +10,7 @@ class Team extends Controller
 {
     public function index()
     {
-        $users = User::whereDisabled(0)->get();
+        $users = User::whereDisabled(0)->where('role','!=','IT Support')->get();
         return view('shared.team',compact('users'));
     }
 }
