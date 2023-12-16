@@ -40,50 +40,57 @@ class ApplicationsView extends Controller
         $user->save();
         $application->state = 1;
         $application->save();
-        if($application->discordId != null) {
-            $auth = DiscordToken::whereDiscordId($application->discordId)->firstOrFail();
-            $userAccessToken = $auth->access_token;
-            $guildId = config('app.guild');
-            if (strlen($guildId) == 0) return redirect()->route('admin-pending-applications');
-            $client = new Client([
-                'base_uri' => 'https://discord.com/api/v10/',
-                'verify' => env('VERIFY_HTTPS', false)
-            ]);
-            $joined = $client->put("guilds/{$guildId}/members/{$application->discordId}", [
-                'headers' => [
-                    'Authorization' => 'Bot ' . config('discord-auth.bot_token'),
-                    'Content-Type' => 'application/json',
-                ],
-                'json' => [
-                    'access_token' => $userAccessToken,
-                ],
-            ]);
-
-            if ($joined->getStatusCode() == 204 || $joined->getStatusCode() == 201) {
-
-                $jsonBody = [
+        $message = "";
+        try {
+            if ($application->discordId != null) {
+                $auth = DiscordToken::whereDiscordId($application->discordId)->firstOrFail();
+                $userAccessToken = $auth->access_token;
+                $guildId = config('app.guild');
+                if (strlen($guildId) == 0) return redirect()->route('admin-pending-applications');
+                $client = new Client([
+                    'base_uri' => 'https://discord.com/api/v10/',
+                    'verify' => env('VERIFY_HTTPS', false)
+                ]);
+                $joined = $client->put("guilds/{$guildId}/members/{$application->discordId}", [
                     'headers' => [
                         'Authorization' => 'Bot ' . config('discord-auth.bot_token'),
                         'Content-Type' => 'application/json',
                     ],
                     'json' => [
-                        'nick' => $application->name
-                    ]
-                ];
+                        'access_token' => $userAccessToken,
+                    ],
+                ]);
 
-                $staffRole = DiscordRole::whereRoleName('Staff');
-                if (!$staffRole->count() == 0 || $staffRole->first()->role_id != -1) {
-                    $jsonBody['json']['roles'][] = $staffRole->first()->role_id;
+                if ($joined->getStatusCode() == 204 || $joined->getStatusCode() == 201) {
+
+                    $jsonBody = [
+                        'headers' => [
+                            'Authorization' => 'Bot ' . config('discord-auth.bot_token'),
+                            'Content-Type' => 'application/json',
+                        ],
+                        'json' => [
+                            'nick' => $application->name
+                        ]
+                    ];
+
+                    $staffRole = DiscordRole::whereRoleName('Staff');
+                    if (!$staffRole->count() == 0 || $staffRole->first()->role_id != -1) {
+                        $jsonBody['json']['roles'][] = $staffRole->first()->role_id;
+                    }
+
+                    $jobRole = DiscordRole::whereRoleName($request->input('role'));
+                    if (!$jobRole->count() == 0 || $jobRole->first()->role_id != -1) {
+                        $jsonBody['json']['roles'][] = $jobRole->first()->role_id;
+                    }
+
+                    $client->patch("guilds/{$guildId}/members/{$application->discordId}", $jsonBody);
                 }
-
-                $jobRole = DiscordRole::whereRoleName($request->input('role'));
-                if (!$jobRole->count() == 0 || $jobRole->first()->role_id != -1) {
-                    $jsonBody['json']['roles'][] = $jobRole->first()->role_id;
-                }
-
-                $client->patch("guilds/{$guildId}/members/{$application->discordId}", $jsonBody);
             }
+        } catch (\Exception $e)
+        {
+            $message = "Something went wrong inviting to discord";
         }
-        return redirect()->route('admin-pending-applications');
+
+        return redirect()->route('admin-pending-applications')->with('message',$message);
     }
 }
