@@ -15,7 +15,7 @@ return new class extends Migration
     {
         if(!Schema::hasTable('workTime')) {
             Schema::create('workTime', function (Blueprint $table) {
-                $table->integer('id')->primary();
+                $table->id();
                 $table->timestamp('clockInAt')->useCurrent();
                 $table->timestamp('clockOutAt')->nullable();
                 $table->integer('cid');

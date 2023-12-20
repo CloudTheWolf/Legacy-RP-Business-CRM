@@ -15,7 +15,7 @@ return new class extends Migration
     {
         if(!Schema::hasTable('storage')) {
             Schema::create('storage', function (Blueprint $table) {
-                $table->integer('id')->primary();
+                $table->id();
                 $table->string('name');
                 $table->integer('capacity');
                 $table->integer('scrap');

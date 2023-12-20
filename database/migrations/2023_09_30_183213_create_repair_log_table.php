@@ -15,7 +15,7 @@ return new class extends Migration
     {
         if(!Schema::hasTable('repair_log')) {
             Schema::create('repair_log', function (Blueprint $table) {
-                $table->integer('id')->primary();
+                $table->id();
                 $table->integer('mechanic');
                 $table->string('customer_name')->nullable();
                 $table->string('vehicle', 500)->nullable();

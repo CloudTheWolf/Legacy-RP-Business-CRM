@@ -15,7 +15,7 @@ class CreateCityTowLogsTable extends Migration
     {
         if(!Schema::hasTable('cityTowLogs')) {
             Schema::create('cityTowLogs', function (Blueprint $table) {
-                $table->integer('rowId')->primary();
+                $table->id('rowId');
                 $table->integer('id');
                 $table->integer('characterId');
                 $table->timestamp('timestamp')->useCurrent();

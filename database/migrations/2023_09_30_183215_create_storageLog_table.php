@@ -15,7 +15,7 @@ return new class extends Migration
     {
         if(!Schema::hasTable('storageLog')) {
             Schema::create('storageLog', function (Blueprint $table) {
-                $table->integer('id')->primary();
+                $table->id();
                 $table->integer('storageId');
                 $table->integer('scrap');
                 $table->integer('aluminium');

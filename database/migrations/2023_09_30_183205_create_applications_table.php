@@ -15,7 +15,7 @@ class CreateApplicationsTable extends Migration
     {
         if(!Schema::hasTable('applications')) {
             Schema::create('applications', function (Blueprint $table) {
-                $table->integer('id')->primary();
+                $table->id();
                 $table->string('name');
                 $table->string('discord', 100);
                 $table->string('steam');
