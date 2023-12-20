@@ -15,7 +15,7 @@ class CreateConfigTable extends Migration
     {
         if(!Schema::hasTable('config')) {
             Schema::create('config', function (Blueprint $table) {
-                $table->integer('id')->primary();
+                $table->integer('id')->primary()->autoIncrement();
                 $table->string('name', 50);
                 $table->string('value', 600);
                 $table->string('group');
