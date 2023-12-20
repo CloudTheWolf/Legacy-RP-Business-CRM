@@ -18,7 +18,7 @@ class CreateCityTowLogsTable extends Migration
                 $table->integer('rowId')->primary();
                 $table->integer('id');
                 $table->integer('characterId');
-                $table->timestamp('timestamp')->default('0000-00-00 00:00:00');
+                $table->timestamp('timestamp')->useCurrent();
                 $table->string('modelName');
                 $table->integer('reward');
                 $table->tinyInteger('playerVehicle');
