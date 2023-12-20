@@ -25,7 +25,7 @@ return new class extends Migration
                 $table->integer('glass_used')->default(0);
                 $table->integer('rubber_used')->default(0);
                 $table->integer('cost');
-                $table->timestamp('timestamp')->default('current_timestamp()');
+                $table->timestamp('timestamp')->useCurrent();;
                 $table->boolean('deleted')->default(0);
             });
         }

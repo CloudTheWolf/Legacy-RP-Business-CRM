@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
                 $table->string('towID')->nullable();
                 $table->string('role', 100)->default('');
                 $table->string('workingAs', 100)->default('');
-                $table->timestamp('email_verified_at')->default('current_timestamp()');
+                $table->timestamp('email_verified_at')->useCurrent();
                 $table->string('password');
                 $table->rememberToken();
                 $table->timestamps();

@@ -16,7 +16,7 @@ return new class extends Migration
         if(!Schema::hasTable('workTime')) {
             Schema::create('workTime', function (Blueprint $table) {
                 $table->integer('id')->primary();
-                $table->timestamp('clockInAt')->default('current_timestamp()');
+                $table->timestamp('clockInAt')->useCurrent();
                 $table->timestamp('clockOutAt')->nullable();
                 $table->integer('cid');
                 $table->integer('totalTime')->default(0);

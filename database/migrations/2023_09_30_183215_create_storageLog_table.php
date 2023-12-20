@@ -24,7 +24,7 @@ return new class extends Migration
                 $table->integer('rubber');
                 $table->integer('issuer');
                 $table->integer('issuedTo');
-                $table->timestamp('tstamp')->default('current_timestamp()');
+                $table->timestamp('tstamp')->useCurrent();
             });
         }
     }

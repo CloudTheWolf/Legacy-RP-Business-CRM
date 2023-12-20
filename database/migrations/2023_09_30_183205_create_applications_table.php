@@ -25,7 +25,7 @@ class CreateApplicationsTable extends Migration
                 $table->string('why');
                 $table->string('record');
                 $table->tinyInteger('gang');
-                $table->timestamp('timestamp')->default('current_timestamp()');
+                $table->timestamp('timestamp')->useCurrent();
                 $table->integer('state')->default(0);
             });
         }
