@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Authentication;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\SessionToggleController;
+//use App\Http\Controllers\SessionToggleController;
 use App\Models\DiscordToken;
 use App\Models\User;
 use App\ThirdPartyAuth\DiscordAuth;
@@ -58,7 +58,8 @@ class DiscordLogin extends Controller
                 return redirect('/login')->with('error', "No active user found linked to this discord");
             }
 
-            $user->avatar_url = 'https://cdn.discordapp.com/avatars/'.$discordInfo->id.'/'.$discordInfo->avatar.'.png';
+            // Let's get the avatar URL from the city API
+            //$user->avatar_url = 'https://cdn.discordapp.com/avatars/'.$discordInfo->id.'/'.$discordInfo->avatar.'.png';
             $user->save();
             Auth::login($user, true);
 

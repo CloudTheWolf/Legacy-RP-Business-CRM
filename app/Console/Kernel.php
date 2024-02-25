@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('staff:updatetime')->everyMinute();
         $schedule->command('staff:synctow')->everyMinute();
         $schedule->command("discord:sync")->hourly();
+        $schedule->command("opfw:sync-avatar")->everyTwoHours();
     }
 
     /**

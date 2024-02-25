@@ -12,7 +12,7 @@ class Stats extends Component
     {
         $total = RepairLog::whereDeleted(0);
         $month = Carbon::now()->format('m');
-        $year = $month == "Jan" ? "YEAR(CURRENT_TIMESTAMP) -1" : "YEAR(CURRENT_TIMESTAMP)";
+        $year = $month == "1" ? "YEAR(CURRENT_TIMESTAMP) -1" : "YEAR(CURRENT_TIMESTAMP)";
         $lastMonth = Carbon::now()->subMonthsNoOverflow()->format('m');
 
         $lastMonthCount = $total->whereRaw('MONTH(`repair_log`.`timestamp`) = \''.$lastMonth.'\' and '.

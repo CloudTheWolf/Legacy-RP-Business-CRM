@@ -15,7 +15,7 @@ return new class extends Migration
     {
         if(!Schema::hasTable('storageLog')) {
             Schema::create('storageLog', function (Blueprint $table) {
-                $table->integer('id')->primary();
+                $table->id();
                 $table->integer('storageId');
                 $table->integer('scrap');
                 $table->integer('aluminium');
@@ -24,7 +24,7 @@ return new class extends Migration
                 $table->integer('rubber');
                 $table->integer('issuer');
                 $table->integer('issuedTo');
-                $table->timestamp('tstamp')->default('current_timestamp()');
+                $table->timestamp('tstamp')->useCurrent();
             });
         }
     }
