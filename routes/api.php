@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\VersionOne;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -21,4 +22,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/opfw/{cid}',function (Request $request, $cid){
     return Http::withoutVerifying()->withToken(env("OP_FW_API_KEY"))->withoutVerifying()->get(env("OP_FW_REST_URI") . '/characters/id='.$cid.'/data')->json()['data'][0];
+});
+
+Route::prefix('/v1')->group(function (){
+    Route::get('ActiveUsers',[VersionOne::class,'GetAllActiveUsers']);
+    if (config('app.siteMode') == "Mechanic") {
+        Route::prefix('/mechanic')->group(function () {
+        });
+    }
 });

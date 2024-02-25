@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
+use Mockery\Exception;
 
 class SyncAvatar extends Command
 {
@@ -47,10 +48,17 @@ class SyncAvatar extends Command
             {
                 continue;
             }
-            $this->info("Syncing [".$player["first_name"]." ".$player["last_name"]."]");
+            $this->info("Syncing [".$player["character_id"]."][".$player["first_name"]." ".$player["last_name"]."]");
             $user = $user->first();
             $user->avatar_url = $player["mugshot_url"];
-            $user->save();
+            $user->towID = 0;
+            try {
+                $user->saveOrFail();
+            } catch (Exception $e)
+            {
+                $this->info($e->getMessage());
+            }
+
         }
     }
 }
