@@ -72,6 +72,7 @@ class DiscordAuth implements DiscordAuthInterface
             $this->REDIRECT_URI = $callback;
         }
 
+        //TODO: Identify issue with Cloudflare Proxy
         try {
             $tokens = $this->getAccessTokens($code);
             $access = $tokens['access_token'];

@@ -10,6 +10,7 @@ class SiteSettings extends Component
 {
 
     public string $app_name, $company_name, $branding_dir, $site_mode;
+    public bool $application_state;
 
 
     public function mount()
@@ -18,6 +19,7 @@ class SiteSettings extends Component
         $this->company_name = Config::get('app.companyName','My Company');
         $this->branding_dir = Config::get('app.brandingPath','harmony');
         $this->site_mode = Config::get('app.siteMode','Mechanic');
+        $this->application_state = Config::get('app.enableApplications','No');
     }
     public function render()
     {
@@ -39,6 +41,9 @@ class SiteSettings extends Component
         if(strlen($this->site_mode) > 0) {
             $settings->SaveSetting('siteMode', $this->site_mode, 'discord');
         }
+
+        $settings->SaveSetting('applicationState', $this->application_state == 1 ? 'true' : 'false', 'site');
+
         $this->dispatch('saved');
 
     }

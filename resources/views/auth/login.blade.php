@@ -12,8 +12,8 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
 
             <div>
                 <x-label for="email" value="{{ __('Username') }}" />

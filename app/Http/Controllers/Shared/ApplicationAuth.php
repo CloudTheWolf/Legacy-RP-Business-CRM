@@ -18,7 +18,8 @@ class ApplicationAuth extends Controller
 {
     public function Discord(): View
     {
-        return view('public.application.discord-auth');
+        $application_state = Config::get('app.enableApplications','No');
+        return view('public.application.discord-auth', compact('application_state'));
     }
 
     public function Steam(): View
@@ -70,7 +71,7 @@ class ApplicationAuth extends Controller
             Log::warning($e->getMessage());
             $lastArrest = "{{Error getting information from MDT, Please manually put details here.}}";
         }
-        $user = Http::withToken(env('OP_FW_API_KEY'))->acceptJson()->withoutVerifying() ->get(env('OP_FW_REST_URI').'/characters/id='.$request->input('cid') .'/data')->json('data')[0];
+        $user = Http::withToken(env('OP_FW_API_KEY'))->acceptJson()->withoutVerifying() ->get(env('OP_FW_REST_URI').'/characters?select=*&where=character_id='.$request->input('cid'))->json('data')[0];
         $discordName = Session::get('discordUsername');//$request->input('discordName');
         if(Session::get('discordDiscriminator ') != null)
         {

@@ -49,6 +49,18 @@
     </div>
 
     <div class="relative z-0 w-full mb-6">
+        <div class="flex">
+            <div class="flex items-center h-5">
+                <input wire:model="application_state" id="helper-checkbox" aria-describedby="helper-checkbox-text" type="checkbox" value="" class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            </div>
+            <div class="ms-2 text-sm">
+                <label for="helper-checkbox" class="font-medium text-gray-900 dark:text-gray-300">Job Applications</label>
+                <p id="helper-checkbox-text" class="text-xs font-normal text-gray-500 dark:text-gray-300">Accept new job applications.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="relative z-0 w-full mb-6">
     </div>
     <div class="relative z-0 w-full mb-6">
         <button wire:click="save_settings" type="button" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900 w-full">Save</button>

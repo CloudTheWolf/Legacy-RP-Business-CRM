@@ -91,7 +91,7 @@ class AddEditUser extends Component
     public function cid_lookup()
     {
         try {
-            $user = Http::withToken(env("OP_FW_API_KEY"))->withoutVerifying()->get(env("OP_FW_REST_URI") . '/characters/id=' . $this->cid . '/data')->json()['data'][0];
+            $user = Http::withToken(env('OP_FW_API_KEY'))->acceptJson()->withoutVerifying() ->get(env('OP_FW_REST_URI').'/characters?select=*&where=character_id='.$this->cid)->json('data')[0];
             $this->full_name = $user['first_name'] . " " . $user['last_name'];
             $this->username = $user['first_name'] . "." . $user['last_name'];
             $this->cell = $user['phone_number'];

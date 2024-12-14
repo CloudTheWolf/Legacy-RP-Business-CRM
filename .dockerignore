@@ -1,0 +1,47 @@
+# Ignore node_modules directory (frontend dependencies)
+node_modules
+
+# Ignore vendor directory (PHP dependencies)
+vendor
+
+# Ignore git directory
+.git
+
+# Ignore environment files
+.env
+.env.example
+
+# Ignore log files and directories
+storage/logs
+*.log
+
+# Ignore Remaining Storage
+storage/sessions
+storage/cache
+storage/views/*.php
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE/editor directories and files
+.vscode
+.idea
+
+# Ignore Docker-related files
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Ignore testing and development files
+phpunit.xml
+phpunit.xml.dist
+tests/
+phpcs.xml
+phpcs.xml.dist
+
+# Ignore temporary files and caches
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+composer.phar

@@ -91,7 +91,7 @@
                                     </li>
                                     @if(Config("app.botName") != null)
                                     <li>
-                                        <a href="https://c3.cloudthewolf.com:9443/" target="_blank" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Restart Bot')}}</a>
+                                        <a href="https://containers.legacyrp.company/" target="_blank" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{__('Restart Bot')}}</a>
                                     </li>
                                     @endif
                                 </ul>
@@ -104,7 +104,7 @@
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->
-                    
+
                     <div class="ml-3 relative">
                         <x-dropdown align="right" width="60">
                             <x-slot name="trigger">
