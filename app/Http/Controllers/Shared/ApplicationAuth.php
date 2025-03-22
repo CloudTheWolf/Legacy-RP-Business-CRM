@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Shared;
 
 use App\Http\Controllers\Controller;
 use App\Models\Applications;
+use Exception;
+use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -18,7 +20,7 @@ class ApplicationAuth extends Controller
 {
     public function Discord(): View
     {
-        $application_state = Config::get('app.enableApplications','No');
+        $application_state = Config::get('app.enableApplications','Yes');
         return view('public.application.discord-auth', compact('application_state'));
     }
 
@@ -52,12 +54,8 @@ class ApplicationAuth extends Controller
         }
 
         try {
-            $client = new Client(['base_uri' => Config('app.mdtUrl'), 'timeout' => 60, 'headers' =>[
-                'referer' => env('APP_URL') == "http://localhost:8000" ? 'https://harmony.legacyrp.company' : url('/'),
-                'accept' => 'application/json',
-                'origin' =>  env('APP_URL') == "http://localhost:8000" ? 'https://harmony.legacyrp.company' : url('/'),
-            ]]);
-            $response = $client->get('/arrests/' . $request->input('cid'));
+            $apiToken = $this->GetMdtApiTokenFromCache();
+            list($client, $response) = $this->GetLastArrest($request,$apiToken);
             $arrestData = json_decode($response->getBody(), true);
             bdump($response,"HTTP Response ");
             bdump($arrestData,"Body");
@@ -69,7 +67,7 @@ class ApplicationAuth extends Controller
         catch(GuzzleException $e)
         {
             Log::warning($e->getMessage());
-            $lastArrest = "{{Error getting information from MDT, Please manually put details here.}}";
+            $lastArrest = $e->getMessage();
         }
         $user = Http::withToken(env('OP_FW_API_KEY'))->acceptJson()->withoutVerifying() ->get(env('OP_FW_REST_URI').'/characters?select=*&where=character_id='.$request->input('cid'))->json('data')[0];
         $discordName = Session::get('discordUsername');//$request->input('discordName');
@@ -176,5 +174,67 @@ class ApplicationAuth extends Controller
             ]);
         }
         return redirect(url('apply-done'));
+    }
+
+    private function GetMdtApiTokenFromCache(): string
+    {
+        if(Storage::disk('local')->missing('tmpMdtToken'))
+        {
+            Storage::disk('local')->put('tmpMdtToken','');
+        }
+        return Storage::disk('local')->get('tmpMdtToken');
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function GetLastArrest(Request $request, string $apiToken): array
+    {
+        if(strlen($apiToken) == 0)
+        {
+            $apiToken = $this->GetNewApiToken();
+        }
+        $client = new Client(['base_uri' => Config('app.mdtUrl'), 'timeout' => 60, 'headers' => [
+            'referer' => env('APP_URL') == "http://localhost:8000" ? 'https://harmony.legacyrp.company' : url('/'),
+            'accept' => 'application/json',
+            'origin' => env('APP_URL') == "http://localhost:8000" ? 'https://harmony.legacyrp.company' : url('/'),
+            'Authorization' => 'Bearer '.trim(str_replace('\n','',str_replace('\r','',$apiToken))),
+        ]]);
+
+        $response = $client->get('/arrests/' . $request->input('cid'));
+        if($response->getStatusCode() == 401 || $response->getStatusCode() == 403)
+        {
+            $newToken = $this->GetNewApiToken();
+            $client = new Client(['base_uri' => Config('app.mdtUrl'), 'timeout' => 60, 'headers' => [
+                'accept' => 'application/json',
+                'Authorization' => 'Bearer '.trim(str_replace('\n','',str_replace('\r','',$newToken)))
+            ]]);
+            $response = $client->get('/arrests/' . $request->input('cid'));
+        }
+        return array($client, $response);
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function GetNewApiToken(): string
+    {
+        $apiKey = env('MDT_API_KEY');
+        $client = new Client(['base_uri' => Config('app.mdtUrl'), 'timeout' => 60,'headers' =>[
+            'Authorization' => 'Bearer ' . $apiKey,
+            'Accept' => 'application/json'
+        ]]);
+
+        $response = $client->request('POST', 'api/auth');
+        if($response->getStatusCode() == 200)
+        {
+            $token = json_decode($response->getBody()->getContents())->token->accessToken;
+            Storage::disk('local')->put('tmpMdtToken', $token);
+            return $token;
+        }
+        throw new exception('Failed to get new token');
     }
 }

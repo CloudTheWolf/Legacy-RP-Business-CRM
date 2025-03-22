@@ -42,7 +42,7 @@ class SiteSettings extends Component
             $settings->SaveSetting('siteMode', $this->site_mode, 'discord');
         }
 
-        $settings->SaveSetting('applicationState', $this->application_state == 1 ? 'true' : 'false', 'site');
+        $settings->SaveSetting('enableApplications', $this->application_state == 1 ? 'true' : 'false', 'site');
 
         $this->dispatch('saved');
 

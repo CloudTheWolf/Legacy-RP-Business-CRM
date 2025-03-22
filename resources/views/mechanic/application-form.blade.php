@@ -4,8 +4,14 @@
             <x-authentication-card-logo />
 
         </x-slot>
-        <p class="text-center text-white">
+
+        <h3 class="text-center text-white">
             Application Form
+        </h3>
+        <hr class="py-2">
+        <p class="pb-2 text-sm">
+            All Data on this form, with the exception of Email / Email ID (Discord Name / ID) and Passport ID (Steam ID), MUST be filled "In Character".
+            We Do not want your OOC Details, please don't dox yourself.
         </p>
         <hr class="py-1" />
         <form method="POST" action="{{route('mechanic-application-form-submit')}}">
